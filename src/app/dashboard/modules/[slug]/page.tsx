@@ -17,7 +17,7 @@ export default async function ModulePage({ params }: { params: { slug: string } 
     notFound();
   }
 
-  const { icon: Icon } = module;
+  const { icon: Icon, ...serializableModule } = module;
 
   return (
     <div className="flex flex-col gap-6">
@@ -40,7 +40,7 @@ export default async function ModulePage({ params }: { params: { slug: string } 
 
       <Separator />
 
-      <ModuleContent module={module} />
+      <ModuleContent module={serializableModule} />
     </div>
   );
 }

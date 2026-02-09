@@ -11,7 +11,7 @@ import AvatarCreator from './avatar-creator';
 import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog } from 'lucide-react';
 
 interface ModuleContentProps {
-  module: Module;
+  module: Omit<Module, 'icon'>;
 }
 
 export default function ModuleContent({ module }: ModuleContentProps) {
