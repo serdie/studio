@@ -31,18 +31,6 @@ export async function aiCustomAvatarCreation(input: AICustomAvatarCreationInput)
   return aiCustomAvatarCreationFlow(input);
 }
 
-const aiCustomAvatarCreationPrompt = ai.definePrompt({
-  name: 'aiCustomAvatarCreationPrompt',
-  input: {schema: AICustomAvatarCreationInputSchema},
-  output: {schema: AICustomAvatarCreationOutputSchema},
-  prompt: `You are an AI avatar generator. Based on the following description, create a virtual avatar. If an image is provided, use it as a reference. Return the URL of the generated avatar image.
-
-Description: {{{prompt}}}
-{{#if image}}
-Reference Image: {{media url=image}}
-{{/if}}`,
-});
-
 const aiCustomAvatarCreationFlow = ai.defineFlow(
   {
     name: 'aiCustomAvatarCreationFlow',
@@ -64,8 +52,11 @@ const aiCustomAvatarCreationFlow = ai.defineFlow(
       };
     } else {
       generateArgs = {
-        model: 'googleai/imagen-4.0-fast-generate-001',
-        prompt: input.prompt,
+        model: 'googleai/gemini-2.5-flash-image-preview',
+        prompt: [{ text: input.prompt }],
+        config: {
+          responseModalities: ['TEXT', 'IMAGE'],
+        },
       };
     }
 
