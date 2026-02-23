@@ -1,24 +1,24 @@
 'use server';
 
 /**
- * @fileOverview An AI content question answering support agent.
+ * @fileOverview Agente de soporte educativo mediante IA para responder preguntas sobre el contenido del curso.
  *
- * - aiContentQASupport - A function that handles question answering about course content.
- * - AIContentQASupportInput - The input type for the aiContentQASupport function.
- * - AIContentQASupportOutput - The return type for the aiContentQASupport function.
+ * - aiContentQASupport - Función que gestiona las preguntas de los alumnos sobre el contenido del módulo.
+ * - AIContentQASupportInput - Tipo de entrada para la función aiContentQASupport.
+ * - AIContentQASupportOutput - Tipo de salida de la función aiContentQASupport.
  */
 
-import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { ai } from '@/ai/genkit';
+import { z } from 'genkit';
 
 const AIContentQASupportInputSchema = z.object({
-  courseContent: z.string().describe('The content of the course module.'),
-  studentQuestion: z.string().describe('The question from the student about the course content.'),
+  courseContent: z.string().describe('El contenido del módulo del curso.'),
+  studentQuestion: z.string().describe('La pregunta del alumno sobre el contenido del curso.'),
 });
 export type AIContentQASupportInput = z.infer<typeof AIContentQASupportInputSchema>;
 
 const AIContentQASupportOutputSchema = z.object({
-  answer: z.string().describe('The answer to the student question based on the course content.'),
+  answer: z.string().describe('La respuesta a la pregunta del alumno basada en el contenido del curso.'),
 });
 export type AIContentQASupportOutput = z.infer<typeof AIContentQASupportOutputSchema>;
 
@@ -28,16 +28,25 @@ export async function aiContentQASupport(input: AIContentQASupportInput): Promis
 
 const prompt = ai.definePrompt({
   name: 'aiContentQASupportPrompt',
-  input: {schema: AIContentQASupportInputSchema},
-  output: {schema: AIContentQASupportOutputSchema},
-  prompt: `You are an AI assistant helping students understand course content.
+  input: { schema: AIContentQASupportInputSchema },
+  output: { schema: AIContentQASupportOutputSchema },
+  prompt: `Eres un asistente educativo de IA especializado en el curso de Inteligencia Artificial de CEOE-FEDETO (Toledo, España).
+  Tu función es ayudar a los alumnos a comprender el contenido del módulo de forma clara, precisa y didáctica.
 
-  You will be provided with the course content and a question from the student.
-  Your goal is to answer the question accurately and helpfully using the course content.
+  Instrucciones:
+  - Responde SIEMPRE en español de España (castellano formal).
+  - Basa tus respuestas ÚNICAMENTE en el contenido del módulo proporcionado.
+  - Si la pregunta no está relacionada con el contenido del módulo, indícalo amablemente y sugiere al alumno que consulte el material correspondiente.
+  - Usa ejemplos prácticos y cercanos al contexto empresarial español cuando sea posible.
+  - Sé conciso, claro y pedagógico. Máximo 300 palabras en tu respuesta.
+  - Si el alumno comete un error conceptual, corrígelo con amabilidad y precisión.
+  - Cuando sea útil, estructura tu respuesta con puntos o una pequeña lista para facilitar la comprensión.
 
-  Course Content: {{{courseContent}}}
+  Contenido del Módulo:
+  {{{courseContent}}}
 
-  Student Question: {{{studentQuestion}}}
+  Pregunta del Alumno:
+  {{{studentQuestion}}}
   `,
 });
 
@@ -48,7 +57,7 @@ const aiContentQASupportFlow = ai.defineFlow(
     outputSchema: AIContentQASupportOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
+    const { output } = await prompt(input);
     return output!;
   }
 );

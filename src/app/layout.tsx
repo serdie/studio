@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
+import { FeditoChatWrapper } from '@/components/fedito/fedito-chat-wrapper';
 
 export const metadata: Metadata = {
   title: 'Curso IA CEOE-FEDETO',
@@ -32,6 +33,7 @@ export default function RootLayout({
           {children}
         </FirebaseClientProvider>
         <Toaster />
+        <FeditoChatWrapper />
       </body>
     </html>
   );

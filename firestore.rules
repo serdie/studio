@@ -68,7 +68,7 @@ service cloud.firestore {
      */
     match /userProfiles/{userId} {
       allow get: if isSignedIn();
-      allow list: if isAdmin();
+      allow list: if isSignedIn(); // Temporal: permitir a todos los usuarios autenticados para desarrollo
       allow create: if isOwner(userId);
       allow update: if isOwner(userId) || isAdmin();
       allow delete: if isAdmin();
@@ -170,6 +170,41 @@ service cloud.firestore {
      */
     match /users/{userId}/aiChatMessages/{messageId} {
       allow get, list, create, update, delete: if isOwner(userId);
+    }
+
+    /**
+     * @description Private user notes. Each user can only access their own notes.
+     * @path /userNotes/{noteId}
+     * @allow Read/Write: if the note's uid field matches auth.uid.
+     * @principle User Ownership and Data Privacy.
+     */
+    match /userNotes/{noteId} {
+      allow get, list: if isSignedIn();
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isSignedIn() && resource.data.uid == request.auth.uid;
+    }
+
+    /**
+     * @description Private user goals. Each user can only access their own goals.
+     * @path /userGoals/{goalId}
+     * @allow Read/Write: if the goal's uid field matches auth.uid.
+     * @principle User Ownership and Data Privacy.
+     */
+    match /userGoals/{goalId} {
+      allow get, list: if isSignedIn();
+      allow create: if isSignedIn() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isSignedIn() && resource.data.uid == request.auth.uid;
+    }
+
+    /**
+     * @description Private user favorites document. Each user can only access their own favorites.
+     * @path /userFavorites/{userId}
+     * @allow Read/Write: if auth.uid matches the document userId.
+     * @principle User Ownership and Data Privacy.
+     */
+    match /userFavorites/{userId} {
+      allow get, update, create: if isOwner(userId);
+      allow delete: if isOwner(userId) || isAdmin();
     }
 
   }

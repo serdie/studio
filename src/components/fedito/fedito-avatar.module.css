@@ -1,0 +1,293 @@
+/* Contenedor principal de Fedito */
+.fedito {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Debug: descomentar para ver el contenedor */
+  /* border: 2px solid red; */
+}
+
+/* Imagen base de Fedito */
+.fedito::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/fedito/fedito-trasparente.png") center/contain no-repeat;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+/* ============================================
+   ESTADO IDLE - Flotación suave con respiración
+   ============================================ */
+.idle::before {
+  animation: fedito-float 2.4s ease-in-out infinite;
+}
+
+@keyframes fedito-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+/* ============================================
+   ESTADO THINKING - Rotación suave + partículas
+   ============================================ */
+.thinking {
+  animation: fedito-thinking-wobble 1.2s ease-in-out infinite;
+}
+
+@keyframes fedito-thinking-wobble {
+  0%, 100% {
+    transform: rotate(-3deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.05);
+  }
+}
+
+.thinking::before {
+  animation: fedito-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes fedito-pulse {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.15);
+  }
+}
+
+/* Partículas orbitales para estado thinking */
+.orbitParticles {
+  position: absolute;
+  inset: -10px;
+  pointer-events: none;
+}
+
+.orbitParticle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fbbf24 0%, #f59e0b 100%);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+}
+
+.orbitParticle:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: fedito-orbit-1 2s linear infinite;
+}
+
+.orbitParticle:nth-child(2) {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  animation: fedito-orbit-2 2s linear infinite 0.5s;
+}
+
+.orbitParticle:nth-child(3) {
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  animation: fedito-orbit-3 2s linear infinite 1s;
+}
+
+@keyframes fedito-orbit-1 {
+  0% { transform: translate(-50%, -50%) rotate(0deg) translateX(40px) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) translateX(40px) rotate(-360deg); }
+}
+
+@keyframes fedito-orbit-2 {
+  0% { transform: translate(-50%, 50%) rotate(0deg) translateX(30px) rotate(0deg); }
+  100% { transform: translate(-50%, 50%) rotate(-360deg) translateX(30px) rotate(360deg); }
+}
+
+@keyframes fedito-orbit-3 {
+  0% { transform: translate(-50%, -50%) rotate(120deg) translateX(35px) rotate(-120deg); }
+  100% { transform: translate(-50%, -50%) rotate(480deg) translateX(35px) rotate(-480deg); }
+}
+
+/* ============================================
+   ESTADO TALKING - Animación de boca (simulada con scale)
+   ============================================ */
+.talking::before {
+  animation: fedito-talking 0.28s ease-in-out infinite;
+}
+
+@keyframes fedito-talking {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  25% {
+    transform: scaleY(1.03);
+  }
+  50% {
+    transform: scaleY(1.06);
+  }
+  75% {
+    transform: scaleY(1.03);
+  }
+}
+
+/* Onda de sonido para talking */
+.soundWaves {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.soundWave {
+  position: absolute;
+  border: 2px solid rgba(59, 130, 246, 0.6);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.soundWave:nth-child(1) {
+  inset: 10%;
+  animation: fedito-sound-1 0.8s ease-out infinite;
+}
+
+.soundWave:nth-child(2) {
+  inset: 20%;
+  animation: fedito-sound-2 0.8s ease-out infinite 0.2s;
+}
+
+.soundWave:nth-child(3) {
+  inset: 30%;
+  animation: fedito-sound-3 0.8s ease-out infinite 0.4s;
+}
+
+@keyframes fedito-sound-1 {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes fedito-sound-2 {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes fedito-sound-3 {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* ============================================
+   ESTADO HAPPY - Salto con squash & stretch
+   ============================================ */
+.happy {
+  animation: fedito-hop 0.6s cubic-bezier(0.36, -0.2, 0.2, 1.2) 1;
+}
+
+@keyframes fedito-hop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-16px) scale(1.04, 0.96);
+  }
+  60% {
+    transform: translateY(0) scale(0.96, 1.04);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Partículas de alegría */
+.happyParticles {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+}
+
+.happyParticle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.happyParticle:nth-child(1) {
+  background: radial-gradient(circle, #fbbf24 0%, #f59e0b 100%);
+  top: 0;
+  left: 20%;
+  animation: fedito-happy-particle-1 0.8s ease-out infinite;
+}
+
+.happyParticle:nth-child(2) {
+  background: radial-gradient(circle, #60a5fa 0%, #3b82f6 100%);
+  top: 0;
+  right: 20%;
+  animation: fedito-happy-particle-2 0.8s ease-out infinite 0.15s;
+}
+
+.happyParticle:nth-child(3) {
+  background: radial-gradient(circle, #f472b6 0%, #ec4899 100%);
+  top: 10%;
+  left: 50%;
+  animation: fedito-happy-particle-3 0.8s ease-out infinite 0.3s;
+}
+
+.happyParticle:nth-child(4) {
+  background: radial-gradient(circle, #34d399 0%, #10b981 100%);
+  bottom: 20%;
+  left: 10%;
+  animation: fedito-happy-particle-4 0.8s ease-out infinite 0.45s;
+}
+
+@keyframes fedito-happy-particle-1 {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-40px) scale(0.5); opacity: 0; }
+}
+
+@keyframes fedito-happy-particle-2 {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-35px) translateX(10px) scale(0.5); opacity: 0; }
+}
+
+@keyframes fedito-happy-particle-3 {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-45px) scale(0.5); opacity: 0; }
+}
+
+@keyframes fedito-happy-particle-4 {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-30px) translateX(-10px) scale(0.5); opacity: 0; }
+}
+
+/* ============================================
+   Tamaños
+   ============================================ */
+.sizeSm {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+}
+
+.sizeMd {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+}
+
+.sizeLg {
+  width: 128px;
+  height: 128px;
+  min-width: 128px;
+  min-height: 128px;
+}

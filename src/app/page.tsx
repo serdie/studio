@@ -59,11 +59,10 @@ export default function HomePage() {
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
                 <Image
-                  src="https://picsum.photos/seed/ai-hero/600/400"
+                  src="/images/home.jpg"
                   width={600}
                   height={400}
-                  alt="IA Hero"
-                  data-ai-hint="artificial intelligence"
+                  alt="Curso IA CEOE-FEDETO"
                   className="relative mx-auto aspect-video overflow-hidden rounded-xl object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
                   priority
                 />

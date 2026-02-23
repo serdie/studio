@@ -39,12 +39,17 @@ const aiCustomAvatarCreationFlow = ai.defineFlow(
   },
   async input => {
     let generateArgs: Parameters<typeof ai.generate>[0];
+    const systemPrefix = `Eres un generador de avatares digitales para la plataforma educativa CEOE-FEDETO de Toledo (España). 
+Crea un avatar digital profesional y atractivo basado en la siguiente descripción. 
+El avatar debe tener un estilo moderno, tecnológico y positivo, adecuado para una plataforma de formación en Inteligencia Artificial. 
+Descripción del alumno: `;
+    
     if (input.image) {
       generateArgs = {
-        model: 'googleai/gemini-2.5-flash-image-preview',
+        model: 'googleai/gemini-2.0-flash-exp',
         prompt: [
           {media: {url: input.image}},
-          {text: input.prompt},
+          {text: systemPrefix + input.prompt},
         ],
         config: {
           responseModalities: ['TEXT', 'IMAGE'],
@@ -52,8 +57,8 @@ const aiCustomAvatarCreationFlow = ai.defineFlow(
       };
     } else {
       generateArgs = {
-        model: 'googleai/gemini-2.5-flash-image-preview',
-        prompt: [{ text: input.prompt }],
+        model: 'googleai/gemini-2.0-flash-exp',
+        prompt: [{ text: systemPrefix + input.prompt }],
         config: {
           responseModalities: ['TEXT', 'IMAGE'],
         },

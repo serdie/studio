@@ -32,18 +32,26 @@ const aiImageGenerationFlow = ai.defineFlow(
     outputSchema: ImageGenerationOutputSchema,
   },
   async input => {
-    const {media} = await ai.generate({
-      model: 'googleai/gemini-2.5-flash-image-preview',
-      prompt: [{ text: input.prompt }],
-      config: {
-        responseModalities: ['TEXT', 'IMAGE'],
-      },
-    });
+    try {
+      const {media} = await ai.generate({
+        model: 'googleai/gemini-2.5-flash',
+        prompt: [{ text: input.prompt }],
+        config: {
+          responseModalities: ['TEXT', 'IMAGE'],
+        },
+      });
 
-    if (!media || !media.url) {
-      throw new Error('Failed to generate image.');
+      if (!media || !media.url) {
+        throw new Error('Failed to generate image.');
+      }
+
+      return {imageUrl: media.url};
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      if (errorMessage.includes('not available in your country')) {
+        throw new Error('La generación de imágenes no está disponible en tu región.');
+      }
+      throw error;
     }
-
-    return {imageUrl: media.url};
   }
 );
