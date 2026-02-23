@@ -164,7 +164,7 @@ export default function HomePage() {
               <span className="font-bold font-headline">Curso IA CEOE-FEDETO</span>
             </div>
             <p className="text-sm text-muted-foreground order-last md:order-none">
-              &copy; {new Date().getFullYear()} Curso de IA Toledo. Impulsado por CEOE y FEDETO.
+              &copy; 2026 Curso de IA Toledo. Impulsado por CEOE y FEDETO. Creado por Diego Gómez Marín
             </p>
             <nav className="flex gap-6">
               <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Términos</Link>

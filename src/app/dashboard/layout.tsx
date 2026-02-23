@@ -8,7 +8,6 @@ import AppHeader from '@/components/layout/app-header';
 
 /**
  * DashboardContent handles the main layout logic including authentication checks.
- * It is separated to ensure hooks are used within the context of FirebaseProvider (from RootLayout).
  */
 function DashboardContent({ children }: { children: React.ReactNode }) {
   const { user, isUserLoading } = useUser();
@@ -40,13 +39,14 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 bg-muted/20">
           {children}
         </main>
+        <footer className="p-4 text-center text-[10px] text-muted-foreground border-t bg-muted/5">
+          &copy; 2026 Curso de IA Toledo. Impulsado por CEOE y FEDETO. Creado por Diego Gómez Marín
+        </footer>
       </div>
     </div>
   );
 }
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  // FirebaseClientProvider is already provided in the RootLayout (src/app/layout.tsx).
-  // Providing it here again is redundant and can cause performance/initialization issues.
   return <DashboardContent>{children}</DashboardContent>;
 }
