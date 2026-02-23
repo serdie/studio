@@ -1,0 +1,678 @@
+{
+  "entities": {
+    "UserProfile": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserProfile",
+      "type": "object",
+      "description": "Represents a user profile within the AI Learning Hub, including both students and instructors. Authentication details are managed externally.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the UserProfile entity. This typically originates from an external authentication system."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The first name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The last name of the user."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the user, used for communication.",
+          "format": "email"
+        },
+        "role": {
+          "type": "string",
+          "description": "The role of the user within the application (e.g., 'student', 'instructor', 'admin')."
+        },
+        "dateRegistered": {
+          "type": "string",
+          "description": "The date and time when the user profile was registered.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email",
+        "role",
+        "dateRegistered"
+      ]
+    },
+    "Course": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Course",
+      "type": "object",
+      "description": "Represents a specific learning course, in this case, the comprehensive AI course by CEOE and FEDETO.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Course entity."
+        },
+        "title": {
+          "type": "string",
+          "description": "The official title of the course."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description or summary of the course content and objectives."
+        },
+        "startDate": {
+          "type": "string",
+          "description": "The official start date of the course.",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "The official end date of the course.",
+          "format": "date"
+        },
+        "targetAudience": {
+          "type": "string",
+          "description": "Describes the intended demographic for the course (e.g., 'Young people 16-29 years old')."
+        },
+        "totalHours": {
+          "type": "number",
+          "description": "The total duration of the course in hours."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "startDate",
+        "endDate",
+        "targetAudience",
+        "totalHours"
+      ]
+    },
+    "Module": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Module",
+      "type": "object",
+      "description": "Represents a major section or module within a course.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Module entity."
+        },
+        "courseId": {
+          "type": "string",
+          "description": "Reference to the Course this module belongs to. (Relationship: Course 1:N Module)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the module (e.g., 'Módulo 1: Introducción a la IA')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of the module's content."
+        },
+        "order": {
+          "type": "number",
+          "description": "The sequential order of the module within the course."
+        },
+        "totalHours": {
+          "type": "number",
+          "description": "The total duration of the module in hours."
+        }
+      },
+      "required": [
+        "id",
+        "courseId",
+        "title",
+        "description",
+        "order",
+        "totalHours"
+      ]
+    },
+    "Topic": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Topic",
+      "type": "object",
+      "description": "Represents a specific sub-section or topic within a module.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Topic entity."
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "Reference to the Module this topic belongs to. (Relationship: Module 1:N Topic)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the topic (e.g., '1.1. Fundamentos de la IA')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the topic's content."
+        },
+        "order": {
+          "type": "number",
+          "description": "The sequential order of the topic within its module."
+        },
+        "estimatedHours": {
+          "type": "number",
+          "description": "The estimated time a student should spend on this topic in hours."
+        }
+      },
+      "required": [
+        "id",
+        "moduleId",
+        "title",
+        "description",
+        "order",
+        "estimatedHours"
+      ]
+    },
+    "Enrollment": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Enrollment",
+      "type": "object",
+      "description": "Links a student to a specific course, indicating their participation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Enrollment entity."
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Reference to the UserProfile of the student. (Relationship: UserProfile 1:N Enrollment)"
+        },
+        "courseId": {
+          "type": "string",
+          "description": "Reference to the Course the student is enrolled in. (Relationship: Course 1:N Enrollment)"
+        },
+        "enrollmentDate": {
+          "type": "string",
+          "description": "The date and time when the student enrolled in the course.",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current enrollment status of the student (e.g., 'active', 'completed', 'dropped')."
+        }
+      },
+      "required": [
+        "id",
+        "studentId",
+        "courseId",
+        "enrollmentDate",
+        "status"
+      ]
+    },
+    "ContentItem": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ContentItem",
+      "type": "object",
+      "description": "Represents a single piece of learning content (e.g., text, link, image, file, video) associated with a topic.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the ContentItem entity."
+        },
+        "topicId": {
+          "type": "string",
+          "description": "Reference to the Topic this content item belongs to. (Relationship: Topic 1:N ContentItem)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title or name of the content item."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of what the content item contains."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of content (e.g., 'text', 'link', 'image', 'video', 'file', 'downloadable')."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL or path to the content (for links, images, videos, downloadable files).",
+          "format": "uri"
+        },
+        "content": {
+          "type": "string",
+          "description": "Direct text content, if the type is 'text' (e.g., a short article or explanation)."
+        },
+        "order": {
+          "type": "number",
+          "description": "The sequential order of the content item within its topic."
+        },
+        "uploadedBy": {
+          "type": "string",
+          "description": "Reference to the UserProfile (instructor) who uploaded this content. (Relationship: UserProfile 1:N ContentItem)"
+        },
+        "uploadDate": {
+          "type": "string",
+          "description": "The date and time when the content item was uploaded.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "topicId",
+        "title",
+        "description",
+        "type",
+        "uploadedBy",
+        "uploadDate"
+      ]
+    },
+    "Activity": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Activity",
+      "type": "object",
+      "description": "Represents an interactive task, exercise, quiz, or project within a topic.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Activity entity."
+        },
+        "topicId": {
+          "type": "string",
+          "description": "Reference to the Topic this activity belongs to. (Relationship: Topic 1:N Activity)"
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the activity (e.g., 'Quiz on AI Fundamentals', 'Upload your Avatar project')."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed instructions or prompt for the activity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of activity (e.g., 'quiz', 'assignment_upload', 'discussion_prompt', 'generative_avatar_creation', 'project')."
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "The deadline for completing this activity, if applicable.",
+          "format": "date-time"
+        },
+        "maxScore": {
+          "type": "number",
+          "description": "The maximum possible score for this activity, if it is graded."
+        },
+        "order": {
+          "type": "number",
+          "description": "The sequential order of the activity within its topic."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Reference to the UserProfile (instructor) who created this activity. (Relationship: UserProfile 1:N Activity)"
+        },
+        "creationDate": {
+          "type": "string",
+          "description": "The date and time when the activity was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "topicId",
+        "title",
+        "description",
+        "type",
+        "order",
+        "createdBy",
+        "creationDate"
+      ]
+    },
+    "StudentTopicProgress": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "StudentTopicProgress",
+      "type": "object",
+      "description": "Tracks a student's completion status for each topic in a course.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the StudentTopicProgress entity."
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Reference to the UserProfile of the student. (Relationship: UserProfile 1:N StudentTopicProgress)"
+        },
+        "topicId": {
+          "type": "string",
+          "description": "Reference to the Topic being tracked. (Relationship: Topic 1:N StudentTopicProgress)"
+        },
+        "status": {
+          "type": "string",
+          "description": "The completion status of the topic for the student (e.g., 'not_started', 'in_progress', 'completed')."
+        },
+        "completionDate": {
+          "type": "string",
+          "description": "The date and time when the student marked the topic as completed, if applicable.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "studentId",
+        "topicId",
+        "status"
+      ]
+    },
+    "AssignmentSubmission": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AssignmentSubmission",
+      "type": "object",
+      "description": "Records a student's submission for an assignment, project, or avatar creation activity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AssignmentSubmission entity."
+        },
+        "activityId": {
+          "type": "string",
+          "description": "Reference to the Activity this submission is for. (Relationship: Activity 1:N AssignmentSubmission)"
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Reference to the UserProfile of the student who made the submission. (Relationship: UserProfile 1:N AssignmentSubmission)"
+        },
+        "submissionDate": {
+          "type": "string",
+          "description": "The date and time when the submission was made.",
+          "format": "date-time"
+        },
+        "fileUrl": {
+          "type": "string",
+          "description": "The URL or path to the submitted file (e.g., document, image, code, generated avatar).",
+          "format": "uri"
+        },
+        "grade": {
+          "type": "number",
+          "description": "The numerical grade received for the submission, if graded."
+        },
+        "feedback": {
+          "type": "string",
+          "description": "Textual feedback provided by the instructor for the submission."
+        },
+        "gradedBy": {
+          "type": "string",
+          "description": "Reference to the UserProfile (instructor) who graded the submission. (Relationship: UserProfile 1:N AssignmentSubmission)"
+        },
+        "gradeDate": {
+          "type": "string",
+          "description": "The date and time when the submission was graded.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "activityId",
+        "studentId",
+        "submissionDate",
+        "fileUrl"
+      ]
+    },
+    "AIChatMessage": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AIChatMessage",
+      "type": "object",
+      "description": "Logs interactions between a student and the AI Learning Assistant.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AIChatMessage entity."
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Reference to the UserProfile of the student interacting with the AI. (Relationship: UserProfile 1:N AIChatMessage)"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "The date and time of the chat message.",
+          "format": "date-time"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "The input text provided by the student to the AI."
+        },
+        "response": {
+          "type": "string",
+          "description": "The text response generated by the AI."
+        },
+        "contextTopicId": {
+          "type": "string",
+          "description": "Optional reference to the Topic related to the chat interaction, if applicable. (Relationship: Topic 1:N AIChatMessage)"
+        },
+        "responseType": {
+          "type": "string",
+          "description": "The type of AI response (e.g., 'summary', 'answer', 'image_generation', 'conversation')."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to an image generated by the AI, if applicable.",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "id",
+        "studentId",
+        "timestamp",
+        "prompt",
+        "response",
+        "responseType"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/userProfiles/{userId}",
+        "definition": {
+          "entityName": "UserProfile",
+          "schema": {
+            "$ref": "#/backend/entities/UserProfile"
+          },
+          "description": "Stores user profiles, including role (student, instructor, admin). 'userId' matches the Firebase Authentication UID. Roles stored here enable DBAC. All security rules will check 'resource.data.role' or 'get(/userProfiles/$(request.auth.uid)).data.role'.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique ID of the user, corresponding to Firebase Authentication UID."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/courses/{courseId}",
+        "definition": {
+          "entityName": "Course",
+          "schema": {
+            "$ref": "#/backend/entities/Course"
+          },
+          "description": "Stores core course metadata. This collection will hold the single main AI course described.",
+          "params": [
+            {
+              "name": "courseId",
+              "description": "The unique ID of the course."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/courses/{courseId}/modules/{moduleId}",
+        "definition": {
+          "entityName": "Module",
+          "schema": {
+            "$ref": "#/backend/entities/Module"
+          },
+          "description": "Subcollection for each module within a course. Includes denormalized 'courseId' for authorization independence and simplified rule checks.",
+          "params": [
+            {
+              "name": "courseId",
+              "description": "The unique ID of the parent course."
+            },
+            {
+              "name": "moduleId",
+              "description": "The unique ID of the module."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/courses/{courseId}/modules/{moduleId}/topics/{topicId}",
+        "definition": {
+          "entityName": "Topic",
+          "schema": {
+            "$ref": "#/backend/entities/Topic"
+          },
+          "description": "Subcollection for each topic within a module. Includes denormalized 'courseId' and 'moduleId' for authorization independence and simplified rule checks.",
+          "params": [
+            {
+              "name": "courseId",
+              "description": "The unique ID of the parent course."
+            },
+            {
+              "name": "moduleId",
+              "description": "The unique ID of the parent module."
+            },
+            {
+              "name": "topicId",
+              "description": "The unique ID of the topic."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/courses/{courseId}/modules/{moduleId}/topics/{topicId}/contentItems/{contentItemId}",
+        "definition": {
+          "entityName": "ContentItem",
+          "schema": {
+            "$ref": "#/backend/entities/ContentItem"
+          },
+          "description": "Subcollection for content items (links, images, text) within a topic. Includes denormalized 'courseId', 'moduleId', 'topicId', and 'uploadedBy' for authorization independence and simplified rule checks. Students enrolled in the course can read, instructors can write.",
+          "params": [
+            {
+              "name": "courseId",
+              "description": "The unique ID of the parent course."
+            },
+            {
+              "name": "moduleId",
+              "description": "The unique ID of the parent module."
+            },
+            {
+              "name": "topicId",
+              "description": "The unique ID of the parent topic."
+            },
+            {
+              "name": "contentItemId",
+              "description": "The unique ID of the content item."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/courses/{courseId}/modules/{moduleId}/topics/{topicId}/activities/{activityId}",
+        "definition": {
+          "entityName": "Activity",
+          "schema": {
+            "$ref": "#/backend/entities/Activity"
+          },
+          "description": "Subcollection for activities (assignments, quizzes) within a topic. Includes denormalized 'courseId', 'moduleId', 'topicId', and 'createdBy' for authorization independence and simplified rule checks. Students enrolled in the course can read, instructors can write.",
+          "params": [
+            {
+              "name": "courseId",
+              "description": "The unique ID of the parent course."
+            },
+            {
+              "name": "moduleId",
+              "description": "The unique ID of the parent module."
+            },
+            {
+              "name": "topicId",
+              "description": "The unique ID of the parent topic."
+            },
+            {
+              "name": "activityId",
+              "description": "The unique ID of the activity."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/enrollments/{enrollmentId}",
+        "definition": {
+          "entityName": "Enrollment",
+          "schema": {
+            "$ref": "#/backend/entities/Enrollment"
+          },
+          "description": "Records a student's enrollment in a course. Includes denormalized 'studentId' and 'courseId' to directly link a student to a course for authorization checks without 'get()'. Students can manage their own enrollments, instructors can view their students' enrollments.",
+          "params": [
+            {
+              "name": "enrollmentId",
+              "description": "The unique ID for the enrollment record."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/studentTopicProgress/{studentTopicProgressId}",
+        "definition": {
+          "entityName": "StudentTopicProgress",
+          "schema": {
+            "$ref": "#/backend/entities/StudentTopicProgress"
+          },
+          "description": "Tracks the progress of a student through topics. Includes denormalized 'studentId', 'courseId', and 'topicId' to enable direct authorization checks and efficient queries for student progress across courses/topics.",
+          "params": [
+            {
+              "name": "studentTopicProgressId",
+              "description": "The unique ID for the student's topic progress record."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/assignmentSubmissions/{submissionId}",
+        "definition": {
+          "entityName": "AssignmentSubmission",
+          "schema": {
+            "$ref": "#/backend/entities/AssignmentSubmission"
+          },
+          "description": "Stores student submissions for activities. Includes denormalized 'studentId', 'activityId', 'courseId' (from parent Activity), and 'gradedBy' for authorization independence, allowing students to access their submissions and instructors to grade them without additional 'get()' calls.",
+          "params": [
+            {
+              "name": "submissionId",
+              "description": "The unique ID for the assignment submission."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/aiChatMessages/{messageId}",
+        "definition": {
+          "entityName": "AIChatMessage",
+          "schema": {
+            "$ref": "#/backend/entities/AIChatMessage"
+          },
+          "description": "Stores private chat messages between a student and the AI Learning Assistant. This is a private subcollection per user, ensuring that only the owning student can read/write their chat history.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique ID of the user, corresponding to Firebase Authentication UID."
+            },
+            {
+              "name": "messageId",
+              "description": "The unique ID of the AI chat message."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The recommended Firestore structure for the 'AI Learning Hub' application prioritizes security, scalability, and debuggability by strictly adhering to the core design principles. The structure is built around a clear hierarchy for course content and distinct, often denormalized, collections for user-specific data and cross-cutting entities like enrollments and submissions. This approach ensures Authorization Independence and supports Query-based Access Patterns (QAPs).\n\n**Authorization Independence via Denormalization:**\n1.  **User Roles (DBAC):** The `UserProfile` collection (`/userProfiles/{userId}`) serves as the central authority for user roles (`student`, `instructor`, `admin`). While security rules will perform a single `get()` operation to `get(/userProfiles/$(request.auth.uid))` to determine the authenticated user's role, this is a standard and efficient pattern for core identity and avoids hierarchical `get()` calls for content access.\n2.  **Course Content (Read/Write):** For collections representing course content (`Module`, `Topic`, `ContentItem`, `Activity`), critical contextual IDs like `courseId`, `moduleId`, and `topicId` are denormalized into each document. This means a security rule checking read access for a `ContentItem` can directly access `resource.data.courseId` and then verify if the `request.auth.uid` is enrolled in that specific course (via `exists(/enrollments/$(request.auth.uid)_$(resource.data.courseId))`) or if the user is an instructor (via their `UserProfile` role). Similarly, instructor write access can be determined without traversing the parent hierarchy via `get()` operations, thereby preserving authorization independence and supporting atomic writes.\n3.  **Enrollments:** The `Enrollment` collection is top-level (`/enrollments/{enrollmentId}`) and explicitly contains `studentId` and `courseId`. This allows students to manage their own enrollments directly and enables instructors to query their students' enrollments efficiently, with rules checking `resource.data.studentId == request.auth.uid` or `resource.data.courseId` in conjunction with the instructor's role.\n4.  **Student Progress and Submissions:** `StudentTopicProgress` and `AssignmentSubmission` are designed as top-level collections (`/studentTopicProgress/{studentTopicProgressId}` and `/assignmentSubmissions/{submissionId}`). Both explicitly denormalize `studentId` and `courseId`, and `AssignmentSubmission` also includes `gradedBy`. This design is crucial for authorization independence as it allows students to access their own data (`resource.data.studentId == request.auth.uid`) and instructors to access relevant data for their course (e.g., all submissions for `courseId`) directly, without needing to perform `get()` calls on `Topic`, `Module`, or `Activity` documents to resolve the `courseId` or `instructorId` context. This ensures that a single document operation (read/write) does not depend on the existence or attributes of other unrelated documents for its authorization.\n\n**QAPs (Query-based Access Patterns):**\n1.  **Homogeneous Security Posture:** Collections like `courses`, `modules`, `topics`, `contentItems`, and `activities` are designed with a homogeneous security posture: generally readable by enrolled students and writable by instructors/admins. This structural segregation simplifies security rules and allows for efficient `list` operations without the rules attempting to act as filters.\n2.  **Targeted Data Access:** The denormalization of `courseId`, `studentId`, `topicId`, and `activityId` into `Enrollment`, `StudentTopicProgress`, and `AssignmentSubmission` documents, combined with well-defined hierarchical paths for course content, enables precise and secure queries. For example, an instructor can query all `AssignmentSubmission` documents for a specific `courseId` or `activityId`, and security rules can validate this access efficiently using the denormalized fields. Similarly, a student can easily query their own `StudentTopicProgress` or `AIChatMessage` history by using their `userId` as part of the path or as a query filter, knowing that the rules will strictly enforce ownership.\n\nIn summary, this structure effectively separates authorization concerns from data hierarchy where necessary, uses explicit roles and ownership fields, and leverages denormalization to ensure that security rules are simple, robust, and do not impede the atomic nature of Firestore operations or the efficiency of query patterns."
+  }
+}

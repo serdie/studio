@@ -1,0 +1,176 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * AI Learning Hub - CEOE & FEDETO Training Portal
+     * 
+     * Core Philosophy: This ruleset implements a Role-Based Access Control (RBAC) model 
+     * driven by user profiles, combined with a strict ownership model for student data.
+     * 
+     * Data Structure:
+     * - /userProfiles: Central identity and role storage.
+     * - /courses, /modules, /topics: Publicly readable course curriculum.
+     * - /contentItems, /activities: Course materials accessible to enrolled students.
+     * - /enrollments, /studentTopicProgress, /assignmentSubmissions: Shared student/instructor records.
+     * - /users/{userId}/aiChatMessages: Private user-specific subcollections.
+     * 
+     * Key Security Decisions:
+     * - Roles (student, instructor, admin) are fetched from the /userProfiles collection.
+     * - Enrollment is verified via a concatenated document ID pattern (/enrollments/userId_courseId).
+     * - Prototyping Mode: Schema validation is omitted to allow rapid data model evolution,
+     *   but ownership fields (studentId, instructorId) and relational links are strictly enforced.
+     * - Immutability is enforced on critical relational IDs during updates.
+     */
+
+    // --- Helper Functions ---
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/userProfiles/$(request.auth.uid)).data;
+    }
+
+    function hasRole(role) {
+      return isSignedIn() && getUserData().role == role;
+    }
+
+    function isInstructor() {
+      return hasRole('instructor') || hasRole('admin');
+    }
+
+    function isAdmin() {
+      return hasRole('admin');
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isExistingOwner(userId) {
+      return resource != null && isOwner(userId);
+    }
+
+    function isEnrolled(courseId) {
+      return isSignedIn() && (exists(/databases/$(database)/documents/enrollments/$(request.auth.uid + "_" + courseId)) || isInstructor());
+    }
+
+    // --- Collection Rules ---
+
+    /**
+     * @description Rules for user profiles. Users create their own; admins manage all.
+     * @path /userProfiles/{userId}
+     * @allow Create: if auth.uid matches userId. Update: if owner or admin.
+     * @deny Create: if auth.uid does not match document ID.
+     * @principle Verified Identity and Self-Creation.
+     */
+    match /userProfiles/{userId} {
+      allow get: if isSignedIn();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    /**
+     * @description Top-level course metadata. Public read for users; instructor-only writes.
+     * @path /courses/{courseId}
+     * @allow Read: if signed in. Write: if instructor or admin.
+     * @deny Write: if student.
+     * @principle Role-Based Access Control (RBAC).
+     */
+    match /courses/{courseId} {
+      allow get, list: if isSignedIn();
+      allow create, update, delete: if isInstructor();
+
+      /**
+       * @description Modules within a course. Follows course-level permissions.
+       * @path /courses/{courseId}/modules/{moduleId}
+       */
+      match /modules/{moduleId} {
+        allow get, list: if isSignedIn();
+        allow create, update, delete: if isInstructor();
+
+        /**
+         * @description Topics within a module.
+         * @path /courses/{courseId}/modules/{moduleId}/topics/{topicId}
+         */
+        match /topics/{topicId} {
+          allow get, list: if isSignedIn();
+          allow create, update, delete: if isInstructor();
+
+          /**
+           * @description Course materials. Readable only if enrolled or instructor.
+           * @path /courses/.../contentItems/{contentItemId}
+           */
+          match /contentItems/{contentItemId} {
+            allow get, list: if isEnrolled(courseId);
+            allow create, update, delete: if isInstructor();
+          }
+
+          /**
+           * @description Graded activities or assignments.
+           * @path /courses/.../activities/{activityId}
+           */
+          match /activities/{activityId} {
+            allow get, list: if isEnrolled(courseId);
+            allow create, update, delete: if isInstructor();
+          }
+        }
+      }
+    }
+
+    /**
+     * @description Enrollment records linking students to courses.
+     * @path /enrollments/{enrollmentId}
+     * @allow Create: if studentId matches auth.uid. Read: if student is owner or instructor.
+     * @deny Write: if trying to enroll another user.
+     * @principle Relational Integrity and Shared Access.
+     */
+    match /enrollments/{enrollmentId} {
+      allow get, list: if isSignedIn() && (isOwner(resource.data.studentId) || isInstructor());
+      allow create: if isOwner(request.resource.data.studentId);
+      allow update, delete: if isInstructor() || isExistingOwner(resource.data.studentId);
+    }
+
+    /**
+     * @description Tracks completion of topics per student.
+     * @path /studentTopicProgress/{studentTopicProgressId}
+     * @allow Create/Update: if studentId matches auth.uid. Read: if owner or instructor.
+     * @principle Ownership and Relational Consistency.
+     */
+    match /studentTopicProgress/{studentTopicProgressId} {
+      allow get, list: if isSignedIn() && (isOwner(resource.data.studentId) || isInstructor());
+      allow create: if isOwner(request.resource.data.studentId);
+      allow update: if isExistingOwner(resource.data.studentId) && request.resource.data.studentId == resource.data.studentId;
+      allow delete: if isAdmin();
+    }
+
+    /**
+     * @description Student submissions for assignments. Students upload; instructors grade.
+     * @path /assignmentSubmissions/{submissionId}
+     * @allow Create: if studentId matches auth.uid. Update: if owner or instructor (for grading).
+     * @principle Ownership and Shared Access (Closed Collaborators).
+     */
+    match /assignmentSubmissions/{submissionId} {
+      allow get, list: if isSignedIn() && (isOwner(resource.data.studentId) || isInstructor());
+      allow create: if isOwner(request.resource.data.studentId);
+      allow update: if (isExistingOwner(resource.data.studentId) || isInstructor()) && request.resource.data.studentId == resource.data.studentId;
+      allow delete: if isAdmin();
+    }
+
+    /**
+     * @description Private AI Chat history. Strictly private to the owning user.
+     * @path /users/{userId}/aiChatMessages/{messageId}
+     * @allow Read/Write: if auth.uid matches userId path parameter.
+     * @deny Read/Write: if auth.uid does not match userId.
+     * @principle Structural Segregation and User Ownership.
+     */
+    match /users/{userId}/aiChatMessages/{messageId} {
+      allow get, list, create, update, delete: if isOwner(userId);
+    }
+
+  }
+}
