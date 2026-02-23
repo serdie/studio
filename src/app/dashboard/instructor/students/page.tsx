@@ -1,17 +1,23 @@
 'use client';
 
-import { useMemoFirebase, useCollection, useUser, useFirestore } from '@/firebase';
+import { useState, useEffect } from 'react';
+import { useMemoFirebase, useCollection, useFirestore } from '@/firebase';
 import { collection, query, where } from 'firebase/firestore';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { GraduationCap, User } from 'lucide-react';
+import { User } from 'lucide-react';
 
 export default function StudentsProgressPage() {
-  const { user } = useUser();
   const db = useFirestore();
+  const [mounted, setMounted] = useState(false);
 
-  // Consulta para obtener todos los perfiles que son alumnos
+  // Handle mounting state to avoid hydration errors with date formatting
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Query to get all profiles that are students
   const studentsQuery = useMemoFirebase(() => {
     if (!db) return null;
     return query(collection(db, 'userProfiles'), where('role', '==', 'student'));
@@ -19,9 +25,24 @@ export default function StudentsProgressPage() {
 
   const { data: students, isLoading } = useCollection(studentsQuery);
 
-  if (isLoading) {
-    return <div className="flex justify-center p-12"><div className="animate-spin h-8 w-8 border-b-2 border-primary rounded-full"></div></div>;
+  if (isLoading || !mounted) {
+    return (
+      <div className="flex justify-center p-12">
+        <div className="animate-spin h-8 w-8 border-b-2 border-primary rounded-full"></div>
+      </div>
+    );
   }
+
+  const formatDate = (date: any) => {
+    if (!date) return 'N/A';
+    // Firestore timestamp has seconds and nanoseconds
+    const d = date.seconds ? new Date(date.seconds * 1000) : new Date(date);
+    return d.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+  };
 
   return (
     <div className="flex flex-col gap-6">
@@ -51,7 +72,7 @@ export default function StudentsProgressPage() {
                   <Badge variant="secondary">Activo</Badge>
                 </div>
                 <div className="pt-2 border-t text-xs text-muted-foreground">
-                  <p>Registrado el: {student.dateRegistered ? new Date(student.dateRegistered.seconds * 1000).toLocaleDateString() : 'N/A'}</p>
+                  <p>Registrado el: {formatDate(student.dateRegistered)}</p>
                 </div>
               </div>
             </CardContent>

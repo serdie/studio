@@ -5,13 +5,17 @@ import { useRouter } from 'next/navigation';
 import { useUser } from '@/firebase';
 import AppSidebar from '@/components/layout/app-sidebar';
 import AppHeader from '@/components/layout/app-header';
-import { FirebaseClientProvider } from '@/firebase/client-provider';
 
+/**
+ * DashboardContent handles the main layout logic including authentication checks.
+ * It is separated to ensure hooks are used within the context of FirebaseProvider (from RootLayout).
+ */
 function DashboardContent({ children }: { children: React.ReactNode }) {
   const { user, isUserLoading } = useUser();
   const router = useRouter();
 
   useEffect(() => {
+    // Redirect to login if user session is not found after loading
     if (!isUserLoading && !user) {
       router.push('/login');
     }
@@ -25,6 +29,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
     );
   }
 
+  // Prevent flash of content if user is not authenticated
   if (!user) return null;
 
   return (
@@ -41,9 +46,7 @@ function DashboardContent({ children }: { children: React.ReactNode }) {
 }
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <FirebaseClientProvider>
-      <DashboardContent>{children}</DashboardContent>
-    </FirebaseClientProvider>
-  );
+  // FirebaseClientProvider is already provided in the RootLayout (src/app/layout.tsx).
+  // Providing it here again is redundant and can cause performance/initialization issues.
+  return <DashboardContent>{children}</DashboardContent>;
 }
