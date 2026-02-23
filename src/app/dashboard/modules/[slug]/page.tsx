@@ -10,8 +10,9 @@ async function getModule(slug: string): Promise<Module | undefined> {
   return modules.find(m => m.slug === slug);
 }
 
-export default async function ModulePage({ params }: { params: { slug: string } }) {
-  const module = await getModule(params.slug);
+export default async function ModulePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const module = await getModule(slug);
 
   if (!module) {
     notFound();

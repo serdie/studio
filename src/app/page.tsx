@@ -7,16 +7,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <header className="px-4 lg:px-6 h-14 flex items-center bg-card border-b">
-        <Link href="/" className="flex items-center justify-center">
-          <Bot className="h-6 w-6 text-primary" />
-          <span className="ml-2 font-semibold font-headline">AI Learning Hub</span>
+      <header className="px-4 lg:px-6 h-16 flex items-center bg-card/80 backdrop-blur-md sticky top-0 z-50 border-b">
+        <Link href="/" className="flex items-center justify-center gap-2">
+          <Bot className="h-8 w-8 text-primary" />
+          <span className="text-xl font-bold font-headline tracking-tight">AI Learning Hub</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Button variant="ghost" asChild>
-            <Link href="/login">Iniciar Sesión</Link>
+            <Link href="/login">Acceder</Link>
           </Button>
-          <Button asChild>
+          <Button asChild className="hidden sm:flex">
             <Link href="/login">Registrarse</Link>
           </Button>
         </nav>
@@ -24,77 +24,90 @@ export default function HomePage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-muted/20">
+        <section className="w-full py-16 md:py-24 lg:py-32 xl:py-40 bg-gradient-to-b from-primary/5 to-background">
           <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    Desbloquea el Poder de la Inteligencia Artificial
+            <div className="grid gap-10 lg:grid-cols-[1fr_500px] xl:grid-cols-[1fr_600px] items-center">
+              <div className="flex flex-col justify-center space-y-6">
+                <div className="space-y-4">
+                  <h1 className="text-4xl font-bold font-headline tracking-tighter sm:text-6xl xl:text-7xl/none">
+                    Lidera el Futuro con <span className="text-primary">Inteligencia Artificial</span>
                   </h1>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Nuestra plataforma interactiva te guía a través de los conceptos más avanzados de IA, desde los fundamentos hasta la creación de tus propios modelos.
+                  <p className="max-w-[600px] text-muted-foreground text-lg md:text-xl leading-relaxed">
+                    Plataforma educativa interactiva diseñada para jóvenes en Toledo. Aprende, crea y domina las herramientas que están cambiando el mundo.
                   </p>
                 </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                   <Button size="lg" asChild>
+                <div className="flex flex-col sm:flex-row gap-4">
+                   <Button size="lg" className="h-12 px-8 text-lg" asChild>
                      <Link href="/dashboard">
-                        Empieza a Aprender
+                        Comenzar Ahora
                         <ArrowRight className="ml-2 h-5 w-5" />
                      </Link>
                    </Button>
+                   <Button size="lg" variant="outline" className="h-12 px-8 text-lg" asChild>
+                     <Link href="#features">Saber Más</Link>
+                   </Button>
                 </div>
               </div>
-              <Image
-                src="https://picsum.photos/seed/ai-hero/600/400"
-                width={600}
-                height={400}
-                alt="Hero"
-                data-ai-hint="artificial intelligence technology"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last"
-              />
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                <Image
+                  src="https://picsum.photos/seed/ai-hero/600/400"
+                  width={600}
+                  height={400}
+                  alt="IA Hero"
+                  data-ai-hint="artificial intelligence"
+                  className="relative mx-auto aspect-video overflow-hidden rounded-xl object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section id="features" className="w-full py-12 md:py-24 lg:py-32">
+        <section id="features" className="w-full py-20 bg-muted/30">
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
               <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Características Principales</div>
-                <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">Una nueva forma de aprender IA</h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Nuestra plataforma está diseñada para ser práctica e interactiva, con herramientas de IA que te asistirán en cada paso de tu aprendizaje.
+                <div className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary mb-2">Innovación Educativa</div>
+                <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">Tu viaje hacia la maestría en IA</h2>
+                <p className="max-w-[800px] text-muted-foreground text-lg">
+                  Hemos diseñado una experiencia de aprendizaje práctica donde la teoría se encuentra con la creación real mediante herramientas de IA.
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl items-start gap-6 py-12 lg:grid-cols-3 lg:gap-12">
-              <Card>
-                <CardHeader className="flex flex-col items-center text-center">
-                  <BrainCircuit className="h-12 w-12 text-primary mb-4" />
-                  <CardTitle className="font-headline">Módulos Interactivos</CardTitle>
+            <div className="mx-auto grid max-w-6xl items-start gap-8 lg:grid-cols-3">
+              <Card className="relative overflow-hidden border-none shadow-md bg-card transition-all hover:shadow-xl hover:-translate-y-1">
+                <CardHeader className="flex flex-col items-center text-center pb-2 pt-8">
+                  <div className="p-3 rounded-2xl bg-primary/10 text-primary mb-4">
+                    <BrainCircuit className="h-10 w-10" />
+                  </div>
+                  <CardTitle className="font-headline text-2xl">Módulos Dinámicos</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center text-muted-foreground p-6 pt-0">
-                  Aprende a tu propio ritmo con contenido estructurado, desde conceptos básicos hasta temas avanzados.
+                <CardContent className="text-center text-muted-foreground p-6 pt-2">
+                  Contenido estructurado que evoluciona contigo, desde los fundamentos lógicos hasta el deep learning avanzado.
                 </CardContent>
               </Card>
-              <Card>
-                <CardHeader className="flex flex-col items-center text-center">
-                  <Sparkles className="h-12 w-12 text-primary mb-4" />
-                  <CardTitle className="font-headline">Asistentes de IA</CardTitle>
+              <Card className="relative overflow-hidden border-none shadow-md bg-card transition-all hover:shadow-xl hover:-translate-y-1">
+                <CardHeader className="flex flex-col items-center text-center pb-2 pt-8">
+                  <div className="p-3 rounded-2xl bg-accent/10 text-accent mb-4">
+                    <Sparkles className="h-10 w-10" />
+                  </div>
+                  <CardTitle className="font-headline text-2xl">Asistencia con IA</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center text-muted-foreground p-6 pt-0">
-                  Obtén resúmenes, respuestas a tus preguntas y genera contenido visual con nuestras herramientas de IA integradas.
+                <CardContent className="text-center text-muted-foreground p-6 pt-2">
+                  Resuelve tus dudas al instante, genera resúmenes automáticos y crea contenido visual con nuestros agentes integrados.
                 </CardContent>
               </Card>
-               <Card>
-                <CardHeader className="flex flex-col items-center text-center">
-                  <BotMessageSquare className="h-12 w-12 text-primary mb-4" />
-                  <CardTitle className="font-headline">Creación de Proyectos</CardTitle>
+               <Card className="relative overflow-hidden border-none shadow-md bg-card transition-all hover:shadow-xl hover:-translate-y-1">
+                <CardHeader className="flex flex-col items-center text-center pb-2 pt-8">
+                  <div className="p-3 rounded-2xl bg-primary/10 text-primary mb-4">
+                    <BotMessageSquare className="h-10 w-10" />
+                  </div>
+                  <CardTitle className="font-headline text-2xl">Proyectos Reales</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center text-muted-foreground p-6 pt-0">
-                  Aplica lo que aprendes creando tus propios avatares virtuales y otros proyectos prácticos.
+                <CardContent className="text-center text-muted-foreground p-6 pt-2">
+                  No solo aprendes, construyes. Desde avatares personalizados hasta asistentes virtuales funcionales.
                 </CardContent>
               </Card>
             </div>
@@ -102,38 +115,50 @@ export default function HomePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/20">
-          <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
-            <div className="space-y-3">
-              <h2 className="text-3xl font-bold font-headline tracking-tighter md:text-4xl/tight">
-                ¿Listo para comenzar tu viaje en la IA?
-              </h2>
-              <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Regístrate ahora y obtén acceso inmediato a todos nuestros cursos y herramientas.
-              </p>
-            </div>
-            <div className="mx-auto w-full max-w-sm space-y-2">
-               <Button size="lg" asChild>
-                 <Link href="/login">
-                    Comienza gratis
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                 </Link>
-               </Button>
+        <section className="w-full py-20 md:py-32">
+          <div className="container px-4 md:px-6">
+            <div className="relative overflow-hidden rounded-3xl bg-primary px-8 py-16 text-primary-foreground shadow-2xl">
+              <div className="absolute top-0 right-0 -mt-20 -mr-20 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 -mb-20 -ml-20 h-64 w-64 rounded-full bg-accent/20 blur-3xl"></div>
+              
+              <div className="relative flex flex-col items-center justify-center gap-6 text-center">
+                <h2 className="text-3xl font-bold font-headline tracking-tighter md:text-5xl lg:text-6xl">
+                  ¿Preparado para el desafío?
+                </h2>
+                <p className="max-w-[700px] text-primary-foreground/80 text-lg md:text-xl">
+                  Únete a la comunidad de jóvenes creadores en Toledo y empieza a construir el futuro hoy mismo.
+                </p>
+                <div className="mt-4">
+                   <Button size="lg" variant="secondary" className="h-14 px-10 text-xl font-semibold shadow-lg hover:scale-105 transition-transform" asChild>
+                     <Link href="/login">
+                        Registrarme Gratis
+                        <ArrowRight className="ml-2 h-6 w-6" />
+                     </Link>
+                   </Button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
       </main>
 
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} AI Learning Hub. Todos los derechos reservados.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link href="#" className="text-xs hover:underline underline-offset-4">
-            Términos de Servicio
-          </Link>
-          <Link href="#" className="text-xs hover:underline underline-offset-4">
-            Política de Privacidad
-          </Link>
-        </nav>
+      <footer className="w-full py-10 border-t bg-card/50">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-2">
+              <Bot className="h-6 w-6 text-primary" />
+              <span className="font-bold font-headline">AI Learning Hub</span>
+            </div>
+            <p className="text-sm text-muted-foreground order-last md:order-none">
+              &copy; {new Date().getFullYear()} Curso de IA Toledo. Impulsado por CEOE.
+            </p>
+            <nav className="flex gap-6">
+              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Términos</Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacidad</Link>
+              <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Contacto</Link>
+            </nav>
+          </div>
+        </div>
       </footer>
     </div>
   );
