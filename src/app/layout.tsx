@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'AI Learning Hub',
+  title: 'Curso IA CEOE-FEDETO',
   description: 'Plataforma de aprendizaje para el curso de Inteligencia Artificial de la CEOE.',
   icons: {
     icon: '/logo.svg',

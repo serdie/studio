@@ -62,7 +62,7 @@ export default function LoginPage() {
         <div className="relative z-10 flex flex-col justify-between h-full p-10 text-white">
           <Link href="/" className="flex items-center gap-2 text-lg font-medium font-headline">
             <Bot className="h-8 w-8 text-primary-foreground" />
-            <span>AI Learning Hub</span>
+            <span>Curso IA CEOE-FEDETO</span>
           </Link>
           <div className="mt-auto">
             <blockquote className="space-y-2">

@@ -10,7 +10,7 @@ export default function HomePage() {
       <header className="px-4 lg:px-6 h-16 flex items-center bg-card/80 backdrop-blur-md sticky top-0 z-50 border-b">
         <Link href="/" className="flex items-center justify-center gap-2">
           <Bot className="h-8 w-8 text-primary" />
-          <span className="text-xl font-bold font-headline tracking-tight">AI Learning Hub</span>
+          <span className="text-xl font-bold font-headline tracking-tight">Curso IA CEOE-FEDETO</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Button variant="ghost" asChild>
@@ -147,7 +147,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
               <Bot className="h-6 w-6 text-primary" />
-              <span className="font-bold font-headline">AI Learning Hub</span>
+              <span className="font-bold font-headline">Curso IA CEOE-FEDETO</span>
             </div>
             <p className="text-sm text-muted-foreground order-last md:order-none">
               &copy; {new Date().getFullYear()} Curso de IA Toledo. Impulsado por CEOE.
