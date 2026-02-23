@@ -1,5 +1,15 @@
 import type { LucideIcon } from 'lucide-react';
-import { BookCopy, BrainCircuit, BotMessageSquare } from 'lucide-react';
+import { 
+  BookCopy, 
+  BrainCircuit, 
+  BotMessageSquare, 
+  Settings2, 
+  Cpu, 
+  Megaphone, 
+  ShieldCheck, 
+  Layers, 
+  Rocket 
+} from 'lucide-react';
 
 export interface Resource {
   title: string;
@@ -23,75 +33,137 @@ export const modules: Module[] = [
   {
     id: 1,
     slug: 'introduccion-ia',
-    title: 'Introducción a la IA',
+    title: 'Módulo 1: Introducción a la IA',
     duration: '30 h',
-    description: 'Fundamentos de la IA y su impacto en el mundo empresarial.',
-    longDescription: 'Este módulo cubre los conceptos fundamentales de la Inteligencia Artificial, su historia, y cómo está transformando industrias. Los estudiantes aprenderán sobre los diferentes tipos de IA y su aplicación práctica en los negocios.',
-    progress: 75,
+    description: 'Impacto en el mundo empresarial y fundamentos básicos.',
+    longDescription: 'Fundamentos de la IA, evolución, tendencias y estrategia empresarial. Incluye sesiones sobre optimización de procesos y debates socioeconómicos.',
+    progress: 0,
     icon: BrainCircuit,
-    resources: [
-      { title: 'Presentación del Módulo 1', file: '/resources/modulo1.pdf' },
-      { title: 'Glosario de Términos de IA', file: '/resources/glosario-ia.pdf' },
-      { title: 'Dataset de Ejemplo: Ventas', file: '/resources/ventas.csv' },
-    ],
+    resources: [],
     content: `
-      <h2>Semana 1: Historia y Fundamentos de la IA</h2>
-      <p>Exploraremos los orígenes de la inteligencia artificial, desde las ideas de Alan Turing hasta los sistemas expertos. Se introducirán los conceptos de machine learning, deep learning y redes neuronales.</p>
-      <h2>Semana 2: IA en la Empresa</h2>
-      <p>Análisis de casos de uso de la IA en diferentes sectores: finanzas, salud, retail y más. Discutiremos el impacto en la eficiencia operativa, la toma de decisiones y la creación de nuevos modelos de negocio.</p>
-      <h2>Semana 3: Ética y Futuro de la IA</h2>
-      <p>Debate sobre las implicaciones éticas de la inteligencia artificial, incluyendo el sesgo en los algoritmos y la privacidad de los datos. Visionaremos las tendencias futuras y el futuro del trabajo en la era de la IA.</p>
+      <h2>1.1. Fundamentos de la IA</h2><p>Definición, historia y tipos de IA.</p>
+      <h2>1.2. Evolución y tendencias</h2><p>Machine Learning, Deep Learning, PLN, Visión por Computadora y Robótica.</p>
+      <h2>1.3. Impacto en la empresa</h2><p>Optimización de procesos y nuevos modelos de negocio.</p>
     `
   },
   {
     id: 2,
-    slug: 'modelos-lenguaje-llm',
-    title: 'Modelos de Lenguaje (LLMs)',
+    slug: 'llms-generativa',
+    title: 'Módulo 2: Modelos de Lenguaje (LLMs)',
     duration: '60 h',
-    description: 'Exploración profunda de los LLMs y la IA generativa.',
-    longDescription: 'Los estudiantes se sumergirán en el mundo de los Modelos de Lenguaje Grandes (LLMs). Aprenderán sobre arquitecturas como los Transformers, técnicas de fine-tuning y cómo utilizar APIs de modelos como GPT y Gemini para crear aplicaciones.',
-    progress: 45,
+    description: 'IA Generativa, ChatGPT y Prompt Engineering avanzado.',
+    longDescription: 'Exploración profunda de los LLMs, uso avanzado de ChatGPT y técnicas de ingeniería de prompts para aplicaciones empresariales.',
+    progress: 0,
     icon: BookCopy,
-    resources: [
-      { title: 'Paper "Attention Is All You Need"', file: '/resources/attention.pdf' },
-      { title: 'Guía de Prompt Engineering', file: '/resources/prompt-guide.pdf' },
-      { title: 'Ejemplos de código Python', file: '/resources/code-examples.zip' },
-    ],
+    resources: [],
     content: `
-      <h2>Semana 1-2: Arquitectura de Transformers</h2>
-      <p>Estudio detallado del paper "Attention Is All You Need". Descompondremos la arquitectura del Transformer, entendiendo los mecanismos de atención, codificadores y decodificadores.</p>
-      <h2>Semana 3-4: IA Generativa y LLMs</h2>
-      <p>Introducción a la IA generativa. Se analizarán los principales LLMs del mercado (GPT, Gemini, Llama). Los alumnos realizarán prácticas interactuando con estos modelos a través de sus APIs.</p>
-      <h2>Semana 5-6: Fine-tuning y Aplicaciones</h2>
-      <p>Aprenderemos a especializar un LLM para una tarea concreta mediante el fine-tuning. Desarrollaremos un proyecto práctico, como un chatbot de atención al cliente o un generador de contenido.</p>
+      <h2>2.1. Introducción a LLMs</h2><p>Conceptos de IA Generativa y funcionamiento de modelos masivos.</p>
+      <h2>2.3. Ingeniería de Prompts</h2><p>Técnicas avanzadas para maximizar el rendimiento de ChatGPT y Gemini.</p>
     `
   },
   {
     id: 3,
-    slug: 'creacion-avatares-virtuales',
-    title: 'Creación de Avatares Virtuales',
+    slug: 'avatares-virtuales',
+    title: 'Módulo 3: Avatares Virtuales',
     duration: '36 h',
-    description: 'Diseño y aplicación de avatares virtuales con IA.',
-    longDescription: 'Módulo práctico donde los estudiantes utilizarán herramientas de IA generativa para crear y personalizar avatares virtuales. Se explorarán las aplicaciones de estos avatares en marketing, educación y entretenimiento.',
-    progress: 10,
+    description: 'Creación y aplicación de avatares con IA.',
+    longDescription: 'Generación de avatares, adaptación de contenidos y tecnologías de Texto a Voz (TTS).',
+    progress: 0,
     icon: BotMessageSquare,
-    resources: [
-      { title: 'Tutorial de Creación de Avatares', file: '/resources/avatar-tutorial.pdf' },
-      { title: 'Herramientas de IA para Imágenes', file: '/resources/image-tools.pdf' },
-      { title: 'Casos de Éxito: Avatares en Empresas', file: '/resources/avatar-cases.pdf' },
-    ],
+    resources: [],
     content: `
-      <h2>Semana 1: Diseño de Personajes con IA</h2>
-      <p>Utilizaremos generadores de imágenes basados en texto (como Midjourney o Stable Diffusion) para conceptualizar y diseñar la apariencia de un avatar. Aprenderemos a escribir prompts efectivos para obtener el resultado deseado.</p>
-      <h2>Semana 2: Generación y Personalización del Avatar</h2>
-      <p>Introducción a plataformas que permiten crear avatares 3D a partir de imágenes o descripciones. Los estudiantes usarán la herramienta de la plataforma para generar su propio avatar personalizado.</p>
-      <h2>Semana 3: Aplicaciones Prácticas</h2>
-      <p>Integraremos los avatares creados en un pequeño proyecto. Por ejemplo, un video de presentación, un asistente virtual para una página web o un personaje para un prototipo de juego.</p>
+      <h2>3.1. Generación de Avatares</h2><p>Herramientas para crear representaciones digitales realistas.</p>
+      <h2>3.3. Tecnologías Text-to-Voice</h2><p>Implementación de voces sintéticas naturales.</p>
+    `
+  },
+  {
+    id: 4,
+    slug: 'bots-asistentes',
+    title: 'Módulo 4: Bots y Asistentes',
+    duration: '42 h',
+    description: 'Creación, implementación y estrategia multimodal.',
+    longDescription: 'Estrategia de asistentes internos vs externos, proceso de creación y ética en la automatización.',
+    progress: 0,
+    icon: Cpu,
+    resources: [],
+    content: `
+      <h2>4.3. Proceso de Creación</h2><p>Fases desde el diseño de flujo hasta la implementación técnica.</p>
+    `
+  },
+  {
+    id: 5,
+    slug: 'low-code-no-code',
+    title: 'Módulo 5: Low-Code e IA',
+    duration: '42 h',
+    description: 'Automatización de procesos con MAKE e IA integrada.',
+    longDescription: 'Introducción al movimiento No-Code y automatización avanzada de flujos de trabajo utilizando MAKE.',
+    progress: 0,
+    icon: Settings2,
+    resources: [],
+    content: `
+      <h2>5.2. Automatización con MAKE</h2><p>Creación de escenarios y conexión de aplicaciones sin código.</p>
+    `
+  },
+  {
+    id: 6,
+    slug: 'marketing-ia',
+    title: 'Módulo 6: Marketing con IA',
+    duration: '24 h',
+    description: 'SEO, SEM, Funnels y Redes Sociales con IA.',
+    longDescription: 'Aplicación de la inteligencia artificial para optimizar el posicionamiento, la conversión y la gestión de comunidades.',
+    progress: 0,
+    icon: Megaphone,
+    resources: [],
+    content: `
+      <h2>6.2. IA para SEO y SEM</h2><p>Optimización de contenidos y campañas publicitarias.</p>
+    `
+  },
+  {
+    id: 7,
+    slug: 'etica-privacidad',
+    title: 'Módulo 7: Ética y Privacidad',
+    duration: '24 h',
+    description: 'Legislación, GDPR y el nuevo reglamento europeo.',
+    longDescription: 'Análisis de sesgos, protección de datos y el marco legal de la IA en la Unión Europea.',
+    progress: 0,
+    icon: ShieldCheck,
+    resources: [],
+    content: `
+      <h2>7.3. Marco legal</h2><p>Reglamento europeo de IA y GDPR aplicado.</p>
+    `
+  },
+  {
+    id: 8,
+    slug: 'areas-funcionales',
+    title: 'Módulo 8: Aplicaciones Funcionales',
+    duration: '12 h',
+    description: 'IA en Logística, RRHH, Finanzas y Operaciones.',
+    longDescription: 'Casos prácticos de IA aplicada a la cadena de suministro, contratación y gestión financiera.',
+    progress: 0,
+    icon: Layers,
+    resources: [],
+    content: `
+      <h2>8.1. IA en Ventas y RRHH</h2><p>Personalización de la experiencia y contratación inteligente.</p>
+    `
+  },
+  {
+    id: 9,
+    slug: 'proyectos-integradores',
+    title: 'Módulo 9: Proyectos Integradores',
+    duration: '90 h',
+    description: 'Desarrollo, defensa y despliegue de proyectos reales.',
+    longDescription: 'Fase final del curso dedicada a la creación de un proyecto práctico completo con monitorización real.',
+    progress: 0,
+    icon: Rocket,
+    resources: [],
+    content: `
+      <h2>9.2. Selección de Proyecto</h2><p>Definición de retos reales con aplicación a la empresa.</p>
     `
   }
 ];
 
 export const getUser = () => ({
-  name: 'Estudiante',
-  email: 'estudiante@ailearninghub.com',
+  name: 'Profesor/Estudiante',
+  email: 'usuario@ceoe-fedeto.com',
+  role: 'instructor' // Simulado para el prototipo
 });
