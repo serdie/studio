@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -25,6 +25,7 @@ export default function RegisterPage() {
   const db = useFirestore();
   const router = useRouter();
   const { toast } = useToast();
+  const logoUrl = "https://www.fedeto.es/wp-content/uploads/2020/10/logotipo-web-fedeto.png";
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,8 +66,14 @@ export default function RegisterPage() {
     <div className="flex min-h-screen items-center justify-center bg-muted/20 p-4">
       <div className="mx-auto grid w-[400px] gap-6">
         <div className="flex flex-col gap-2 text-center">
-          <div className="flex justify-center mb-2">
-            <Bot className="h-12 w-12 text-primary" />
+          <div className="flex justify-center mb-4">
+            <Image 
+              src={logoUrl} 
+              alt="FEDETO Logo" 
+              width={160} 
+              height={55} 
+              className="h-12 w-auto object-contain"
+            />
           </div>
           <h1 className="text-3xl font-bold font-headline">Crear Cuenta</h1>
           <p className="text-muted-foreground">Únete al curso de IA de CEOE y FEDETO</p>

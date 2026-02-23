@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,6 +22,7 @@ export default function LoginPage() {
   const { toast } = useToast();
   
   const loginBg = PlaceHolderImages.find(p => p.id === 'login-background');
+  const logoUrl = "https://www.fedeto.es/wp-content/uploads/2020/10/logotipo-web-fedeto.png";
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -120,16 +120,22 @@ export default function LoginPage() {
           />
         )}
         <div className="relative z-10 flex flex-col justify-between h-full p-10 text-white">
-          <Link href="/" className="flex items-center gap-2 text-lg font-medium font-headline">
-            <Bot className="h-8 w-8 text-primary-foreground" />
-            <span>Curso IA CEOE-FEDETO</span>
+          <Link href="/" className="flex items-center gap-3 text-lg font-medium font-headline bg-white/90 p-3 rounded-lg w-fit">
+            <Image 
+              src={logoUrl} 
+              alt="FEDETO Logo" 
+              width={140} 
+              height={45} 
+              className="h-10 w-auto object-contain"
+            />
+            <span className="text-primary font-bold">Curso IA CEOE-FEDETO</span>
           </Link>
           <div className="mt-auto">
-            <blockquote className="space-y-2">
-              <p className="text-lg">
-                &ldquo;Esta plataforma ha transformado mi manera de aprender sobre IA. Las herramientas interactivas son simplemente increíbles.&rdquo;
+            <blockquote className="space-y-2 bg-black/40 p-6 rounded-xl backdrop-blur-sm">
+              <p className="text-lg italic">
+                &ldquo;Esta plataforma ha transformado mi manera de aprender sobre IA. Las herramientas interactivas y el apoyo de CEOE y FEDETO son simplemente increíbles.&rdquo;
               </p>
-              <footer className="text-sm">Sofia, Estudiante del curso</footer>
+              <footer className="text-sm font-semibold">— Sofia, Estudiante del curso</footer>
             </blockquote>
           </div>
         </div>

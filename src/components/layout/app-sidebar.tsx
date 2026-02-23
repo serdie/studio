@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Bot, Home, Settings, GraduationCap, ClipboardList, Users } from 'lucide-react';
+import { Home, Settings, ClipboardList, Users } from 'lucide-react';
 import { modules } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { useUser, useDoc, useFirestore, useMemoFirebase } from '@/firebase';
@@ -18,6 +19,7 @@ export default function AppSidebar() {
   const pathname = usePathname();
   const { user } = useUser();
   const db = useFirestore();
+  const logoUrl = "https://www.fedeto.es/wp-content/uploads/2020/10/logotipo-web-fedeto.png";
 
   // Obtener el rol del usuario desde Firestore
   const profileRef = useMemoFirebase(() => {
@@ -40,9 +42,14 @@ export default function AppSidebar() {
     <aside className="hidden border-r bg-background md:block">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-          <Link href="/dashboard" className="flex items-center gap-2 font-headline font-semibold">
-            <Bot className="h-6 w-6 text-primary" />
-            <span className="text-sm">Curso IA CEOE-FEDETO</span>
+          <Link href="/dashboard" className="flex items-center gap-3 font-headline font-semibold">
+            <Image 
+              src={logoUrl} 
+              alt="FEDETO Logo" 
+              width={100} 
+              height={35} 
+              className="h-7 w-auto object-contain"
+            />
           </Link>
         </div>
         <div className="flex-1 overflow-y-auto">
@@ -54,7 +61,7 @@ export default function AppSidebar() {
                 className={cn(
                   'flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted',
                   {
-                    'bg-muted text-primary': pathname === href,
+                    'bg-muted text-primary font-semibold': pathname === href,
                   }
                 )}
               >
@@ -63,7 +70,7 @@ export default function AppSidebar() {
               </Link>
             ))}
             
-            <div className="my-4 px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            <div className="my-4 px-3 text-xs font-bold text-primary uppercase tracking-wider">
               Módulos del Curso
             </div>
 
@@ -74,7 +81,7 @@ export default function AppSidebar() {
                 className={cn(
                   'flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary hover:bg-muted text-xs',
                   {
-                    'bg-muted text-primary': pathname.includes(m.slug),
+                    'bg-muted text-primary font-semibold': pathname.includes(m.slug),
                   }
                 )}
               >

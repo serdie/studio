@@ -1,23 +1,31 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Bot, BrainCircuit, BotMessageSquare, Sparkles, ArrowRight } from 'lucide-react';
+import { BrainCircuit, BotMessageSquare, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function HomePage() {
+  const logoUrl = "https://www.fedeto.es/wp-content/uploads/2020/10/logotipo-web-fedeto.png";
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <header className="px-4 lg:px-6 h-16 flex items-center bg-card/80 backdrop-blur-md sticky top-0 z-50 border-b">
         <Link href="/" className="flex items-center justify-center gap-2">
-          <Bot className="h-8 w-8 text-primary" />
-          <span className="text-xl font-bold font-headline tracking-tight">Curso IA CEOE-FEDETO</span>
+          <Image 
+            src={logoUrl} 
+            alt="FEDETO Logo" 
+            width={120} 
+            height={40} 
+            className="h-8 w-auto object-contain"
+          />
+          <span className="text-xl font-bold font-headline tracking-tight text-primary">Curso IA CEOE-FEDETO</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <Button variant="ghost" asChild>
             <Link href="/login">Acceder</Link>
           </Button>
           <Button asChild className="hidden sm:flex">
-            <Link href="/login">Registrarse</Link>
+            <Link href="/register">Registrarse</Link>
           </Button>
         </nav>
       </header>
@@ -33,12 +41,12 @@ export default function HomePage() {
                     Lidera el Futuro con <span className="text-primary">Inteligencia Artificial</span>
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground text-lg md:text-xl leading-relaxed">
-                    Plataforma educativa interactiva diseñada para jóvenes en Toledo. Aprende, crea y domina las herramientas que están cambiando el mundo.
+                    Plataforma educativa interactiva diseñada para jóvenes en Toledo (16-29 años). Aprende, crea y domina las herramientas que están cambiando el mundo con el respaldo de CEOE y FEDETO.
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
                    <Button size="lg" className="h-12 px-8 text-lg" asChild>
-                     <Link href="/dashboard">
+                     <Link href="/login">
                         Comenzar Ahora
                         <ArrowRight className="ml-2 h-5 w-5" />
                      </Link>
@@ -72,7 +80,7 @@ export default function HomePage() {
                 <div className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary mb-2">Innovación Educativa</div>
                 <h2 className="text-3xl font-bold font-headline tracking-tighter sm:text-5xl">Tu viaje hacia la maestría en IA</h2>
                 <p className="max-w-[800px] text-muted-foreground text-lg">
-                  Hemos diseñado una experiencia de aprendizaje práctica donde la teoría se encuentra con la creación real mediante herramientas de IA.
+                  Hemos diseñado una experiencia de aprendizaje práctica de 336 horas donde la teoría se encuentra con la creación real mediante herramientas de IA.
                 </p>
               </div>
             </div>
@@ -85,7 +93,7 @@ export default function HomePage() {
                   <CardTitle className="font-headline text-2xl">Módulos Dinámicos</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center text-muted-foreground p-6 pt-2">
-                  Contenido estructurado que evoluciona contigo, desde los fundamentos lógicos hasta el deep learning avanzado.
+                  9 módulos estructurados que evolucionan contigo, desde los fundamentos lógicos hasta el desarrollo de proyectos reales.
                 </CardContent>
               </Card>
               <Card className="relative overflow-hidden border-none shadow-md bg-card transition-all hover:shadow-xl hover:-translate-y-1">
@@ -107,7 +115,7 @@ export default function HomePage() {
                   <CardTitle className="font-headline text-2xl">Proyectos Reales</CardTitle>
                 </CardHeader>
                 <CardContent className="text-center text-muted-foreground p-6 pt-2">
-                  No solo aprendes, construyes. Desde avatares personalizados hasta asistentes virtuales funcionales.
+                  No solo aprendes, construyes. El curso culmina con 90 horas dedicadas al desarrollo de proyectos prácticos integradores.
                 </CardContent>
               </Card>
             </div>
@@ -126,11 +134,11 @@ export default function HomePage() {
                   ¿Preparado para el desafío?
                 </h2>
                 <p className="max-w-[700px] text-primary-foreground/80 text-lg md:text-xl">
-                  Únete a la comunidad de jóvenes creadores en Toledo y empieza a construir el futuro hoy mismo.
+                  Únete a la comunidad de jóvenes creadores en Toledo y empieza a construir el futuro hoy mismo con CEOE y FEDETO.
                 </p>
                 <div className="mt-4">
                    <Button size="lg" variant="secondary" className="h-14 px-10 text-xl font-semibold shadow-lg hover:scale-105 transition-transform" asChild>
-                     <Link href="/login">
+                     <Link href="/register">
                         Registrarme Gratis
                         <ArrowRight className="ml-2 h-6 w-6" />
                      </Link>
@@ -145,12 +153,18 @@ export default function HomePage() {
       <footer className="w-full py-10 border-t bg-card/50">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Bot className="h-6 w-6 text-primary" />
+            <div className="flex items-center gap-4">
+              <Image 
+                src={logoUrl} 
+                alt="FEDETO Logo" 
+                width={100} 
+                height={35} 
+                className="h-6 w-auto object-contain brightness-0 dark:brightness-100"
+              />
               <span className="font-bold font-headline">Curso IA CEOE-FEDETO</span>
             </div>
             <p className="text-sm text-muted-foreground order-last md:order-none">
-              &copy; {new Date().getFullYear()} Curso de IA Toledo. Impulsado por CEOE.
+              &copy; {new Date().getFullYear()} Curso de IA Toledo. Impulsado por CEOE y FEDETO.
             </p>
             <nav className="flex gap-6">
               <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Términos</Link>
