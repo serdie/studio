@@ -1,14 +1,59 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Bot, Sparkles } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useAuth } from '@/firebase';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useToast } from '@/hooks/use-toast';
 
 export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const auth = useAuth();
+  const router = useRouter();
+  const { toast } = useToast();
+  
   const loginBg = PlaceHolderImages.find(p => p.id === 'login-background');
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      router.push('/dashboard');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: "Error de acceso",
+        description: "Credenciales incorrectas o usuario no encontrado.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      router.push('/dashboard');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: "Error",
+        description: "No se pudo iniciar sesión con Google.",
+      });
+    }
+  };
 
   return (
     <div className="w-full h-screen lg:grid lg:grid-cols-2">
@@ -17,13 +62,21 @@ export default function LoginPage() {
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold font-headline">Iniciar Sesión</h1>
             <p className="text-balance text-muted-foreground">
-              Introduce tu correo para acceder a tu cuenta
+              Accede a tu cuenta de formación en IA
             </p>
           </div>
-          <div className="grid gap-4">
+          
+          <form onSubmit={handleLogin} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Correo Electrónico</Label>
-              <Input id="email" type="email" placeholder="nombre@ejemplo.com" required />
+              <Input 
+                id="email" 
+                type="email" 
+                placeholder="nombre@ejemplo.com" 
+                required 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
@@ -32,18 +85,25 @@ export default function LoginPage() {
                   ¿Olvidaste tu contraseña?
                 </Link>
               </div>
-              <Input id="password" type="password" required />
+              <Input 
+                id="password" 
+                type="password" 
+                required 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
-            <Button type="submit" className="w-full" asChild>
-              <Link href="/dashboard">Iniciar Sesión</Link>
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? 'Accediendo...' : 'Iniciar Sesión'}
             </Button>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full" type="button" onClick={handleGoogleLogin}>
               Iniciar Sesión con Google
             </Button>
-          </div>
+          </form>
+          
           <div className="mt-4 text-center text-sm">
             ¿No tienes una cuenta?{' '}
-            <Link href="#" className="underline">
+            <Link href="/register" className="underline">
               Regístrate
             </Link>
           </div>

@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Bot, Home, Settings, GraduationCap, ClipboardList } from 'lucide-react';
+import { Bot, Home, Settings, GraduationCap, ClipboardList, Users } from 'lucide-react';
 import { modules } from '@/lib/data';
 import { cn } from '@/lib/utils';
+import { useUser, useDoc, useFirestore, useMemoFirebase } from '@/firebase';
+import { doc } from 'firebase/firestore';
 import {
   Tooltip,
   TooltipContent,
@@ -14,10 +16,24 @@ import {
 
 export default function AppSidebar() {
   const pathname = usePathname();
+  const { user } = useUser();
+  const db = useFirestore();
+
+  // Obtener el rol del usuario desde Firestore
+  const profileRef = useMemoFirebase(() => {
+    if (!db || !user) return null;
+    return doc(db, 'userProfiles', user.uid);
+  }, [db, user]);
+
+  const { data: profile } = useDoc(profileRef);
+  const isInstructor = profile?.role === 'instructor' || profile?.role === 'admin';
 
   const navLinks = [
     { href: '/dashboard', icon: Home, label: 'Inicio' },
-    { href: '/dashboard/instructor', icon: ClipboardList, label: 'Gestión del Curso', instructorOnly: true },
+    ...(isInstructor ? [
+      { href: '/dashboard/instructor', icon: ClipboardList, label: 'Gestión de Contenidos' },
+      { href: '/dashboard/instructor/students', icon: Users, label: 'Avance Alumnos' }
+    ] : []),
   ];
 
   return (
