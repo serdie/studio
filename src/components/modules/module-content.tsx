@@ -118,7 +118,7 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                     Leer Cuento en Gemini
                   </Button>
                   <Button 
-                    onClick={() => window.open('/materiales/tema1/El Despertar del Código_ Un Viaje por la Historia de la IA.pdf', '_blank')}
+                    onClick={() => window.open('/materiales/tema1/El Despertar del Código_ Un Viaje por la Historia de la IA_compressed.pdf', '_blank')}
                     variant="outline"
                     className="border-amber-400 text-amber-700 hover:bg-amber-100 flex-1"
                   >
