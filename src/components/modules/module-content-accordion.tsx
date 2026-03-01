@@ -24,6 +24,48 @@ export default function ModuleContentAccordion({ htmlContent, moduleSlug }: Modu
     return <div className="module-prose max-w-none" dangerouslySetInnerHTML={{ __html: htmlContent }} />;
   }
 
+  // Componente del Cuento para insertar en el tema 1.1
+  const CuentoComponent = () => (
+    <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 my-4">
+      <CardHeader className="pb-3">
+        <div className="flex items-center gap-3">
+          <div className="h-12 w-12 rounded-xl bg-amber-200 flex items-center justify-center">
+            <BookOpen className="h-6 w-6 text-amber-700" />
+          </div>
+          <div>
+            <h4 className="text-xl font-bold text-amber-900">📚 Cuento: El Despertar del Código</h4>
+            <p className="text-sm text-amber-700">Un Viaje por la Historia de la Inteligencia Artificial</p>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <p className="text-amber-800 text-sm">
+          Descubre la fascinante historia de la IA desde sus inicios hasta la actualidad en este cuento interactivo.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Button 
+            onClick={() => window.open('https://gemini.google.com/share/258b15141250', '_blank')}
+            className="bg-amber-600 hover:bg-amber-700 text-white flex-1"
+          >
+            <BookOpen className="mr-2 h-4 w-4" />
+            Leer Cuento en Gemini
+          </Button>
+          <Button 
+            onClick={() => window.open('/materiales/tema1/El Despertar del Código_ Un Viaje por la Historia de la IA_compressed.pdf', '_blank')}
+            variant="outline"
+            className="border-amber-400 text-amber-700 hover:bg-amber-100 flex-1"
+          >
+            <FileTextIcon className="mr-2 h-4 w-4" />
+            Ver PDF
+          </Button>
+        </div>
+        <p className="text-xs text-amber-600 text-center">
+          💡 Consejo: El cuento en Gemini es interactivo. El PDF es mejor para imprimir o leer offline.
+        </p>
+      </CardContent>
+    </Card>
+  );
+
   // Parsear el contenido HTML para extraer las secciones h2
   const parseSections = (): ModuleSection[] => {
     const parser = new DOMParser();
@@ -38,9 +80,25 @@ export default function ModuleContentAccordion({ htmlContent, moduleSlug }: Modu
       // Obtener el contenido hasta el siguiente h2
       let content = '';
       let nextSibling = h2.nextElementSibling;
-      while (nextSibling && nextSibling.tagName !== 'H2') {
-        content += nextSibling.outerHTML;
-        nextSibling = nextSibling.nextElementSibling;
+      
+      // Para el tema 1.1, insertar el cuento antes de "Tipos de IA"
+      if (number === '1.1') {
+        while (nextSibling && nextSibling.tagName !== 'H2') {
+          // Insertar el cuento antes de "Tipos de IA"
+          if (nextSibling.tagName === 'H3' && nextSibling.textContent?.includes('Tipos de IA')) {
+            // Crear un div temporal para renderizar el cuento
+            const tempDiv = document.createElement('div');
+            tempDiv.id = 'cuento-insert-point';
+            content += tempDiv.outerHTML;
+          }
+          content += nextSibling.outerHTML;
+          nextSibling = nextSibling.nextElementSibling;
+        }
+      } else {
+        while (nextSibling && nextSibling.tagName !== 'H2') {
+          content += nextSibling.outerHTML;
+          nextSibling = nextSibling.nextElementSibling;
+        }
       }
 
       sections.push({
@@ -146,10 +204,21 @@ export default function ModuleContentAccordion({ htmlContent, moduleSlug }: Modu
           
           {expandedSections[index] && (
             <CardContent className="pt-0 pb-4 animate-in fade-in slide-in-from-top-2 duration-300">
-              <div 
-                className="module-prose max-w-none border-t pt-4 mt-2"
-                dangerouslySetInnerHTML={{ __html: section.content }} 
-              />
+              <div className="module-prose max-w-none border-t pt-4 mt-2">
+                {/* Insertar el cuento en el tema 1.1 antes de "Tipos de IA" */}
+                {section.number === '1.1' && (
+                  <div dangerouslySetInnerHTML={{ __html: section.content.replace('<div id="cuento-insert-point"></div>', '<div id="cuento-insert-point"></div>') }} />
+                )}
+                {section.number !== '1.1' && (
+                  <div dangerouslySetInnerHTML={{ __html: section.content }} />
+                )}
+                {/* Renderizar el cuento después del contenido parseado para 1.1 */}
+                {section.number === '1.1' && (
+                  <div className="mt-6">
+                    <CuentoComponent />
+                  </div>
+                )}
+              </div>
             </CardContent>
           )}
         </Card>

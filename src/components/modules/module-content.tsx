@@ -92,53 +92,11 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         </TabsList>
 
         <TabsContent value="content" className="mt-4">
-          {/* Cuento para No Olvidar - Solo en Módulo 1 */}
-          {module.slug === 'introduccion-ia' && (
-            <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 mb-6">
-              <CardHeader className="pb-3">
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-amber-200 flex items-center justify-center">
-                    <BookOpen className="h-6 w-6 text-amber-700" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-xl text-amber-900">📚 Cuento: El Despertar del Código</CardTitle>
-                    <p className="text-sm text-amber-700">Un Viaje por la Historia de la Inteligencia Artificial</p>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-amber-800 text-sm">
-                  Descubre la fascinante historia de la IA desde sus inicios hasta la actualidad en este cuento interactivo.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    onClick={() => window.open('https://gemini.google.com/share/258b15141250', '_blank')}
-                    className="bg-amber-600 hover:bg-amber-700 text-white flex-1"
-                  >
-                    <BookOpen className="mr-2 h-4 w-4" />
-                    Leer Cuento en Gemini
-                  </Button>
-                  <Button 
-                    onClick={() => window.open('/materiales/tema1/El Despertar del Código_ Un Viaje por la Historia de la IA_compressed.pdf', '_blank')}
-                    variant="outline"
-                    className="border-amber-400 text-amber-700 hover:bg-amber-100 flex-1"
-                  >
-                    <FileTextIcon className="mr-2 h-4 w-4" />
-                    Ver PDF
-                  </Button>
-                </div>
-                <p className="text-xs text-amber-600 text-center">
-                  💡 Consejo: El cuento en Gemini es interactivo. El PDF es mejor para imprimir o leer offline.
-                </p>
-              </CardContent>
-            </Card>
-          )}
-
           <Card className="border-border/60">
             <CardContent className="p-6">
-              <ModuleContentAccordion 
-                htmlContent={module.content} 
-                moduleSlug={module.slug} 
+              <ModuleContentAccordion
+                htmlContent={module.content}
+                moduleSlug={module.slug}
               />
             </CardContent>
           </Card>
