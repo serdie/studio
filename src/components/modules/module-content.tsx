@@ -10,6 +10,7 @@ import AIAssistant from './ai-assistant';
 import AIImageGenerator from './ai-image-generator';
 import AvatarCreator from './avatar-creator';
 import LearningObjectives from './learning-objectives';
+import ModuleContentAccordion from './module-content-accordion';
 import GamesSection from '@/components/games/games-section';
 import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon } from 'lucide-react';
 import { useState, useMemo } from 'react';
@@ -134,7 +135,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
           )}
 
           <Card className="border-border/60">
-            <CardContent className="p-6 module-prose max-w-none" dangerouslySetInnerHTML={{ __html: module.content }} />
+            <CardContent className="p-6">
+              <ModuleContentAccordion 
+                htmlContent={module.content} 
+                moduleSlug={module.slug} 
+              />
+            </CardContent>
           </Card>
         </TabsContent>
 
