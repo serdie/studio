@@ -44,6 +44,6 @@ next-env.d.ts
 firebase-debug.log
 firestore-debug.log
 
-# Large files (>100MB for GitHub limit)
-"public/materiales/tema1/El Despertar del Código*"
-"temas/tema1/El Despertar del Código*"
+# Large files (>100MB for GitHub limit) - Excluir solo versión grande
+"public/materiales/tema1/El Despertar del Código_ Un Viaje por la Historia de la IA.pdf"
+"temas/tema1/El Despertar del Código_ Un Viaje por la Historia de la IA.pdf"
