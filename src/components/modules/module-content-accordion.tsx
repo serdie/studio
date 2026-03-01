@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronUp, BookOpen } from 'lucide-react';
+import { ChevronDown, ChevronUp, BookOpen, FileText } from 'lucide-react';
 
 interface ModuleSection {
   number: string;
@@ -55,7 +55,7 @@ export default function ModuleContentAccordion({ htmlContent, moduleSlug }: Modu
             variant="outline"
             className="border-amber-400 text-amber-700 hover:bg-amber-100 flex-1"
           >
-            <FileTextIcon className="mr-2 h-4 w-4" />
+            <FileText className="mr-2 h-4 w-4" />
             Ver PDF
           </Button>
         </div>
