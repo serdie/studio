@@ -39,7 +39,14 @@ export const modules: Module[] = [
     longDescription: 'Fundamentos de la IA, evolución, tendencias y estrategia empresarial. Incluye sesiones sobre optimización de procesos y debates socioeconómicos.',
     progress: 0,
     icon: BrainCircuit,
-    resources: [],
+    resources: [
+      { title: 'Guía del Módulo 1 (PDF)', file: '/materiales/tema1/01_guia_modulo_1_v01.pdf' },
+      { title: 'AI Business Strategy and Impact (PDF)', file: '/materiales/tema1/AI_Business_Strategy_and_Impact.pdf' },
+      { title: 'Manual de trinchera para la IA (Audio M4A)', file: '/materiales/tema1/Manual_de_trinchera_para_la_IA_empresarial.m4a' },
+      { title: 'Infografía del Módulo 1 (Imagen PNG)', file: '/materiales/tema1/modulo1-infografía.png' },
+      { title: 'Programa Superior del Curso (PDF)', file: '/materiales/tema1/Programa-Superior.pdf' },
+      { title: 'Presentación del Programa (PPTX)', file: '/materiales/tema1/Programa-Superior.pptx' }
+    ],
     content: `
       <h2>1.1. Fundamentos de la IA: Definición, historia, tipos de IA</h2>
       <h3>¿Qué es la Inteligencia Artificial?</h3>

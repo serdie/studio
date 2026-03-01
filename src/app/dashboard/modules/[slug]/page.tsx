@@ -5,9 +5,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Progress } from '@/components/ui/progress';
 import { Separator } from '@/components/ui/separator';
 import ModuleContent from '@/components/modules/module-content';
+import fs from 'fs';
+import path from 'path';
 
 async function getModule(slug: string): Promise<Module | undefined> {
   return modules.find(m => m.slug === slug);
+}
+
+async function getObjectives(moduleId: number) {
+  try {
+    const filePath = path.join(process.cwd(), 'docs', `module-${moduleId}-objectives.json`);
+    if (fs.existsSync(filePath)) {
+      const fileContent = fs.readFileSync(filePath, 'utf8');
+      return JSON.parse(fileContent);
+    }
+  } catch (error) {
+    console.error(`Error loading objectives for module ${moduleId}:`, error);
+  }
+  return null;
 }
 
 export default async function ModulePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -18,6 +33,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
     notFound();
   }
 
+  const objectives = await getObjectives(module.id);
   const { icon: Icon, ...serializableModule } = module;
 
   return (
@@ -41,7 +57,7 @@ export default async function ModulePage({ params }: { params: Promise<{ slug: s
 
       <Separator />
 
-      <ModuleContent module={serializableModule} />
+      <ModuleContent module={serializableModule} objectives={objectives} />
     </div>
   );
 }

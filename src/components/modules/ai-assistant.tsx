@@ -7,9 +7,13 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Bot, User, Send, Trash2 } from 'lucide-react';
 import { aiContentQASupport } from '@/ai/flows/ai-content-qa-support';
 import { useToast } from '@/hooks/use-toast';
+import { useFirestore, useUser } from '@/firebase/provider';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 interface AIAssistantProps {
   courseContent: string;
+  moduleSlug?: string;
+  additionalContext?: string; // Content from uploaded files
 }
 
 interface Message {
@@ -17,11 +21,13 @@ interface Message {
   content: string;
 }
 
-export default function AIAssistant({ courseContent }: AIAssistantProps) {
+export default function AIAssistant({ courseContent, moduleSlug, additionalContext }: AIAssistantProps) {
   const [question, setQuestion] = useState('');
   const [conversation, setConversation] = useState<Message[]>([]);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
+  const { user } = useUser();
+  const db = useFirestore();
   const bottomRef = useRef<HTMLDivElement>(null);
   const maxChars = 500;
 
@@ -35,16 +41,38 @@ export default function AIAssistant({ courseContent }: AIAssistantProps) {
 
     const userMessage: Message = { role: 'user', content: question };
     setConversation(prev => [...prev, userMessage]);
+    const currentQuestion = question;
     setQuestion('');
 
     startTransition(async () => {
       try {
-        const result = await aiContentQASupport({ courseContent, studentQuestion: question });
+        // Log interaction for predictive analytics
+        if (user && db) {
+          await addDoc(collection(db, 'ai_analytics'), {
+            userId: user.uid,
+            userName: user.displayName || 'Alumno',
+            moduleSlug: moduleSlug || 'unknown',
+            question: currentQuestion,
+            timestamp: serverTimestamp(),
+            type: 'content_qa'
+          });
+        }
+
+        const fullContext = additionalContext 
+          ? `${courseContent}\n\nRECURSOS ADICIONALES DEL PROFESOR:\n${additionalContext}`
+          : courseContent;
+
+        const result = await aiContentQASupport({ 
+          courseContent: fullContext, 
+          studentQuestion: currentQuestion 
+        });
+        
         if (result.answer) {
           const assistantMessage: Message = { role: 'assistant', content: result.answer };
           setConversation(prev => [...prev, assistantMessage]);
         }
-      } catch {
+      } catch (error) {
+        console.error('Error in AIAssistant:', error);
         toast({
           variant: 'destructive',
           title: 'Error del asistente',

@@ -1,0 +1,73 @@
+{
+  "module": 1,
+  "title": "Módulo 1: Introducción a la IA y su impacto en el mundo empresarial",
+  "total_hours": 30,
+  "objectives": [
+    {
+      "section": "1.1. Fundamentos de la IA",
+      "items": [
+        "Explicar qué es la IA con un lenguaje claro y aplicable al contexto empresarial.",
+        "Diferenciar IA, automatización, analítica y machine learning con ejemplos simples.",
+        "Identificar conceptos clave (datos, modelo, entrenamiento, inferencia, sesgo, generalización).",
+        "Reconocer hitos y 'olas' de desarrollo de la IA y su relación con avances tecnológicos.",
+        "Clasificar tipos de IA (por capacidad, por enfoque, por nivel de autonomía) y asociarlos a casos de uso.",
+        "Aplicar un criterio inicial para discernir expectativas realistas vs 'hype' en soluciones de IA."
+      ]
+    },
+    {
+      "section": "1.2. Evolución y tendencias",
+      "items": [
+        "Diferenciar ML y DL y seleccionar cuándo conviene cada aproximación.",
+        "Describir qué es el PLN y qué aportan los LLMs en tareas empresariales.",
+        "Reconocer capacidades y límites típicos de los LLMs (errores, alucinaciones, sesgos, seguridad).",
+        "Identificar aplicaciones frecuentes de visión por computadora y robótica en sectores productivos.",
+        "Valorar requisitos prácticos (datos, procesos, costes, cumplimiento) para cada familia tecnológica.",
+        "Proponer 'primeros pilotos' realistas a partir de necesidades de una pyme o departamento."
+      ]
+    },
+    {
+      "section": "1.3. Impacto de la IA en la empresa",
+      "items": [
+        "Detectar procesos donde IA aporta eficiencia (tiempos, costes, calidad).",
+        "Diseñar un mapa simple de procesos y localizar puntos de automatización inteligente.",
+        "Identificar decisiones mejorables con analítica predictiva y recomendación.",
+        "Proponer personalización responsable (experiencia cliente) con foco en valor y privacidad.",
+        "Explorar nuevos modelos de negocio habilitados por IA (productos, servicios, pricing, soporte).",
+        "Priorizar oportunidades usando criterios de impacto, viabilidad, riesgo y adopción."
+      ]
+    },
+    {
+      "section": "1.4. Casos de éxito y fracaso",
+      "items": [
+        "Identificar patrones comunes de éxito en implantaciones de IA.",
+        "Reconocer causas típicas de fracaso (datos, proceso, adopción, gobernanza).",
+        "Formular preguntas de diagnóstico para evaluar la 'madurez' de un caso.",
+        "Separar 'caso inspirador' de 'caso replicable' en pyme.",
+        "Proponer medidas prácticas para reducir riesgos en proyectos iniciales.",
+        "Construir aprendizajes transferibles a su propio entorno profesional."
+      ]
+    },
+    {
+      "section": "1.5. Estrategia de IA en la empresa",
+      "items": [
+        "Identificar oportunidades de IA alineadas con objetivos de negocio.",
+        "Priorizar iniciativas con un método simple (impacto/viabilidad/riesgo).",
+        "Diseñar una hoja de ruta inicial (pilotos, quick wins, escalado).",
+        "Definir roles mínimos (negocio, datos, IT, legal, seguridad) en adopción de IA.",
+        "Proponer acciones de cambio cultural (formación, comunicación, políticas de uso).",
+        "Establecer indicadores de adopción y valor (KPI de negocio + KPI operativos)."
+      ]
+    },
+    {
+      "section": "1.6. Sesiones interactivas",
+      "items": [
+        "Argumentar de forma estructurada sobre el impacto de la IA en empleo y productividad.",
+        "Identificar riesgos (sesgo, privacidad, desinformación, dependencia tecnológica) y medidas de mitigación.",
+        "Reconocer implicaciones de regulación y buenas prácticas empresariales (visión general).",
+        "Contrastar perspectivas (empresa, trabajador, cliente, sociedad) sin caer en extremos.",
+        "Elaborar una posición razonada aplicable a su sector o empresa.",
+        "Sintetizar conclusiones accionables para el proyecto final del curso (módulo práctico)."
+      ]
+    }
+  ]
+}

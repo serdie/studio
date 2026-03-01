@@ -10,17 +10,34 @@ interface Message {
   content: string;
 }
 
+interface FeditoChatProps {
+  initialQuestion?: string;
+}
+
 /**
  * FeditoChat Component
  * Componente principal del chat con el asistente Fedito
+ * Conectado a la API de IA para responder preguntas reales
  */
-export function FeditoChat() {
+export function FeditoChat({ initialQuestion }: FeditoChatProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [avatarState, setAvatarState] = useState<'idle' | 'thinking' | 'talking' | 'happy'>('idle');
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [conversationHistory, setConversationHistory] = useState<{role: string, content: string}[]>([]);
+
+  // Mensaje de bienvenida cuando se abre el chat por primera vez
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      setMessages([{
+        id: 'welcome',
+        role: 'assistant',
+        content: '¡Hola! 👋 Soy Fedito, tu asistente virtual del curso de IA de CEOE-FEDETO.\n\nPregúntame sobre:\n• Los módulos del curso\n• Conceptos de inteligencia artificial\n• Cómo usar la plataforma\n• Dudas técnicas\n\n¿En qué puedo ayudarte hoy?',
+      }]);
+    }
+  }, [isOpen]);
 
   // Scroll al final cuando hay nuevos mensajes
   useEffect(() => {
@@ -36,18 +53,23 @@ export function FeditoChat() {
     }
   }, [messages]);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // Manejar pregunta inicial opcional
+  useEffect(() => {
+    if (initialQuestion && !messages.some(m => m.content === initialQuestion)) {
+      handleSendMessage(null, initialQuestion);
+    }
+  }, [initialQuestion]);
 
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputValue.trim()) return;
+  const handleSendMessage = async (e: React.FormEvent | null, customMessage?: string) => {
+    if (e) e.preventDefault();
+    
+    const messageToSend = customMessage || inputValue.trim();
+    if (!messageToSend) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
       role: 'user',
-      content: inputValue.trim(),
+      content: messageToSend,
     };
 
     setMessages(prev => [...prev, userMessage]);
@@ -55,20 +77,75 @@ export function FeditoChat() {
     setIsTyping(true);
     setAvatarState('thinking');
 
-    // Simular respuesta de la IA (aquí iría la llamada real a la API)
-    setTimeout(() => {
+    // Actualizar historial
+    setConversationHistory(prev => [
+      ...prev,
+      { role: 'user', content: messageToSend }
+    ]);
+
+    try {
+      // Llamar a la API de Fedito
+      const response = await fetch('/api/fedito-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: messageToSend,
+          conversationHistory: conversationHistory,
+        }),
+      });
+
+      // Verificar si la respuesta es JSON antes de parsear
+      const contentType = response.headers.get('content-type');
+      let data;
+      
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        // Respuesta no es JSON (probablemente error del servidor)
+        const textError = await response.text();
+        console.error('Error en API Fedito (no JSON):', textError);
+        throw new Error('Error en el servidor');
+      }
+
+      if (response.ok) {
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: data.response,
+        };
+        setMessages(prev => [...prev, assistantMessage]);
+        setAvatarState('happy');
+
+        // Actualizar historial con respuesta
+        setConversationHistory(prev => [
+          ...prev,
+          { role: 'assistant', content: data.response }
+        ]);
+      } else {
+        // Error en la API
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: data.error || 'Lo siento, he tenido un problema. ¿Puedes repetir la pregunta?',
+        };
+        setMessages(prev => [...prev, assistantMessage]);
+      }
+    } catch (error) {
+      console.error('Error al enviar mensaje:', error);
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: '¡Hola! Soy Fedito, tu asistente virtual. ¿En qué puedo ayudarte hoy?',
+        content: 'Vaya, parece que hay un problema de conexión. ¿Puedes intentarlo de nuevo?',
       };
       setMessages(prev => [...prev, assistantMessage]);
+    } finally {
       setIsTyping(false);
-      setAvatarState('happy');
-      
+
       // Volver a idle después de un momento
       setTimeout(() => setAvatarState('idle'), 1500);
-    }, 1500);
+    }
   };
 
   return (
@@ -94,44 +171,36 @@ export function FeditoChat() {
 
           {/* Mensajes */}
           <div className="h-80 p-4 overflow-y-auto bg-muted/30">
-            {messages.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground">
-                <FeditoAvatar state="idle" size="lg" className="mb-4 opacity-50" />
-                <p className="text-sm">¡Hola! Soy Fedito</p>
-                <p className="text-xs">Pregúntame lo que necesites</p>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {messages.map((message) => (
+            <div className="space-y-3">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
                   <div
-                    key={message.id}
-                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    className={`max-w-[80%] px-3 py-2 rounded-lg text-sm whitespace-pre-line ${
+                      message.role === 'user'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-background border'
+                    }`}
                   >
-                    <div
-                      className={`max-w-[80%] px-3 py-2 rounded-lg text-sm ${
-                        message.role === 'user'
-                          ? 'bg-primary text-primary-foreground'
-                          : 'bg-background border'
-                      }`}
-                    >
-                      {message.content}
+                    {message.content}
+                  </div>
+                </div>
+              ))}
+              {isTyping && (
+                <div className="flex justify-start">
+                  <div className="bg-background border px-3 py-2 rounded-lg text-sm">
+                    <div className="flex gap-1">
+                      <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
-                ))}
-                {isTyping && (
-                  <div className="flex justify-start">
-                    <div className="bg-background border px-3 py-2 rounded-lg text-sm">
-                      <div className="flex gap-1">
-                        <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                        <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                        <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                      </div>
-                    </div>
-                  </div>
-                )}
-                <div ref={messagesEndRef} />
-              </div>
-            )}
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
           </div>
 
           {/* Input */}
@@ -141,8 +210,9 @@ export function FeditoChat() {
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Escribe tu mensaje..."
+                placeholder="Escribe tu pregunta..."
                 className="flex-1 px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                disabled={isTyping}
               />
               <button
                 type="submit"
