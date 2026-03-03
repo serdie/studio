@@ -39,6 +39,24 @@ const externalActivities: GameItem[] = [
     category: 'actividad',
     icon: <Gamepad2 className="h-5 w-5 text-blue-400" />,
   },
+  {
+    id: 'mit-ai-classifier',
+    title: 'MIT AI Classifier - App Inventor',
+    description: 'Explora cómo funciona el aprendizaje automático creando tu propio clasificador de imágenes. ¡Entrena una IA para reconocer diferentes objetos!',
+    type: 'external',
+    url: 'https://classifier.appinventor.mit.edu/',
+    category: 'actividad',
+    icon: <ExternalLink className="h-5 w-5 text-purple-400" />,
+  },
+  {
+    id: 'mit-app-inventor',
+    title: 'MIT App Inventor',
+    description: 'Crea tus propias aplicaciones móviles para Android de forma visual y sencilla. ¡Desarrolla apps sin necesidad de escribir código complejo!',
+    type: 'external',
+    url: 'https://appinventor.mit.edu/',
+    category: 'actividad',
+    icon: <ExternalLink className="h-5 w-5 text-green-400" />,
+  },
 ];
 
 interface GameAccordionItemProps {
