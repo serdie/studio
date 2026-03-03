@@ -108,7 +108,64 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               <Loader2 className="h-8 w-8 animate-spin text-primary/40" />
             </div>
           ) : (
-            <ResourceList resources={allResources} />
+            <div className="space-y-6">
+              <ResourceList resources={allResources} />
+              
+              {/* Sección de Videos - Solo en Módulo 1 */}
+              {module.slug === 'introduccion-ia' && (
+                <Card className="border-red-200 bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-12 rounded-xl bg-red-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-red-700"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m10 9 5 3-5 3z"/><path d="M2 8v8"/></svg>
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl text-red-900">🎬 Videos Recomendados</CardTitle>
+                        <p className="text-sm text-red-700">Contenido audiovisual para complementar tu aprendizaje</p>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {/* Video 1 */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/Q6BclIP5QBQ?start=421"
+                            title="Video 1: Introducción a la IA"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-red-800 font-medium">
+                          📺 Introducción a la Inteligencia Artificial
+                        </p>
+                      </div>
+                      
+                      {/* Video 2 */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/5MWT_doo68k?start=17"
+                            title="Video 2: Aplicaciones de la IA"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-red-800 font-medium">
+                          📺 Aplicaciones Prácticas de la IA
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-red-600 text-center">
+                      💡 Consejo: Los videos comienzan en el punto exacto recomendado para este módulo.
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
           )}
         </TabsContent>
 
