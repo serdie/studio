@@ -157,11 +157,35 @@ function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
   );
 }
 
-export default function GamesSection() {
+interface GamesSectionProps {
+  moduleSlug: string;
+}
+
+export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [openGameId, setOpenGameId] = useState<string | null>(null);
 
   const handleToggle = (gameId: string) => {
     setOpenGameId(openGameId === gameId ? null : gameId);
+  };
+
+  // Solo mostrar juegos y enlaces en el módulo 1 (introduccion-ia)
+  if (moduleSlug !== 'introduccion-ia') {
+    return (
+      <Card className="border-slate-700 bg-slate-800/50">
+        <CardContent className="p-12 text-center space-y-4">
+          <Gamepad2 className="h-16 w-16 mx-auto text-slate-600" />
+          <div>
+            <h3 className="text-xl font-semibold text-slate-300">🎮 Juegos y Enlaces - Próximamente</h3>
+            <p className="text-slate-400 mt-2">
+              Estamos preparando contenido interactivo y enlaces recomendados para este módulo.
+            </p>
+            <p className="text-slate-500 text-sm mt-4">
+              ¡Vuelve pronto para descubrir nuevas actividades!
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+    );
   };
 
   return (
