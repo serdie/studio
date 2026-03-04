@@ -7,6 +7,7 @@ import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy } from 'l
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
+import FactorySensorsGame from './factory-sensors-game';
 
 interface GameItem {
   id: string;
@@ -46,6 +47,15 @@ const gamesList: GameItem[] = [
     category: 'juego',
     icon: <Brain className="h-5 w-5 text-teal-400" />,
     component: <IAClassificationGame />,
+  },
+  {
+    id: 'factory-sensors',
+    title: '🏭 Fábrica con Impresora 3D: Sensores IoT',
+    description: 'Arrastra los sensores a la zona de la fábrica donde aporten más valor (Recepción, Almacén, Impresión, Calidad).',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-emerald-400" />,
+    component: <FactorySensorsGame />,
   },
 ];
 
