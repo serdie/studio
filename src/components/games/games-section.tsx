@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy } from 'lucide-react';
 import ProjectNeural from './project-neural';
+import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 
 interface GameItem {
   id: string;
@@ -26,6 +27,15 @@ const gamesList: GameItem[] = [
     category: 'juego',
     icon: <Brain className="h-5 w-5 text-cyan-400" />,
     component: <ProjectNeural />,
+  },
+  {
+    id: 'ia-ml-dl-quiz',
+    title: '¿IA, ML, Deep Learning o Automatización?',
+    description: 'Pon a prueba tus conocimientos identificando qué tecnología se usa en cada ejemplo del mundo real.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-indigo-400" />,
+    component: <IAMLDeepLearningQuiz />,
   },
 ];
 
