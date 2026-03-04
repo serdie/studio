@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
+import IAClassificationGame from './ia-classification-game';
 
 interface GameItem {
   id: string;
@@ -36,6 +37,15 @@ const gamesList: GameItem[] = [
     category: 'juego',
     icon: <Brain className="h-5 w-5 text-indigo-400" />,
     component: <IAMLDeepLearningQuiz />,
+  },
+  {
+    id: 'ia-classification-game',
+    title: '🗂️ Clasifica los Ejemplos por Tipo de IA',
+    description: 'Arrastra cada ejemplo a la columna correcta (Reglas, ML, Deep Learning, IA Generativa).',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-teal-400" />,
+    component: <IAClassificationGame />,
   },
 ];
 
