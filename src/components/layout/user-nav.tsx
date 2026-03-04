@@ -35,8 +35,12 @@ export default function UserNav() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Perfil</DropdownMenuItem>
-        <DropdownMenuItem>Ajustes</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/dashboard/perfil">Perfil</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/dashboard/mi-zona">Mi Zona</Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/login">Cerrar Sesión</Link>

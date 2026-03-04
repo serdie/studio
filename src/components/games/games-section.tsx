@@ -57,6 +57,24 @@ const externalActivities: GameItem[] = [
     category: 'actividad',
     icon: <ExternalLink className="h-5 w-5 text-green-400" />,
   },
+  {
+    id: 'code-org-students',
+    title: 'Code.org - Estudiantes',
+    description: 'Plataforma completa de Code.org para aprender programación. Tutoriales interactivos, desafíos de código y recursos para todos los niveles.',
+    type: 'external',
+    url: 'https://code.org/es/students',
+    category: 'enlace',
+    icon: <ExternalLink className="h-5 w-5 text-cyan-400" />,
+  },
+  {
+    id: 'scratch-mit',
+    title: 'Scratch - MIT',
+    description: 'Crea historias interactivas, juegos y animaciones con Scratch. La plataforma del MIT para aprender programación de forma creativa y divertida.',
+    type: 'external',
+    url: 'https://scratch.mit.edu/',
+    category: 'enlace',
+    icon: <ExternalLink className="h-5 w-5 text-orange-400" />,
+  },
 ];
 
 interface GameAccordionItemProps {
