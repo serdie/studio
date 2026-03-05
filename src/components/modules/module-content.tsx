@@ -3,6 +3,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import type { Module, Resource } from '@/lib/data';
 import ResourceList from './resource-list';
 import AISummarizer from './ai-summarizer';
@@ -12,11 +14,96 @@ import AvatarCreator from './avatar-creator';
 import LearningObjectives from './learning-objectives';
 import ModuleContentAccordion from './module-content-accordion';
 import GamesSection from '@/components/games/games-section';
-import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon } from 'lucide-react';
+import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
 import { collection, query, where, orderBy } from 'firebase/firestore';
 import { useCollection } from '@/firebase/firestore/use-collection';
+
+// Componente plegable para secciones
+interface CollapsibleSectionProps {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}
+
+function CollapsibleSection({ title, description, icon, children }: CollapsibleSectionProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Collapsible open={isOpen} onOpenChange={setIsOpen} className="mb-6">
+      <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-pink-50 to-white">
+        <CollapsibleTrigger asChild>
+          <CardHeader className="cursor-pointer hover:bg-purple-50/50 transition-colors">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                  {icon}
+                </div>
+                <div>
+                  <CardTitle className="text-lg text-purple-900">{title}</CardTitle>
+                  <p className="text-sm text-purple-700">{description}</p>
+                </div>
+              </div>
+              <Button variant="ghost" size="sm" className="text-purple-600">
+                {isOpen ? (
+                  <>
+                    <ChevronUp className="h-4 w-4 mr-1" />
+                    Ocultar
+                  </>
+                ) : (
+                  <>
+                    <ChevronDown className="h-4 w-4 mr-1" />
+                    Ver
+                  </>
+                )}
+              </Button>
+            </div>
+          </CardHeader>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="pt-0">
+          <CardContent className="space-y-4">
+            {children}
+          </CardContent>
+        </CollapsibleContent>
+      </Card>
+    </Collapsible>
+  );
+}
+
+// Componente para tarjetas de películas
+interface MovieCardProps {
+  title: string;
+  description: string;
+  poster: string;
+  themes: string[];
+}
+
+function MovieCard({ title, description, poster, themes }: MovieCardProps) {
+  return (
+    <Card className="border-slate-200 overflow-hidden hover:border-purple-300 hover:shadow-lg transition-all">
+      <div className="aspect-[2/3] overflow-hidden bg-slate-100">
+        <img 
+          src={poster} 
+          alt={title}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+      <CardContent className="p-3 space-y-2">
+        <h4 className="font-bold text-purple-900 text-sm">{title}</h4>
+        <p className="text-xs text-slate-600 line-clamp-3">{description}</p>
+        <div className="flex flex-wrap gap-1">
+          {themes.map((theme, idx) => (
+            <Badge key={idx} variant="outline" className="text-xs border-purple-300 text-purple-700 bg-purple-50">
+              {theme}
+            </Badge>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
 interface ModuleContentProps {
   module: Omit<Module, 'icon'>;
@@ -69,6 +156,48 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
 
       {objectives && (
         <LearningObjectives objectives={objectives.objectives} />
+      )}
+
+      {/* Deberes de Fin de Semana - Solo en Módulo 1 */}
+      {module.slug === 'introduccion-ia' && (
+        <CollapsibleSection
+          title="📚 Deberes de Fin de Semana: Cine y IA"
+          description="Películas recomendadas para reflexionar sobre el futuro de la IA"
+          icon={<Film className="h-5 w-5 text-purple-600" />}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <MovieCard
+              title="Her (2013)"
+              description="Un hombre solitario se enamora de una IA con voz femenina. Explora la relación entre humanos e IA, el amor y la soledad en la era digital."
+              poster="https://pics.filmaffinity.com/her-716403893-mmed.jpg"
+              themes={['IA emocional', 'Relaciones humano-IA', 'Soledad digital']}
+            />
+            <MovieCard
+              title="I, Robot - Yo, Robot (2004)"
+              description="En 2035, un detective investiga un crimen que podría haber sido cometido por un robot. Basado en Asimov, explora las Tres Leyes de la Robótica."
+              poster="https://pics.filmaffinity.com/i_robot-964272233-mmed.jpg"
+              themes={['Tres Leyes de la Robótica', 'Ética de la IA', 'Conciencia artificial']}
+            />
+            <MovieCard
+              title="Bicentennial Man - El Hombre Bicentenario (1999)"
+              description="Un robot con capacidad de sentir emociones lucha por ser reconocido como humano a lo largo de 200 años. Una reflexión sobre humanidad y conciencia."
+              poster="https://pics.filmaffinity.com/bicentennial_man-582339231-mmed.jpg"
+              themes={['Humanidad vs Artificialidad', 'Evolución de la IA', 'Derechos de los robots']}
+            />
+            <MovieCard
+              title="The Imitation Game - Descifrando Enigma (2014)"
+              description="La historia de Alan Turing, el matemático que descifró el código Enigma nazi durante la Segunda Guerra Mundial y sentó las bases de la computación moderna."
+              poster="https://pics.filmaffinity.com/the_imitation_game-824166913-mmed.jpg"
+              themes={['Alan Turing', 'Criptografía', 'Orígenes de la computación', 'IA simbólica']}
+            />
+          </div>
+          <div className="mt-4 p-3 bg-purple-50 border border-purple-200 rounded-lg">
+            <p className="text-sm text-purple-800">
+              💡 <strong>Actividad:</strong> Después de ver cada película, piensa en cómo se relaciona con los conceptos de IA que hemos aprendido en el módulo. 
+              ¿Son realistas las representaciones? ¿Qué aspectos éticos plantean?
+            </p>
+          </div>
+        </CollapsibleSection>
       )}
 
       <Tabs defaultValue="content" className="w-full">

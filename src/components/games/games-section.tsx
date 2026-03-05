@@ -270,78 +270,6 @@ function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
   );
 }
 
-// Componente para la sección de películas
-function WeekendMovies() {
-  const movies = [
-    {
-      title: 'Her (2013)',
-      description: 'Un hombre solitario se enamora de una IA con voz femenina. Explora la relación entre humanos e IA, el amor y la soledad en la era digital.',
-      poster: 'https://pics.filmaffinity.com/her-716403893-mmed.jpg',
-      themes: ['IA emocional', 'Relaciones humano-IA', 'Soledad digital']
-    },
-    {
-      title: 'I, Robot - Yo, Robot (2004)',
-      description: 'En 2035, un detective investiga un crimen que podría haber sido cometido por un robot. Basado en Asimov, explora las Tres Leyes de la Robótica.',
-      poster: 'https://pics.filmaffinity.com/i_robot-964272233-mmed.jpg',
-      themes: ['Tres Leyes de la Robótica', 'Ética de la IA', 'Conciencia artificial']
-    },
-    {
-      title: 'Bicentennial Man - El Hombre Bicentenario (1999)',
-      description: 'Un robot con capacidad de sentir emociones lucha por ser reconocido como humano a lo largo de 200 años. Una reflexión sobre humanidad y conciencia.',
-      poster: 'https://pics.filmaffinity.com/bicentennial_man-582339231-mmed.jpg',
-      themes: ['Humanidad vs Artificialidad', 'Evolución de la IA', 'Derechos de los robots']
-    }
-  ];
-
-  return (
-    <div className="space-y-4">
-      <div className="bg-gradient-to-br from-purple-900/30 via-slate-900 to-blue-900/30 rounded-xl border-2 border-purple-500/30 p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="h-12 w-12 rounded-xl bg-purple-500/20 flex items-center justify-center">
-            <span className="text-2xl">🎬</span>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold text-purple-300">📚 Deberes de Fin de Semana: Cine y IA</h3>
-            <p className="text-sm text-slate-400">Películas recomendadas para reflexionar sobre el futuro de la IA</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {movies.map((movie, index) => (
-            <Card key={index} className="border-slate-700 bg-slate-800/50 overflow-hidden hover:border-purple-500/50 transition-all">
-              <div className="aspect-[2/3] overflow-hidden">
-                <img 
-                  src={movie.poster} 
-                  alt={movie.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform"
-                />
-              </div>
-              <CardContent className="p-3 space-y-2">
-                <h4 className="font-bold text-purple-300">{movie.title}</h4>
-                <p className="text-xs text-slate-400">{movie.description}</p>
-                <div className="flex flex-wrap gap-1">
-                  {movie.themes.map((theme, idx) => (
-                    <Badge key={idx} variant="outline" className="text-xs border-purple-500/50 text-purple-300">
-                      {theme}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="mt-4 p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
-          <p className="text-sm text-purple-200">
-            💡 <strong>Actividad:</strong> Después de ver cada película, piensa en cómo se relaciona con los conceptos de IA que hemos aprendido en el módulo. 
-            ¿Son realistas las representaciones? ¿Qué aspectos éticos plantean?
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 interface GamesSectionProps {
   moduleSlug: string;
 }
@@ -423,11 +351,6 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
           </div>
         </div>
       )}
-
-      {/* Sección de Deberes de Fin de Semana - Películas */}
-      <div className="mt-8">
-        <WeekendMovies />
-      </div>
     </div>
   );
 }
