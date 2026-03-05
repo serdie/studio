@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
