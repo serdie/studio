@@ -159,6 +159,25 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                         </p>
                       </div>
                     </div>
+
+                    {/* Fila de videos adicionales */}
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      {/* Video 3 */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/IY1WXMOJMVw"
+                            title="Video 3: IA y Automatización"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-red-800 font-medium">
+                          📺 IA y Automatización en la Industria
+                        </p>
+                      </div>
+                    </div>
                     <p className="text-xs text-red-600 text-center">
                       💡 Consejo: Los videos comienzan en el punto exacto recomendado para este módulo.
                     </p>

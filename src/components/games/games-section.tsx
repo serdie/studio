@@ -105,6 +105,24 @@ const externalActivities: GameItem[] = [
     category: 'enlace',
     icon: <ExternalLink className="h-5 w-5 text-orange-400" />,
   },
+  {
+    id: 'tinkercad',
+    title: 'Tinkercad - Diseño 3D y Electrónica',
+    description: 'Herramienta gratuita de Autodesk para diseño 3D, electrónica y programación. Ideal para principiantes que quieren crear modelos 3D y circuitos.',
+    type: 'external',
+    url: 'https://www.tinkercad.com/',
+    category: 'enlace',
+    icon: <ExternalLink className="h-5 w-5 text-pink-400" />,
+  },
+  {
+    id: 'ultimaker-cura',
+    title: 'Ultimaker Cura - Software de Impresión 3D',
+    description: 'El software de laminado (slicer) más popular para impresión 3D. Prepara tus modelos 3D para imprimir con configuración profesional.',
+    type: 'external',
+    url: 'https://ultimaker.com/es/software/ultimaker-cura/',
+    category: 'enlace',
+    icon: <ExternalLink className="h-5 w-5 text-indigo-400" />,
+  },
 ];
 
 interface GameAccordionItemProps {
