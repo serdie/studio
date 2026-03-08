@@ -4,12 +4,14 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
 import FactorySensorsGame from './factory-sensors-game';
 import AutomationLabGame from './automation-lab-game';
+import PromptEngineeringQuiz from './prompt-quiz';
+import LLMSelectorTool from './llm-selector-tool';
 
 interface GameItem {
   id: string;
@@ -67,6 +69,122 @@ const gamesList: GameItem[] = [
     category: 'juego',
     icon: <Brain className="h-5 w-5 text-cyan-400" />,
     component: <AutomationLabGame />,
+  },
+];
+
+// Lista de juegos específica para Módulo 2 (LLMs)
+const module2GamesList: GameItem[] = [
+  {
+    id: 'llm-selector-tool',
+    title: '🧠 Selector Inteligente de IAs (LLM)',
+    description: 'Elige un caso de uso, tu perfil y descubre las mejores IAs para cada escenario. Incluye calculadora de costes de tokens.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-purple-400" />,
+    component: <LLMSelectorTool />,
+  },
+  {
+    id: 'prompt-quiz',
+    title: '✨ Quiz de Prompt Engineering',
+    description: 'Identifica las técnicas de prompt engineering en cada ejemplo: Role Prompting, Few-Shot, Chain of Thought, etc.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Sparkles className="h-5 w-5 text-pink-400" />,
+    component: <PromptEngineeringQuiz />,
+  },
+];
+
+// Enlaces externos específicos para Módulo 2 (LLMs)
+const module2ExternalActivities: GameItem[] = [
+  {
+    id: 'chatgpt',
+    title: 'ChatGPT - OpenAI',
+    description: 'El LLM más popular. Ideal para redacción general, código, brainstorming y tareas cotidianas.',
+    type: 'external',
+    url: 'https://chat.openai.com',
+    category: 'actividad',
+    icon: <Sparkles className="h-5 w-5 text-green-400" />,
+  },
+  {
+    id: 'claude',
+    title: 'Claude - Anthropic',
+    description: 'Excelente para documentos largos, análisis profundo y razonamiento. Ventana de contexto de 200K tokens.',
+    type: 'external',
+    url: 'https://claude.ai',
+    category: 'actividad',
+    icon: <Brain className="h-5 w-5 text-orange-400" />,
+  },
+  {
+    id: 'gemini',
+    title: 'Gemini - Google',
+    description: 'Multimodal nativo. Integrado con Google Workspace. Ideal para investigación y productividad.',
+    type: 'external',
+    url: 'https://gemini.google.com',
+    category: 'actividad',
+    icon: <Sparkles className="h-5 w-5 text-blue-400" />,
+  },
+  {
+    id: 'copilot',
+    title: 'Microsoft Copilot',
+    description: 'Integrado en Word, Excel, PowerPoint y Edge. Perfecto si usas Microsoft 365.',
+    type: 'external',
+    url: 'https://copilot.microsoft.com',
+    category: 'actividad',
+    icon: <ExternalLink className="h-5 w-5 text-indigo-400" />,
+  },
+  {
+    id: 'perplexity',
+    title: 'Perplexity AI',
+    description: 'Motor de búsqueda con IA. Proporciona respuestas con fuentes citadas. Ideal para investigación.',
+    type: 'external',
+    url: 'https://www.perplexity.ai',
+    category: 'actividad',
+    icon: <Search className="h-5 w-5 text-cyan-400" />,
+  },
+  {
+    id: 'mistral',
+    title: 'Mistral AI - Le Chat',
+    description: 'Modelo europeo eficiente. Excelente para código y tareas técnicas. API muy competitiva.',
+    type: 'external',
+    url: 'https://chat.mistral.ai',
+    category: 'actividad',
+    icon: <Code2 className="h-5 w-5 text-yellow-400" />,
+  },
+  {
+    id: 'llama-meta',
+    title: 'LLaMA - Meta',
+    description: 'Modelo open source. Ideal para ejecutar localmente o personalizar para casos específicos.',
+    type: 'external',
+    url: 'https://ai.meta.com/llama',
+    category: 'actividad',
+    icon: <Brain className="h-5 w-5 text-purple-400" />,
+  },
+  {
+    id: 'qwen',
+    title: 'Qwen - Alibaba',
+    description: 'Modelo versátil con buen rendimiento en código y tareas generales. API competitiva.',
+    type: 'external',
+    url: 'https://chat.qwen.ai',
+    category: 'actividad',
+    icon: <Sparkles className="h-5 w-5 text-red-400" />,
+  },
+  {
+    id: 'grok',
+    title: 'Grok - xAI',
+    description: 'Integrado en X (Twitter). Acceso a información en tiempo real desde redes sociales.',
+    type: 'external',
+    url: 'https://grok.x.ai',
+    category: 'actividad',
+    icon: <ExternalLink className="h-5 w-5 text-slate-400" />,
+  },
+  {
+    id: 'huggingface',
+    title: 'Hugging Face',
+    description: 'Plataforma con miles de modelos open source. Ideal para explorar y probar alternativas.',
+    type: 'external',
+    url: 'https://huggingface.co/chat',
+    category: 'actividad',
+    icon: <Brain className="h-5 w-5 text-pink-400" />,
   },
 ];
 
@@ -276,13 +394,47 @@ interface GamesSectionProps {
 
 export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [openGameId, setOpenGameId] = useState<string | null>(null);
+  const [externalLinksOpen, setExternalLinksOpen] = useState(false);
+  const [imageAiOpen, setImageAiOpen] = useState(false);
+  const [videoAiOpen, setVideoAiOpen] = useState(false);
+  const [musicAiOpen, setMusicAiOpen] = useState(false);
+  const [voiceAiOpen, setVoiceAiOpen] = useState(false);
+  const [threeDAiOpen, setThreeDAiOpen] = useState(false);
 
   const handleToggle = (gameId: string) => {
     setOpenGameId(openGameId === gameId ? null : gameId);
   };
 
-  // Solo mostrar juegos y enlaces en el módulo 1 (introduccion-ia)
-  if (moduleSlug !== 'introduccion-ia') {
+  const handleExternalLinksToggle = () => {
+    setExternalLinksOpen(!externalLinksOpen);
+  };
+
+  const handleImageAiToggle = () => {
+    setImageAiOpen(!imageAiOpen);
+  };
+
+  const handleVideoAiToggle = () => {
+    setVideoAiOpen(!videoAiOpen);
+  };
+
+  const handleMusicAiToggle = () => {
+    setMusicAiOpen(!musicAiOpen);
+  };
+
+  const handleVoiceAiToggle = () => {
+    setVoiceAiOpen(!voiceAiOpen);
+  };
+
+  const handleThreeDAiToggle = () => {
+    setThreeDAiOpen(!threeDAiOpen);
+  };
+
+  // Determinar qué lista de juegos y enlaces usar según el módulo
+  const currentGamesList = moduleSlug === 'llms-generativa' ? module2GamesList : gamesList;
+  const currentExternalActivities = moduleSlug === 'llms-generativa' ? module2ExternalActivities : externalActivities;
+
+  // Solo mostrar juegos y enlaces en el módulo 1 y 2
+  if (moduleSlug !== 'introduccion-ia' && moduleSlug !== 'llms-generativa') {
     return (
       <Card className="border-slate-700 bg-slate-800/50">
         <CardContent className="p-12 text-center space-y-4">
@@ -310,9 +462,9 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
           <h3 className="text-lg font-semibold">Juegos Interactivos</h3>
         </div>
         
-        {gamesList.length > 0 ? (
+        {currentGamesList.length > 0 ? (
           <div className="space-y-3">
-            {gamesList.map(game => (
+            {currentGamesList.map(game => (
               <GameAccordionItem
                 key={game.id}
                 game={game}
@@ -331,26 +483,254 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
         )}
       </div>
 
-      {/* Sección de Actividades Externas */}
-      {externalActivities.length > 0 && (
+      {/* Sección de Actividades Externas - Desplegable */}
+      {currentExternalActivities.length > 0 && (
         <div className="mt-8">
-          <div className="flex items-center gap-2 mb-4">
-            <Trophy className="h-5 w-5 text-yellow-500" />
-            <h3 className="text-lg font-semibold">Actividades Externas Recomendadas</h3>
-          </div>
+          <Card className="border-yellow-200 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50 cursor-pointer" onClick={handleExternalLinksToggle}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-yellow-200 flex items-center justify-center">
+                    <Trophy className="h-5 w-5 text-yellow-700" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-yellow-900">🔗 Enlaces Externos a LLMs</h3>
+                    <p className="text-sm text-yellow-700">
+                      {externalLinksOpen 
+                        ? `${currentExternalActivities.length} enlaces disponibles - Haz clic para ocultar`
+                        : `${currentExternalActivities.length} enlaces a principales IAs - Haz clic para ver`}
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown 
+                  className={`h-6 w-6 text-yellow-700 transition-transform duration-300 ${
+                    externalLinksOpen ? 'rotate-180' : ''
+                  }`} 
+                />
+              </div>
+            </CardContent>
+          </Card>
 
-          <div className="space-y-3">
-            {externalActivities.map(activity => (
-              <GameAccordionItem
-                key={activity.id}
-                game={activity}
-                isOpen={openGameId === activity.id}
-                onToggle={() => handleToggle(activity.id)}
-              />
-            ))}
-          </div>
+          {/* Enlaces desplegables */}
+          {externalLinksOpen && (
+            <div className="space-y-3 mt-4 animate-in slide-in-from-top-2 duration-300">
+              {currentExternalActivities.map(activity => (
+                <GameAccordionItem
+                  key={activity.id}
+                  game={activity}
+                  isOpen={openGameId === activity.id}
+                  onToggle={() => handleToggle(activity.id)}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
+
+      {/* Sección IA de Imagen - Desplegable */}
+      <div className="mt-8">
+        <Card className="border-pink-200 bg-gradient-to-br from-pink-50 via-rose-50 to-red-50 cursor-pointer" onClick={handleImageAiToggle}>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-pink-200 flex items-center justify-center">
+                  <ImageIcon className="h-5 w-5 text-pink-700" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-pink-900">🎨 Enlaces Externos a IAs de Imagen</h3>
+                  <p className="text-sm text-pink-700">
+                    {imageAiOpen 
+                      ? 'Próximamente en los próximos días'
+                      : 'Generación y edición de imágenes con IA - Haz clic para ver'}
+                  </p>
+                </div>
+              </div>
+              <ChevronDown 
+                className={`h-6 w-6 text-pink-700 transition-transform duration-300 ${
+                  imageAiOpen ? 'rotate-180' : ''
+                }`} 
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contenido desplegable */}
+        {imageAiOpen && (
+          <Card className="border-pink-200 bg-pink-50 mt-4 animate-in slide-in-from-top-2 duration-300">
+            <CardContent className="p-8 text-center">
+              <ImageIcon className="h-12 w-12 mx-auto mb-3 text-pink-400 opacity-50" />
+              <p className="text-pink-700 font-medium">🚧 Próximamente en los próximos días</p>
+              <p className="text-pink-600 text-sm mt-2">
+                Estamos preparando una selección de las mejores IAs para generación y edición de imágenes.
+              </p>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+
+      {/* Sección IA de Video - Desplegable */}
+      <div className="mt-6">
+        <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-violet-50 to-fuchsia-50 cursor-pointer" onClick={handleVideoAiToggle}>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-purple-200 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-purple-700"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m10 9 5 3-5 3z"/><path d="M2 8v8"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-purple-900">🎬 Enlaces Externos a IAs de Video</h3>
+                  <p className="text-sm text-purple-700">
+                    {videoAiOpen 
+                      ? 'Próximamente en los próximos días'
+                      : 'Generación y edición de video con IA - Haz clic para ver'}
+                  </p>
+                </div>
+              </div>
+              <ChevronDown 
+                className={`h-6 w-6 text-purple-700 transition-transform duration-300 ${
+                  videoAiOpen ? 'rotate-180' : ''
+                }`} 
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contenido desplegable */}
+        {videoAiOpen && (
+          <Card className="border-purple-200 bg-purple-50 mt-4 animate-in slide-in-from-top-2 duration-300">
+            <CardContent className="p-8 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-12 w-12 mx-auto mb-3 text-purple-400 opacity-50"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m10 9 5 3-5 3z"/><path d="M2 8v8"/></svg>
+              <p className="text-purple-700 font-medium">🚧 Próximamente en los próximos días</p>
+              <p className="text-purple-600 text-sm mt-2">
+                Estamos preparando una selección de las mejores IAs para generación y edición de video.
+              </p>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+
+      {/* Sección IA de Música - Desplegable */}
+      <div className="mt-6">
+        <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-50 cursor-pointer" onClick={handleMusicAiToggle}>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-cyan-200 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-cyan-700"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-cyan-900">🎵 Enlaces Externos a IAs de Música</h3>
+                  <p className="text-sm text-cyan-700">
+                    {musicAiOpen 
+                      ? 'Próximamente en los próximos días'
+                      : 'Generación de música y audio con IA - Haz clic para ver'}
+                  </p>
+                </div>
+              </div>
+              <ChevronDown 
+                className={`h-6 w-6 text-cyan-700 transition-transform duration-300 ${
+                  musicAiOpen ? 'rotate-180' : ''
+                }`} 
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contenido desplegable */}
+        {musicAiOpen && (
+          <Card className="border-cyan-200 bg-cyan-50 mt-4 animate-in slide-in-from-top-2 duration-300">
+            <CardContent className="p-8 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-12 w-12 mx-auto mb-3 text-cyan-400 opacity-50"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+              <p className="text-cyan-700 font-medium">🚧 Próximamente en los próximos días</p>
+              <p className="text-cyan-600 text-sm mt-2">
+                Estamos preparando una selección de las mejores IAs para generación de música y audio.
+              </p>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+
+      {/* Sección IA de Voz - Desplegable */}
+      <div className="mt-6">
+        <Card className="border-green-200 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 cursor-pointer" onClick={handleVoiceAiToggle}>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-green-200 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-green-700"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/><line x1="8" x2="16" y1="22" y2="22"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-green-900">🎙️ Enlaces Externos a IAs de Voz</h3>
+                  <p className="text-sm text-green-700">
+                    {voiceAiOpen 
+                      ? 'Próximamente en los próximos días'
+                      : 'Síntesis y clonación de voz con IA - Haz clic para ver'}
+                  </p>
+                </div>
+              </div>
+              <ChevronDown 
+                className={`h-6 w-6 text-green-700 transition-transform duration-300 ${
+                  voiceAiOpen ? 'rotate-180' : ''
+                }`} 
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contenido desplegable */}
+        {voiceAiOpen && (
+          <Card className="border-green-200 bg-green-50 mt-4 animate-in slide-in-from-top-2 duration-300">
+            <CardContent className="p-8 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-12 w-12 mx-auto mb-3 text-green-400 opacity-50"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/><line x1="8" x2="16" y1="22" y2="22"/></svg>
+              <p className="text-green-700 font-medium">🚧 Próximamente en los próximos días</p>
+              <p className="text-green-600 text-sm mt-2">
+                Estamos preparando una selección de las mejores IAs para síntesis y clonación de voz.
+              </p>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+
+      {/* Sección IA 3D - Desplegable */}
+      <div className="mt-6 mb-8">
+        <Card className="border-indigo-200 bg-gradient-to-br from-indigo-50 via-blue-50 to-cyan-50 cursor-pointer" onClick={handleThreeDAiToggle}>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-indigo-200 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-indigo-700"><path d="M12 3 2 12h3v8h6v-6h2v6h6v-8h3L12 3Z"/><path d="m2 12 10 9 10-9"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-indigo-900">🧊 Enlaces Externos a IAs 3D</h3>
+                  <p className="text-sm text-indigo-700">
+                    {threeDAiOpen 
+                      ? 'Próximamente en los próximos días'
+                      : 'Generación de modelos y escenas 3D con IA - Haz clic para ver'}
+                  </p>
+                </div>
+              </div>
+              <ChevronDown 
+                className={`h-6 w-6 text-indigo-700 transition-transform duration-300 ${
+                  threeDAiOpen ? 'rotate-180' : ''
+                }`} 
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contenido desplegable */}
+        {threeDAiOpen && (
+          <Card className="border-indigo-200 bg-indigo-50 mt-4 animate-in slide-in-from-top-2 duration-300">
+            <CardContent className="p-8 text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-12 w-12 mx-auto mb-3 text-indigo-400 opacity-50"><path d="M12 3 2 12h3v8h6v-6h2v6h6v-8h3L12 3Z"/><path d="m2 12 10 9 10-9"/></svg>
+              <p className="text-indigo-700 font-medium">🚧 Próximamente en los próximos días</p>
+              <p className="text-indigo-600 text-sm mt-2">
+                Estamos preparando una selección de las mejores IAs para generación de modelos 3D.
+              </p>
+            </CardContent>
+          </Card>
+        )}
+      </div>
     </div>
   );
 }

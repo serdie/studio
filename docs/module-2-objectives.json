@@ -1,0 +1,73 @@
+{
+  "module": 2,
+  "title": "Módulo 2: Modelos de Lenguaje (LLMs) e IA Generativa",
+  "total_hours": 60,
+  "objectives": [
+    {
+      "section": "2.1. Introducción a los LLMs e IA Generativa",
+      "items": [
+        "Explicar qué es un LLM y cómo funciona a nivel conceptual.",
+        "Diferenciar entre IA tradicional, Machine Learning, Deep Learning y LLMs.",
+        "Identificar las capacidades y limitaciones actuales de los LLMs.",
+        "Reconocer los principales tipos de IA Generativa (texto, imagen, audio, video, código).",
+        "Comprender el concepto de tokenización y su impacto en costes.",
+        "Evaluar críticamente las expectativas vs realidad de los LLMs."
+      ]
+    },
+    {
+      "section": "2.2. Modelos Principales del Mercado",
+      "items": [
+        "Comparar GPT-4, Claude, Gemini, LLaMA y Mistral en fortalezas y debilidades.",
+        "Seleccionar el modelo adecuado para cada caso de uso empresarial.",
+        "Configurar acceso a las principales plataformas de LLMs.",
+        "Calcular costes estimados de uso de APIs según modelo y volumen.",
+        "Identificar modelos especializados por sector (código, legal, medicina).",
+        "Evaluar criterios de privacidad y cumplimiento normativo."
+      ]
+    },
+    {
+      "section": "2.3. Prompt Engineering Esencial",
+      "items": [
+        "Aplicar técnicas básicas: ser específico, proporcionar contexto, estructurar salida.",
+        "Diseñar prompts efectivos usando ejemplos (Few-Shot Prompting).",
+        "Implementar Chain of Thought para razonamiento complejo.",
+        "Utilizar Role Prompting para obtener respuestas especializadas.",
+        "Iterar y refinar prompts progresivamente.",
+        "Evitar errores comunes en la formulación de prompts."
+      ]
+    },
+    {
+      "section": "2.4. Técnicas Avanzadas de Prompt Engineering",
+      "items": [
+        "Aplicar Tree of Thoughts para explorar múltiples soluciones.",
+        "Utilizar Self-Consistency para mejorar precisión.",
+        "Diseñar flujos de Iterative Refinement.",
+        "Crear prompts para análisis de documentos complejos.",
+        "Generar contenido multi-formato y multi-canál.",
+        "Optimizar prompts para casos empresariales específicos."
+      ]
+    },
+    {
+      "section": "2.5. Casos de Uso Empresariales",
+      "items": [
+        "Analizar documentos y extraer información estructurada.",
+        "Generar contenido de marketing y comunicación.",
+        "Automatizar tareas repetitivas de procesamiento de texto.",
+        "Crear asistentes virtuales y chatbots básicos.",
+        "Implementar flujos de trabajo con LLMs integrados.",
+        "Evaluar ROI de implementación de LLMs en procesos."
+      ]
+    },
+    {
+      "section": "2.6. Ética, Riesgos y Limitaciones",
+      "items": [
+        "Detectar y mitigar alucinaciones en salidas de LLMs.",
+        "Identificar sesgos potenciales en respuestas generadas.",
+        "Aplicar principios de uso responsable y ético.",
+        "Comprender implicaciones de privacidad y protección de datos.",
+        "Establecer políticas de uso de IA en la organización.",
+        "Evaluar riesgos legales y reputacionales."
+      ]
+    }
+  ]
+}

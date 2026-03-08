@@ -228,7 +228,17 @@ export const modules: Module[] = [
     longDescription: 'Exploración profunda de los LLMs, uso avanzado de ChatGPT y técnicas de ingeniería de prompts para aplicaciones empresariales.',
     progress: 0,
     icon: BookCopy,
-    resources: [],
+    resources: [
+      { title: 'Guía del Módulo 2 (PDF)', file: '/materiales/tema2/01_guia_modulo_2_v01.pdf' },
+      { title: 'Guía de Prácticas Módulo 2 (PDF)', file: '/materiales/tema2/02_guia_practicas_modulo_2_v01.pdf' },
+      { title: 'Recursos Adicionales (PDF)', file: '/materiales/tema2/03_recursos_2_v01.pdf' },
+      { title: 'Ejercicios Módulo 2 (PDF)', file: '/materiales/tema2/05_ejercicios_2_v01.pdf' },
+      { title: 'Enterprise AI Manual (PDF)', file: '/materiales/tema2/Enterprise_AI_Manual.pdf' },
+      { title: 'Presentación Enterprise AI (PPTX)', file: '/materiales/tema2/Enterprise_AI_Manual.pptx' },
+      { title: 'Video: De Casual a Pro (MP4)', file: '/materiales/tema2/Manual_de_IA__Casual_a_Pro.mp4' },
+      { title: 'Audio: Operador Profesional de IA (M4A)', file: '/materiales/tema2/Manual_del_operador_profesional_de_IA.m4a' },
+      { title: 'Infografía de LLMs (PNG)', file: '/materiales/tema2/unnamed.png' }
+    ],
     content: `
       <h2>2.1. Introducción a los Modelos de Lenguaje (LLMs) y la IA Generativa</h2>
       <h3>¿Qué es un Modelo de Lenguaje?</h3>

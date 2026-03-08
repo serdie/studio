@@ -271,7 +271,7 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                           📺 Introducción a la Inteligencia Artificial
                         </p>
                       </div>
-                      
+
                       {/* Video 2 */}
                       <div className="space-y-2">
                         <div className="aspect-video rounded-lg overflow-hidden bg-black">
@@ -309,6 +309,96 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                     </div>
                     <p className="text-xs text-red-600 text-center">
                       💡 Consejo: Los videos comienzan en el punto exacto recomendado para este módulo.
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Sección de Videos - Módulo 2 (LLMs) */}
+              {module.slug === 'llms-generativa' && (
+                <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-12 rounded-xl bg-purple-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-purple-700"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m10 9 5 3-5 3z"/><path d="M2 8v8"/></svg>
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl text-purple-900">🎬 Videos Recomendados - LLMs</CardTitle>
+                        <p className="text-sm text-purple-700">Videos sobre Modelos de Lenguaje y Prompt Engineering</p>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {/* Video 1: How LLMs Work - Dot CSV (español) */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/ZYlZaRKeSCA"
+                            title="Video 1: Cómo funcionan los LLMs"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-purple-800 font-medium">
+                          📺 ¿Cómo Funcionan los Modelos de Lenguaje? (Dot CSV)
+                        </p>
+                      </div>
+
+                      {/* Video 2: Prompt Engineering */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/8tFMX7cZBdU"
+                            title="Video 2: Prompt Engineering Guide"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-purple-800 font-medium">
+                          📺 Guía Completa de Prompt Engineering
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Fila de videos adicionales */}
+                    <div className="grid gap-4 md:grid-cols-2 mt-4">
+                      {/* Video 3: GPT-4 vs Claude vs Gemini */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/MLqMqZ2Z8qE"
+                            title="Video 3: Comparativa de LLMs"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-purple-800 font-medium">
+                          📺 GPT-4 vs Claude vs Gemini: ¿Cuál es Mejor?
+                        </p>
+                      </div>
+
+                      {/* Video 4: Aplicaciones de LLMs en Empresa */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/nvqH5V4SqOw"
+                            title="Video 4: Aplicaciones de LLMs"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-purple-800 font-medium">
+                          📺 Aplicaciones Empresariales de la IA Generativa
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-purple-600 text-center">
+                      💡 Consejo: Toma notas mientras ves los videos. Hay conceptos clave que usarás en las prácticas.
                     </p>
                   </CardContent>
                 </Card>
