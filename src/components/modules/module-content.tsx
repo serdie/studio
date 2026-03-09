@@ -403,6 +403,144 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                   </CardContent>
                 </Card>
               )}
+
+              {/* Sección de Deberes de Fin de Semana */}
+              {module.slug === 'llms-generativa' && (
+                <Card className="border-indigo-200 bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 mt-6">
+                  <CardHeader className="pb-3 border-b border-indigo-200/50">
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+                        <Film className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <CardTitle className="text-xl text-indigo-900">📚 Deberes de Fin de Semana</CardTitle>
+                        <p className="text-sm text-indigo-700">
+                          Películas, documentales y actividades para reforzar lo aprendido
+                        </p>
+                      </div>
+                      <Badge variant="outline" className="border-indigo-300 text-indigo-700 bg-indigo-100/50">
+                        <CheckCircle2 className="h-3 w-3 mr-1" />
+                        Módulo 2
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pt-4">
+                    <div className="space-y-4">
+                      {/* Película: Transcendence */}
+                      <Card className="border-slate-200 bg-gradient-to-br from-slate-50 to-gray-50 overflow-hidden">
+                        <CardContent className="p-0">
+                          <div className="grid md:grid-cols-3 gap-4 p-4">
+                            {/* Poster de la película */}
+                            <div className="md:col-span-1">
+                              <div className="aspect-[2/3] rounded-lg overflow-hidden shadow-lg mx-auto max-w-[200px]">
+                                <img
+                                  src="https://pics.filmaffinity.com/transcendence-787338727-mmed.jpg"
+                                  alt="Transcendence (2014) - Poster"
+                                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                />
+                              </div>
+                            </div>
+
+                            {/* Información de la película */}
+                            <div className="md:col-span-2 space-y-3">
+                              <div>
+                                <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                  🎬 Transcendence (2014)
+                                  <Badge className="bg-purple-500 text-white text-xs">IA y Conciencia</Badge>
+                                </h4>
+                                <p className="text-sm text-slate-600 mt-1">
+                                  Dirigida por Wally Pfister | Protagonizada por Johnny Depp, Rebecca Hall, Paul Bettany
+                                </p>
+                              </div>
+
+                              <div className="flex flex-wrap gap-2">
+                                <Badge variant="outline" className="border-indigo-300 text-indigo-700">Ciencia Ficción</Badge>
+                                <Badge variant="outline" className="border-indigo-300 text-indigo-700">Thriller</Badge>
+                                <Badge variant="outline" className="border-indigo-300 text-indigo-700">2h 59min</Badge>
+                                <Badge variant="outline" className="border-indigo-300 text-indigo-700">IMDb: 6.2/10</Badge>
+                              </div>
+
+                              <div className="space-y-2">
+                                <h5 className="text-sm font-semibold text-indigo-900">📖 Sinopsis:</h5>
+                                <p className="text-sm text-slate-700 leading-relaxed">
+                                  Un investigador de inteligencia artificial es envenenado por radicales anti-tecnología. 
+                                  Antes de morir, su esposa sube su conciencia a una computadora cuántica, permitiéndole 
+                                  seguir vivo en forma digital. A medida que la IA evoluciona y se vuelve más poderosa, 
+                                  surgen preguntas sobre la naturaleza de la conciencia, los límites de la tecnología 
+                                  y las consecuencias de jugar a ser Dios.
+                                </p>
+                              </div>
+
+                              <div className="space-y-2">
+                                <h5 className="text-sm font-semibold text-indigo-900">🎯 Relación con el Módulo 2:</h5>
+                                <ul className="text-sm text-slate-700 space-y-1 ml-4">
+                                  <li>• <strong>LLMs y conciencia:</strong> ¿Puede una IA desarrollar verdadera conciencia?</li>
+                                  <li>• <strong>Ética de la IA:</strong> Límites éticos en el desarrollo de IA avanzada</li>
+                                  <li>• <strong>IA Generativa:</strong> ¿Hasta dónde puede llegar la generación de contenido y decisiones autónomas?</li>
+                                  <li>• <strong>Debate en clase:</strong> Preparar argumentos sobre los riesgos y beneficios de la IA</li>
+                                </ul>
+                              </div>
+
+                              <div className="flex gap-2 pt-2">
+                                <Button 
+                                  variant="outline" 
+                                  size="sm"
+                                  className="border-indigo-300 text-indigo-700 hover:bg-indigo-100"
+                                  onClick={() => window.open('https://www.filmaffinity.com/es/film787338.html', '_blank')}
+                                >
+                                  <Film className="h-3 w-3 mr-1" />
+                                  Ver en Filmaffinity
+                                </Button>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm"
+                                  className="border-slate-300 text-slate-700 hover:bg-slate-100"
+                                  onClick={() => window.open('https://www.youtube.com/results?search_query=transcendence+2014+trailer', '_blank')}
+                                >
+                                  <Film className="h-3 w-3 mr-1" />
+                                  Ver Trailer
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Instrucciones para los alumnos */}
+                          <div className="bg-indigo-100/50 border-t border-indigo-200 p-4">
+                            <div className="flex items-start gap-3">
+                              <div className="h-8 w-8 rounded-full bg-indigo-500 flex items-center justify-center flex-shrink-0">
+                                <span className="text-white font-bold text-sm">📝</span>
+                              </div>
+                              <div className="space-y-2 flex-1">
+                                <h5 className="text-sm font-bold text-indigo-900">Instrucciones para el Lunes:</h5>
+                                <ol className="text-sm text-indigo-800 space-y-1 list-decimal list-inside">
+                                  <li>Ver la película completa antes del lunes</li>
+                                  <li>Tomar notas sobre los aspectos éticos que aparecen</li>
+                                  <li>Preparar 2-3 preguntas para debatir en clase</li>
+                                  <li>Pensar: ¿Es realista lo que muestra la película? ¿Por qué sí/no?</li>
+                                </ol>
+                                <p className="text-xs text-indigo-600 mt-2 italic">
+                                  💡 El lunes dedicaremos los primeros 30 minutos a debatir sobre la película y su relación con los LLMs actuales.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      {/* Próximamente más contenido */}
+                      <Card className="border-dashed border-slate-300 bg-slate-50">
+                        <CardContent className="p-6 text-center">
+                          <Film className="h-10 w-10 mx-auto mb-3 text-slate-400 opacity-50" />
+                          <p className="text-sm font-semibold text-slate-700">🚧 Más películas y documentales próximamente</p>
+                          <p className="text-xs text-slate-500 mt-1">
+                            Cada fin de semana añadiremos nuevo contenido audiovisual relacionado con el módulo.
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           )}
         </TabsContent>
