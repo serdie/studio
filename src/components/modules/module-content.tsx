@@ -14,7 +14,7 @@ import AvatarCreator from './avatar-creator';
 import LearningObjectives from './learning-objectives';
 import ModuleContentAccordion from './module-content-accordion';
 import GamesSection from '@/components/games/games-section';
-import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film } from 'lucide-react';
+import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
 import { collection, query, where, orderBy } from 'firebase/firestore';
