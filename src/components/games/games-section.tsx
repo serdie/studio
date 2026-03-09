@@ -12,6 +12,7 @@ import FactorySensorsGame from './factory-sensors-game';
 import AutomationLabGame from './automation-lab-game';
 import PromptEngineeringQuiz from './prompt-quiz';
 import LLMSelectorTool from './llm-selector-tool';
+import CUMPLEPromptWorkshop from './cumple-prompt-workshop';
 
 interface GameItem {
   id: string;
@@ -82,6 +83,15 @@ const module2GamesList: GameItem[] = [
     category: 'juego',
     icon: <Brain className="h-5 w-5 text-purple-400" />,
     component: <LLMSelectorTool />,
+  },
+  {
+    id: 'cumple-prompt-workshop',
+    title: '📝 C.U.M.P.L.E? – Taller de Prompts IA',
+    description: 'Constructor de prompts paso a paso usando el método C.U.M.P.L.E?: Contexto, U (extra), Manda, Pregunta, Lenguaje y Estructura.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Sparkles className="h-5 w-5 text-pink-400" />,
+    component: <CUMPLEPromptWorkshop />,
   },
   {
     id: 'prompt-quiz',
