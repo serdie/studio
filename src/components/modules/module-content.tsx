@@ -207,7 +207,7 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
           description="Películas recomendadas para reflexionar sobre LLMs y conciencia artificial"
           icon={<Film className="h-5 w-5 text-indigo-600" />}
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <MovieCard
               title="Transcendence (2014)"
               description="Un investigador de IA es envenenado y su conciencia es subida a una computadora cuántica. A medida que la IA evoluciona, surgen preguntas sobre conciencia, ética tecnológica y los límites de la IA."
@@ -217,14 +217,8 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <MovieCard
               title="Ex Machina (2014)"
               description="Un programador es seleccionado para evaluar el comportamiento de un robot con IA avanzado. Un thriller psicológico sobre el Test de Turing y la manipulación."
-              poster="https://pics.filmaffinity.com/ex_machina-949162693-mmed.jpg"
+              poster="https://pics.filmaffinity.com/ex_machina-368494509-mmed.jpg"
               themes={['Test de Turing', 'Manipulación', 'Conciencia', 'Ética IA']}
-            />
-            <MovieCard
-              title="Her (2013)"
-              description="Un hombre solitario se enamora de una IA con voz femenina. Explora las relaciones humano-IA, emociones artificiales y la soledad en la era digital."
-              poster="https://pics.filmaffinity.com/her-716403893-mmed.jpg"
-              themes={['IA emocional', 'Relaciones humano-IA', 'LLMs', 'Soledad digital']}
             />
           </div>
           <div className="mt-4 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
@@ -368,28 +362,28 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="grid gap-4 md:grid-cols-2">
-                      {/* Video 1: Cómo funcionan los LLMs - Dot CSV */}
+                    <div className="grid gap-4 md:grid-cols-3">
+                      {/* Video 1: LLMs explicados */}
                       <div className="space-y-2">
                         <div className="aspect-video rounded-lg overflow-hidden bg-black">
                           <iframe
-                            src="https://www.youtube.com/embed/ZYlZaRKeSCA"
-                            title="Video 1: Cómo funcionan los LLMs"
+                            src="https://www.youtube.com/embed/Sz4qacFBHLk"
+                            title="Video 1: LLMs explicados"
                             className="w-full h-full"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
                           />
                         </div>
                         <p className="text-sm text-purple-800 font-medium">
-                          📺 ¿Cómo Funcionan los Modelos de Lenguaje? (Dot CSV)
+                          📺 ¿Qué son los LLMs?
                         </p>
                       </div>
 
-                      {/* Video 2: Prompt Engineering - Píldoras de IA */}
+                      {/* Video 2: Prompt Engineering */}
                       <div className="space-y-2">
                         <div className="aspect-video rounded-lg overflow-hidden bg-black">
                           <iframe
-                            src="https://www.youtube.com/embed/8tFMX7cZBdU"
+                            src="https://www.youtube.com/embed/x-iTco25VGI"
                             title="Video 2: Prompt Engineering"
                             className="w-full h-full"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -397,42 +391,23 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                           />
                         </div>
                         <p className="text-sm text-purple-800 font-medium">
-                          📺 Guía de Prompt Engineering
+                          📺 Prompt Engineering básico
                         </p>
                       </div>
-                    </div>
 
-                    {/* Fila de videos adicionales */}
-                    <div className="grid gap-4 md:grid-cols-2 mt-4">
-                      {/* Video 3: GPT-4 vs Claude - Comparativa */}
+                      {/* Video 3: Aplicaciones de IA */}
                       <div className="space-y-2">
                         <div className="aspect-video rounded-lg overflow-hidden bg-black">
                           <iframe
-                            src="https://www.youtube.com/embed/videoseries?list=PLJVt1ZMOJJdQTfMfXddZnPLzNfNz8pJtG"
-                            title="Video 3: Comparativa de LLMs"
+                            src="https://www.youtube.com/embed/OCdIvYcH3Gc"
+                            title="Video 3: Aplicaciones de IA"
                             className="w-full h-full"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
                           />
                         </div>
                         <p className="text-sm text-purple-800 font-medium">
-                          📺 Comparativa de LLMs: GPT-4, Claude, Gemini
-                        </p>
-                      </div>
-
-                      {/* Video 4: Aplicaciones de IA - TED */}
-                      <div className="space-y-2">
-                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
-                          <iframe
-                            src="https://www.youtube.com/embed/nvqH5V4SqOw"
-                            title="Video 4: Aplicaciones de LLMs"
-                            className="w-full h-full"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                        </div>
-                        <p className="text-sm text-purple-800 font-medium">
-                          📺 Aplicaciones Empresariales de la IA Generativa
+                          📺 Aplicaciones prácticas de IA
                         </p>
                       </div>
                     </div>
