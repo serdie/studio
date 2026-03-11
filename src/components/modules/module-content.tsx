@@ -209,6 +209,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <MovieCard
+              title="Juegos de Guerra / WarGames (1983)"
+              description="Un joven hacker accede por error a una supercomputadora militar con IA que está aprendiendo sola. La IA comienza una simulación de guerra nuclear que podría desencadenar un conflicto real. Una película visionaria sobre IA, aprendizaje automático y los peligros de delegar decisiones críticas a máquinas."
+              poster="https://pics.filmaffinity.com/wargames_war_games-169101753-large.jpg"
+              themes={['IA Militar', 'Aprendizaje Automático', 'Ética', 'Toma de Decisiones']}
+            />
+            <MovieCard
               title="Transcendence (2014)"
               description="Un investigador de IA es envenenado y su conciencia es subida a una computadora cuántica. A medida que la IA evoluciona, surgen preguntas sobre conciencia, ética tecnológica y los límites de la IA."
               poster="https://pics.filmaffinity.com/transcendence-787338727-mmed.jpg"

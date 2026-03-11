@@ -405,6 +405,7 @@ interface GamesSectionProps {
 export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [openGameId, setOpenGameId] = useState<string | null>(null);
   const [externalLinksOpen, setExternalLinksOpen] = useState(false);
+  const [localhostLlmOpen, setLocalhostLlmOpen] = useState(false);
   const [imageAiOpen, setImageAiOpen] = useState(false);
   const [videoAiOpen, setVideoAiOpen] = useState(false);
   const [musicAiOpen, setMusicAiOpen] = useState(false);
@@ -417,6 +418,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handleExternalLinksToggle = () => {
     setExternalLinksOpen(!externalLinksOpen);
+  };
+
+  const handleLocalhostLlmToggle = () => {
+    setLocalhostLlmOpen(!localhostLlmOpen);
   };
 
   const handleImageAiToggle = () => {
@@ -536,6 +541,109 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
           )}
         </div>
       )}
+
+      {/* Sección LLMs en LOCALHOST - Desplegable */}
+      <div className="mt-8">
+        <Card className="border-green-200 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 cursor-pointer" onClick={handleLocalhostLlmToggle}>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-green-200 flex items-center justify-center">
+                  <Code2 className="h-5 w-5 text-green-700" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-green-900">🖥️ Enlace Externo a LLMs en LOCALHOST</h3>
+                  <p className="text-sm text-green-700">
+                    {localhostLlmOpen
+                      ? '7 herramientas para ejecutar IAs en tu propio ordenador'
+                      : 'Ejecuta modelos de lenguaje localmente sin conexión - Haz clic para ver'}
+                  </p>
+                </div>
+              </div>
+              <ChevronDown
+                className={`h-6 w-6 text-green-700 transition-transform duration-300 ${
+                  localhostLlmOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contenido desplegable */}
+        {localhostLlmOpen && (
+          <div className="space-y-3 mt-4 animate-in slide-in-from-top-2 duration-300">
+            <Card className="border-green-200 bg-green-50">
+              <CardContent className="p-6">
+                <div className="grid gap-3 md:grid-cols-2">
+                  <a
+                    href="https://ollama.com/download"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-lg bg-white border border-green-200 hover:border-green-400 hover:bg-green-100 transition-all group"
+                  >
+                    <ExternalLink className="h-5 w-5 text-green-600 group-hover:text-green-700" />
+                    <span className="font-medium text-green-900">Ollama</span>
+                  </a>
+                  <a
+                    href="https://lmstudio.ai/download"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-lg bg-white border border-green-200 hover:border-green-400 hover:bg-green-100 transition-all group"
+                  >
+                    <ExternalLink className="h-5 w-5 text-green-600 group-hover:text-green-700" />
+                    <span className="font-medium text-green-900">LM Studio</span>
+                  </a>
+                  <a
+                    href="https://www.nomic.ai/gpt4all"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-lg bg-white border border-green-200 hover:border-green-400 hover:bg-green-100 transition-all group"
+                  >
+                    <ExternalLink className="h-5 w-5 text-green-600 group-hover:text-green-700" />
+                    <span className="font-medium text-green-900">GPT4All</span>
+                  </a>
+                  <a
+                    href="https://www.jan.ai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-lg bg-white border border-green-200 hover:border-green-400 hover:bg-green-100 transition-all group"
+                  >
+                    <ExternalLink className="h-5 w-5 text-green-600 group-hover:text-green-700" />
+                    <span className="font-medium text-green-900">Jan</span>
+                  </a>
+                  <a
+                    href="https://msty.ai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-lg bg-white border border-green-200 hover:border-green-400 hover:bg-green-100 transition-all group"
+                  >
+                    <ExternalLink className="h-5 w-5 text-green-600 group-hover:text-green-700" />
+                    <span className="font-medium text-green-900">Msty</span>
+                  </a>
+                  <a
+                    href="https://localai.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-lg bg-white border border-green-200 hover:border-green-400 hover:bg-green-100 transition-all group"
+                  >
+                    <ExternalLink className="h-5 w-5 text-green-600 group-hover:text-green-700" />
+                    <span className="font-medium text-green-900">LocalAI</span>
+                  </a>
+                  <a
+                    href="https://anythingllm.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-4 rounded-lg bg-white border border-green-200 hover:border-green-400 hover:bg-green-100 transition-all group"
+                  >
+                    <ExternalLink className="h-5 w-5 text-green-600 group-hover:text-green-700" />
+                    <span className="font-medium text-green-900">AnythingLLM</span>
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+      </div>
 
       {/* Sección IA de Imagen - Desplegable */}
       <div className="mt-8">
