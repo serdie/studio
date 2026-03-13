@@ -416,6 +416,22 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                           📺 Aplicaciones prácticas de IA
                         </p>
                       </div>
+
+                      {/* Video 4: Google Cloud LLMs */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/GjvgtwSOCao"
+                            title="Video 4: Google Cloud LLMs"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-purple-800 font-medium">
+                          📺 LLMs en Google Cloud
+                        </p>
+                      </div>
                     </div>
                     <p className="text-xs text-purple-600 text-center">
                       💡 Consejo: Toma notas mientras ves los videos. Hay conceptos clave que usarás en las prácticas.
