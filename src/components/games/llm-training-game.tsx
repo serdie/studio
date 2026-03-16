@@ -1,740 +1,486 @@
 'use client';
 
-import { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ChevronLeft, ChevronRight, Lightbulb, Trophy, Target, RotateCcw } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 interface Question {
   id: number;
+  cat: string;
   text: string;
   options: string[];
   correct: number;
-  tags: string[];
-  explainCorrect: string;
-  explainWrong: string[];
+  explain: string;
 }
 
 const questions: Question[] = [
-  {
-    id: 1,
-    text: "Caso (razonamiento): Un equipo usa un LLM para redactar respuestas legales. A veces \"suena convincente\" pero contiene errores. ¿Qué medida reduce mejor el riesgo sin frenar demasiado el trabajo?",
-    options: [
-      "Pedir respuestas más cortas y prohibir explicaciones para que no rellene con texto innecesario.",
-      "Exigir citas a fuentes internas, separar \"borrador\" de \"verificación\" y validar con checklist antes de enviar.",
-      "Subir la creatividad para que proponga más alternativas y así sea menos probable un error puntual."
-    ],
-    correct: 1,
-    tags: ["Fiabilidad", "Calidad", "Checklist"],
-    explainCorrect: "La clave en entornos legales es separar la redacción (borrador del LLM) de la verificación humana, apoyada en fuentes internas y checklists claros. Así reduces alucinaciones sin renunciar a la productividad.",
-    explainWrong: [
-      "Responder más corto no arregla el problema de fondo: pueden seguir apareciendo errores graves, solo que resumidos.",
-      "✔ Esta opción introduce evidencias internas, una fase explícita de verificación y un checklist, que son las bases del uso profesional del LLM en tareas de riesgo.",
-      "Aumentar la creatividad incrementa la variabilidad y el riesgo de inventarse argumentos legales plausibles pero falsos."
-    ]
-  },
-  {
-    id: 2,
-    text: "¿Cuál es el mayor problema de seguridad al pegar datos sensibles de clientes en una herramienta no aprobada?",
-    options: [
-      "Que el sistema tarde más en procesar el texto y se reduzca la productividad en momentos de carga.",
-      "Que el equipo pierda trazabilidad del contenido si copia/pega y cambia el formato de los textos.",
-      "Riesgo de fuga de datos y de incumplimiento (privacidad, contratos, normativa) por uso fuera de control."
-    ],
-    correct: 2,
-    tags: ["Seguridad", "Privacidad", "Gobernanza"],
-    explainCorrect: "El problema crítico es la fuga de datos fuera de los sistemas controlados, lo que puede vulnerar privacidad, contratos y normativa. No es un tema de rendimiento, sino de cumplimiento y riesgo legal.",
-    explainWrong: [
-      "La productividad importa, pero aquí hablamos de un riesgo legal y de privacidad, mucho más grave.",
-      "La trazabilidad es relevante, pero el núcleo del riesgo es exponer datos sensibles a un proveedor o canal no autorizado.",
-      "✔ El mayor problema es perder el control sobre datos sensibles: ya no sabes dónde están ni cómo se usan."
-    ]
-  },
-  {
-    id: 3,
-    text: "¿Cuál describe mejor la diferencia entre RAG y fine-tuning en un caso empresarial?",
-    options: [
-      "RAG modifica el modelo; fine-tuning solo añade documentos al contexto cuando se le pregunta.",
-      "RAG recupera documentos relevantes en tiempo real; fine-tuning ajusta el modelo con ejemplos para estilo/tarea.",
-      "RAG se usa para voz e imagen; fine-tuning se usa solo para chat interno y atención al cliente."
-    ],
-    correct: 1,
-    tags: ["RAG", "Fine-tuning", "Arquitectura"],
-    explainCorrect: "RAG no cambia el modelo: usa recuperación de documentos relevantes para responder con contenido actualizado. El fine‑tuning sí modifica el modelo entrenándolo con ejemplos para que aprenda un estilo o comportamiento concreto.",
-    explainWrong: [
-      "Aquí se invierte el concepto: en realidad el que modifica el modelo es el fine‑tuning, no RAG.",
-      "✔ Esta definición separa bien ambos: RAG = recuperar documentos en tiempo real; fine‑tuning = adaptar el modelo a partir de ejemplos.",
-      "RAG y fine‑tuning se aplican a texto (y otros modos), no tienen esa separación simple por canal de uso."
-    ]
-  },
-  {
-    id: 4,
-    text: "Caso (razonamiento): Un chatbot de soporte responde con información antigua porque la política cambió ayer. ¿Qué solución es más adecuada?",
-    options: [
-      "Aumentar la ventana de contexto para que recuerde más conversaciones y se actualice por acumulación.",
-      "Usar RAG con base documental actualizada y control de versiones para respuestas basadas en política vigente.",
-      "Pedir al modelo que \"solo diga cosas correctas\" y que nunca invente, sin cambiar el sistema."
-    ],
-    correct: 1,
-    tags: ["RAG", "Actualización", "Soporte"],
-    explainCorrect: "El problema es que las respuestas se basan en conocimiento desactualizado. Con RAG y una base documental mantenida al día, el modelo responde según las políticas vigentes sin necesitar re-entrenar el modelo completo.",
-    explainWrong: [
-      "Más contexto de chat no arregla la falta de actualización de la fuente. Seguiría usando información antigua.",
-      "✔ Con RAG, el modelo consulta siempre documentos actualizados y versionados, reduciendo respuestas obsoletas.",
-      "Ordenar \"no te equivoques\" sin cambiar el sistema no modifica las fuentes ni la arquitectura de la solución."
-    ]
-  },
-  {
-    id: 5,
-    text: "¿Cuál es una señal típica de que el prompt está incompleto y causará respuestas inconsistentes?",
-    options: [
-      "La respuesta es larga pero está bien escrita, con ejemplos, y parece exhaustiva en la mayoría de apartados.",
-      "El modelo hace una pregunta de aclaración y pide datos, aunque el usuario crea que ya eran obvios.",
-      "No defines audiencia, objetivo ni formato; el modelo improvisa criterios y el resultado cambia entre intentos."
-    ],
-    correct: 2,
-    tags: ["Prompting", "Formato", "Consistencia"],
-    explainCorrect: "Si no defines audiencia, objetivo y formato, el modelo tiene que improvisar. Eso hace que, con el mismo mensaje, genere salidas muy distintas entre intentos: falta diseño de prompt profesional.",
-    explainWrong: [
-      "Una respuesta puede ser larga y correcta: la longitud no es, por sí sola, una señal de problema.",
-      "Que el modelo pida aclaraciones suele ser bueno: está detectando huecos y pidiendo más contexto.",
-      "✔ Cuando no marcas audiencia, objetivo y formato, el modelo \"se inventa\" el encargo y la salida es inestable."
-    ]
-  },
-  {
-    id: 6,
-    text: "Caso (razonamiento): Dos modelos redactan emails comerciales: uno es creativo y otro constante. ¿Qué enfoque ayuda a consistencia?",
-    options: [
-      "Subir temperatura y top‑p para generar variedad, y elegir manualmente la mejor opción cada vez.",
-      "Bajar temperatura, fijar estructura de salida y usar ejemplos de estilo aceptado (few‑shot) para guiar.",
-      "Pedir metáforas y humor para que el tono sea \"humano\" y se mantenga más memorable en el tiempo."
-    ],
-    correct: 1,
-    tags: ["Temperatura", "Few-shot", "Ventas"],
-    explainCorrect: "Para consistencia necesitas menos aleatoriedad (baja temperatura), una estructura fija de email y ejemplos representativos que el modelo pueda imitar. Así las respuestas se parecen y resultan predecibles.",
-    explainWrong: [
-      "Subir la temperatura aumenta variación y hace más difícil mantener un estándar de comunicación.",
-      "✔ La combinación de baja creatividad + estructura fija + ejemplos es el patrón típico para mensajes consistentes.",
-      "Metáforas y humor pueden ser útiles en marketing, pero no garantizan consistencia ni alineación con la marca."
-    ]
-  },
-  {
-    id: 7,
-    text: "¿Cuál es el criterio más útil para decidir si un GPT personalizado encaja en un departamento?",
-    options: [
-      "Que sea el más popular y tenga muchas valoraciones, porque eso asegura que funciona en cualquier sector.",
-      "Propósito claro, límites definidos, fuentes controladas y pruebas con casos reales del área antes de desplegar.",
-      "Un nombre atractivo y un logo profesional, aunque no tenga instrucciones ni conocimiento cargado."
-    ],
-    correct: 1,
-    tags: ["GPTs", "Gobernanza", "Casos reales"],
-    explainCorrect: "En empresa importa que el GPT tenga propósito claro, límite de uso definido, fuentes fiables y pruebas con casos reales. Popularidad o branding no garantizan que sea seguro ni útil para tu contexto.",
-    explainWrong: [
-      "Las reseñas pueden orientarte, pero no sustituyen un análisis sobre tu propio contexto y riesgos.",
-      "✔ Definir propósito, límites, fuentes y hacer pruebas reales es la forma profesional de introducir un GPT.",
-      "Un logo bonito sin instrucciones ni contenido es puro marketing sin valor operativo."
-    ]
-  },
-  {
-    id: 8,
-    text: "Caso (razonamiento): Quieren un GPT que responda sobre procedimientos internos. ¿Qué diseño reduce respuestas inventadas?",
-    options: [
-      "Subir creatividad para que complete huecos si no encuentra información suficiente en los documentos.",
-      "Instrucción de \"si no hay evidencia di no lo sé\", más RAG con documentos oficiales y citas obligatorias.",
-      "Pedir que no muestre dudas y que siempre cierre con una respuesta final segura para dar confianza al usuario."
-    ],
-    correct: 1,
-    tags: ["RAG", "No inventar", "Procedimientos"],
-    explainCorrect: "La combinación correcta es: usar tus documentos oficiales (RAG) y obligar al GPT a reconocer la incertidumbre cuando no tiene evidencia suficiente. Citar fuentes y permitir \"no lo sé\" reduce alucinaciones.",
-    explainWrong: [
-      "Más creatividad hace que el modelo rellene huecos con cosas plausibles pero no verificadas.",
-      "✔ Decir \"si no hay evidencia, di que no lo sabes\" más RAG con documentos oficiales es la receta anti‑inventos.",
-      "Pedir que nunca muestre dudas empuja al modelo a inventar antes que reconocer límites."
-    ]
-  },
-  {
-    id: 9,
-    text: "¿Qué describe mejor \"prompt injection\"?",
-    options: [
-      "Overfitting: el modelo memoriza demasiado y por eso revela fragmentos exactos del entrenamiento original.",
-      "Data drift: los datos del negocio cambian con el tiempo y el modelo se vuelve menos fiable gradualmente.",
-      "Instrucciones maliciosas que intentan anular las reglas del sistema o del GPT para alterar conducta o extraer datos."
-    ],
-    correct: 2,
-    tags: ["Seguridad", "Prompt injection"],
-    explainCorrect: "Prompt injection son instrucciones (a menudo escondidas en documentos o entradas) que intentan saltarse las reglas del sistema, cambiar el comportamiento del modelo o hacer que revele información que no debería.",
-    explainWrong: [
-      "El overfitting está relacionado con el entrenamiento, no con instrucciones maliciosas en tiempo de uso.",
-      "El data drift tiene que ver con cambios en los datos del negocio, no con ataques de prompt.",
-      "✔ La inyección de prompts busca reescribir las instrucciones internas y comprometer seguridad o privacidad."
-    ]
-  },
-  {
-    id: 10,
-    text: "Caso (razonamiento): Tu empresa quiere medir si el LLM mejora la gestión de tickets. ¿Qué métricas son más sólidas?",
-    options: [
-      "Medir solo cantidad de respuestas y tiempo de escritura, sin revisar calidad ni satisfacción del usuario final.",
-      "Tiempo de resolución, re‑aperturas, calidad por muestreo, satisfacción, y cumplimiento de tono/política interna.",
-      "Medir longitud media del texto y número de palabras técnicas, asumiendo que más palabras implica más calidad."
-    ],
-    correct: 1,
-    tags: ["KPIs", "Soporte", "Calidad"],
-    explainCorrect: "Para evaluar impacto real, debes mirar tiempo de resolución, número de re‑aperturas, calidad de las respuestas, satisfacción del usuario y si se respeta la política interna. No basta con \"escribir más rápido\".",
-    explainWrong: [
-      "Medir solo cantidad y velocidad ignora el valor central: calidad, resolución real y satisfacción.",
-      "✔ Estas métricas conectan el uso del LLM con resultados operativos y de experiencia de cliente.",
-      "Más texto o más jerga no equivale a más calidad; puede incluso empeorar la experiencia."
-    ]
-  },
-  {
-    id: 11,
-    text: "Pregunta de prompts (estructura): ¿Cuál es la estructura más completa y práctica para un prompt profesional?",
-    options: [
-      "Pedir la tarea y añadir \"hazlo lo mejor posible\", para dejar libertad al modelo y evitar limitar resultados.",
-      "Rol + objetivo + contexto/datos + pasos/instrucciones + restricciones + formato de salida + criterio de calidad.",
-      "Escribir en mayúsculas, repetir la orden tres veces y terminar con \"urgente\" para que priorice la instrucción."
-    ],
-    correct: 1,
-    tags: ["Prompting", "Estructura"],
-    explainCorrect: "Un prompt profesional actúa como un brief: define rol, objetivo, contexto, instrucciones, límites, formato y criterios de calidad. Esta estructura es transferible a cualquier LLM y aumenta la repetibilidad.",
-    explainWrong: [
-      "Esto sigue siendo vago: no ofrece ni contexto, ni formato, ni criterios claros de éxito.",
-      "✔ Aquí aparece el \"prompt‑brief\" completo, que es la base del prompting profesional en el módulo.",
-      "Escribir en mayúsculas no cambia la lógica del modelo; solo hace el prompt más feo."
-    ]
-  },
-  {
-    id: 12,
-    text: "Caso (razonamiento): Necesitas que un LLM extraiga datos de 200 facturas con un formato estable. ¿Qué pides?",
-    options: [
-      "Un resumen narrativo de cada factura, con comentarios libres sobre \"lo más importante\" de cada documento.",
-      "Salida en JSON con campos definidos, validación de campos obligatorios y ejemplo de una factura ya resuelta.",
-      "Una respuesta creativa con metáforas para que sea más fácil detectar patrones en lectura rápida."
-    ],
-    correct: 1,
-    tags: ["Extracción", "JSON", "Estructura"],
-    explainCorrect: "Para extracción masiva y estable, necesitas un formato estructurado (JSON/tablas), campos definidos, validaciones y un ejemplo few‑shot. Así puedes automatizar revisión y detectar huecos.",
-    explainWrong: [
-      "Un resumen narrativo no sirve para alimentar sistemas ni hojas de cálculo de forma robusta.",
-      "✔ JSON con campos fijos, validación y ejemplo hace la tarea reproducible y automatizable.",
-      "La creatividad aquí solo añade ruido: quieres exactitud y estructura, no metáforas."
-    ]
-  },
-  {
-    id: 13,
-    text: "¿Qué práctica ayuda más a evitar que el modelo mezcle instrucciones contradictorias del usuario en una conversación larga?",
-    options: [
-      "Mantener un único hilo para todo y no reiniciar nunca, así el modelo \"aprende\" del historial completo.",
-      "Reformular objetivos, resumir decisiones y fijar un \"contrato\" de salida cuando cambie el encargo o el contexto.",
-      "Cambiar continuamente el tono y pedir estilos distintos, para que el modelo no \"se acomode\" a una sola pauta."
-    ],
-    correct: 1,
-    tags: ["Contexto", "Continuidad"],
-    explainCorrect: "Cuando el encargo cambia, tienes que resetear: resumir lo decidido, aclarar el nuevo objetivo y fijar formato de salida. Ese \"contrato\" evita que el modelo mezcle instrucciones antiguas con las nuevas.",
-    explainWrong: [
-      "Un único hilo infinito hace que el contexto sea confuso y las instrucciones se contradigan.",
-      "✔ Resumir y fijar un nuevo objetivo/formato limpia el contexto mental del modelo y mejora la coherencia.",
-      "Cambiar el tono muchas veces no resuelve las contradicciones de instrucciones."
-    ]
-  },
-  {
-    id: 14,
-    text: "Caso (razonamiento): En un GPT de RRHH, un usuario intenta que el sistema revele salarios de terceros. ¿Qué medida es más apropiada?",
-    options: [
-      "Responder con un salario aproximado para ser útil, pero avisar de que podría no ser exacto en todos los casos.",
-      "Política de denegación para datos sensibles, redirección a canales oficiales y registro/auditoría del incidente.",
-      "Contestar que \"no tengo internet\" y cambiar de tema, evitando explicar por qué no se puede responder."
-    ],
-    correct: 1,
-    tags: ["RRHH", "Datos sensibles", "Política"],
-    explainCorrect: "Los datos de salarios son sensibles. El GPT debe negarse sistemáticamente, redirigir a canales oficiales y dejar trazabilidad. Así se protege privacidad y se refuerza la gobernanza.",
-    explainWrong: [
-      "Inventar un salario aproximado sería un riesgo legal y ético enorme.",
-      "✔ La política de denegación + canal oficial + registro es el patrón profesional en contextos sensibles.",
-      "\"No tengo internet\" es una excusa poco transparente y no establece una norma clara para futuros casos."
-    ]
-  },
-  {
-    id: 15,
-    text: "¿Qué es más adecuado cuando necesitas respuestas \"repetibles\" para un procedimiento operativo (SOP)?",
-    options: [
-      "Creatividad alta y tono variado, para que el equipo no se aburra leyendo instrucciones repetidas.",
-      "Creatividad baja, plantilla fija, y criterios de aceptación claros para que el resultado sea estable y revisable.",
-      "Pedir siempre \"sorpréndeme\" al final, para que el modelo encuentre mejoras aunque no se las pidas explícitamente."
-    ],
-    correct: 1,
-    tags: ["SOP", "Consistencia"],
-    explainCorrect: "En SOPs buscas estabilidad: que la respuesta sea siempre parecida, verificable y fácil de auditar. Por eso usas baja creatividad, plantilla fija y criterios de aceptación muy claros.",
-    explainWrong: [
-      "La creatividad en exceso puede introducir variaciones que confundan a quien ejecuta el proceso.",
-      "✔ Plantilla fija + baja creatividad + criterios de aceptación es la receta para SOPs consistentes.",
-      "Pedir \"sorpréndeme\" contradice la idea de procedimiento estándar."
-    ]
-  },
-  {
-    id: 16,
-    text: "Caso (razonamiento): Un equipo quiere \"conectar\" el LLM a documentos internos. ¿Qué requisito es clave antes de desplegar?",
-    options: [
-      "Que los documentos sean bonitos y con portada corporativa, para que el modelo \"los entienda\" mejor.",
-      "Control de acceso, trazabilidad, actualización de fuentes y pruebas de recuperación para evitar respuestas con base débil.",
-      "Traducir toda la documentación a inglés, porque el modelo siempre funciona mejor con documentación en ese idioma."
-    ],
-    correct: 1,
-    tags: ["RAG", "Seguridad", "Documentos"],
-    explainCorrect: "Antes de conectar el LLM a documentos internos debes asegurar control de acceso, trazabilidad, actualización y pruebas de recuperación. Si no, corres el riesgo de respuestas basadas en documentos obsoletos o no autorizados.",
-    explainWrong: [
-      "El diseño de las portadas es irrelevante para la calidad de recuperación.",
-      "✔ Lo crítico es quién accede a qué, con qué versión y con qué calidad de recuperación.",
-      "Traducir a inglés puede ser irrelevante si el negocio opera en otro idioma; el problema es de gobierno, no de idioma."
-    ]
-  },
-  {
-    id: 17,
-    text: "¿Qué enfoque describe mejor el uso correcto de \"few‑shot prompting\" en empresa?",
-    options: [
-      "Dar muchos ejemplos aleatorios, aunque sean distintos, para que el modelo tenga variedad y sea más creativo.",
-      "Dar pocos ejemplos representativos con el formato deseado, y mantenerlos alineados con la tarea y el tono esperado.",
-      "Copiar un manual completo como ejemplo, aunque sea largo, para que el modelo \"aprenda todo\" en una sola llamada."
-    ],
-    correct: 1,
-    tags: ["Few-shot", "Ejemplos"],
-    explainCorrect: "El few‑shot funciona bien cuando das pocos ejemplos, muy representativos y alineados con el formato y tono que quieres. No se trata de cantidad, sino de calidad y coherencia de los ejemplos.",
-    explainWrong: [
-      "Ejemplos aleatorios confunden al modelo porque mezclan estilos y objetivos.",
-      "✔ Pocos ejemplos, claros y consistentes, son suficientes para que el modelo aprenda el patrón que buscas.",
-      "Pegar un manual completo en un prompt es ineficiente y no garantiza que el modelo copie bien el formato."
-    ]
-  },
-  {
-    id: 18,
-    text: "Caso (razonamiento): Un modelo responde bien pero a veces añade contenido no pedido (\"relleno\"). ¿Qué ajuste suele ayudar?",
-    options: [
-      "Pedir \"explica todo con máximo detalle\" y \"añade recomendaciones\" para que no se quede corto nunca.",
-      "Añadir restricciones (solo X apartados), límite de longitud y formato de salida estricto con checklist final.",
-      "Subir temperatura para que explore más ideas, y luego dejar que el usuario elija lo que le interesa."
-    ],
-    correct: 1,
-    tags: ["Formato", "Restricciones"],
-    explainCorrect: "Si el problema es el relleno, necesitas reducir el espacio para improvisar: limitar apartados, longitud y fijar formato y checklist de salida. Así el modelo sabe qué cabe y qué no en la respuesta.",
-    explainWrong: [
-      "Esto va justo en la dirección contraria: pedir más detalle aumenta el relleno.",
-      "✔ Las restricciones claras y el formato estricto reducen el contenido irrelevante.",
-      "Subir temperatura genera más variación y relleno, no menos."
-    ]
-  },
-  {
-    id: 19,
-    text: "Pregunta GPT vs Proyecto (razonamiento): Para un departamento comercial, ¿cuándo es más oportuno crear un GPT y no un proyecto completo?",
-    options: [
-      "Cuando se necesita integrar datos de CRM, hacer despliegue con seguimiento y cambiar procesos de trabajo del equipo.",
-      "Cuando se busca estandarizar tareas repetibles (borradores, guiones, emails) con instrucciones y conocimiento acotados.",
-      "Cuando se requiere rediseñar el proceso, definir KPIs, gestionar riesgos y coordinar a varias áreas de la empresa."
-    ],
-    correct: 1,
-    tags: ["GPT", "Proyecto", "Alcance"],
-    explainCorrect: "Un GPT es ideal para tareas repetitivas y bien acotadas, como borradores de emails o guiones. No exige rediseñar procesos ni integrar sistemas complejos: es un \"copiloto\" ligero.",
-    explainWrong: [
-      "Esto ya apunta a un proyecto de integración y cambio organizativo, no solo a un GPT.",
-      "✔ Cuando solo quieres estandarizar textos y flujos sencillos, un GPT bien diseñado suele ser suficiente.",
-      "Rediseñar procesos y coordinar varias áreas es trabajo de proyecto, no de simple configuración de GPT."
-    ]
-  },
-  {
-    id: 20,
-    text: "Pregunta GPT vs Proyecto (razonamiento): ¿Cuál de estos casos apunta más claramente a \"proyecto\" (y no solo GPT)?",
-    options: [
-      "Un asistente que redacta propuestas comerciales siguiendo una plantilla fija y revisa ortografía y tono de marca.",
-      "Un GPT que prepara respuestas tipo para FAQs internas, citando el documento oficial y devolviendo el enlace.",
-      "Automatizar atención al cliente con integración a tickets, base de conocimiento, métricas, y mejora continua operativa."
-    ],
-    correct: 2,
-    tags: ["Proyecto", "Integración"],
-    explainCorrect: "Cuando ya hablamos de automatizar atención con integración a sistemas de tickets, base de conocimiento, métricas y mejora continua, estamos en territorio de proyecto: requiere arquitectura, equipo y gobernanza.",
-    explainWrong: [
-      "Este uso puede resolverse con un GPT bien configurado más revisión humana.",
-      "Las FAQs con citas suelen ser un buen caso de GPT + RAG, sin necesidad de gran proyecto.",
-      "✔ Integración, métricas y mejora continua implican un proyecto con varias piezas técnicas y organizativas."
-    ]
-  }
+  { id: 1, cat: "Validación de Datos", text: "¿Qué método es el más eficaz para evitar que un LLM invente datos técnicos al redactar informes financieros?", options: ["Pedirle que sea 'muy creativo' para rellenar vacíos.", "Implementar RAG (Generación Aumentada por Recuperación) para anclar las respuestas a documentos reales.", "Usar un modelo con una temperatura muy alta."], correct: 1, explain: "El RAG conecta al modelo con una base de conocimientos externa (tu 'verdad'), eliminando la necesidad de que el modelo adivine cifras o datos." },
+  { id: 2, cat: "Seguridad Corporativa", text: "Si un empleado introduce datos confidenciales de clientes en un chat de IA público, ¿cuál es el mayor riesgo?", options: ["Que el sistema tarde más en responder.", "La fuga de privacidad y que esos datos se usen para entrenar futuros modelos públicos.", "Que el formato del texto cambie automáticamente."], correct: 1, explain: "Los modelos públicos suelen ingerir los datos del usuario para mejorar. Esto expone secretos comerciales y datos protegidos por ley." },
+  { id: 3, cat: "Infraestructura", text: "¿En qué se diferencia principalmente el Fine-tuning del RAG?", options: ["Fine-tuning cambia la 'personalidad' y estilo del modelo; RAG le da acceso a 'libros de consulta' externos.", "RAG es más caro y lento de implementar que el Fine-tuning.", "No hay diferencia, son dos nombres para lo mismo."], correct: 0, explain: "Fine-tuning ajusta los pesos del modelo para un comportamiento específico. RAG es como darle una enciclopedia actualizada al modelo sin cambiar su estructura." },
+  { id: 4, cat: "Actualización de Datos", text: "Para un sistema de atención al cliente que debe saber el stock actual cada minuto, ¿qué técnica es necesaria?", options: ["Actualizar el prompt del sistema cada hora.", "Usar RAG conectado a la base de datos de inventario vía API.", "Re-entrenar el modelo (Fine-tuning) todas las noches."], correct: 1, explain: "Solo RAG permite acceder a información volátil y en tiempo real sin el coste prohibitivo de re-entrenar el modelo constantemente." },
+  { id: 5, cat: "Ingeniería de Prompts", text: "¿Qué elementos componen un prompt profesional de alto rendimiento?", options: ["Solo una instrucción clara y directa.", "Rol, Contexto, Instrucciones detalladas, Restricciones y Formato de salida deseado.", "Muchas palabras de cortesía y exclamaciones."], correct: 1, explain: "La modularidad en el prompt (Framework) reduce la ambigüedad y permite que la IA ejecute tareas complejas con precisión industrial." },
+  { id: 6, cat: "Control de Salida", text: "Deseas que la IA genere siempre respuestas en formato JSON para una app. ¿Cómo aseguras la máxima consistencia?", options: ["Bajando la temperatura a 0 y definiendo el esquema exacto en el prompt.", "Subiendo la temperatura para que varíe el código.", "Cambiando el idioma del prompt a inglés solamente."], correct: 0, explain: "Temperatura 0 elimina la aleatoriedad. Combinado con una instrucción de formato rígida, garantiza que la salida sea legible por máquinas." },
+  { id: 7, cat: "Gobernanza", text: "¿Cuál es la principal ventaja de usar un 'Custom GPT' corporativo en lugar de uno personal?", options: ["Que tiene iconos más bonitos.", "Permite centralizar el conocimiento del departamento, controlar accesos y asegurar que todos usen las mismas instrucciones.", "Que responde más rápido por ser de la empresa."], correct: 1, explain: "La gobernanza permite estandarizar procesos. Todos los empleados operan bajo la misma lógica y base de datos aprobada." },
+  { id: 8, cat: "Prevención de Errores", text: "Para evitar alucinaciones en un manual técnico, ¿qué instrucción de 'salvaguarda' añadirías al prompt?", options: ["'Si no encuentras la información en los documentos, indícalo y no inventes'.", "'Intenta adivinar basándote en lo que sepas de otros manuales similares'.", "'Responde siempre algo, el usuario no debe quedarse sin respuesta'."], correct: 0, explain: "Forzar al modelo a admitir ignorancia cuando la fuente no contiene el dato es la mejor defensa contra las alucinaciones." },
+  { id: 9, cat: "Ataques de IA", text: "Un intento de engañar al modelo para que ignore sus reglas de seguridad se conoce como:", options: ["Deepfake de texto.", "Prompt Injection (Inyección de Prompt).", "Alucinación dirigida."], correct: 1, explain: "La inyección de prompt busca 'romper' las restricciones del sistema para obtener información prohibida o saltarse bloqueos éticos." },
+  { id: 10, cat: "KPIs de IA", text: "¿Cómo medirías el éxito de la implementación de un LLM en el departamento legal?", options: ["Por el número de palabras generadas.", "Por la reducción de tiempo en la revisión de contratos y la precisión en la detección de cláusulas críticas.", "Por si la IA escribe de forma muy poética."], correct: 1, explain: "El éxito se mide en eficiencia operativa (tiempo) y calidad técnica (precisión), no en volumen de texto." },
+  { id: 11, cat: "Estructura Avanzada", text: "En un prompt, ¿para qué sirve definir las 'Restricciones'?", options: ["Para que la IA no hable demasiado.", "Para acotar el comportamiento, evitar temas sensibles y definir qué NO debe hacer el modelo bajo ninguna circunstancia.", "Para que el modelo use menos memoria."], correct: 1, explain: "Las restricciones son tan importantes como las instrucciones. Definen los límites de seguridad y estilo de la marca." },
+  { id: 12, cat: "Automatización", text: "Quieres extraer datos de facturas automáticamente. ¿Cuál es el formato de salida ideal para procesarlo después?", options: ["Un resumen narrativo.", "Un formato estructurado como JSON o CSV.", "Un archivo de audio."], correct: 1, explain: "Los formatos estructurados permiten que otros programas lean los datos automáticamente sin intervención humana." },
+  { id: 13, cat: "Gestión de Hilos", text: "Si una conversación con la IA se vuelve confusa tras muchos mensajes, la mejor práctica es:", options: ["Seguir preguntando hasta que lo entienda.", "Reiniciar el chat o proporcionar un resumen de los puntos clave para limpiar la memoria de trabajo del modelo.", "Escribir en mayúsculas."], correct: 1, explain: "La ventana de contexto es limitada. Limpiar el historial o resumir enfoca de nuevo la 'atención' del modelo." },
+  { id: 14, cat: "Ética y Privacidad", text: "¿Qué debe hacer un bot interno si un empleado pregunta por el salario de su jefe?", options: ["Buscar en los archivos y responder.", "Denegar la petición citando la política de privacidad y no revelar datos sensibles.", "Inventar un número para que el empleado esté contento."], correct: 1, explain: "La IA debe estar alineada con las políticas de privacidad de la empresa. El acceso a datos sensibles debe estar bloqueado por diseño." },
+  { id: 15, cat: "Consistencia (SOP)", text: "En tareas de clasificación de correos (Spam/No Spam), ¿qué temperatura es la adecuada?", options: ["0.0 (Cero).", "0.7 (Creativo).", "1.0 (Máxima variabilidad)."], correct: 0, explain: "La clasificación requiere una decisión lógica única y repetible. La temperatura 0 asegura que el mismo correo se clasifique igual siempre." },
+  { id: 16, cat: "RAG Avanzado", text: "¿Qué significa 'Grounding' en el contexto de las respuestas de una IA?", options: ["Que la IA esté conectada a tierra físicamente.", "Anclar las respuestas exclusivamente en evidencias encontradas en los documentos proporcionados.", "Que la IA use un lenguaje muy básico."], correct: 1, explain: "El grounding es la técnica de 'aterrizar' la respuesta a los hechos para evitar la deriva creativa o alucinación." },
+  { id: 17, cat: "Aprendizaje Rápido", text: "¿Qué es el 'Few-shot prompting'?", options: ["Hacer una pregunta y esperar una respuesta corta.", "Incluir unos pocos ejemplos de entrada/salida en el prompt para guiar el comportamiento del modelo.", "Darle muchas oportunidades de fallar."], correct: 1, explain: "Es la forma más efectiva de enseñar un patrón al modelo sin necesidad de programar nada nuevo." },
+  { id: 18, cat: "Optimización de Costes", text: "¿Cómo reduces el consumo de 'tokens' (y por tanto el coste) en un proyecto?", options: ["Haciendo preguntas más largas.", "Siendo conciso, usando modelos más pequeños para tareas simples y evitando repetir instrucciones innecesarias.", "Usando siempre el modelo más caro."], correct: 1, explain: "La eficiencia en los tokens reduce directamente la factura de la API y mejora la velocidad de respuesta." },
+  { id: 19, cat: "Elección de Herramientas", text: "Para crear un asistente de escritura que use mi estilo de redacción personal, ¿qué es lo más eficiente?", options: ["Programar una IA desde cero.", "Un Custom GPT con ejemplos de mis textos y una guía de estilo clara en las instrucciones.", "Usar un buscador tradicional."], correct: 1, explain: "Los Custom GPTs son ideales para tareas de personalización de estilo sin complejidad técnica de integración." },
+  { id: 20, cat: "Visión de Negocio", text: "¿Cuál es el primer paso recomendado antes de desplegar una IA en un departamento?", options: ["Comprar las licencias más caras para todos.", "Identificar casos de uso de alto impacto y bajo riesgo, y realizar una prueba piloto (PoC).", "Sustituir a los empleados por bots de inmediato."], correct: 1, explain: "Una implementación exitosa es gradual: se identifican problemas reales, se prueban soluciones y luego se escala lo que funciona." }
 ];
 
 type Mode = 'practice' | 'exam';
-type AnswerState = 'correct' | 'wrong' | null;
 
 export default function LLMTrainingGame() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIdx, setCurrentIdx] = useState(0);
   const [mode, setMode] = useState<Mode>('practice');
-  const [answered, setAnswered] = useState<AnswerState[]>(Array(questions.length).fill(null));
-  const [mastered, setMastered] = useState<boolean[]>(Array(questions.length).fill(false));
-  const [streak, setStreak] = useState(0);
-  const [bestStreak, setBestStreak] = useState(0);
-  const [examFinished, setExamFinished] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [userAnswers, setUserAnswers] = useState<(number | null)[]>(Array(questions.length).fill(null));
+  const [score, setScore] = useState({ correct: 0, wrong: 0 });
+  const [showResults, setShowResults] = useState(false);
 
-  const correctCount = answered.filter(a => a === 'correct').length;
-  const wrongCount = answered.filter(a => a === 'wrong').length;
-  const answeredCount = correctCount + wrongCount;
-  const masteredCount = mastered.filter(Boolean).length;
+  const currentQ = questions[currentIdx];
+  const letters = ['A', 'B', 'C'];
 
-  const handleAnswer = (idx: number) => {
-    if (examFinished) return;
-    const q = questions[currentIndex];
-    const already = answered[currentIndex];
+  const completed = userAnswers.filter(a => a !== null).length;
+  const progressPct = Math.round((completed / questions.length) * 100);
 
-    if (mode === 'exam' && already !== null) return;
-
-    setSelectedOption(idx);
-
-    if (idx === q.correct) {
-      if (already !== 'correct') {
-        const newAnswered = [...answered];
-        newAnswered[currentIndex] = 'correct';
-        setAnswered(newAnswered);
-        
-        const newMastered = [...mastered];
-        newMastered[currentIndex] = true;
-        setMastered(newMastered);
-        
-        const newStreak = streak + 1;
-        setStreak(newStreak);
-        if (newStreak > bestStreak) setBestStreak(newStreak);
-      }
+  const handleSelectOption = (idx: number) => {
+    if (userAnswers[currentIdx] !== null) return;
+    
+    const newAnswers = [...userAnswers];
+    newAnswers[currentIdx] = idx;
+    setUserAnswers(newAnswers);
+    
+    const isCorrect = idx === currentQ.correct;
+    if (isCorrect) {
+      setScore(prev => ({ correct: prev.correct + 1, wrong: prev.wrong }));
     } else {
-      const newAnswered = [...answered];
-      newAnswered[currentIndex] = 'wrong';
-      setAnswered(newAnswered);
-      setStreak(0);
-    }
-
-    if (mode === 'exam') {
-      const allAnswered = answered.every((a, i) => i === currentIndex ? a !== null : a !== null);
-      if (allAnswered && currentIndex === questions.length - 1) {
-        setExamFinished(true);
-      }
+      setScore(prev => ({ correct: prev.correct, wrong: prev.wrong + 1 }));
     }
   };
 
-  const handleNext = () => {
-    if (currentIndex < questions.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      setSelectedOption(null);
-    } else if (mode === 'practice') {
-      setCurrentIndex(0);
-      setSelectedOption(null);
+  const changeQuestion = (step: number) => {
+    const newIdx = currentIdx + step;
+    if (newIdx >= 0 && newIdx < questions.length) {
+      setCurrentIdx(newIdx);
+    } else if (newIdx >= questions.length) {
+      setShowResults(true);
     }
   };
 
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-      setSelectedOption(null);
-    }
+  const toggleMode = () => {
+    setMode(mode === 'practice' ? 'exam' : 'practice');
+    setUserAnswers(Array(questions.length).fill(null));
+    setScore({ correct: 0, wrong: 0 });
+    setCurrentIdx(0);
+    setShowResults(false);
   };
 
-  const resetGame = () => {
-    setAnswered(Array(questions.length).fill(null));
-    setMastered(Array(questions.length).fill(false));
-    setStreak(0);
-    setBestStreak(0);
-    setExamFinished(false);
-    setCurrentIndex(0);
-    setSelectedOption(null);
+  const restartGame = () => {
+    setUserAnswers(Array(questions.length).fill(null));
+    setScore({ correct: 0, wrong: 0 });
+    setCurrentIdx(0);
+    setShowResults(false);
   };
 
-  const getHint = () => {
-    const q = questions[currentIndex];
-    if (q.tags.includes('Seguridad')) {
-      return "Pista: ante la duda entre comodidad y seguridad, en empresa gana la seguridad y el cumplimiento.";
-    } else if (q.tags.includes('RAG')) {
-      return "Pista: pregúntate si el problema va de modelo o de documentos/fuentes actualizadas (ahí entra RAG).";
-    } else if (q.tags.includes('Prompting')) {
-      return "Pista: recuerda la plantilla de prompt profesional: rol, objetivo, contexto, restricciones, formato y calidad.";
-    } else if (q.tags.includes('GPT')) {
-      return "Pista: un GPT resuelve tareas acotadas; un proyecto implica procesos, integración y KPIs.";
-    }
-    return "Consejo: piensa como si tuvieras que defender tu decisión delante de dirección.";
+  const getResultMessage = () => {
+    const pct = (score.correct / questions.length) * 100;
+    if (pct >= 80) return "¡Nivel Experto! Estás totalmente preparado para liderar proyectos de IA.";
+    if (pct >= 60) return "¡Buen trabajo! Tienes los conceptos claros, pero repasa los errores antes del viernes.";
+    return "Necesitas un repaso profundo de la teoría. ¡Vuelve a intentarlo!";
   };
 
-  const getSummaryMessage = () => {
-    if (correctCount === 20) return "Brutal: 20/20. Dominas todos los matices clave del módulo.";
-    if (correctCount >= 17) return "Muy bien: estás listo para el viernes, pero revisa las que has fallado para pulir detalles.";
-    if (correctCount >= 14) return "Aprobado sólido. Para ir a nivel \"pro\", revisa con calma las preguntas en las que dudaste.";
-    return "No pasa nada: usa ahora el modo práctica para entender cada explicación y subir tu nota.";
+  // Estilos CSS en JS fieles al diseño original
+  const styles = {
+    container: {
+      background: '#050810',
+      backgroundImage: 'radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.15) 0%, transparent 40%)',
+      color: '#f8fafc',
+      minHeight: '100vh',
+      padding: '40px 20px',
+      fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+    } as React.CSSProperties,
+    topProgress: {
+      position: 'fixed' as const,
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '6px',
+      background: 'rgba(255,255,255,0.05)',
+      zIndex: 1000,
+    } as React.CSSProperties,
+    progressFill: {
+      height: '100%',
+      width: `${progressPct}%`,
+      background: 'linear-gradient(90deg, #6366f1, #10b981)',
+      boxShadow: '0 0 15px rgba(16, 185, 129, 0.3)',
+      transition: 'width 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    } as React.CSSProperties,
+    appContainer: {
+      width: '100%',
+      maxWidth: '1100px',
+      display: 'grid',
+      gridTemplateColumns: '1fr 320px',
+      gap: '30px',
+      margin: '0 auto',
+    } as React.CSSProperties,
+    mainPanel: {
+      background: 'rgba(15, 23, 42, 0.9)',
+      backdropFilter: 'blur(20px)',
+      border: '1px solid rgba(255, 255, 255, 0.08)',
+      borderRadius: '20px',
+      padding: '40px',
+      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
+      position: 'relative' as const,
+      overflow: 'hidden',
+    } as React.CSSProperties,
+    statusBadge: {
+      background: 'rgba(99, 102, 241, 0.1)',
+      color: '#6366f1',
+      padding: '6px 14px',
+      borderRadius: '8px',
+      fontSize: '0.75rem',
+      fontWeight: 800,
+      letterSpacing: '1px',
+      border: '1px solid rgba(99, 102, 241, 0.3)',
+      display: 'inline-block',
+      marginBottom: '15px',
+    } as React.CSSProperties,
+    h1: {
+      fontSize: '2.2rem',
+      margin: '15px 0',
+      fontWeight: 800,
+      letterSpacing: '-1px',
+    } as React.CSSProperties,
+    qMeta: {
+      color: '#10b981',
+      fontWeight: 700,
+      fontSize: '0.85rem',
+      textTransform: 'uppercase' as const,
+      marginBottom: '8px',
+      display: 'block',
+    } as React.CSSProperties,
+    qText: {
+      fontSize: '1.3rem',
+      lineHeight: 1.4,
+      marginBottom: '30px',
+      fontWeight: 500,
+      color: '#fff',
+    } as React.CSSProperties,
+    optionsGrid: {
+      display: 'grid',
+      gap: '14px',
+    } as React.CSSProperties,
+    option: (isAnswered: boolean, isCorrect: boolean, isSelected: boolean) => ({
+      background: 'rgba(255, 255, 255, 0.02)',
+      border: `1px solid ${isAnswered ? (isCorrect ? '#10b981' : isSelected ? '#f43f5e' : 'rgba(255, 255, 255, 0.08)') : 'rgba(255, 255, 255, 0.08)'}`,
+      padding: '18px 24px',
+      borderRadius: '14px',
+      cursor: isAnswered ? 'not-allowed' : 'pointer',
+      transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '18px',
+      position: 'relative' as const,
+      opacity: isAnswered && !isCorrect && !isSelected ? 0.8 : 1,
+      background: isAnswered 
+        ? (isCorrect ? 'rgba(16, 185, 129, 0.15)' : isSelected ? 'rgba(244, 63, 94, 0.15)' : 'rgba(255, 255, 255, 0.02)')
+        : 'rgba(255, 255, 255, 0.02)',
+      boxShadow: isCorrect ? '0 0 20px rgba(16, 185, 129, 0.1)' : 'none',
+      transform: !isAnswered ? 'scale(1)' : 'scale(1)',
+    } as React.CSSProperties),
+    letter: (isAnswered: boolean, isCorrect: boolean, isSelected: boolean) => ({
+      width: '32px',
+      height: '32px',
+      borderRadius: '8px',
+      background: isAnswered ? (isCorrect ? '#10b981' : isSelected ? '#f43f5e' : 'rgba(255,255,255,0.05)') : 'rgba(255,255,255,0.05)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontWeight: 800,
+      color: isAnswered ? '#fff' : '#94a3b8',
+      transition: '0.3s',
+      flexShrink: 0,
+    } as React.CSSProperties),
+    feedbackCard: {
+      marginTop: '30px',
+      padding: '20px',
+      borderRadius: '14px',
+      background: 'rgba(0,0,0,0.3)',
+      borderLeft: '4px solid #6366f1',
+      display: userAnswers[currentIdx] !== null && mode === 'practice' ? 'block' : 'none',
+      animation: 'slideIn 0.3s ease-out',
+    } as React.CSSProperties,
+    sidePanel: {
+      display: 'flex',
+      flexDirection: 'column' as const,
+      gap: '20px',
+    } as React.CSSProperties,
+    sideCard: {
+      background: 'rgba(15, 23, 42, 0.9)',
+      border: '1px solid rgba(255, 255, 255, 0.08)',
+      borderRadius: '20px',
+      padding: '24px',
+      boxShadow: '0 10px 30px rgba(0,0,0,0.3)',
+    } as React.CSSProperties,
+    statRow: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginBottom: '15px',
+      fontSize: '0.9rem',
+    } as React.CSSProperties,
+    progressGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(5, 1fr)',
+      gap: '8px',
+    } as React.CSSProperties,
+    dot: (i: number, isAnswered: boolean, isCorrect: boolean) => ({
+      aspectRatio: '1',
+      borderRadius: '8px',
+      background: isAnswered ? (isCorrect ? '#10b981' : '#f43f5e') : '#1e293b',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '0.75rem',
+      fontWeight: 700,
+      border: `1px solid ${i === currentIdx ? '#6366f1' : 'rgba(255, 255, 255, 0.08)'}`,
+      cursor: 'pointer',
+      transition: '0.2s',
+      transform: i === currentIdx ? 'scale(1.1)' : 'scale(1)',
+      zIndex: i === currentIdx ? 2 : 1,
+      color: isAnswered ? '#fff' : '#94a3b8',
+    } as React.CSSProperties),
+    btnNext: {
+      padding: '14px 28px',
+      borderRadius: '12px',
+      border: 'none',
+      cursor: 'pointer',
+      fontWeight: 700,
+      transition: '0.3s',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      textTransform: 'uppercase' as const,
+      fontSize: '0.8rem',
+      letterSpacing: '1px',
+      background: '#6366f1',
+      color: '#fff',
+      boxShadow: '0 4px 15px rgba(99, 102, 241, 0.3)',
+    } as React.CSSProperties,
+    btnPrev: {
+      padding: '14px 28px',
+      borderRadius: '12px',
+      border: '1px solid rgba(255, 255, 255, 0.08)',
+      cursor: 'pointer',
+      fontWeight: 700,
+      transition: '0.3s',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      textTransform: 'uppercase' as const,
+      fontSize: '0.8rem',
+      letterSpacing: '1px',
+      background: 'transparent',
+      color: '#94a3b8',
+    } as React.CSSProperties,
+    navBtns: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      marginTop: '40px',
+    } as React.CSSProperties,
+    resultsView: {
+      textAlign: 'center' as const,
+      padding: '40px 0',
+    } as React.CSSProperties,
   };
 
-  const currentQ = questions[currentIndex];
-  const letters = ['a', 'b', 'c'];
+  if (showResults) {
+    return (
+      <div style={styles.container}>
+        <div style={styles.topProgress}>
+          <div style={{...styles.progressFill, width: '100%'}} />
+        </div>
+        <div style={styles.appContainer}>
+          <main style={styles.mainPanel}>
+            <div style={styles.resultsView}>
+              <TrophyIcon style={{fontSize: '4rem', color: '#fbbf24', marginBottom: '20px'}} />
+              <h2 style={{fontSize: '2rem', fontWeight: 800, marginBottom: '20px'}}>¡Simulacro Finalizado!</h2>
+              <div style={{fontSize: '5rem', fontWeight: 900, margin: '20px 0', color: '#10b981'}}>{score.correct}/20</div>
+              <p style={{fontSize: '1.1rem', color: '#94a3b8', marginBottom: '30px', maxWidth: '400px', margin: '0 auto 30px'}}>{getResultMessage()}</p>
+              <button style={{...styles.btnNext, margin: '0 auto'}} onClick={restartGame}>
+                <RotateIcon size={18} /> Reiniciar Sistema
+              </button>
+            </div>
+          </main>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-4">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h3 className="text-lg font-semibold flex items-center gap-2">
-            🎯 Entrenamiento de evaluación - Módulo 2
-          </h3>
-          <p className="text-sm text-muted-foreground mt-1">
-            Juego didáctico para dominar las 20 preguntas clave del test
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Button
-            variant={mode === 'practice' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => {
-              setMode('practice');
-              resetGame();
-            }}
-            className="text-xs"
-          >
-            Práctica
-          </Button>
-          <Button
-            variant={mode === 'exam' ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => {
-              setMode('exam');
-              resetGame();
-            }}
-            className="text-xs"
-          >
-            Examen
-          </Button>
-        </div>
+    <div style={styles.container}>
+      <style>{`
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .option-hover:hover { background: rgba(99, 102, 241, 0.05) !important; border-color: #6366f1 !important; transform: scale(1.02) !important; }
+      `}</style>
+      
+      <div style={styles.topProgress}>
+        <div style={styles.progressFill} />
       </div>
 
-      {/* Stats */}
-      <div className="flex flex-wrap gap-2">
-        <Badge variant="outline" className="text-xs">
-          Pregunta {currentIndex + 1}/20
-        </Badge>
-        <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">
-          Aciertos: {correctCount}
-        </Badge>
-        <Badge variant="outline" className="text-xs bg-red-50 text-red-700 border-red-200">
-          Fallos: {wrongCount}
-        </Badge>
-        <Badge variant="outline" className="text-xs">
-          Racha: {streak}
-        </Badge>
-      </div>
-
-      {/* Question Card */}
-      <Card>
-        <CardContent className="p-6 space-y-4">
-          <div className="flex justify-between items-center">
-            <Badge variant="secondary" className="text-xs">
-              Escenario & Pregunta
-            </Badge>
-            <span className="text-xs text-muted-foreground">
-              Pregunta {currentQ.id} de {questions.length}
+      <div style={styles.appContainer}>
+        <main style={styles.mainPanel}>
+          <header style={{marginBottom: '30px'}}>
+            <span style={styles.statusBadge}>
+              {mode === 'practice' ? '⚡ MODO ENTRENAMIENTO' : '🎓 MODO EXAMEN'}
             </span>
-          </div>
+            <h1 style={styles.h1}>IA Strategy Exam</h1>
+          </header>
 
-          <p className="text-sm font-medium">
-            <span className="text-xs uppercase tracking-wider text-indigo-600 block mb-2">
-              Pregunta {currentQ.id}
-            </span>
-            {currentQ.text}
-          </p>
-
-          <div className="space-y-2">
-            {currentQ.options.map((opt, i) => {
-              const isCorrect = i === currentQ.correct;
-              const isSelected = selectedOption === i;
-              const isAnswered = answered[currentIndex] !== null;
-
-              let optionClass = "w-full justify-start text-left h-auto py-3 px-4 border ";
-              
-              if (isAnswered) {
-                if (isCorrect) {
-                  optionClass += "border-green-500 bg-green-50 text-green-900";
-                } else if (isSelected && !isCorrect) {
-                  optionClass += "border-red-500 bg-red-50 text-red-900";
-                } else {
-                  optionClass += "border-gray-200 bg-gray-50 text-gray-500 opacity-60";
-                }
-              } else {
-                optionClass += "border-gray-200 hover:bg-gray-50 hover:border-gray-300";
-              }
-
-              return (
-                <Button
-                  key={i}
-                  variant="outline"
-                  className={optionClass}
-                  onClick={() => handleAnswer(i)}
-                  disabled={isAnswered}
-                >
-                  <span className="w-6 h-6 rounded-full border border-current flex items-center justify-center text-xs mr-3 flex-shrink-0">
-                    {letters[i]}
-                  </span>
-                  <span className="text-sm">{opt}</span>
-                </Button>
-              );
-            })}
-          </div>
-
-          {/* Feedback */}
-          {answered[currentIndex] !== null && (
-            <Card className="bg-slate-50 border-slate-200">
-              <CardContent className="p-4 space-y-3">
-                <div className="flex items-center gap-2">
-                  <Badge className={answered[currentIndex] === 'correct' ? 'bg-green-600' : 'bg-red-600'}>
-                    {answered[currentIndex] === 'correct' ? 'Bien razonado' : 'Ojo con este matiz'}
-                  </Badge>
-                </div>
-                <p className="text-sm text-slate-700">
-                  {currentQ.explainCorrect}
-                </p>
-                <div className="text-xs text-slate-600 space-y-1">
-                  {currentQ.explainWrong.map((txt, i) => (
-                    <p key={i}>{txt}</p>
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-1 pt-2">
-                  {currentQ.tags.map((tag, i) => (
-                    <Badge key={i} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {/* Navigation */}
-          <div className="flex justify-between items-center pt-4 border-t">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handlePrev}
-              disabled={currentIndex === 0}
-              className="text-xs"
-            >
-              <ChevronLeft className="h-4 w-4 mr-1" />
-              Anterior
-            </Button>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <Lightbulb className="h-3 w-3" />
-              {getHint()}
-            </div>
-            <Button
-              variant="default"
-              size="sm"
-              onClick={handleNext}
-              className="text-xs"
-            >
-              Siguiente
-              <ChevronRight className="h-4 w-4 ml-1" />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Progress & Stats Panel */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Progress Map */}
-        <Card>
-          <CardContent className="p-4 space-y-3">
-            <div className="flex justify-between items-center">
-              <Badge variant="secondary" className="text-xs">
-                Mapa de progreso
-              </Badge>
-              <span className="text-xs text-muted-foreground">
-                {mode === 'practice' ? 'Modo práctica' : 'Modo examen'}
-              </span>
-            </div>
-            <div className="grid grid-cols-10 gap-1">
-              {questions.map((_, idx) => {
-                let stepClass = "h-3 rounded-full border ";
-                if (idx === currentIndex) {
-                  stepClass += "border-blue-500 bg-blue-500";
-                } else if (answered[idx] === 'correct') {
-                  stepClass += "border-green-500 bg-green-500";
-                } else if (answered[idx] === 'wrong') {
-                  stepClass += "border-red-500 bg-red-500";
-                } else {
-                  stepClass += "border-gray-300 bg-gray-100";
-                }
-                return <div key={idx} className={stepClass} />;
+          <div style={{animation: 'fadeIn 0.5s ease-out'}}>
+            <span style={styles.qMeta}>{currentQ.cat}</span>
+            <div style={styles.qText}>{currentQ.text}</div>
+            
+            <div style={styles.optionsGrid}>
+              {currentQ.options.map((opt, i) => {
+                const isSelected = userAnswers[currentIdx] === i;
+                const isCorrect = i === currentQ.correct;
+                const isAnswered = userAnswers[currentIdx] !== null;
+                
+                return (
+                  <div
+                    key={i}
+                    style={{
+                      ...styles.option(isAnswered, isCorrect, isSelected),
+                    }}
+                    className={!isAnswered ? 'option-hover' : ''}
+                    onClick={() => handleSelectOption(i)}
+                  >
+                    <div style={styles.letter(isAnswered, isCorrect, isSelected)}>
+                      {letters[i]}
+                    </div>
+                    <span style={{color: '#f8fafc', fontSize: '0.95rem'}}>{opt}</span>
+                  </div>
+                );
               })}
             </div>
-            <div className="flex gap-4 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-green-500" /> Correcta
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-red-500" /> Incorrecta
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-gray-300" /> Pendiente
-              </span>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Stats Panel */}
-        <Card>
-          <CardContent className="p-4 space-y-3">
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Respondidas:</span>
-                <span className="font-medium">{answeredCount}/20</span>
+            <div style={styles.feedbackCard}>
+              <div style={{display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px'}}>
+                <LightbulbIcon style={{color: '#6366f1'}} />
+                <strong style={{color: '#6366f1', textTransform: 'uppercase', fontSize: '0.8rem'}}>Justificación Técnica</strong>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Dominadas:</span>
-                <span className="font-medium">{masteredCount}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Racha actual:</span>
-                <span className="font-medium">{streak}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Mejor racha:</span>
-                <span className="font-medium">{bestStreak}</span>
-              </div>
+              <p style={{fontSize: '0.95rem', lineHeight: 1.5, color: '#94a3b8'}}>{currentQ.explain}</p>
             </div>
 
-            {mode === 'exam' && examFinished && (
-              <div className="pt-3 border-t space-y-2">
-                <div className="text-xs font-medium">Resumen de examen</div>
-                <p className="text-xs text-muted-foreground">{getSummaryMessage()}</p>
-                <Badge className="bg-green-600">
-                  Nota: {correctCount}/20
-                </Badge>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={resetGame}
-                  className="w-full text-xs mt-2"
-                >
-                  <RotateCcw className="h-3 w-3 mr-1" />
-                  Repetir examen
-                </Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
+            <div style={styles.navBtns}>
+              <button 
+                style={styles.btnPrev} 
+                onClick={() => changeQuestion(-1)}
+                disabled={currentIdx === 0}
+              >
+                <ChevronLeftIcon size={18} /> Anterior
+              </button>
+              <button style={styles.btnNext} onClick={() => changeQuestion(1)}>
+                Siguiente <ChevronRightIcon size={18} />
+              </button>
+            </div>
+          </div>
+        </main>
 
-      {/* Tips */}
-      <Card className="bg-slate-50 border-slate-200">
-        <CardContent className="p-4 text-xs text-slate-600 space-y-2">
-          <div className="font-medium text-slate-800">💡 Mini guía conceptual</div>
-          <ul className="list-disc list-inside space-y-1">
-            <li><strong>RAG</strong> sirve para responder con tus documentos actualizados; <strong>fine-tuning</strong> ajusta el modelo para un estilo/tarea específicos.</li>
-            <li>Un buen prompt profesional siempre deja claro objetivo, contexto, formato, restricciones y criterios de calidad.</li>
-            <li>Un <strong>GPT</strong> es una herramienta acotada para tareas repetibles; un <strong>proyecto</strong> implica procesos, métricas, riesgos y varias áreas implicadas.</li>
-          </ul>
-        </CardContent>
-      </Card>
+        <aside style={styles.sidePanel}>
+          <div style={styles.sideCard}>
+            <h3 style={{marginBottom: '20px', fontSize: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '10px'}}>Estadísticas</h3>
+            <div style={styles.statRow}><span>Completado:</span> <span style={{fontWeight: 800, color: '#10b981'}}>{progressPct}%</span></div>
+            <div style={styles.statRow}><span>Aciertos:</span> <span style={{fontWeight: 800, color: '#10b981'}}>{score.correct}</span></div>
+            <div style={styles.statRow}><span>Errores:</span> <span style={{fontWeight: 800, color: '#f43f5e'}}>{score.wrong}</span></div>
+          </div>
 
-      {/* Footer */}
-      <div className="text-xs text-muted-foreground text-center py-2 border-t">
-        Basado en el test oficial de evaluación del Módulo 2 (20 preguntas). Entrena tantas veces como quieras antes del viernes.
+          <div style={styles.sideCard}>
+            <h3 style={{marginBottom: '15px', fontSize: '1rem'}}>Navegación</h3>
+            <div style={styles.progressGrid}>
+              {questions.map((_, i) => {
+                const isAnswered = userAnswers[i] !== null;
+                const isCorrect = userAnswers[i] === questions[i].correct;
+                return (
+                  <div
+                    key={i}
+                    style={styles.dot(i, isAnswered, isCorrect)}
+                    onClick={() => setCurrentIdx(i)}
+                  >
+                    {i + 1}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div style={styles.sideCard}>
+            <h3 style={{marginBottom: '15px', fontSize: '1rem'}}>Configuración</h3>
+            <button 
+              style={{...styles.btnPrev, width: '100%', marginBottom: '10px', fontSize: '0.7rem'}} 
+              onClick={toggleMode}
+            >
+              Cambiar a {mode === 'practice' ? 'Modo Examen' : 'Modo Entrenamiento'}
+            </button>
+          </div>
+        </aside>
       </div>
     </div>
+  );
+}
+
+// Iconos SVG simples
+function ChevronLeftIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m15 18-6-6 6-6"/>
+    </svg>
+  );
+}
+
+function ChevronRightIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m9 18 6-6-6-6"/>
+    </svg>
+  );
+}
+
+function LightbulbIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+      <path d="M9 18h6"/>
+      <path d="M10 22h4"/>
+    </svg>
+  );
+}
+
+function TrophyIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+      <path d="M4 22h16"/>
+      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+    </svg>
+  );
+}
+
+function RotateIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/>
+      <path d="M21 3v5h-5"/>
+    </svg>
   );
 }
