@@ -13,6 +13,7 @@ import AutomationLabGame from './automation-lab-game';
 import PromptEngineeringQuiz from './prompt-quiz';
 import LLMSelectorTool from './llm-selector-tool';
 import CUMPLEPromptWorkshop from './cumple-prompt-workshop';
+import LLMTrainingGame from './llm-training-game';
 
 interface GameItem {
   id: string;
@@ -101,6 +102,15 @@ const module2GamesList: GameItem[] = [
     category: 'juego',
     icon: <Sparkles className="h-5 w-5 text-pink-400" />,
     component: <PromptEngineeringQuiz />,
+  },
+  {
+    id: 'llm-training-game',
+    title: '🎯 Entrenamiento de evaluación - Módulo 2',
+    description: 'Juego didáctico con las 20 preguntas clave del test: uso seguro, prompts, RAG, GPTs y proyectos. Incluye modo práctica y modo examen.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Trophy className="h-5 w-5 text-amber-400" />,
+    component: <LLMTrainingGame />,
   },
 ];
 
