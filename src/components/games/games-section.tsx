@@ -1155,7 +1155,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
         {/* Contenido desplegable */}
         {localhostImageAiOpen && (
           <div className="mt-4 space-y-4 animate-in slide-in-from-top-2 duration-300">
-            {/* Google Colab Script Card */}
+            {/* Google Colab Script Card - Fooocus */}
             <Card className="border-emerald-200 bg-emerald-50">
               <CardContent className="p-6">
                 <div className="flex items-start gap-3 mb-4">
@@ -1189,6 +1189,15 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                     Abrir Google Colab
                   </a>
                   <a
+                    href="https://www.kaggle.com/account/register"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h6"/><path d="M8 11h8"/><path d="M8 15h6"/></svg>
+                    Abrir Kaggle
+                  </a>
+                  <a
                     href="https://github.com/lllyasviel/Fooocus"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -1197,6 +1206,73 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                     Ver Fooocus en GitHub
                   </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Automatic1111 Card with Embed */}
+            <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="h-10 w-10 rounded-xl bg-blue-200 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-blue-700"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-blue-900">⚡ Stable Diffusion v2.0 con AUTOMATIC1111</h4>
+                    <p className="text-sm text-blue-700 mb-3">
+                      Notebook interactivo en Kaggle con la interfaz AUTOMATIC1111. Ejecuta Stable Diffusion v2.0 directamente en el navegador sin instalación.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Embed iframe */}
+                <div className="rounded-lg overflow-hidden border-2 border-blue-200 bg-white mb-4">
+                  <iframe
+                    src="https://www.kaggle.com/embed/amida168/stable-diffusion-v2-0-with-automatic1111?cellIds=2&kernelSessionId=119900699"
+                    height="300"
+                    style={{ margin: '0 auto', width: '100%', maxWidth: '950px' }}
+                    frameBorder="0"
+                    scrolling="auto"
+                    title="Stable Diffusion v2.0 with Automatic1111"
+                    className="w-full"
+                  />
+                </div>
+
+                <div className="flex gap-2 mt-4">
+                  <a
+                    href="https://www.kaggle.com/code/amida168/stable-diffusion-v2-0-with-automatic1111"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h6"/><path d="M8 11h8"/><path d="M8 15h6"/></svg>
+                    Abrir Notebook en Kaggle
+                  </a>
+                  <a
+                    href="https://colab.research.google.com/github/TheLastBen/fast-stable-diffusion/blob/main/fast_stable_diffusion_AUTOMATIC1111.ipynb"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    Abrir Google Colab
+                  </a>
+                  <a
+                    href="https://github.com/AUTOMATIC1111/stable-diffusion-webui"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 border border-blue-300 text-blue-700 hover:bg-blue-100 rounded-lg text-sm font-medium transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                    Ver AUTOMATIC1111 en GitHub
+                  </a>
+                </div>
+
+                {/* Info adicional */}
+                <div className="mt-4 p-3 bg-blue-100/50 border border-blue-200 rounded-lg">
+                  <p className="text-xs text-blue-800">
+                    <strong className="text-blue-900">💡 Tip:</strong> Este notebook incluye la interfaz completa de AUTOMATIC1111 con txt2img, img2img, inpainting, y control de todos los parámetros de generación.
+                  </p>
                 </div>
               </CardContent>
             </Card>
