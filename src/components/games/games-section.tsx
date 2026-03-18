@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -15,6 +15,7 @@ import LLMSelectorTool from './llm-selector-tool';
 import CUMPLEPromptWorkshop from './cumple-prompt-workshop';
 import LLMTrainingGame from './llm-training-game';
 import ImagePromptWorkshop from './image-prompt-workshop';
+import VideoPromptWorkshop from './video-prompt-workshop';
 
 interface GameItem {
   id: string;
@@ -103,6 +104,15 @@ const module2GamesList: GameItem[] = [
     category: 'juego',
     icon: <ImageIcon className="h-5 w-5 text-blue-400" />,
     component: <ImagePromptWorkshop />,
+  },
+  {
+    id: 'video-prompt-workshop',
+    title: '🚀 PromptMaster Video IA Pro Max',
+    description: 'Generador de prompts ULTRA completos con 12 secciones: personaje, acción, escenario, iluminación, cámara, estilo, clima, audio y más.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Film className="h-5 w-5 text-red-400" />,
+    component: <VideoPromptWorkshop />,
   },
   {
     id: 'prompt-quiz',
@@ -427,6 +437,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [externalLinksOpen, setExternalLinksOpen] = useState(false);
   const [localhostLlmOpen, setLocalhostLlmOpen] = useState(false);
   const [localhostImageAiOpen, setLocalhostImageAiOpen] = useState(false);
+  const [localhostVideoAiOpen, setLocalhostVideoAiOpen] = useState(false);
   const [imageAiOpen, setImageAiOpen] = useState(false);
   const [videoAiOpen, setVideoAiOpen] = useState(false);
   const [musicAiOpen, setMusicAiOpen] = useState(false);
@@ -447,6 +458,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handleLocalhostImageAiToggle = () => {
     setLocalhostImageAiOpen(!localhostImageAiOpen);
+  };
+
+  const handleLocalhostVideoAiToggle = () => {
+    setLocalhostVideoAiOpen(!localhostVideoAiOpen);
   };
 
   const handleImageAiToggle = () => {
@@ -1507,15 +1522,866 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
         {/* Contenido desplegable */}
         {videoAiOpen && (
-          <Card className="border-purple-200 bg-purple-50 mt-4 animate-in slide-in-from-top-2 duration-300">
-            <CardContent className="p-8 text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-12 w-12 mx-auto mb-3 text-purple-400 opacity-50"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m10 9 5 3-5 3z"/><path d="M2 8v8"/></svg>
-              <p className="text-purple-700 font-medium">🚧 Próximamente en los próximos días</p>
-              <p className="text-purple-600 text-sm mt-2">
-                Estamos preparando una selección de las mejores IAs para generación y edición de video.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="mt-4 space-y-6 animate-in slide-in-from-top-2 duration-300">
+            {/* Categoría 1: 100% Creación de Video */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-purple-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-purple-900">🎬 100% Creación de Video (Text/Image to Video)</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {/* Runway */}
+                <a
+                  href="https://runwayml.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-purple-900 group-hover:text-purple-600">1. Runway (Gen-3)</h4>
+                    <ExternalLink className="h-4 w-4 text-purple-400 group-hover:text-purple-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-purple-700 mb-3 line-clamp-4">
+                    La herramienta profesional de referencia para creación cinematográfica. Ofrece control creativo avanzado con herramientas de edición integradas, generación desde texto o imagen, motion brush para controlar movimiento específico, y capacidades de inpainting/outpainting temporal. Usada en producciones de Hollywood.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Profesional</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Cinematográfico</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Edición</Badge>
+                  </div>
+                </a>
+
+                {/* OpenAI Sora */}
+                <a
+                  href="https://openai.com/sora/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-purple-900 group-hover:text-purple-600">2. OpenAI Sora</h4>
+                    <ExternalLink className="h-4 w-4 text-purple-400 group-hover:text-purple-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-purple-700 mb-3 line-clamp-4">
+                    El modelo más avanzado de OpenAI para narrativa visual. Genera clips de hasta 60 segundos con coherencia temporal excepcional, comprensión profunda de física del mundo real, y capacidad de mantener consistencia de personajes y escenarios a lo largo del tiempo. Calidad cinematográfica realista.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Storytelling</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Realista</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">60 segundos</Badge>
+                  </div>
+                </a>
+
+                {/* Kling AI */}
+                <a
+                  href="https://klingai.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-purple-900 group-hover:text-purple-600">3. Kling AI</h4>
+                    <ExternalLink className="h-4 w-4 text-purple-400 group-hover:text-purple-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-purple-700 mb-3 line-clamp-4">
+                    Especializado en humanos fotorrealistas con movimientos fluidos de alta calidad. Destaca por generar expresiones faciales naturales, gestos corporales coherentes, y física de cabello y ropa realista. Ideal para crear contenido con personas que no parezcan generadas por IA.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Fotorrealista</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Humanos</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Movimiento fluido</Badge>
+                  </div>
+                </a>
+
+                {/* Luma Dream Machine */}
+                <a
+                  href="https://lumalabs.ai/dream-machine"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-purple-900 group-hover:text-purple-600">4. Luma Dream Machine</h4>
+                    <ExternalLink className="h-4 w-4 text-purple-400 group-hover:text-purple-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-purple-700 mb-3 line-clamp-4">
+                    Resultados rápidos y cinematográficos, ideal para iteraciones rápidas de producción. Genera videos de alta calidad en minutos, con comprensión de iluminación cinematográfica, composición de planos, y movimiento de cámara profesional. Perfecto para prototipado y previsualización.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Rápido</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Cinematográfico</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Iteración</Badge>
+                  </div>
+                </a>
+
+                {/* Pika */}
+                <a
+                  href="https://pika.art"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-purple-900 group-hover:text-purple-600">5. Pika (Pika 2.0)</h4>
+                    <ExternalLink className="h-4 w-4 text-purple-400 group-hover:text-purple-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-purple-700 mb-3 line-clamp-4">
+                    Contenido creativo optimizado para redes sociales con animaciones divertidas y dinámicas. Ofrece efectos especiales integrados, transiciones creativas, estilo anime/animación, y herramientas para modificar regiones específicas del video. Ideal para TikTok, Instagram Reels y YouTube Shorts.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Redes Sociales</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Animación</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Efectos</Badge>
+                  </div>
+                </a>
+
+                {/* Google Veo 3 */}
+                <a
+                  href="https://deepmind.google/technologies/veo/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-purple-900 group-hover:text-purple-600">6. Google Veo 3</h4>
+                    <ExternalLink className="h-4 w-4 text-purple-400 group-hover:text-purple-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-purple-700 mb-3 line-clamp-4">
+                    Realismo cinematográfico con audio integrado sincronizado. El modelo de Google genera videos en 1080p con comprensión de terminología cinematográfica profesional, iluminación realista, y genera automáticamente bandas sonoras y efectos de sonido que coinciden con la acción visual.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">1080p</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Audio integrado</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Google</Badge>
+                  </div>
+                </a>
+
+                {/* Hailuo AI */}
+                <a
+                  href="https://hailuoai.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-purple-900 group-hover:text-purple-600">7. Hailuo AI (MiniMax)</h4>
+                    <ExternalLink className="h-4 w-4 text-purple-400 group-hover:text-purple-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-purple-700 mb-3 line-clamp-4">
+                    Animaciones estilizadas con movimientos suaves y fluidos. Especializado en crear videos con estética de animación profesional, interpolación de frames de alta calidad, y transiciones naturales entre escenas. Ideal para contenido animado y artístico.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Animación</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Estilizado</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Movimiento suave</Badge>
+                  </div>
+                </a>
+
+                {/* Wan 2.6 */}
+                <a
+                  href="https://wan.video"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-purple-200 hover:border-purple-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-purple-900 group-hover:text-purple-600">8. Wan 2.6</h4>
+                    <ExternalLink className="h-4 w-4 text-purple-400 group-hover:text-purple-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-purple-700 mb-3 line-clamp-4">
+                    Clips largos con construcción de mundo sólida y coherente. Capaz de generar secuencias de hasta 2 minutos manteniendo consistencia en escenarios, personajes y narrativa. Ideal para storytelling extendido y creación de mundos fantásticos detallados.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Clips largos</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Worldbuilding</Badge>
+                    <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Coherente</Badge>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Categoría 2: Videos con Avatares */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-blue-900">👤 Videos con Avatares IA</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {/* HeyGen */}
+                <a
+                  href="https://heygen.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">9. HeyGen</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-4">
+                    Videos personalizados con avatares IA hiperrealistas y traducción multilingüe automática. Crea presentadores virtuales que hablan en 40+ idiomas con sincronización labial perfecta. Incluye clonación de voz y avatares personalizables que se parecen a ti o a tu equipo.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Avatares</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Multilingüe</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Traducción</Badge>
+                  </div>
+                </a>
+
+                {/* Synthesia */}
+                <a
+                  href="https://synthesia.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">10. Synthesia</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-4">
+                    Plataforma líder para videos empresariales y de training con avatares realistas. Más de 140 avatares diversos, 120+ idiomas, plantillas corporativas profesionales. Usada por el 50% de las empresas Fortune 100 para formación interna, onboarding y comunicaciones corporativas.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Empresarial</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Training</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">140+ avatares</Badge>
+                  </div>
+                </a>
+
+                {/* Elai.io */}
+                <a
+                  href="https://elai.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">11. Elai.io</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-4">
+                    Explainer videos educativos con avatares personalizables. Convierte texto, artículos o presentaciones en videos con presentadores IA. Ideal para e-learning, tutoriales, y contenido educativo. Incluye pizarra virtual, integración con PowerPoint y Google Slides.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Educación</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Explainer</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">E-learning</Badge>
+                  </div>
+                </a>
+
+                {/* Rephrase.ai */}
+                <a
+                  href="https://rephrase.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">12. Rephrase.ai</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-4">
+                    Presentadores virtuales hiperrealistas para videos personalizados a escala. Crea miles de variaciones de un video con diferentes presentadores, idiomas y mensajes. Ideal para marketing personalizado, ventas outreach, y comunicaciones masivas personalizadas.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Hiperrealista</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Personalización</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Escala</Badge>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Categoría 3: Article/Text to Video */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-amber-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-amber-900">📝 Article/Text to Video</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {/* Pictory */}
+                <a
+                  href="https://pictory.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-amber-200 hover:border-amber-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-amber-900 group-hover:text-amber-600">13. Pictory</h4>
+                    <ExternalLink className="h-4 w-4 text-amber-400 group-hover:text-amber-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-amber-700 mb-3 line-clamp-4">
+                    Convierte artículos de blog y contenido escrito largo en videos engaging automáticamente. Extrae puntos clave, añade stock footage relevante, música de fondo y voiceover. Ideal para marketers de contenido que quieren repurpostear artículos en videos para redes sociales.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">Blog a Video</Badge>
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">Auto-editado</Badge>
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">Stock footage</Badge>
+                  </div>
+                </a>
+
+                {/* InVideo */}
+                <a
+                  href="https://invideo.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-amber-200 hover:border-amber-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-amber-900 group-hover:text-amber-600">14. InVideo</h4>
+                    <ExternalLink className="h-4 w-4 text-amber-400 group-hover:text-amber-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-amber-700 mb-3 line-clamp-4">
+                    Miles de plantillas IA para marketing y redes sociales. Convierte texto a video con escenas pre-diseñadas, transiciones profesionales, y biblioteca de 8M+ stock media. Incluye editor drag-and-drop, voiceover IA, y optimización automática para cada plataforma social.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">Plantillas</Badge>
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">Marketing</Badge>
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">8M+ stock</Badge>
+                  </div>
+                </a>
+
+                {/* Fliki */}
+                <a
+                  href="https://fliki.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-amber-200 hover:border-amber-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-amber-900 group-hover:text-amber-600">15. Fliki</h4>
+                    <ExternalLink className="h-4 w-4 text-amber-400 group-hover:text-amber-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-amber-700 mb-3 line-clamp-4">
+                    Voiceovers naturales con conversión texto a video en minutos. 2000+ voces IA ultra realistas en 75+ idiomas, sincronización automática con visuals, y biblioteca de 100M+ assets. Ideal para videos de YouTube, cursos online, y contenido narrado profesional.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">Voiceover</Badge>
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">2000+ voces</Badge>
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">75+ idiomas</Badge>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Categoría 4: Edición de Video con IA */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-emerald-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-emerald-900">✂️ Edición de Video con IA</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {/* Veed.io */}
+                <a
+                  href="https://veed.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-emerald-900 group-hover:text-emerald-600">16. Veed.io</h4>
+                    <ExternalLink className="h-4 w-4 text-emerald-400 group-hover:text-emerald-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-emerald-700 mb-3 line-clamp-4">
+                    Editor de video online con features IA automáticas: subtítulos auto-generados (95% precisión), eliminación de ruido de audio, eye contact correction, background removal, y resize automático para cada red social. Todo en el navegador sin instalar software.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Subtítulos auto</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Online</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Eye contact</Badge>
+                  </div>
+                </a>
+
+                {/* Kapwing */}
+                <a
+                  href="https://kapwing.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-emerald-900 group-hover:text-emerald-600">17. Kapwing</h4>
+                    <ExternalLink className="h-4 w-4 text-emerald-400 group-hover:text-emerald-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-emerald-700 mb-3 line-clamp-4">
+                    Edición versátil con IA para memes, shorts y contenido viral. Herramientas de auto-crop, smart cut para eliminar silencios, generación automática de memes con templates trending, y colaboración en tiempo real para equipos. Popular entre creadores de contenido.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Memes</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Shorts</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Colaboración</Badge>
+                  </div>
+                </a>
+
+                {/* Wisecut */}
+                <a
+                  href="https://wisecut.video"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-emerald-900 group-hover:text-emerald-600">18. Wisecut</h4>
+                    <ExternalLink className="h-4 w-4 text-emerald-400 group-hover:text-emerald-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-emerald-700 mb-3 line-clamp-4">
+                    Edición automática con sincronización de audio inteligente. Elimina silencios automáticamente, ajusta música de fondo según el volumen de voz (auto-ducking), añade subtítulos, y optimiza el ritmo del video. Ideal para podcasts, tutoriales y talking head videos.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Auto-cut</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Audio ducking</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Podcasts</Badge>
+                  </div>
+                </a>
+
+                {/* Vidyo.ai */}
+                <a
+                  href="https://vidyo.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-emerald-900 group-hover:text-emerald-600">19. Vidyo.ai</h4>
+                    <ExternalLink className="h-4 w-4 text-emerald-400 group-hover:text-emerald-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-emerald-700 mb-3 line-clamp-4">
+                    Resume videos largos en clips cortos virales automáticamente. Detecta momentos highlights, añade captions dinámicos, emojis, y reformatea para TikTok/Reels/Shorts. Ideal para podcaster y creadores de contenido largo que quieren maximizar reach en redes.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Clips virales</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Auto-highlights</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Captions</Badge>
+                  </div>
+                </a>
+
+                {/* Opus Clip */}
+                <a
+                  href="https://opus.pro"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-emerald-900 group-hover:text-emerald-600">20. Opus Clip</h4>
+                    <ExternalLink className="h-4 w-4 text-emerald-400 group-hover:text-emerald-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-emerald-700 mb-3 line-clamp-4">
+                    Clips cortos de videos largos optimizados para viralidad con AI curation score. Analiza tu contenido largo, identifica los momentos más engaging, y crea múltiples clips con diferentes hooks. Usado por top creators para escalar contenido en redes sociales.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">AI curation</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Viral score</Badge>
+                    <Badge variant="outline" className="text-xs bg-emerald-50 text-emerald-700 border-emerald-200">Multi-clips</Badge>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Consejo Pro */}
+            <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-amber-200 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-amber-700"><path d="M12 2a7 7 0 1 1-7 7c0-2.38 1.19-4.47 3-5.74V2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1.26c1.81 1.27 3 3.36 3 5.74a7 7 0 1 1-7-7z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-amber-900 mb-2">💡 Consejo Pro para tu examen</h4>
+                    <ul className="text-sm text-amber-800 space-y-1">
+                      <li>• Si te preguntan por <strong>"Video cinematográfico profesional"</strong>, menciona <strong>Runway</strong> o <strong>Google Veo</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Avatares para empresa"</strong>, menciona <strong>Synthesia</strong> o <strong>HeyGen</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Clips virales de podcasts"</strong>, menciona <strong>Opus Clip</strong> o <strong>Vidyo.ai</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Humanos más realistas"</strong>, menciona <strong>Kling AI</strong>.</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+      </div>
+
+      {/* Sección IA-Video en LOCALHOST - Desplegable */}
+      <div className="mt-8">
+        <Card className="border-teal-200 bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50 cursor-pointer" onClick={handleLocalhostVideoAiToggle}>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-teal-200 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-teal-700"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-teal-900">🎥 IA-Video en LOCALHOST</h3>
+                  <p className="text-sm text-teal-700">
+                    {localhostVideoAiOpen
+                      ? 'IAs de video para ejecutar en tu ordenador'
+                      : 'Generación de video con IA en local - Haz clic para ver'}
+                  </p>
+                </div>
+              </div>
+              <ChevronDown
+                className={`h-6 w-6 text-teal-700 transition-transform duration-300 ${
+                  localhostVideoAiOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contenido desplegable */}
+        {localhostVideoAiOpen && (
+          <div className="mt-4 space-y-6 animate-in slide-in-from-top-2 duration-300">
+            {/* Categoría 1: Modelos Open Source Principales */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-teal-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><path d="M12 2a7 7 0 1 0 10 10 7 7 0 0 0-10-10z"/><circle cx="12" cy="12" r="3"/><path d="m12 9 3 3-3 3"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-teal-900">🚀 Modelos Open Source Principales</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {/* Wan 2.1 / Wan2GP */}
+                <Card className="border-teal-200 bg-white hover:border-teal-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-teal-900">1. Wan 2.1 / Wan2GP</h4>
+                      <a
+                        href="https://github.com/Wan-Video/Wan2.1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-teal-600 hover:text-teal-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-teal-700 mb-3">
+                      Top open-source text-to-video con arquitectura MoE (Mixture of Experts). Rápido y eficiente, genera clips de hasta 10 segundos en resolución 720p. Disponible vía Pinokio para instalación en 1-clic. Ideal para quienes buscan calidad Sora-like en local.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">MoE Architecture</Badge>
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">720p</Badge>
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">Pinokio</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* LTX-2 / LTX Video */}
+                <Card className="border-teal-200 bg-white hover:border-teal-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-teal-900">2. LTX-2 / LTX Video</h4>
+                      <a
+                        href="https://github.com/Lightricks/LTX-Video"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-teal-600 hover:text-teal-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-teal-700 mb-3">
+                      La mejor calidad local disponible actualmente. En tests independientes supera a Sora en coherencia temporal y física realista. Incluye audio sync automático. Requiere mínimo 12GB VRAM pero los resultados son cinematográficos.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">Calidad Sora+</Badge>
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">Audio sync</Badge>
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">12GB VRAM</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* HunyuanVideo 1.5 */}
+                <Card className="border-teal-200 bg-white hover:border-teal-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-teal-900">3. HunyuanVideo 1.5 (Tencent)</h4>
+                      <a
+                        href="https://github.com/Tencent/HunyuanVideo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-teal-600 hover:text-teal-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-teal-700 mb-3">
+                      Excelente optimización para low VRAM (funciona con 8GB). Nativo en ComfyUI con nodos dedicados. Soporta tanto Image-to-Video como Text-to-Video. Calidad profesional con menor consumo de recursos que la competencia.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">Low VRAM</Badge>
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">ComfyUI</Badge>
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">I2V + T2V</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* CogVideoX */}
+                <Card className="border-teal-200 bg-white hover:border-teal-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-teal-900">4. CogVideoX</h4>
+                      <a
+                        href="https://github.com/THUDM/CogVideo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-teal-600 hover:text-teal-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-teal-700 mb-3">
+                      Text-to-video gratis y open source de Tsinghua University. Incluye Streamlit app para instalación local simple. Genera clips de 6 segundos a 480p. Perfecto para principiantes que quieren experimentar con video IA sin hardware potente.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">Gratis</Badge>
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">Streamlit</Badge>
+                      <Badge variant="outline" className="text-xs bg-teal-50 text-teal-700 border-teal-200">Principiantes</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Categoría 2: Frameworks y Nodos */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-blue-900">🔧 Frameworks y Nodos para Video</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {/* ComfyUI Video Nodes */}
+                <Card className="border-blue-200 bg-white hover:border-blue-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-blue-900">5. ComfyUI Video Nodes</h4>
+                      <a
+                        href="https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-blue-700 mb-3">
+                      Framework modular que soporta múltiples modelos de video (Mochi, TI2V, AnimateDiff). Permite crear workflows personalizados con nodos para load video, extract frames, video combine, y upscale. Esencial para producción profesional de video IA en local.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Modular</Badge>
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Multi-modelo</Badge>
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Workflows</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* AnimateDiff */}
+                <Card className="border-blue-200 bg-white hover:border-blue-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-blue-900">6. AnimateDiff (SD1.5/SDXL)</h4>
+                      <a
+                        href="https://github.com/guoyww/AnimateDiff"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-blue-700 mb-3">
+                      El pionero en animación de imágenes estáticas usando Stable Diffusion. Crea loops animados de 2-4 segundos a partir de una imagen + prompt. Compatible con miles de checkpoints de SD. Ideal para animaciones sutiles de retratos y paisajes.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Image Animation</Badge>
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">SD Compatible</Badge>
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Loops</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Deforum */}
+                <Card className="border-blue-200 bg-white hover:border-blue-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-blue-900">7. Deforum (Automatic1111)</h4>
+                      <a
+                        href="https://github.com/deforum-art/deforum-stable-diffusion"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-blue-700 mb-3">
+                      Extension clásica para Automatic1111 especializada en videos psicodélicos y transformaciones morphing. Control total de camera movement, keyframes, y prompts por frame. Popular para videos musicales y arte abstracto animado.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Morphing</Badge>
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Keyframes</Badge>
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">A1111 Extension</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Stable Video Diffusion */}
+                <Card className="border-blue-200 bg-white hover:border-blue-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-blue-900">8. Stable Video Diffusion (SVD)</h4>
+                      <a
+                        href="https://github.com/Stability-AI/generative-models"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-blue-700 mb-3">
+                      Modelo oficial de Stability AI para image-to-video. Genera 2-4 segundos de video a partir de una imagen. Requiere 16GB VRAM para calidad óptima. Se integra con ComfyUI y Automatic1111. Base para muchos fine-tunes de la comunidad.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Image-to-Video</Badge>
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Stability AI</Badge>
+                      <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">16GB VRAM</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Categoría 3: Herramientas Todo-en-Uno */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-purple-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-purple-900">📦 Herramientas Todo-en-Uno</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {/* Pinokio */}
+                <Card className="border-purple-200 bg-white hover:border-purple-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-purple-900">9. Pinokio (Video Scripts)</h4>
+                      <a
+                        href="https://pinokio.computer/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-600 hover:text-purple-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-purple-700 mb-3">
+                      Navegador/gestor que incluye scripts de instalación 1-clic para Wan2GP, CogVideo, y otros modelos de video. Gestiona dependencias, actualizaciones y ejecución automáticamente. Ideal para quienes no quieren complicaciones con terminal y Python.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">1-Click Install</Badge>
+                      <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Auto-Update</Badge>
+                      <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Gestor</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Fooocus Video (Experimental) */}
+                <Card className="border-purple-200 bg-white hover:border-purple-400 transition-all">
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <h4 className="font-bold text-purple-900">10. Fooocus Video (Experimental)</h4>
+                      <a
+                        href="https://github.com/lllyasviel/Fooocus"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-purple-600 hover:text-purple-700"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <p className="text-xs text-purple-700 mb-3">
+                      Extensión experimental del popular Fooocus para generación de video. Mantiene la interfaz simple y minimalista característica de Fooocus. Actualmente en desarrollo activo, promete democratizar el video IA como hizo con las imágenes.
+                    </p>
+                    <div className="flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Experimental</Badge>
+                      <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">Simple UI</Badge>
+                      <Badge variant="outline" className="text-xs bg-purple-50 text-purple-700 border-purple-200">En desarrollo</Badge>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+
+            {/* Info Card con Requisitos */}
+            <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-amber-200 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-amber-700"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-amber-900 mb-2">💡 Requisitos para Video IA en Local</h4>
+                    <div className="grid md:grid-cols-2 gap-4 text-sm text-amber-800">
+                      <div>
+                        <p className="mb-2"><strong className="text-amber-900">Mínimo recomendado:</strong></p>
+                        <ul className="space-y-1">
+                          <li>• <strong>GPU:</strong> NVIDIA RTX 3060 12GB o superior</li>
+                          <li>• <strong>VRAM:</strong> 12GB mínimo, 16GB+ recomendado</li>
+                          <li>• <strong>RAM:</strong> 32GB system memory</li>
+                          <li>• <strong>Storage:</strong> SSD con 50GB+ libres</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="mb-2"><strong className="text-amber-900">Para modelos avanzados (LTX-2, Wan 2.1):</strong></p>
+                        <ul className="space-y-1">
+                          <li>• <strong>GPU:</strong> RTX 4090 (24GB) o RTX 3090/4090</li>
+                          <li>• <strong>VRAM:</strong> 24GB recomendado</li>
+                          <li>• <strong>RAM:</strong> 64GB system memory</li>
+                          <li>• <strong>Storage:</strong> NVMe SSD 100GB+ libres</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="mt-4 p-3 bg-amber-100/50 border border-amber-200 rounded-lg">
+                      <p className="text-xs text-amber-800">
+                        <strong>💡 Tip:</strong> Si no tienes hardware suficiente, usa <strong>Google Colab Pro</strong> ($10/mes) con GPU A100 de 40GB o <strong>RunPod</strong> / <strong>Vast.ai</strong> para alquilar GPUs potentes por horas (~$0.40-0.70/hora).
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Consejo Pro */}
+            <Card className="border-teal-200 bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-teal-200 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-teal-700"><path d="M12 2a7 7 0 1 1-7 7c0-2.38 1.19-4.47 3-5.74V2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1.26c1.81 1.27 3 3.36 3 5.74a7 7 0 1 1-7-7z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-teal-900 mb-2">🎯 Recomendaciones según tu hardware</h4>
+                    <ul className="text-sm text-teal-800 space-y-1">
+                      <li>• <strong>8GB VRAM:</strong> Empieza con <strong>CogVideoX</strong> o <strong>HunyuanVideo</strong> en baja resolución.</li>
+                      <li>• <strong>12GB VRAM:</strong> <strong>LTX-2</strong> para máxima calidad, <strong>Wan2GP</strong> para velocidad.</li>
+                      <li>• <strong>16-24GB VRAM:</strong> Todos los modelos, incluyendo <strong>SVD</strong> y workflows complejos de <strong>ComfyUI</strong>.</li>
+                      <li>• <strong>&lt;8GB VRAM:</strong> Usa <strong>Colab Pro</strong>, <strong>RunPod</strong>, o <strong>Pinokio</strong> con modelos optimizados.</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         )}
       </div>
 
