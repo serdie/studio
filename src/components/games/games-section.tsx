@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -16,6 +16,7 @@ import CUMPLEPromptWorkshop from './cumple-prompt-workshop';
 import LLMTrainingGame from './llm-training-game';
 import ImagePromptWorkshop from './image-prompt-workshop';
 import VideoPromptWorkshop from './video-prompt-workshop';
+import AudioPromptWorkshop from './audio-prompt-workshop';
 
 interface GameItem {
   id: string;
@@ -113,6 +114,15 @@ const module2GamesList: GameItem[] = [
     category: 'juego',
     icon: <Film className="h-5 w-5 text-red-400" />,
     component: <VideoPromptWorkshop />,
+  },
+  {
+    id: 'audio-prompt-workshop',
+    title: '🎧 PromptMaster Audio IA Pro Max',
+    description: 'Crea prompts para voz, clonación, música, SFX y podcast: tipo de proyecto, voz, música, ambiente, curva emocional y detalles técnicos.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Headphones className="h-5 w-5 text-cyan-400" />,
+    component: <AudioPromptWorkshop />,
   },
   {
     id: 'prompt-quiz',
@@ -438,6 +448,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [localhostLlmOpen, setLocalhostLlmOpen] = useState(false);
   const [localhostImageAiOpen, setLocalhostImageAiOpen] = useState(false);
   const [localhostVideoAiOpen, setLocalhostVideoAiOpen] = useState(false);
+  const [localhostMusicVoiceOpen, setLocalhostMusicVoiceOpen] = useState(false);
   const [imageAiOpen, setImageAiOpen] = useState(false);
   const [videoAiOpen, setVideoAiOpen] = useState(false);
   const [musicAiOpen, setMusicAiOpen] = useState(false);
@@ -462,6 +473,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handleLocalhostVideoAiToggle = () => {
     setLocalhostVideoAiOpen(!localhostVideoAiOpen);
+  };
+
+  const handleLocalhostMusicVoiceToggle = () => {
+    setLocalhostMusicVoiceOpen(!localhostMusicVoiceOpen);
   };
 
   const handleImageAiToggle = () => {
@@ -2385,6 +2400,385 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
         )}
       </div>
 
+      {/* Sección IA de Música y Voz en LOCALHOST */}
+      <div className="mt-8">
+        <Card className="border-violet-200 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50 cursor-pointer" onClick={handleLocalhostMusicVoiceToggle}>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-xl bg-violet-200 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-violet-700"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/><line x1="8" x2="16" y1="22" y2="22"/><circle cx="12" cy="7" r="2"/></svg>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-violet-900">🎤 IA de Música y Voz en LOCALHOST (Open Source)</h3>
+                  <p className="text-sm text-violet-700">
+                    {localhostMusicVoiceOpen
+                      ? '12 IAs open-source para ejecutar en tu ordenador'
+                      : 'Herramientas open-source de música y voz - Haz clic para ver'}
+                  </p>
+                </div>
+              </div>
+              <ChevronDown
+                className={`h-6 w-6 text-violet-700 transition-transform duration-300 ${
+                  localhostMusicVoiceOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contenido desplegable */}
+        {localhostMusicVoiceOpen && (
+          <div className="mt-4 space-y-6 animate-in slide-in-from-top-2 duration-300">
+            {/* Categoría 1: Generación de Música */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-violet-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-violet-900">🎵 Generación de Música</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {/* MusicGen (Meta) */}
+                <a
+                  href="https://github.com/facebookresearch/audiocraft"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-violet-200 hover:border-violet-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-violet-900 group-hover:text-violet-600">1. MusicGen (Meta)</h4>
+                    <ExternalLink className="h-4 w-4 text-violet-400 group-hover:text-violet-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-violet-700 mb-3 line-clamp-3">
+                    Modelo de Meta para generación de música desde texto. Calidad profesional, soporta melodías de referencia y permite generar clips de hasta 30 segundos. Disponible en Hugging Face y ejecutable localmente con GPU.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">Meta AI</Badge>
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">Texto → Música</Badge>
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">30s clips</Badge>
+                  </div>
+                </a>
+
+                {/* Stable Audio */}
+                <a
+                  href="https://github.com/Stability-AI/stable-audio-tools"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-violet-200 hover:border-violet-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-violet-900 group-hover:text-violet-600">2. Stable Audio Open</h4>
+                    <ExternalLink className="h-4 w-4 text-violet-400 group-hover:text-violet-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-violet-700 mb-3 line-clamp-3">
+                    Modelo open-source de Stability AI para generación de audio y música. Permite generar pistas de hasta 47 segundos con control de tempo y estructura. Entrenado con 800k+ samples de alta calidad.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">Stability AI</Badge>
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">47s máximo</Badge>
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">800k+ samples</Badge>
+                  </div>
+                </a>
+
+                {/* AudioLDM */}
+                <a
+                  href="https://github.com/haoheliu/AudioLDM"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-violet-200 hover:border-violet-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-violet-900 group-hover:text-violet-600">3. AudioLDM</h4>
+                    <ExternalLink className="h-4 w-4 text-violet-400 group-hover:text-violet-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-violet-700 mb-3 line-clamp-3">
+                    Modelo de difusión latente para generación de audio desde texto. Soporta efectos de sonido, música y ambientes. Versión 2 mejora la calidad y coherencia temporal significativamente.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">Difusión Latente</Badge>
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">SFX + Música</Badge>
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">V2 disponible</Badge>
+                  </div>
+                </a>
+
+                {/* Riffusion */}
+                <a
+                  href="https://github.com/riffusion/riffusion"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-violet-200 hover:border-violet-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-violet-900 group-hover:text-violet-600">4. Riffusion</h4>
+                    <ExternalLink className="h-4 w-4 text-violet-400 group-hover:text-violet-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-violet-700 mb-3 line-clamp-3">
+                    Genera música visualizando espectrogramas como imágenes. Usa Stable Diffusion fine-tuned para audio. Permite crear loops, variaciones de estilo y mezclas entre géneros musicales.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">Espectrogramas</Badge>
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">Loops</Badge>
+                    <Badge variant="outline" className="text-xs bg-violet-50 text-violet-700 border-violet-200">Style transfer</Badge>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Categoría 2: Clonación y Conversión de Voz */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-pink-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/><line x1="8" x2="16" y1="22" y2="22"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-pink-900">🎙️ Clonación y Conversión de Voz</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {/* RVC */}
+                <a
+                  href="https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-pink-200 hover:border-pink-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-pink-900 group-hover:text-pink-600">5. RVC (Retrieval-based Voice Conversion)</h4>
+                    <ExternalLink className="h-4 w-4 text-pink-400 group-hover:text-pink-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-pink-700 mb-3 line-clamp-3">
+                    El estándar open-source para conversión de voz. Permite clonar voces con solo 10 minutos de audio, soporta cambio de tono en tiempo real y tiene interfaz WebUI fácil de usar. Muy popular para covers de IA.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">10min audio</Badge>
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">Tiempo real</Badge>
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">WebUI</Badge>
+                  </div>
+                </a>
+
+                {/* So-VITS-SVC */}
+                <a
+                  href="https://github.com/svc-develop-team/so-vits-svc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-pink-200 hover:border-pink-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-pink-900 group-hover:text-pink-600">6. So-VITS-SVC</h4>
+                    <ExternalLink className="h-4 w-4 text-pink-400 group-hover:text-pink-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-pink-700 mb-3 line-clamp-3">
+                    Especializado en conversión de voz para canto. Calidad excepcional para covers musicales, mantiene el timbre y expresión emocional. Requiere ~20 minutos de audio limpio para entrenar.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">Canto</Badge>
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">Covers</Badge>
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">20min audio</Badge>
+                  </div>
+                </a>
+
+                {/* OpenVoice */}
+                <a
+                  href="https://github.com/myshell-ai/OpenVoice"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-pink-200 hover:border-pink-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-pink-900 group-hover:text-pink-600">7. OpenVoice (MyShell)</h4>
+                    <ExternalLink className="h-4 w-4 text-pink-400 group-hover:text-pink-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-pink-700 mb-3 line-clamp-3">
+                    Clonación de voz instantánea con control granular sobre estilo, emoción y acento. Soporta múltiples idiomas y requiere solo segundos de audio de referencia. Muy rápido y eficiente.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">Instantáneo</Badge>
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">Multilingüe</Badge>
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">Control estilo</Badge>
+                  </div>
+                </a>
+
+                {/* Bark */}
+                <a
+                  href="https://github.com/suno-ai/bark"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-pink-200 hover:border-pink-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-pink-900 group-hover:text-pink-600">8. Bark (Suno AI)</h4>
+                    <ExternalLink className="h-4 w-4 text-pink-400 group-hover:text-pink-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-pink-700 mb-3 line-clamp-3">
+                    Modelo de audio generativo que crea voz realista con risas, suspiros y emociones. Soporta múltiples idiomas y puede generar música simple. Totalmente open-source y ejecutable localmente.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">Suno AI</Badge>
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">Emociones</Badge>
+                    <Badge variant="outline" className="text-xs bg-pink-50 text-pink-700 border-pink-200">Multilingüe</Badge>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Categoría 3: Text-to-Speech */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-cyan-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/><line x1="8" x2="16" y1="22" y2="22"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-cyan-900">📢 Text-to-Speech (TTS)</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {/* Coqui TTS */}
+                <a
+                  href="https://github.com/coqui-ai/TTS"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">9. Coqui TTS</h4>
+                    <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                    Framework deep learning para TTS con 1100+ voces pre-entrenadas en 100+ idiomas. Soporta clonación de voz, entrenamiento personalizado y múltiples arquitecturas (Tacotron2, Glow-TTS, VITS).
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">1100+ voces</Badge>
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">100+ idiomas</Badge>
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Clonación</Badge>
+                  </div>
+                </a>
+
+                {/* Piper TTS */}
+                <a
+                  href="https://github.com/rhasspy/piper"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">10. Piper TTS</h4>
+                    <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                    TTS neuronal ultrarrápido optimizado para Raspberry Pi y dispositivos de bajos recursos. Calidad natural, soporta 30+ idiomas y puede generar audio en tiempo real con latencia mínima.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Ultrarrápido</Badge>
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Raspberry Pi</Badge>
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">30+ idiomas</Badge>
+                  </div>
+                </a>
+
+                {/* StyleTTS 2 */}
+                <a
+                  href="https://github.com/yl4579/StyleTTS2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">11. StyleTTS 2</h4>
+                    <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                    Estado del arte en TTS con calidad casi humana. Transferencia de estilo de voz, requiere solo 1 segundo de referencia para clonar estilo. Más rápido que tiempo real en GPU moderna.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">SOTA</Badge>
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">1s referencia</Badge>
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Transfer estilo</Badge>
+                  </div>
+                </a>
+
+                {/* MeloTTS */}
+                <a
+                  href="https://github.com/myshell-ai/MeloTTS"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">12. MeloTTS (MyShell)</h4>
+                    <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                    TTS multilingüe de alta calidad soportando inglés, español, francés, chino, japonés y coreano. Fácil instalación, calidad natural y puede ejecutarse en CPU con buen rendimiento.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Multilingüe</Badge>
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">6 idiomas</Badge>
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">CPU friendly</Badge>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Info Card con Requisitos */}
+            <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-amber-200 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-amber-700"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-amber-900 mb-2">💡 Requisitos para ejecutar en local</h4>
+                    <div className="grid md:grid-cols-2 gap-4 text-sm text-amber-800">
+                      <div>
+                        <p className="mb-2"><strong className="text-amber-900">Mínimo recomendado:</strong></p>
+                        <ul className="space-y-1">
+                          <li>• <strong>GPU:</strong> NVIDIA GTX 1060 6GB o superior</li>
+                          <li>• <strong>VRAM:</strong> 6GB mínimo, 8GB+ recomendado</li>
+                          <li>• <strong>RAM:</strong> 16GB system memory</li>
+                          <li>• <strong>Storage:</strong> SSD con 20GB+ libres</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="mb-2"><strong className="text-amber-900">Para modelos grandes (MusicGen, Bark):</strong></p>
+                        <ul className="space-y-1">
+                          <li>• <strong>GPU:</strong> RTX 3060 12GB o RTX 3080/4080</li>
+                          <li>• <strong>VRAM:</strong> 12GB+ recomendado</li>
+                          <li>• <strong>RAM:</strong> 32GB system memory</li>
+                          <li>• <strong>Storage:</strong> NVMe SSD 50GB+ libres</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="mt-4 p-3 bg-amber-100/50 border border-amber-200 rounded-lg">
+                      <p className="text-xs text-amber-800">
+                        <strong>💡 Tip:</strong> Para RVC y So-VITS-SVC, puedes usar Google Colab gratuito con GPU T4. Muchos repos incluyen notebooks listos para Colab.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Consejo Pro */}
+            <Card className="border-violet-200 bg-gradient-to-br from-violet-50 via-purple-50 to-fuchsia-50">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-violet-200 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-violet-700"><path d="M12 2a7 7 0 1 1-7 7c0-2.38 1.19-4.47 3-5.74V2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1.26c1.81 1.27 3 3.36 3 5.74a7 7 0 1 1-7-7z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-violet-900 mb-2">🎯 Recomendaciones según tu objetivo</h4>
+                    <ul className="text-sm text-violet-800 space-y-1">
+                      <li>• <strong>Crear música desde texto:</strong> Empieza con <strong>MusicGen</strong> o <strong>Stable Audio Open</strong>.</li>
+                      <li>• <strong>Clonar tu voz para covers:</strong> Usa <strong>RVC</strong> (fácil) o <strong>So-VITS-SVC</strong> (calidad superior).</li>
+                      <li>• <strong>Text-to-Speech rápido:</strong> <strong>Piper TTS</strong> para Raspberry Pi o <strong>MeloTTS</strong> para multilingüe.</li>
+                      <li>• <strong>TTS calidad humana:</strong> <strong>StyleTTS 2</strong> es el estado del arte actual.</li>
+                      <li>• <strong>Voz con emociones:</strong> <strong>Bark</strong> añade risas, suspiros y pausas naturales.</li>
+                      <li>• <strong>Clonación instantánea:</strong> <strong>OpenVoice</strong> con segundos de audio de referencia.</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+      </div>
+
       {/* Sección IA de Música - Desplegable */}
       <div className="mt-6">
         <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-sky-50 to-blue-50 cursor-pointer" onClick={handleMusicAiToggle}>
@@ -2397,16 +2791,16 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                 <div>
                   <h3 className="text-lg font-bold text-cyan-900">🎵 Enlaces Externos a IAs de Música</h3>
                   <p className="text-sm text-cyan-700">
-                    {musicAiOpen 
-                      ? 'Próximamente en los próximos días'
+                    {musicAiOpen
+                      ? '6 IAs para crear música desde cero'
                       : 'Generación de música y audio con IA - Haz clic para ver'}
                   </p>
                 </div>
               </div>
-              <ChevronDown 
+              <ChevronDown
                 className={`h-6 w-6 text-cyan-700 transition-transform duration-300 ${
                   musicAiOpen ? 'rotate-180' : ''
-                }`} 
+                }`}
               />
             </div>
           </CardContent>
@@ -2414,15 +2808,185 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
         {/* Contenido desplegable */}
         {musicAiOpen && (
-          <Card className="border-cyan-200 bg-cyan-50 mt-4 animate-in slide-in-from-top-2 duration-300">
-            <CardContent className="p-8 text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-12 w-12 mx-auto mb-3 text-cyan-400 opacity-50"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-              <p className="text-cyan-700 font-medium">🚧 Próximamente en los próximos días</p>
-              <p className="text-cyan-600 text-sm mt-2">
-                Estamos preparando una selección de las mejores IAs para generación de música y audio.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="mt-4 space-y-4 animate-in slide-in-from-top-2 duration-300">
+            <div className="grid gap-4 md:grid-cols-2">
+              {/* Suno */}
+              <a
+                href="https://suno.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">1. Suno</h4>
+                  <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                </div>
+                <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                  Genera canciones completas con voz y letra a partir de un prompt. Ideal para contenido corto y temas creativos para redes.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Texto → Canción</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Con voz</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Redes</Badge>
+                </div>
+                <div className="p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
+                  <p className="text-xs text-cyan-800">
+                    <strong>🎯 Tu ejercicio:</strong> Crea una canción de 30 segundos sobre "un programador que sueña con código". Usa el prompt: "upbeat electronic pop song about a programmer dreaming of code, catchy chorus, male vocals". ¡Luego ponla como tono de llamada!
+                  </p>
+                </div>
+              </a>
+
+              {/* Mubert */}
+              <a
+                href="https://mubert.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">2. Mubert</h4>
+                  <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                </div>
+                <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                  Generador de música royalty-free optimizado para creadores: decenas de estilos y licencias claras para uso comercial.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Royalty-free</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Comercial</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Streams</Badge>
+                </div>
+                <div className="p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
+                  <p className="text-xs text-cyan-800">
+                    <strong>🎯 Tu ejercicio:</strong> Genera 3 pistas de "focus music" de 2 minutos cada una. Úsalas de fondo mientras estudias esta semana. Compara: ¿cuál te ayuda más a concentrarte?
+                  </p>
+                </div>
+              </a>
+
+              {/* AIVA */}
+              <a
+                href="https://www.aiva.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">3. AIVA</h4>
+                  <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                </div>
+                <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                  Compositor IA para música cinematográfica y clásica con estructura completa, exporta MIDI+WAV y cede derechos en plan Pro.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Orquestal</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Cinemática</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">MIDI</Badge>
+                </div>
+                <div className="p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
+                  <p className="text-xs text-cyan-800">
+                    <strong>🎯 Tu ejercicio:</strong> Crea una banda sonora de 1 minuto para "una escena de persecución en coche". Exporta el MIDI y ábrelo en un editor para ver cómo la IA estructura la tensión musical.
+                  </p>
+                </div>
+              </a>
+
+              {/* Soundraw */}
+              <a
+                href="https://soundraw.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">4. Soundraw</h4>
+                  <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                </div>
+                <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                  Crea pistas por género/estado de ánimo y permite editar secciones (intro, drop, final) desde el navegador.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Editable</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Por secciones</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Browser</Badge>
+                </div>
+                <div className="p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
+                  <p className="text-xs text-cyan-800">
+                    <strong>🎯 Tu ejercicio:</strong> Crea una pista "energetic workout" y edita 3 versiones: una solo con intro, otra solo con drop, otra completa. ¿Cuál funciona mejor para entrenar?
+                  </p>
+                </div>
+              </a>
+
+              {/* ElevenLabs Music */}
+              <a
+                href="https://elevenlabs.io/music"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">5. ElevenLabs Music</h4>
+                  <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                </div>
+                <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                  Módulo específico de música con calidad 48 kHz, voz cantada muy realista y acuerdos de licencia reforzados.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">48 kHz</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Voz cantada</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Premium</Badge>
+                </div>
+                <div className="p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
+                  <p className="text-xs text-cyan-800">
+                    <strong>🎯 Tu ejercicio:</strong> Genera una canción con voz cantada sobre "amor en la era de la IA". Compara la calidad de la voz con Suno. ¿Cuál suena más humana?
+                  </p>
+                </div>
+              </a>
+
+              {/* LALAL.AI */}
+              <a
+                href="https://www.lalal.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-5 rounded-xl bg-white border-2 border-cyan-200 hover:border-cyan-400 hover:shadow-lg transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h4 className="font-bold text-cyan-900 group-hover:text-cyan-600">6. LALAL.AI</h4>
+                  <ExternalLink className="h-4 w-4 text-cyan-400 group-hover:text-cyan-600 flex-shrink-0" />
+                </div>
+                <p className="text-xs text-cyan-700 mb-3 line-clamp-3">
+                  Separa canciones en stems (voz, batería, bajo, etc.) con buena precisión. Útil para remixes y karaokes.
+                </p>
+                <div className="flex flex-wrap gap-1 mb-3">
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Stems</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Separación</Badge>
+                  <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Karaoke</Badge>
+                </div>
+                <div className="p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
+                  <p className="text-xs text-cyan-800">
+                    <strong>🎯 Tu ejercicio:</strong> Sube tu canción favorita y separa la voz del instrumental. ¡Ahora tienes un karaoke! Intenta crear un mashup con dos canciones.
+                  </p>
+                </div>
+              </a>
+            </div>
+
+            {/* Consejo Pro Música */}
+            <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-amber-200 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-amber-700"><path d="M12 2a7 7 0 1 1-7 7c0-2.38 1.19-4.47 3-5.74V2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1.26c1.81 1.27 3 3.36 3 5.74a7 7 0 1 1-7-7z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-amber-900 mb-2">💡 Consejo Pro para tu examen</h4>
+                    <ul className="text-sm text-amber-800 space-y-1">
+                      <li>• Si te preguntan por <strong>"Canción completa con voz"</strong>, menciona <strong>Suno</strong> o <strong>ElevenLabs Music</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Música de fondo sin copyright"</strong>, menciona <strong>Mubert</strong> o <strong>Soundraw</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Música orquestal/cinematográfica"</strong>, menciona <strong>AIVA</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Separar voz de instrumental"</strong>, menciona <strong>LALAL.AI</strong>.</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         )}
       </div>
 
@@ -2436,34 +3000,433 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-green-700"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/><line x1="8" x2="16" y1="22" y2="22"/></svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-green-900">🎙️ Enlaces Externos a IAs de Voz</h3>
+                  <h3 className="text-lg font-bold text-green-900">🎙️ Enlaces Externos a IAs de Voz (¡EMPIEZA POR AQUÍ!)</h3>
                   <p className="text-sm text-green-700">
-                    {voiceAiOpen 
-                      ? 'Próximamente en los próximos días'
+                    {voiceAiOpen
+                      ? '14 IAs ordenadas de menos a más PRO'
                       : 'Síntesis y clonación de voz con IA - Haz clic para ver'}
                   </p>
                 </div>
               </div>
-              <ChevronDown 
+              <ChevronDown
                 className={`h-6 w-6 text-green-700 transition-transform duration-300 ${
                   voiceAiOpen ? 'rotate-180' : ''
-                }`} 
+                }`}
               />
             </div>
           </CardContent>
         </Card>
 
-        {/* Contenido desplegable */}
+        {/* Contenido desplegable - CLONACIÓN primero (más impactante) luego TTS */}
         {voiceAiOpen && (
-          <Card className="border-green-200 bg-green-50 mt-4 animate-in slide-in-from-top-2 duration-300">
-            <CardContent className="p-8 text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-12 w-12 mx-auto mb-3 text-green-400 opacity-50"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/><line x1="8" x2="16" y1="22" y2="22"/></svg>
-              <p className="text-green-700 font-medium">🚧 Próximamente en los próximos días</p>
-              <p className="text-green-600 text-sm mt-2">
-                Estamos preparando una selección de las mejores IAs para síntesis y clonación de voz.
-              </p>
-            </CardContent>
-          </Card>
+          <div className="mt-4 space-y-6 animate-in slide-in-from-top-2 duration-300">
+            {/* Categoría 1: Clonación Avanzada (MÁS impactante - va primero) */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-purple-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/><line x1="8" x2="16" y1="22" y2="22"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-purple-900">🎭 Clonación Avanzada (¡Nivel Hollywood!)</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {/* TTSMaker - MENOS impactante, para empezar */}
+                <a
+                  href="https://ttsmaker.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-green-200 hover:border-green-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-green-900 group-hover:text-green-600">1. TTSMaker</h4>
+                    <ExternalLink className="h-4 w-4 text-green-400 group-hover:text-green-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-green-700 mb-3 line-clamp-3">
+                    Generación de voz gratuita con algunas voces ilimitadas, 600+ voces y 100+ idiomas.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Gratis</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">600+ voces</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Ilimitado</Badge>
+                  </div>
+                  <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-xs text-green-800">
+                      <strong>🎯 Tu ejercicio:</strong> Genera 10 minutos de audio con voces ilimitadas. Úsalo como fondo para un video de YouTube. ¡Es gratis para uso comercial!
+                    </p>
+                  </div>
+                </a>
+
+                {/* LOVO */}
+                <a
+                  href="https://lovo.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-green-200 hover:border-green-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-green-900 group-hover:text-green-600">2. LOVO</h4>
+                    <ExternalLink className="h-4 w-4 text-green-400 group-hover:text-green-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-green-700 mb-3 line-clamp-3">
+                    500+ voces en 100+ idiomas, interfaz moderna para creación de anuncios y contenido marketing.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">500+ voces</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Marketing</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Anuncios</Badge>
+                  </div>
+                  <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-xs text-green-800">
+                      <strong>🎯 Tu ejercicio:</strong> Crea un anuncio de 30 segundos para un producto ficticio. Usa una voz "energética" y añade música de fondo.
+                    </p>
+                  </div>
+                </a>
+
+                {/* Fliki */}
+                <a
+                  href="https://fliki.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-green-200 hover:border-green-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-green-900 group-hover:text-green-600">3. Fliki</h4>
+                    <ExternalLink className="h-4 w-4 text-green-400 group-hover:text-green-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-green-700 mb-3 line-clamp-3">
+                    Más de 2000 voces en 75+ idiomas, con voces "premium" muy naturales y clonación sencilla.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">2000+ voces</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">75+ idiomas</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Premium</Badge>
+                  </div>
+                  <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-xs text-green-800">
+                      <strong>🎯 Tu ejercicio:</strong> Genera el mismo texto en 3 idiomas diferentes (español, inglés, japonés). Compara la naturalidad de cada voz.
+                    </p>
+                  </div>
+                </a>
+
+                {/* Murf.ai */}
+                <a
+                  href="https://murf.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-green-200 hover:border-green-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-green-900 group-hover:text-green-600">4. Murf.ai</h4>
+                    <ExternalLink className="h-4 w-4 text-green-400 group-hover:text-green-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-green-700 mb-3 line-clamp-3">
+                    Enfocado a equipos: 120+ voces en 20+ idiomas, workspace colaborativo e integraciones con presentaciones.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Equipos</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">120+ voces</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Colaborativo</Badge>
+                  </div>
+                  <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-xs text-green-800">
+                      <strong>🎯 Tu ejercicio:</strong> Crea una narración para una presentación de 5 diapositivas. Usa una voz diferente para cada slide. ¿Cuál funciona mejor?
+                    </p>
+                  </div>
+                </a>
+
+                {/* PlayHT */}
+                <a
+                  href="https://play.ht"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-green-200 hover:border-green-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-green-900 group-hover:text-green-600">5. PlayHT</h4>
+                    <ExternalLink className="h-4 w-4 text-green-400 group-hover:text-green-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-green-700 mb-3 line-clamp-3">
+                    900+ voces en 142 idiomas; destaca por cobertura global y muchas variantes de inglés.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">900+ voces</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">142 idiomas</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Global</Badge>
+                  </div>
+                  <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-xs text-green-800">
+                      <strong>🎯 Tu ejercicio:</strong> Prueba 5 variantes de inglés (americano, británico, australiano, indio, sudafricano). ¿Cuál suena más natural?
+                    </p>
+                  </div>
+                </a>
+
+                {/* Speechify */}
+                <a
+                  href="https://speechify.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-green-200 hover:border-green-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-green-900 group-hover:text-green-600">6. Speechify</h4>
+                    <ExternalLink className="h-4 w-4 text-green-400 group-hover:text-green-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-green-700 mb-3 line-clamp-3">
+                    Cadencia "humana" para leer documentos, blogs o libros; incluye estudio para crear locuciones.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Lectura</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Estudio</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Documentos</Badge>
+                  </div>
+                  <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-xs text-green-800">
+                      <strong>🎯 Tu ejercicio:</strong> Sube un PDF de 10 páginas y escúchalo mientras haces otra cosa. ¿Te ayuda a retener mejor la información?
+                    </p>
+                  </div>
+                </a>
+
+                {/* ElevenLabs - EL MÁS PRO, al final */}
+                <a
+                  href="https://elevenlabs.io"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-green-200 hover:border-green-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-green-900 group-hover:text-green-600">7. ElevenLabs</h4>
+                    <ExternalLink className="h-4 w-4 text-green-400 group-hover:text-green-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-green-700 mb-3 line-clamp-3">
+                    Plataforma "todo en uno" para voz: TTS de alta calidad, clonación, diseño de voz y generación de música.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Todo-en-uno</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Clonación</Badge>
+                    <Badge variant="outline" className="text-xs bg-green-50 text-green-700 border-green-200">Música</Badge>
+                  </div>
+                  <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-xs text-green-800">
+                      <strong>🎯 Tu ejercicio:</strong> Clona tu voz con 1 minuto de audio. Luego genera un mensaje de "bienvenida al curso". ¡Envíaselo a un compañero y que adivine si eres tú!
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Categoría 2: TTS General (menos impactante) */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-white"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </div>
+                <h4 className="text-lg font-bold text-blue-900">🔁 Clonación de Voz</h4>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {/* Hume */}
+                <a
+                  href="https://hume.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">8. Hume</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-3">
+                    Diseña una voz desde texto (acento, timbre, carácter) con señales emocionales en tiempo real.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Diseño</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Emocional</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Real-time</Badge>
+                  </div>
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs text-blue-800">
+                      <strong>🎯 Tu ejercicio:</strong> Diseña 3 voces: una "triste", una "alegre" y una "enojada". Di la misma frase con cada una. ¿Cómo cambia el significado?
+                    </p>
+                  </div>
+                </a>
+
+                {/* Fish Audio */}
+                <a
+                  href="https://fish.audio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">9. Fish Audio</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-3">
+                    Clonación con control de emociones mediante tags ("(excited)", "(whisper)") con solo ~10s de audio.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Emociones</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Tags</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">10s audio</Badge>
+                  </div>
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs text-blue-800">
+                      <strong>🎯 Tu ejercicio:</strong> Graba 10 segundos de tu voz. Clona y genera la misma frase con tags: "(excited)", "(sad)", "(whisper)". ¡Es como actuar!
+                    </p>
+                  </div>
+                </a>
+
+                {/* Resemble AI */}
+                <a
+                  href="https://www.resemble.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">10. Resemble AI</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-3">
+                    Orientada a desarrolladores: clonación rápida, control vía SSML y funciones de watermarking.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">API</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">SSML</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Watermark</Badge>
+                  </div>
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs text-blue-800">
+                      <strong>🎯 Tu ejercicio:</strong> Clona tu voz y genera un mensaje. Usa SSML para añadir pausas y énfasis. Compara con la versión sin SSML.
+                    </p>
+                  </div>
+                </a>
+
+                {/* Descript Overdub */}
+                <a
+                  href="https://www.descript.com/overdub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">11. Descript Overdub</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-3">
+                    Clona tu voz para corregir o añadir frases directamente en el editor, editando audio como texto.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Podcast</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Editor</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Como texto</Badge>
+                  </div>
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs text-blue-800">
+                      <strong>🎯 Tu ejercicio:</strong> Graba un podcast de 2 min. Cambia 3 palabras usando Overdub. ¿Notas la diferencia? ¡Es magia!
+                    </p>
+                  </div>
+                </a>
+
+                {/* Respeecher */}
+                <a
+                  href="https://www.respeecher.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">12. Respeecher</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-3">
+                    Conocida por proyectos de cine/TV (Star Wars), ofrece modelos de voz con variaciones expresivas.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Cine/TV</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Star Wars</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Expressivo</Badge>
+                  </div>
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs text-blue-800">
+                      <strong>🎯 Tu ejercicio:</strong> Imagina que eres Darth Vader. Graba una línea y usa Respeecher para convertirla en voz de personaje. ¡Que la fuerza te acompañe!
+                    </p>
+                  </div>
+                </a>
+
+                {/* Altered */}
+                <a
+                  href="https://www.altered.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">13. Altered</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-3">
+                    Toolkit completo: morphing en tiempo real, audio-a-audio, clonación local y editor tipo DAW.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Tiempo real</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Morphing</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">DAW</Badge>
+                  </div>
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs text-blue-800">
+                      <strong>🎯 Tu ejercicio:</strong> Habla por micrófono y aplica morphing en tiempo real. Convierte tu voz en la de un niño, anciano, robot... ¡Diviértete!
+                    </p>
+                  </div>
+                </a>
+
+                {/* Kukarella */}
+                <a
+                  href="https://kukarella.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 rounded-xl bg-white border-2 border-blue-200 hover:border-blue-400 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <h4 className="font-bold text-blue-900 group-hover:text-blue-600">14. Kukarella</h4>
+                    <ExternalLink className="h-4 w-4 text-blue-400 group-hover:text-blue-600 flex-shrink-0" />
+                  </div>
+                  <p className="text-xs text-blue-700 mb-3 line-clamp-3">
+                    Plataforma integrada con TTS, clonación, transcripción y escritura asistida en un solo flujo.
+                  </p>
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Todo-en-uno</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Transcripción</Badge>
+                    <Badge variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-200">Creadores</Badge>
+                  </div>
+                  <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs text-blue-800">
+                      <strong>🎯 Tu ejercicio:</strong> Transcribe un video de YouTube, tradúcelo a otro idioma y genera el audio con TTS. ¡Tienes un doblaje completo!
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Consejo Pro Voz */}
+            <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-amber-200 flex items-center justify-center flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-amber-700"><path d="M12 2a7 7 0 1 1-7 7c0-2.38 1.19-4.47 3-5.74V2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v1.26c1.81 1.27 3 3.36 3 5.74a7 7 0 1 1-7-7z"/><line x1="12" x2="12" y1="9" y2="13"/><line x1="12" x2="12.01" y1="17" y2="17"/></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-amber-900 mb-2">💡 Consejo Pro para tu examen</h4>
+                    <ul className="text-sm text-amber-800 space-y-1">
+                      <li>• Si te preguntan por <strong>"Plataforma todo-en-uno"</strong>, menciona <strong>ElevenLabs</strong> o <strong>Kukarella</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Clonación con emociones"</strong>, menciona <strong>Fish Audio</strong> o <strong>Hume</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Editar audio como texto"</strong>, menciona <strong>Descript Overdub</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Morphing en tiempo real"</strong>, menciona <strong>Altered</strong>.</li>
+                      <li>• Si te preguntan por <strong>"Gratis/ilimitado"</strong>, menciona <strong>TTSMaker</strong>.</li>
+                    </ul>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         )}
       </div>
 
