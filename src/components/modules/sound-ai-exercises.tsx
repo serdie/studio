@@ -85,7 +85,7 @@ export default function SoundAIExercises() {
       description: "Da vida a un cuento infantil usando diferentes voces y emociones. Ideal para profesores o creadores de contenido.",
       difficulty: 'principiante',
       duration: '20 min',
-      aiTools: ['ElevenLabs (free tier)', 'PlayHT'],
+      aiTools: ['PlayHT', 'Bark'],
       icon: '📚',
       color: 'from-blue-500 to-cyan-600',
       steps: [
@@ -96,13 +96,13 @@ export default function SoundAIExercises() {
         },
         {
           step: 2,
-          title: "Regístrate en ElevenLabs",
-          description: "Ve a https://elevenlabs.io y crea una cuenta gratuita. Tienes 10,000 caracteres al mes gratis."
+          title: "Regístrate en PlayHT",
+          description: "Ve a https://play.ht y crea una cuenta gratuita. Tienes caracteres limitados al mes pero suficientes para practicar."
         },
         {
           step: 3,
           title: "Asigna voces a personajes",
-          description: "Para el narrador usa una voz adulta calmada. Para el cerdito usa una voz más aguda. Para el lobo, una voz grave."
+          description: "Para el narrador usa una voz adulta calmada. Para el cerdito usa una voz más aguda. Para el lobo, una voz grave. PlayHT tiene 900+ voces."
         },
         {
           step: 4,
@@ -111,8 +111,8 @@ export default function SoundAIExercises() {
         },
         {
           step: 5,
-          title: "Ajusta la 'Stability'",
-          description: "En ElevenLabs, baja la estabilidad (30-40%) para más expresión emocional, súbela (70%+) para más consistencia."
+          title: "Ajusta emoción y velocidad",
+          description: "En PlayHT puedes ajustar la emoción (feliz, triste, enérgico) y la velocidad. Experimenta para cada personaje."
         },
         {
           step: 6,
@@ -133,41 +133,41 @@ export default function SoundAIExercises() {
       description: "Genera tu primera pista musical desde cero usando solo texto. Sin saber música, ¡es magia pura!",
       difficulty: 'principiante',
       duration: '25 min',
-      aiTools: ['Suno AI', 'Mubert'],
+      aiTools: ['Mubert', 'Stable Audio Open'],
       icon: '🎵',
       color: 'from-purple-500 to-pink-600',
       steps: [
         {
           step: 1,
-          title: "Entra en Suno AI",
-          description: "Ve a https://suno.ai y regístrate (puedes usar tu cuenta de Google). Tienes créditos gratis diarios."
+          title: "Entra en Mubert",
+          description: "Ve a https://mubert.com - tiene plan gratuito con límites pero suficiente para practicar."
         },
         {
           step: 2,
-          title: "Elige 'Create' → 'Custom Mode'",
-          description: "El modo Custom te da más control sobre el resultado final."
+          title: "Elige 'Text-to-Music'",
+          description: "Esta función te permite generar música escribiendo una descripción en texto."
         },
         {
           step: 3,
-          title: "Escribe el prompt de estilo",
-          description: "En 'Style of Music' pon algo como: 'lofi chill beats, piano suave, tempo relajado, sin letra, para estudiar'",
-          tip: "💡 Sé específico: género + instrumentos + ambiente + tempo"
+          title: "Escribe el prompt",
+          description: "Describe la música: 'lofi chill beats, piano suave, tempo relajado, sin letra, para estudiar, 2 minutos'",
+          tip: "💡 Sé específico: género + instrumentos + ambiente + tempo + duración"
         },
         {
           step: 4,
-          title: "Añade título y tags",
-          description: "Pon un título creativo como 'Noches de Estudio' y tags como: lofi, chill, study, instrumental"
+          title: "Elige duración y género",
+          description: "Selecciona la duración (ej: 2 min) y el género más cercano a tu descripción."
         },
         {
           step: 5,
           title: "Genera y elige",
-          description: "Suno creará 2 versiones. Escúchalas ambas y guarda la que más te guste."
+          description: "Mubert creará varias opciones. Escúchalas y guarda la que más te guste."
         },
         {
           step: 6,
           title: "Descarga y usa",
-          description: "Descarga en MP3. Puedes usarla en tus videos, streams o presentaciones.",
-          warning: "⚠️ Con la cuenta gratis, Suno es dueño de la música. Para uso comercial necesitas plan pago."
+          description: "Descarga en MP3. Con el plan gratis puedes usarla en proyectos personales no comerciales.",
+          warning: "⚠️ Para uso comercial (YouTube monetizado, etc.) necesitas plan pago."
         },
         {
           step: 7,
@@ -230,7 +230,7 @@ export default function SoundAIExercises() {
       description: "Crea un clon digital de tu propia voz. Úsalo para narraciones cuando no puedas grabar en persona.",
       difficulty: 'intermedio',
       duration: '40 min',
-      aiTools: ['ElevenLabs', 'PlayHT'],
+      aiTools: ['PlayHT', 'OpenVoice'],
       icon: '🎭',
       color: 'from-indigo-500 to-purple-600',
       steps: [
@@ -247,13 +247,13 @@ export default function SoundAIExercises() {
         },
         {
           step: 3,
-          title: "Ve a ElevenLabs Voice Lab",
-          description: "En https://elevenlabs.io ve a 'VoiceLab' → 'Add Generative or Cloned Voice' → 'Instant Voice Cloning'"
+          title: "Ve a PlayHT Voice Cloning",
+          description: "En https://play.ht ve a 'Voice Cloning' → 'Clone a Voice'. Necesitas cuenta (tiene plan gratuito)."
         },
         {
           step: 4,
           title: "Sube tu muestra de voz",
-          description: "Sube tu archivo de audio. ElevenLabs analizará tu timbre, tono y patrones de habla."
+          description: "Sube tu archivo de audio. PlayHT analizará tu timbre, tono y patrones de habla. Mínimo 30 segundos, ideal 5+ minutos."
         },
         {
           step: 5,
@@ -263,7 +263,7 @@ export default function SoundAIExercises() {
         {
           step: 6,
           title: "Confirma que es tu voz",
-          description: "ElevenLabs te pedirá confirmar que es TU voz. Marca la casilla y acepta los términos."
+          description: "PlayHT te pedirá confirmar que es TU voz. Marca la casilla y acepta los términos."
         },
         {
           step: 7,
@@ -334,60 +334,54 @@ export default function SoundAIExercises() {
     },
     {
       id: 7,
-      title: "🤖 Creando un Agente de Voz con ElevenLabs",
-      description: "Configura un asistente de voz que responde automáticamente. Perfecto para atención al cliente o proyectos interactivos.",
+      title: "🤖 Chatbot de Voz con Bark + Custom GPT",
+      description: "Combina un GPT personalizado con generación de voz para crear un asistente que habla. Alternativa creativa sin ElevenLabs.",
       difficulty: 'avanzado',
-      duration: '45 min',
-      aiTools: ['ElevenLabs Conversational AI', 'Voice Agent'],
+      duration: '50 min',
+      aiTools: ['ChatGPT Custom GPT', 'Bark (Hugging Face)'],
       icon: '🤖',
       color: 'from-cyan-500 to-blue-600',
       steps: [
         {
           step: 1,
-          title: "Accede a ElevenLabs Agents",
-          description: "Ve a https://elevenlabs.io/app/agents - necesitas cuenta (tiene tier gratuito limitado)."
+          title: "Crea un Custom GPT",
+          description: "Ve a https://chatgpt.com/gpts → 'Create a GPT'. Configúralo como 'Profesor de IA' con instrucciones claras."
         },
         {
           step: 2,
-          title: "Crea un nuevo agente",
-          description: "Haz clic en 'Create Agent'. Ponle nombre (ej: 'Asistente de Clase') y descripción."
+          title: "Define el comportamiento",
+          description: "En 'Instructions' escribe: 'Eres un profesor amable que explica IA de forma sencilla. Responde en español, sé paciente y usa ejemplos prácticos.'"
         },
         {
           step: 3,
-          title: "Configura la voz",
-          description: "Elige una voz predefinida o usa tu voz clonada. Ajusta estabilidad y claridad según necesites."
+          title: "Añade conocimiento (opcional)",
+          description: "Sube documentos PDF o texto con el temario de clase para que el GPT pueda responder basado en tu contenido."
         },
         {
           step: 4,
-          title: "Define el 'System Prompt'",
-          description: "Escribe las instrucciones de comportamiento. Ejemplo: 'Eres un asistente amable que ayuda a estudiantes con dudas sobre IA. Responde de forma clara y concisa.'",
-          tip: "💡 Sé específico: incluye qué DEBE hacer y qué NO debe hacer el agente."
+          title: "Prueba el chat",
+          description: "Haz preguntas variadas para ver cómo responde. Ajusta las instrucciones si da respuestas muy largas o cortas."
         },
         {
           step: 5,
-          title: "Añade conocimiento (opcional)",
-          description: "Sube documentos PDF o texto con información que el agente debe conocer (temario, FAQs, etc.)"
+          title: "Copia las respuestas",
+          description: "Cuando el GPT responda algo útil, copia el texto. Lo convertirás a voz en el siguiente paso."
         },
         {
           step: 6,
-          title: "Configura la temperatura",
-          description: "Baja (0.3-0.5) = respuestas más predecibles. Alta (0.7-0.9) = más creativo pero menos consistente."
+          title: "Convierte a voz con Bark",
+          description: "Ve a https://huggingface.co/spaces/suno/bark - es un espacio gratuito de Hugging Face. Pega el texto y genera audio."
         },
         {
           step: 7,
-          title: "Prueba en el chat",
-          description: "Usa el panel de prueba para hablar con tu agente. Haz preguntas variadas para ver cómo responde."
+          title: "Descarga y organiza",
+          description: "Descarga los audios generados. Organízalos por tema para tener una biblioteca de respuestas en voz."
         },
         {
           step: 8,
-          title: "Ajusta y refina",
-          description: "Si el agente da respuestas raras, ajusta el system prompt o añade más ejemplos de lo que debe/debe no hacer."
-        },
-        {
-          step: 9,
           title: "¡Tu reto!",
-          description: "Crea un agente que sea un 'profesor de IA' que responda preguntas básicas. Pruébalo con 10 preguntas diferentes.",
-          warning: "⚠️ Los agentes pueden 'alucinar' (inventar información). Siempre supervisa las respuestas en casos importantes."
+          description: "Crea un GPT que sea 'Tutor de Matemáticas' y genera 5 respuestas en audio para preguntas frecuentes. ¡Tienes un mini-asistente!",
+          tip: "💡 Bark añade automáticamente pausas, risas y emociones. Experimenta con diferentes configuraciones para variedad."
         }
       ]
     },
@@ -397,7 +391,7 @@ export default function SoundAIExercises() {
       description: "Produce un episodio de podcast de 5 minutos usando solo IA: guion, voces, música y efectos.",
       difficulty: 'avanzado',
       duration: '90 min',
-      aiTools: ['ChatGPT', 'ElevenLabs', 'Suno', 'Audacity'],
+      aiTools: ['ChatGPT', 'PlayHT', 'Mubert', 'Audacity'],
       icon: '🎧',
       color: 'from-amber-500 to-orange-600',
       steps: [
@@ -413,18 +407,18 @@ export default function SoundAIExercises() {
         },
         {
           step: 3,
-          title: "Genera las voces en ElevenLabs",
+          title: "Genera las voces en PlayHT",
           description: "Usa voces diferentes para cada presentador. Genera por párrafos para mejor control. Descarga cada segmento."
         },
         {
           step: 4,
-          title: "Crea música de intro/outro con Suno",
+          title: "Crea música de intro/outro con Mubert",
           description: "Prompt: 'upbeat podcast intro music, 15 seconds, energetic, modern, no vocals'. Crea también un outro de 10 segundos."
         },
         {
           step: 5,
           title: "Añade música de fondo",
-          description: "Genera en Suno: 'soft background music for podcast, lofi, very quiet, no vocals, 5 minutes'. Baja el volumen al 10-15%."
+          description: "Genera en Mubert: 'soft background music for podcast, lofi, very quiet, no vocals, 5 minutes'. Baja el volumen al 10-15%."
         },
         {
           step: 6,
@@ -456,60 +450,60 @@ export default function SoundAIExercises() {
     },
     {
       id: 9,
-      title: "🎼 Canción Completa con Letra (Suno v3)",
-      description: "Crea una canción original de principio a fin: letra, melodía, voz y producción. ¡Como un productor real!",
+      title: "🎼 Canción Completa con Stable Audio",
+      description: "Crea una pista musical original con estructura profesional usando IA. ¡Como un productor real!",
       difficulty: 'avanzado',
       duration: '60 min',
-      aiTools: ['Suno AI v3', 'ChatGPT'],
+      aiTools: ['Stable Audio Open', 'ChatGPT', 'Audacity'],
       icon: '🎼',
       color: 'from-violet-500 to-purple-600',
       steps: [
         {
           step: 1,
           title: "Define el concepto",
-          description: "Decide: género (pop, rock, rap, etc.), tema (amor, superación, fiesta), y ambiente (alegre, melancólico, energético)"
+          description: "Decide: género (electrónica, ambient, rock, etc.), tema (energía, relajación, motivación), y ambiente (oscuro, brillante, íntimo)"
         },
         {
           step: 2,
-          title: "Escribe la letra con ChatGPT",
-          description: "Prompt: 'Escribe letra de canción [género] sobre [tema]. Incluye: verso 1, pre-chorus, chorus, verso 2, chorus, bridge, chorus final. Marca cada sección claramente.'",
-          tip: "💡 Una estructura clásica: V1 (4 líneas) → Pre-Chorus (2 líneas) → Chorus (4-6 líneas) → V2 → Chorus → Bridge → Chorus"
+          title: "Escribe el prompt con ChatGPT",
+          description: "Prompt: 'Describe una pista musical de [género] con estructura intro-verso-chorus-verso-chorus-outro. Incluye instrumentos, tempo BPM, y evolución emocional.'",
+          tip: "💡 Ejemplo: 'electrónica chillout, 100 BPM, piano suave + pads + batería ligera, evolución de tranquilo a energético'"
         },
         {
           step: 3,
-          title: "Entra en Suno AI Custom Mode",
-          description: "Ve a https://suno.ai → Create → Custom Mode. Activa 'Instrumental: OFF' para que haya voz."
+          title: "Entra en Stable Audio Open",
+          description: "Ve a https://huggingface.co/spaces/stabilityai/stable-audio - es gratuito y open-source de Stability AI."
         },
         {
           step: 4,
-          title: "Pega la letra estructurada",
-          description: "Copia la letra en el cuadro de 'Lyrics'. Asegúrate de que las secciones estén marcadas: [Verse], [Chorus], [Bridge], etc."
+          title: "Escribe el prompt detallado",
+          description: "Copia la descripción generada. Añade detalles: '4 minutes, professional production, studio quality, no vocals'"
         },
         {
           step: 5,
-          title: "Define el estilo musical",
-          description: "En 'Style of Music' sé específico: 'pop rock energético, guitarra eléctrica, batería potente, voz masculina, tempo 120 BPM'"
+          title: "Configura duración y semillas",
+          description: "Elige duración (ej: 3-4 min). Puedes probar diferentes 'seeds' para variaciones del mismo prompt."
         },
         {
           step: 6,
           title: "Genera múltiples versiones",
-          description: "Haz clic en 'Create'. Suno creará 2 versiones. Genera varias veces hasta encontrar una que te guste."
+          description: "Genera 3-4 veces con el mismo prompt pero diferentes seeds. Elige la mejor versión."
         },
         {
           step: 7,
-          title: "Usa 'Extend' para completar",
-          description: "Si la canción se corta antes de terminar, usa 'Extend from this clip' para continuar desde donde se quedó."
+          title: "Edita la estructura (opcional)",
+          description: "Si necesitas ajustar la estructura, usa Audacity para cortar, reordenar secciones o añadir transiciones."
         },
         {
           step: 8,
-          title: "Descarga las partes",
-          description: "Descarga la canción completa. Con plan gratis, Suno es dueño. Con plan pago ($10/mes), tú eres dueño de la música."
+          title: "Masteriza el audio",
+          description: "En Audacity: Effect → Compressor (suave), Effect → EQ, Effect → Limiter para volumen competitivo."
         },
         {
           step: 9,
           title: "¡Tu reto!",
-          description: "Crea una canción completa de 3 minutos. Sube la letra y el audio a SoundCloud. ¡Comparte tu obra maestra!",
-          warning: "⚠️ Con cuenta gratis NO puedes monetizar la música en Spotify/YouTube. Necesitas plan pago para derechos comerciales."
+          description: "Crea una pista completa de 3-4 minutos. Úsala como música de fondo para un video o presentación. ¡Es 100% tuya!",
+          warning: "⚠️ Stable Audio Open es open-source. Puedes usar la música libremente, pero verifica la licencia específica del modelo."
         }
       ]
     },
