@@ -227,6 +227,18 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               poster="https://pics.filmaffinity.com/ex_machina-368494509-mmed.jpg"
               themes={['Test de Turing', 'Manipulación', 'Conciencia', 'Ética IA']}
             />
+            <MovieCard
+              title="Atlas (2024)"
+              description="Una brillante analista de datos con desconfianza hacia la IA debe confiar en un sistema de IA avanzado para cazar a un robot rebelde que una vez fue su aliado. Una aventura de ciencia ficción sobre la relación humano-IA en un futuro donde los mechas y la inteligencia artificial dominan el campo de batalla."
+              poster="https://pics.filmaffinity.com/atlas-570877983-mmed.jpg"
+              themes={['IA Militar', 'Confianza', 'Mecha', 'Futuro']}
+            />
+            <MovieCard
+              title="A.I. Inteligencia Artificial (2001)"
+              description="En un futuro donde el calentamiento global ha derretido los polos, un niño robot programado para amar es abandonado por sus dueños. Una obra maestra de Spielberg sobre la conciencia artificial, el amor y lo que significa ser humano."
+              poster="https://pics.filmaffinity.com/a_i_artificial_intelligence-535598622-mmed.jpg"
+              themes={['Conciencia IA', 'Amor', 'Humanidad', 'Ética']}
+            />
           </div>
           <div className="mt-4 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
             <p className="text-sm text-indigo-800">
