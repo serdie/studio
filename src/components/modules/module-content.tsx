@@ -14,7 +14,8 @@ import AvatarCreator from './avatar-creator';
 import LearningObjectives from './learning-objectives';
 import ModuleContentAccordion from './module-content-accordion';
 import GamesSection from '@/components/games/games-section';
-import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film } from 'lucide-react';
+import SoundAIExercises from './sound-ai-exercises';
+import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
 import { collection, query, where, orderBy } from 'firebase/firestore';
@@ -240,7 +241,7 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
       )}
 
       <Tabs defaultValue="content" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 h-auto p-1">
+        <TabsList className="grid w-full grid-cols-5 h-auto p-1">
           <TabsTrigger value="content" className="flex items-center gap-2 py-2.5">
             <FileText className="h-4 w-4" />
             <span className="hidden sm:inline">Contenido</span>
@@ -252,6 +253,10 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
           <TabsTrigger value="ai-tools" className="flex items-center gap-2 py-2.5">
             <Bot className="h-4 w-4" />
             <span className="hidden sm:inline">Herramientas IA</span>
+          </TabsTrigger>
+          <TabsTrigger value="sound-exercises" className="flex items-center gap-2 py-2.5">
+            <Headphones className="h-4 w-4" />
+            <span className="hidden sm:inline">Ejercicios Sonido</span>
           </TabsTrigger>
           <TabsTrigger value="games" className="flex items-center gap-2 py-2.5">
             <Gamepad2 className="h-4 w-4" />
@@ -495,6 +500,10 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               </Tabs>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="sound-exercises" className="mt-4">
+          <SoundAIExercises />
         </TabsContent>
 
         <TabsContent value="games" className="mt-4">
