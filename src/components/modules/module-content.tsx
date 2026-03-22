@@ -279,6 +279,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               poster="https://pics.filmaffinity.com/upload-296365789-mmed.jpg"
               themes={['Conciencia Digital', 'Avatares', 'Más Allá Virtual', 'Ética IA']}
             />
+            <MovieCard
+              title="S1m0ne / Simone (2002)"
+              description="Un director de cine en decadencia crea una actriz virtual perfecta llamada Simone usando un software avanzado. Cuando la película se estrena, nadie sabe que la actriz no existe realmente. Una sátira brillante sobre la fama, los medios, la manipulación digital y cómo la industria del entretenimiento puede ser engañada por una creación virtual. Una visión profética de 2002 sobre los avatares e influencers virtuales."
+              poster="https://pics.filmaffinity.com/simone-340232754-mmed.jpg"
+              themes={['Actores Virtuales', 'Manipulación Mediática', 'Fama Digital', 'Ética IA']}
+            />
           </div>
           <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-sm text-blue-800">

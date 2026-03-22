@@ -782,6 +782,22 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                 </CardContent>
               </Card>
 
+              {/* Sketchfab */}
+              <Card className="border-blue-200 bg-blue-50">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="font-semibold text-blue-900">🌐 Sketchfab</h4>
+                      <p className="text-sm text-blue-700">Plataforma para publicar, compartir y descubrir modelos 3D en tiempo real</p>
+                    </div>
+                    <Button variant="outline" size="sm" onClick={() => window.open('https://sketchfab.com/', '_blank')}>
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Abrir
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Unreal Engine */}
               <Card className="border-slate-200 bg-slate-50">
                 <CardContent className="p-4">
