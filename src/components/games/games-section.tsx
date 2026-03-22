@@ -554,6 +554,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [musicAiOpen, setMusicAiOpen] = useState(false);
   const [voiceAiOpen, setVoiceAiOpen] = useState(false);
   const [threeDAiOpen, setThreeDAiOpen] = useState(false);
+  const [avatarToolsOpen, setAvatarToolsOpen] = useState(false);
 
   const handleToggle = (gameId: string) => {
     setOpenGameId(openGameId === gameId ? null : gameId);
@@ -597,6 +598,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handleThreeDAiToggle = () => {
     setThreeDAiOpen(!threeDAiOpen);
+  };
+
+  const handleAvatarToolsToggle = () => {
+    setAvatarToolsOpen(!avatarToolsOpen);
   };
 
   // Determinar qué lista de juegos y enlaces usar según el módulo
@@ -709,6 +714,121 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                   onToggle={() => handleToggle(activity.id)}
                 />
               ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Sección Herramientas de Avatares - Solo Módulo 3 */}
+      {moduleSlug === 'avatares-virtuales' && (
+        <div className="mt-8">
+          <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-pink-50 to-white cursor-pointer" onClick={handleAvatarToolsToggle}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-purple-200 flex items-center justify-center">
+                    <UserRoundCog className="h-5 w-5 text-purple-700" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-purple-900">🎭 Herramientas de Creación de Avatares</h3>
+                    <p className="text-sm text-purple-700">
+                      {avatarToolsOpen
+                        ? 'Software para crear y animar avatares 2D/3D'
+                        : 'Mixamo, Blender, Unreal Engine, MetaHuman y más - Haz clic para ver'}
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown
+                  className={`h-6 w-6 text-purple-700 transition-transform duration-300 ${
+                    avatarToolsOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Contenido desplegable */}
+          {avatarToolsOpen && (
+            <div className="space-y-3 mt-4 animate-in slide-in-from-top-2 duration-300">
+              {/* Mixamo */}
+              <Card className="border-purple-200 bg-purple-50">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="font-semibold text-purple-900">🕺 Mixamo - Adobe</h4>
+                      <p className="text-sm text-purple-700">Biblioteca de animaciones 3D y personajes para videojuegos y animaciones</p>
+                    </div>
+                    <Button variant="outline" size="sm" onClick={() => window.open('https://www.mixamo.com', '_blank')}>
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Abrir
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Blender */}
+              <Card className="border-orange-200 bg-orange-50">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="font-semibold text-orange-900">🎨 Blender</h4>
+                      <p className="text-sm text-orange-700">Software de modelado, animación y renderizado 3D gratuito y de código abierto</p>
+                    </div>
+                    <Button variant="outline" size="sm" onClick={() => window.open('https://www.blender.org', '_blank')}>
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Abrir
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Unreal Engine */}
+              <Card className="border-slate-200 bg-slate-50">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="font-semibold text-slate-900">🎮 Unreal Engine</h4>
+                      <p className="text-sm text-slate-700">Motor de videojuegos para crear entornos 3D fotorrealistas y experiencias interactivas</p>
+                    </div>
+                    <Button variant="outline" size="sm" onClick={() => window.open('https://www.unrealengine.com/es-ES', '_blank')}>
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Abrir
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* MetaHuman */}
+              <Card className="border-blue-200 bg-blue-50">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="font-semibold text-blue-900">👤 MetaHuman</h4>
+                      <p className="text-sm text-blue-700">Crea avatares humanos fotorrealistas en minutos con Unreal Engine</p>
+                    </div>
+                    <Button variant="outline" size="sm" onClick={() => window.open('https://www.metahuman.com/es-ES', '_blank')}>
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Abrir
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Adobe Character Animator */}
+              <Card className="border-red-200 bg-red-50">
+                <CardContent className="p-4">
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="font-semibold text-red-900">🎬 Adobe Character Animator</h4>
+                      <p className="text-sm text-red-700">Anima personajes 2D en tiempo real usando tu cámara web y micrófono</p>
+                    </div>
+                    <Button variant="outline" size="sm" onClick={() => window.open('https://www.adobe.com/es/products/character-animator.html', '_blank')}>
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Abrir
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           )}
         </div>
