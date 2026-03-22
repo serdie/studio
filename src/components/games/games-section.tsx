@@ -17,6 +17,8 @@ import LLMTrainingGame from './llm-training-game';
 import ImagePromptWorkshop from './image-prompt-workshop';
 import VideoPromptWorkshop from './video-prompt-workshop';
 import AudioPromptWorkshop from './audio-prompt-workshop';
+import AvatarCaseMatch from './avatar-case-match';
+import ScriptDurationCalculator from './script-duration-calculator';
 
 interface GameItem {
   id: string;
@@ -235,6 +237,104 @@ const module2ExternalActivities: GameItem[] = [
     url: 'https://huggingface.co/chat',
     category: 'actividad',
     icon: <Brain className="h-5 w-5 text-pink-400" />,
+  },
+];
+
+// Lista de juegos específica para Módulo 3 (Avatares Virtuales)
+const module3GamesList: GameItem[] = [
+  {
+    id: 'avatar-case-match',
+    title: '🎭 Avatar Case Match',
+    description: 'Decide cuándo usar avatares virtuales y cuándo no en situaciones empresariales reales.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-pink-400" />,
+    component: <AvatarCaseMatch />,
+  },
+  {
+    id: 'script-duration-calculator',
+    title: '⏱️ Calculadora de Duración de Guion',
+    description: 'Calcula palabras y estima duración de tu guion (155 palabras/min en español).',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-blue-400" />,
+    component: <ScriptDurationCalculator />,
+  },
+];
+
+// Enlaces externos específicos para Módulo 3 (Avatares Virtuales)
+const module3ExternalActivities: GameItem[] = [
+  {
+    id: 'heygen',
+    title: 'HeyGen - Avatares de Vídeo con IA',
+    description: 'Plataforma líder para crear vídeos con avatares. +100 avatares, 40+ idiomas, lip-sync perfecto.',
+    type: 'external',
+    url: 'https://www.heygen.com',
+    category: 'actividad',
+    icon: <Film className="h-5 w-5 text-blue-400" />,
+  },
+  {
+    id: 'synthesia',
+    title: 'Synthesia - Plataforma de Avatares AI',
+    description: 'Crea vídeos profesionales con avatares AI. +140 avatares, ideal para formación corporativa.',
+    type: 'external',
+    url: 'https://www.synthesia.io',
+    category: 'actividad',
+    icon: <Brain className="h-5 w-5 text-purple-400" />,
+  },
+  {
+    id: 'elevenlabs',
+    title: 'ElevenLabs - Texto a Voz con IA',
+    description: 'Voces neuronales más naturales del mercado. Clonación de voz, 40+ idiomas, control emocional.',
+    type: 'external',
+    url: 'https://elevenlabs.io',
+    category: 'actividad',
+    icon: <Headphones className="h-5 w-5 text-cyan-400" />,
+  },
+  {
+    id: 'd-id',
+    title: 'D-ID - Animación de Fotos con IA',
+    description: 'Anima fotos estáticas con sincronización labial. Ideal para avatares personalizados.',
+    type: 'external',
+    url: 'https://www.d-id.com',
+    category: 'actividad',
+    icon: <ImageIcon className="h-5 w-5 text-pink-400" />,
+  },
+  {
+    id: 'colossyan',
+    title: 'Colossyan - Avatares para Formación',
+    description: 'Enfocado en e-learning y formación corporativa. Avatares conversacionales.',
+    type: 'external',
+    url: 'https://www.colossyan.com',
+    category: 'actividad',
+    icon: <Brain className="h-5 w-5 text-green-400" />,
+  },
+  {
+    id: 'rask-ai',
+    title: 'Rask AI - Doblaje y Localización',
+    description: 'Traduce y dobla vídeos manteniendo la voz original. 130+ idiomas.',
+    type: 'external',
+    url: 'https://www.rask.ai',
+    category: 'actividad',
+    icon: <ExternalLink className="h-5 w-5 text-amber-400" />,
+  },
+  {
+    id: 'murf-ai',
+    title: 'Murf.ai - Estudio de Voz AI',
+    description: '120+ voces profesionales. Editor de audio integrado, sincronización con vídeo.',
+    type: 'external',
+    url: 'https://murf.ai',
+    category: 'actividad',
+    icon: <Headphones className="h-5 w-5 text-indigo-400" />,
+  },
+  {
+    id: 'ready-player-me',
+    title: 'Ready Player Me - Avatares 3D',
+    description: 'Crea avatares 3D para múltiples plataformas. Ideal para metaverso y VR.',
+    type: 'external',
+    url: 'https://readyplayer.me',
+    category: 'actividad',
+    icon: <Brain className="h-5 w-5 text-emerald-400" />,
   },
 ];
 
@@ -500,11 +600,20 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   };
 
   // Determinar qué lista de juegos y enlaces usar según el módulo
-  const currentGamesList = moduleSlug === 'llms-generativa' ? module2GamesList : gamesList;
-  const currentExternalActivities = moduleSlug === 'llms-generativa' ? module2ExternalActivities : externalActivities;
+  const currentGamesList = moduleSlug === 'llms-generativa' 
+    ? module2GamesList 
+    : moduleSlug === 'avatares-virtuales'
+      ? module3GamesList
+      : gamesList;
+  
+  const currentExternalActivities = moduleSlug === 'llms-generativa'
+    ? module2ExternalActivities
+    : moduleSlug === 'avatares-virtuales'
+      ? module3ExternalActivities
+      : externalActivities;
 
-  // Solo mostrar juegos y enlaces en el módulo 1 y 2
-  if (moduleSlug !== 'introduccion-ia' && moduleSlug !== 'llms-generativa') {
+  // Solo mostrar juegos y enlaces en el módulo 1, 2 y 3
+  if (moduleSlug !== 'introduccion-ia' && moduleSlug !== 'llms-generativa' && moduleSlug !== 'avatares-virtuales') {
     return (
       <Card className="border-slate-700 bg-slate-800/50">
         <CardContent className="p-12 text-center space-y-4">
@@ -564,18 +673,26 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                     <Trophy className="h-5 w-5 text-yellow-700" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-yellow-900">🔗 Enlaces Externos a LLMs</h3>
+                    <h3 className="text-lg font-bold text-yellow-900">
+                      {moduleSlug === 'avatares-virtuales'
+                        ? '🔗 Enlaces Externos - Avatares y TTS'
+                        : moduleSlug === 'llms-generativa'
+                          ? '🔗 Enlaces Externos a LLMs'
+                          : '🔗 Enlaces Externos Recomendados'}
+                    </h3>
                     <p className="text-sm text-yellow-700">
-                      {externalLinksOpen 
+                      {externalLinksOpen
                         ? `${currentExternalActivities.length} enlaces disponibles - Haz clic para ocultar`
-                        : `${currentExternalActivities.length} enlaces a principales IAs - Haz clic para ver`}
+                        : moduleSlug === 'avatares-virtuales'
+                          ? `${currentExternalActivities.length} enlaces a plataformas de avatares - Haz clic para ver`
+                          : `${currentExternalActivities.length} enlaces a principales IAs - Haz clic para ver`}
                     </p>
                   </div>
                 </div>
-                <ChevronDown 
+                <ChevronDown
                   className={`h-6 w-6 text-yellow-700 transition-transform duration-300 ${
                     externalLinksOpen ? 'rotate-180' : ''
-                  }`} 
+                  }`}
                 />
               </div>
             </CardContent>
@@ -597,6 +714,9 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
         </div>
       )}
 
+      {/* Secciones adicionales - Solo para Módulo 1 y 2 (NO Módulo 3) */}
+      {moduleSlug !== 'avatares-virtuales' && (
+        <>
       {/* Sección LLMs en LOCALHOST - Desplegable */}
       <div className="mt-8">
         <Card className="border-green-200 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 cursor-pointer" onClick={handleLocalhostLlmToggle}>
@@ -3470,6 +3590,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
           </Card>
         )}
       </div>
+      </>
+      )}
     </div>
   );
 }

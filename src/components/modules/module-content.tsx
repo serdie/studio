@@ -15,6 +15,7 @@ import LearningObjectives from './learning-objectives';
 import ModuleContentAccordion from './module-content-accordion';
 import GamesSection from '@/components/games/games-section';
 import SoundAIExercises from './sound-ai-exercises';
+import AvatarExercises from './avatar-exercises';
 import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
@@ -252,6 +253,45 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         </CollapsibleSection>
       )}
 
+      {/* Deberes de Fin de Semana - Módulo 3 (Avatares Virtuales) */}
+      {module.slug === 'avatares-virtuales' && (
+        <CollapsibleSection
+          title="📚 Deberes de Fin de Semana: Cine y Avatares"
+          description="Películas recomendadas para reflexionar sobre avatares virtuales e identidad digital"
+          icon={<Film className="h-5 w-5 text-blue-600" />}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <MovieCard
+              title="Los Sustitutos / Surrogates (2009)"
+              description="En un futuro donde las personas viven aisladas en sus hogares pero se relacionan a través de avatares robóticos perfectos que interactúan en el mundo real. Cuando un agente investiga un asesinato, descubre una conspiración que amenaza la distinción entre humanos y sus sustitutos. Una película visionaria sobre avatares, identidad digital y las consecuencias de delegar nuestra presencia física en representaciones virtuales."
+              poster="https://pics.filmaffinity.com/surrogates-502617815-mmed.jpg"
+              themes={['Avatares', 'Identidad Digital', 'Futuro', 'Ética IA']}
+            />
+            <MovieCard
+              title="Ready Player One (2018)"
+              description="En un futuro distópico de 2045, la humanidad escapa de la realidad refugiándose en OASIS, un universo de realidad virtual masivo. Cuando el excéntrico creador de OASIS muere, deja un concurso: quien encuentre el 'Huevo de Pascua' oculto en el juego heredará su fortuna y el control del universo virtual. Una aventura épica sobre avatares, mundos virtuales y la línea entre realidad y ficción digital."
+              poster="https://pics.filmaffinity.com/ready_player_one-508487059-mmed.jpg"
+              themes={['Metaverso', 'Avatares', 'Realidad Virtual', 'Mundos Virtuales']}
+            />
+            <MovieCard
+              title="Upload (Serie - 2020)"
+              description="En un futuro donde la conciencia humana puede ser 'subida' a un más allá digital después de la muerte, una joven investigadora ayuda a los residentes de un lujoso cielo virtual a adaptarse a su nueva existencia como avatares digitales. Una comedia de ciencia ficción que explora la vida después de la muerte digital, la identidad consciente y las implicaciones éticas de la inmortalidad virtual."
+              poster="https://pics.filmaffinity.com/upload-296365789-mmed.jpg"
+              themes={['Conciencia Digital', 'Avatares', 'Más Allá Virtual', 'Ética IA']}
+            />
+          </div>
+          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-sm text-blue-800">
+              💡 <strong>Actividad para el Lunes:</strong>
+              (1) Ver al menos una película o 2-3 episodios de la serie antes del lunes,
+              (2) Tomar notas sobre cómo se representan los avatares y la conciencia digital,
+              (3) Preparar 2-3 preguntas para debatir: ¿Qué diferencias hay entre los avatares de la ficción y los actuales?,
+              (4) Reflexionar: ¿Sería ético 'subir' nuestra conciencia a un entorno virtual?
+            </p>
+          </div>
+        </CollapsibleSection>
+      )}
+
       <Tabs defaultValue="content" className="w-full">
         <TabsList className="grid w-full grid-cols-5 h-auto p-1">
           <TabsTrigger value="content" className="flex items-center gap-2 py-2.5">
@@ -268,7 +308,7 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
           </TabsTrigger>
           <TabsTrigger value="sound-exercises" className="flex items-center gap-2 py-2.5">
             <Headphones className="h-4 w-4" />
-            <span className="hidden sm:inline">Ejercicios Sonido</span>
+            <span className="hidden sm:inline">{module.slug === 'avatares-virtuales' ? 'Ejercicios Avatar' : 'Ejercicios Sonido'}</span>
           </TabsTrigger>
           <TabsTrigger value="games" className="flex items-center gap-2 py-2.5">
             <Gamepad2 className="h-4 w-4" />
@@ -456,6 +496,93 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                   </CardContent>
                 </Card>
               )}
+
+              {/* Sección de Videos - Módulo 3 (Avatares Virtuales) */}
+              {module.slug === 'avatares-virtuales' && (
+                <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-cyan-50 to-pink-50">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-12 rounded-xl bg-blue-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-blue-700"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m10 9 5 3-5 3z"/><path d="M2 8v8"/></svg>
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl text-blue-900">🎬 Videos Recomendados - Avatares</CardTitle>
+                        <p className="text-sm text-blue-700">Videos sobre Avatares Virtuales, HeyGen y TTS</p>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid gap-4 md:grid-cols-3">
+                      {/* Video 1: Introducción a Avatares */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/8OZBxVqLqKk"
+                            title="Video 1: Introducción a Avatares Virtuales"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-blue-800 font-medium">
+                          📺 ¿Qué son los Avatares Virtuales?
+                        </p>
+                      </div>
+
+                      {/* Video 2: HeyGen Tutorial */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/8OZBxVqLqKk"
+                            title="Video 2: HeyGen Tutorial"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-blue-800 font-medium">
+                          📺 HeyGen: Tutorial Completo
+                        </p>
+                      </div>
+
+                      {/* Video 3: ElevenLabs TTS */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/8OZBxVqLqKk"
+                            title="Video 3: ElevenLabs TTS"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-blue-800 font-medium">
+                          📺 ElevenLabs: Texto a Voz
+                        </p>
+                      </div>
+
+                      {/* Video 4: Subtitling Best Practices */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/8OZBxVqLqKk"
+                            title="Video 4: Subtitling Best Practices"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-blue-800 font-medium">
+                          📺 Mejores Prácticas de Subtitulado
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-blue-600 text-center">
+                      💡 Consejo: Practica con HeyGen mientras ves los videos. Crea tu primer vídeo el Día 3.
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           )}
         </TabsContent>
@@ -515,7 +642,11 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         </TabsContent>
 
         <TabsContent value="sound-exercises" className="mt-4">
-          <SoundAIExercises />
+          {module.slug === 'avatares-virtuales' ? (
+            <AvatarExercises />
+          ) : (
+            <SoundAIExercises />
+          )}
         </TabsContent>
 
         <TabsContent value="games" className="mt-4">

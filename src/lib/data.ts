@@ -488,12 +488,22 @@ Ahora clasifica: 'Calidad aceptable por el precio pagado'</pre>
     id: 3,
     slug: 'avatares-virtuales',
     title: 'Módulo 3: Avatares Virtuales',
-    duration: '36 h',
+    duration: '30 h',
     description: 'Creación y aplicación de avatares con IA.',
     longDescription: 'Generación de avatares, adaptación de contenidos y tecnologías de Texto a Voz (TTS).',
     progress: 0,
     icon: BotMessageSquare,
-    resources: [],
+    resources: [
+      { title: 'Guía del Módulo 3 (PDF)', file: '/materiales/tema3/01_guia_modulo_3_v01.pdf' },
+      { title: 'Enlaces y Recursos (PDF)', file: '/materiales/tema3/02_enlaces_3_v01.pdf' },
+      { title: 'Ejercicios Módulo 3 (PDF)', file: '/materiales/tema3/03_ejercicios_3.pdf' },
+      { title: 'AI Avatar Production Playbook (PDF)', file: '/materiales/tema3/AI_Avatar_Production_Playbook.pdf' },
+      { title: 'AI Avatar Production Playbook (PPTX)', file: '/materiales/tema3/AI_Avatar_Production_Playbook.pptx' },
+      { title: 'Vídeo: Avatares con IA para Empresas (MP4)', file: '/materiales/tema3/Avatares_con_IA_para_Empresas.mp4' },
+      { title: 'Audio: Avatares de IA en comunicación corporativa (M4A)', file: '/materiales/tema3/Avatares_de_IA_en_la_comunicación_corporativa.m4a' },
+      { title: 'Informe: Avatares Virtuales en Empresa (DOCX)', file: '/materiales/tema3/Informe sobre Creación y Aplicación de Avatares Virtuales en el Entorno Empresarial.docx' },
+      { title: 'Infografía del Módulo 3 (PNG)', file: '/materiales/tema3/unnamed (1).png' }
+    ],
     content: `
       <h2>3.1. Fundamentos y Generación de Avatares Virtuales</h2>
       <h3>¿Qué es un Avatar Virtual?</h3>

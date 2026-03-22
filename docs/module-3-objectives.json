@@ -1,0 +1,66 @@
+{
+  "module": 3,
+  "title": "Módulo 3: Avatares Virtuales y Producción de Vídeo",
+  "total_hours": 30,
+  "objectives": [
+    {
+      "section": "3.1. Fundamentos y Generación de Avatares",
+      "items": [
+        "Definir qué es un avatar virtual y diferenciarlo de vídeo tradicional.",
+        "Identificar tipos de avatares (stock, personalizado, foto-a-vídeo) y sus usos.",
+        "Comprender el pipeline completo: guion → voz → avatar → edición → publicación.",
+        "Escribir guiones claros, locutables y con timing adecuado.",
+        "Aplicar criterios de diseño visual (fondo, encuadre, tipografía, accesibilidad).",
+        "Producir un vídeo con avatar usando HeyGen o herramienta similar."
+      ]
+    },
+    {
+      "section": "3.2. Localización y Adaptación de Contenidos",
+      "items": [
+        "Diferenciar traducción de localización y adaptar mensajes.",
+        "Crear versiones diferenciadas para público interno vs cliente.",
+        "Implementar convención de nombres y estructura de versionado.",
+        "Generar y revisar subtítulos siguiendo estándares (SRT/WebVTT).",
+        "Adaptar contenido a múltiples canales (web, pantallas, formación).",
+        "Aplicar criterios de localización cultural y lingüística."
+      ]
+    },
+    {
+      "section": "3.3. Texto a Voz y Voz + Avatar",
+      "items": [
+        "Entender prosodia, pausas y énfasis en voz sintética.",
+        "Usar ElevenLabs u otra TTS para generar locuciones profesionales.",
+        "Controlar parámetros de voz (estabilidad, expresividad).",
+        "Sincronizar audio TTS con avatar para lip-sync natural.",
+        "Integrar todo en un paquete final listo para empresa.",
+        "Evaluar calidad con checklist de QA profesional."
+      ]
+    }
+  ],
+  "practices": [
+    {
+      "name": "Práctica 1: MAPFRE - Vídeo de Onboarding",
+      "description": "Crear guion y storyboard para vídeo de onboarding de 60-90 segundos",
+      "deliverables": ["Guion definitivo", "Storyboard en HTML", "Brief/prompt del avatar"],
+      "day": 2
+    },
+    {
+      "name": "Práctica 2: Iberdrola - Vídeo de Seguridad",
+      "description": "Producir vídeo de 90-120 segundos sobre seguridad industrial con avatar",
+      "deliverables": ["Vídeo final con avatar", "Subtítulos SRT/VTT", "Checklist QA"],
+      "day": 5
+    },
+    {
+      "name": "Práctica 3: SEAT/CUPRA - Localización",
+      "description": "Localizar vídeo al portugués o italiano con voz y subtítulos",
+      "deliverables": ["Versión ES limpia", "Versión localizada", "Glosario 10 términos"],
+      "day": 5
+    }
+  ],
+  "evaluation": {
+    "participation": 20,
+    "practices": 40,
+    "final_project": 30,
+    "partial_test": 10
+  }
+}
