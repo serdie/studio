@@ -10,6 +10,7 @@ import {
   Circle, Award, TrendingUp, Clock, Star, ExternalLink,
   ChevronDown, ChevronUp, Sparkles, Zap, Target, Mic, Globe, FileText
 } from 'lucide-react';
+import AvatarScriptCreator from './avatar-script-creator';
 
 interface Exercise {
   id: number;
@@ -34,6 +35,7 @@ interface ExerciseStep {
 export default function AvatarExercises() {
   const [expandedExercise, setExpandedExercise] = useState<number | null>(null);
   const [completedSteps, setCompletedSteps] = useState<Record<number, boolean[]>>({});
+  const [showScriptCreator, setShowScriptCreator] = useState(false);
 
   const exercises: Exercise[] = [
     {
@@ -341,6 +343,30 @@ export default function AvatarExercises() {
             </div>
           </div>
         </CardHeader>
+      </Card>
+
+      {/* Herramienta: Creador de Guiones */}
+      <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-cyan-50 to-white">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xl font-bold text-blue-900">✍️ Creador de Guiones para Avatar</h3>
+              <p className="text-blue-700">Genera guiones locutables con estructura profesional: gancho + 3 ideas + cierre</p>
+            </div>
+            <Button
+              onClick={() => setShowScriptCreator(!showScriptCreator)}
+              variant="outline"
+              className="border-blue-300 hover:bg-blue-50"
+            >
+              {showScriptCreator ? '🔼 Ocultar' : '🔽 Abrir herramienta'}
+            </Button>
+          </div>
+        </CardHeader>
+        {showScriptCreator && (
+          <CardContent>
+            <AvatarScriptCreator />
+          </CardContent>
+        )}
       </Card>
 
       {/* Exercises List */}
