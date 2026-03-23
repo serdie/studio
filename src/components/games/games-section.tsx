@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -19,6 +19,15 @@ import VideoPromptWorkshop from './video-prompt-workshop';
 import AudioPromptWorkshop from './audio-prompt-workshop';
 import AvatarCaseMatch from './avatar-case-match';
 import ScriptDurationCalculator from './script-duration-calculator';
+import MapfrePractice1 from './mapfre-practice-1';
+import IberdrolaPractice2 from './iberdrola-practice-2';
+import SeatCupraPractice3 from './seat-cupra-practice-3';
+import AvatarTrainingGame from './avatar-training-game';
+import PipelineSimulator from './pipeline-simulator';
+import QAChecklistGame from './qa-checklist-game';
+import LocalizationChallenge from './localization-challenge';
+import TTSVoiceSelector from './tts-voice-selector';
+import SubtitleEditor from './subtitle-editor';
 
 interface GameItem {
   id: string;
@@ -260,6 +269,87 @@ const module3GamesList: GameItem[] = [
     icon: <Brain className="h-5 w-5 text-blue-400" />,
     component: <ScriptDurationCalculator />,
   },
+  {
+    id: 'pipeline-simulator',
+    title: '🎬 Pipeline Simulator - Flujo de Producción',
+    description: 'Ordena las 8 fases del pipeline de producción de vídeo con avatar: desde Briefing hasta Publicación.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Film className="h-5 w-5 text-red-400" />,
+    component: <PipelineSimulator />,
+  },
+  {
+    id: 'qa-checklist-game',
+    title: '✅ QA Checklist Game - Control de Calidad',
+    description: 'Detecta errores en vídeos con avatar y clasifícalos por gravedad: audio, lip-sync, visuales, subtítulos y coherencia.',
+    type: 'internal',
+    category: 'juego',
+    icon: <CheckCircle2 className="h-5 w-5 text-green-400" />,
+    component: <QAChecklistGame />,
+  },
+  {
+    id: 'localization-challenge',
+    title: '🌍 Localization Challenge - Adaptación Cultural',
+    description: 'Adapta mensajes de España a México, Argentina, Colombia y Chile. Aprende diferencias lingüísticas y culturales.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Globe className="h-5 w-5 text-emerald-400" />,
+    component: <LocalizationChallenge />,
+  },
+  {
+    id: 'tts-voice-selector',
+    title: '🎙️ TTS Voice Selector - Selector de Voces',
+    description: 'Selecciona la voz apropiada para cada caso de uso: corporativo, retail, lujo, industria. Aprende tono, edad y género.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Headphones className="h-5 w-5 text-cyan-400" />,
+    component: <TTSVoiceSelector />,
+  },
+  {
+    id: 'subtitle-editor',
+    title: '📝 Subtitle Editor - Editor de Subtítulos',
+    description: 'Crea y corrige subtítulos siguiendo estándares: 42 caracteres por línea, 2 líneas máx, sincronización y ortografía.',
+    type: 'internal',
+    category: 'juego',
+    icon: <FileText className="h-5 w-5 text-purple-400" />,
+    component: <SubtitleEditor />,
+  },
+  {
+    id: 'mapfre-practice-1',
+    title: '📝 Práctica 1 – MAPFRE: Guion + Storyboard',
+    description: 'Construye paso a paso tu entrega para MAPFRE: guion de 60–90s, storyboard de 6–8 escenas y brief. Incluye descarga en .doc.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Film className="h-5 w-5 text-amber-400" />,
+    component: <MapfrePractice1 />,
+  },
+  {
+    id: 'iberdrola-practice-2',
+    title: '⚡ Práctica 2 – Iberdrola: Mini-vídeo de Seguridad',
+    description: 'Cread en equipo un vídeo para Iberdrola: 5 reglas de seguridad, ejemplo práctico, storyboard y hoja de producción. Descarga en .doc.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Film className="h-5 w-5 text-green-400" />,
+    component: <IberdrolaPractice2 />,
+  },
+  {
+    id: 'seat-cupra-practice-3',
+    title: '🚗 Práctica 3 – SEAT/CUPRA: Localización y Adaptación',
+    description: 'Adaptad un vídeo de formación a Portugal o Italia: glosario de 10 términos, versión localizada, checklist QA. Descarga en .doc.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Globe className="h-5 w-5 text-purple-400" />,
+    component: <SeatCupraPractice3 />,
+  },
+  {
+    id: 'avatar-training-game',
+    title: '🎯 Entrenamiento de Evaluación - Módulo 3',
+    description: 'Juego didáctico con 25 preguntas clave del módulo: avatares, pipeline, localización, TTS, QA y ética. Incluye modo práctica y modo examen.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Trophy className="h-5 w-5 text-amber-400" />,
+    component: <AvatarTrainingGame />,
+  },
 ];
 
 // Enlaces externos específicos para Módulo 3 (Avatares Virtuales)
@@ -429,37 +519,77 @@ interface GameAccordionItemProps {
 }
 
 function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
+  // Detectar si es la práctica de MAPFRE, Iberdrola o SEAT/CUPRA para aplicar estilo especial
+  const isMapfrePractice = game.id === 'mapfre-practice-1';
+  const isIberdrolaPractice = game.id === 'iberdrola-practice-2';
+  const isSeatPractice = game.id === 'seat-cupra-practice-3';
+  const isSpecialPractice = isMapfrePractice || isIberdrolaPractice || isSeatPractice;
+
   return (
-    <Card className="border-slate-700 bg-slate-800/50 overflow-hidden">
+    <Card className={`overflow-hidden ${
+      isMapfrePractice
+        ? 'border-2 border-amber-600/60 bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-900 shadow-lg shadow-amber-900/20'
+        : isIberdrolaPractice
+        ? 'border-2 border-green-600/60 bg-gradient-to-br from-green-950/40 via-slate-900 to-slate-900 shadow-lg shadow-green-900/20'
+        : isSeatPractice
+        ? 'border-2 border-purple-600/60 bg-gradient-to-br from-purple-950/40 via-slate-900 to-slate-900 shadow-lg shadow-purple-900/20'
+        : 'border-slate-700 bg-slate-800/50'
+    }`}>
       <CardHeader className="p-4 cursor-pointer" onClick={onToggle}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="flex-shrink-0 h-10 w-10 rounded-lg bg-slate-700 flex items-center justify-center">
+            <div className={`flex-shrink-0 h-10 w-10 rounded-lg flex items-center justify-center ${
+              isMapfrePractice
+                ? 'bg-amber-600/30 border border-amber-500/50'
+                : isIberdrolaPractice
+                ? 'bg-green-600/30 border border-green-500/50'
+                : isSeatPractice
+                ? 'bg-purple-600/30 border border-purple-500/50'
+                : 'bg-slate-700'
+            }`}>
               {game.icon}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h4 className="font-semibold text-slate-100">{game.title}</h4>
+                <h4 className={`font-semibold ${
+                  isMapfrePractice ? 'text-amber-100' : isIberdrolaPractice ? 'text-green-100' : isSeatPractice ? 'text-purple-100' : 'text-slate-100'
+                }`}>{game.title}</h4>
                 {game.type === 'external' && (
                   <ExternalLink className="h-4 w-4 text-slate-400" />
                 )}
                 <span className={`text-xs px-2 py-0.5 rounded-full ${
-                  game.category === 'juego' 
-                    ? 'bg-purple-500/20 text-purple-400' 
+                  isMapfrePractice
+                    ? 'bg-amber-500/30 text-amber-200 border border-amber-400/40'
+                    : isIberdrolaPractice
+                    ? 'bg-green-500/30 text-green-200 border border-green-400/40'
+                    : isSeatPractice
+                    ? 'bg-purple-500/30 text-purple-200 border border-purple-400/40'
+                    : game.category === 'juego'
+                    ? 'bg-purple-500/20 text-purple-400'
                     : game.category === 'cuento'
                     ? 'bg-amber-500/20 text-amber-400'
                     : 'bg-green-500/20 text-green-400'
                 }`}>
-                  {game.category === 'juego' ? 'Juego' : game.category === 'cuento' ? 'Cuento' : 'Actividad'}
+                  {isMapfrePractice ? '📝 Práctica Evaluable' : isIberdrolaPractice ? '⚡ Práctica Equipo' : isSeatPractice ? '🌍 Localización' : game.category === 'juego' ? 'Juego' : game.category === 'cuento' ? 'Cuento' : 'Actividad'}
                 </span>
               </div>
-              <p className="text-sm text-slate-400 mt-1">{game.description}</p>
+              <p className={`text-sm mt-1 ${
+                isMapfrePractice ? 'text-amber-200/80' : isIberdrolaPractice ? 'text-green-200/80' : isSeatPractice ? 'text-purple-200/80' : 'text-slate-400'
+              }`}>{game.description}</p>
             </div>
           </div>
           <Button
             variant="ghost"
             size="sm"
-            className="flex-shrink-0 text-slate-400 hover:text-slate-100"
+            className={`flex-shrink-0 ${
+              isMapfrePractice
+                ? 'text-amber-300 hover:text-amber-100'
+                : isIberdrolaPractice
+                ? 'text-green-300 hover:text-green-100'
+                : isSeatPractice
+                ? 'text-purple-300 hover:text-purple-100'
+                : 'text-slate-400 hover:text-slate-100'
+            }`}
           >
             {isOpen ? (
               <ChevronUp className="h-5 w-5" />
@@ -469,11 +599,13 @@ function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
           </Button>
         </div>
       </CardHeader>
-      
+
       {isOpen && (
         <CardContent className="pt-0 pb-4">
           {game.type === 'internal' && game.component ? (
-            <div className="mt-2">
+            <div className={`mt-2 ${
+              isSpecialPractice ? 'p-4 rounded-lg bg-slate-900/50 border border-amber-600/30' : ''
+            }`}>
               {game.component}
             </div>
           ) : game.type === 'external' && game.url ? (
