@@ -1,15 +1,8 @@
 'use server';
 
 /**
- * @fileOverview Generación de imágenes con IA para el curso.
+ * @fileOverview Generación de imágenes con IA para el curso usando Pollinations.ai (gratuito, sin API key).
  */
-
-import { googleAI } from '@genkit-ai/google-genai';
-import { genkit } from 'genkit';
-
-const ai = genkit({
-  plugins: [googleAI({ apiKey: process.env.GEMINI_API_KEY })],
-});
 
 export interface ImageGenerationInput {
   prompt: string;
@@ -21,49 +14,30 @@ export interface ImageGenerationOutput {
 
 export async function generateCourseImage(input: ImageGenerationInput): Promise<ImageGenerationOutput> {
   try {
-    console.log('Generando imagen con prompt:', input.prompt);
-    
-    const result = await ai.generate({
-      model: 'googleai/gemini-2.5-flash',
-      prompt: `Genera una imagen basada en esta descripción: ${input.prompt}`,
-      config: {
-        responseModalities: ['IMAGE'],
-      },
-    });
+    console.log('Generando imagen con Pollinations.ai. Prompt:', input.prompt);
 
-    console.log('Resultado recibido:', result);
-    
-    const media = result.media;
-    if (!media || !media.url) {
-      console.error('No se recibió media en el resultado:', result);
-      throw new Error('No se recibió ninguna imagen del modelo. Gemini puede no soportar generación de imágenes en tu región.');
-    }
+    // Pollinations.ai es gratuito y no requiere API key
+    // URL directa para generar imagen
+    const encodedPrompt = encodeURIComponent(input.prompt);
+    const seed = Math.floor(Math.random() * 10000);
+    const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=1024&height=1024&nologo=true&seed=${seed}`;
 
-    return { imageUrl: media.url };
+    console.log('URL de imagen generada:', imageUrl);
+
+    return { imageUrl };
   } catch (error) {
     console.error('=== ERROR EN GENERACIÓN DE IMÁGEN ===');
     console.error('Error completo:', error);
     console.error('Tipo de error:', error?.constructor?.name);
     console.error('Mensaje:', error instanceof Error ? error.message : 'Unknown');
-    
+
     const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
-    
-    // Error específico de región
-    if (errorMessage.includes('not available in your country') || 
-        errorMessage.includes('location')) {
-      throw new Error('La generación de imágenes no está disponible en tu región.');
-    }
-    
+
     // Error de filtro de contenido
-    if (errorMessage.includes('filter') || errorMessage.includes('blocked')) {
-      throw new Error('La solicitud fue bloqueada por los filtros de contenido. Intenta con otra descripción.');
+    if (errorMessage.includes('filter') || errorMessage.includes('blocked') || errorMessage.includes('content') || errorMessage.includes('safety')) {
+      throw new Error('La solicitud fue bloqueada por los filtros de contenido. Intenta con una descripción más simple.');
     }
-    
-    // Error de API key
-    if (errorMessage.includes('API_KEY') || errorMessage.includes('api_key') || errorMessage.includes('401')) {
-      throw new Error('Error de autenticación con la API de Google.');
-    }
-    
+
     throw new Error(`Error al generar imagen: ${errorMessage}`);
   }
 }

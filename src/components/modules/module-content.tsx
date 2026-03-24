@@ -16,7 +16,9 @@ import ModuleContentAccordion from './module-content-accordion';
 import GamesSection from '@/components/games/games-section';
 import SoundAIExercises from './sound-ai-exercises';
 import AvatarExercises from './avatar-exercises';
-import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music } from 'lucide-react';
+import PracticeLab from './practice-lab';
+import Module3Summary from './module-3-summary';
+import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
 import { collection, query, where, orderBy } from 'firebase/firestore';
@@ -299,7 +301,7 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
       )}
 
       <Tabs defaultValue="content" className="w-full">
-        <TabsList className="grid w-full grid-cols-5 h-auto p-1">
+        <TabsList className={`grid w-full ${module.slug === 'avatares-virtuales' ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-6' : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5'} h-auto p-1`}>
           <TabsTrigger value="content" className="flex items-center gap-2 py-2.5">
             <FileText className="h-4 w-4" />
             <span className="hidden sm:inline">Contenido</span>
@@ -312,6 +314,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <Bot className="h-4 w-4" />
             <span className="hidden sm:inline">Herramientas IA</span>
           </TabsTrigger>
+          {module.slug === 'avatares-virtuales' && (
+            <TabsTrigger value="practice-lab" className="flex items-center gap-2 py-2.5">
+              <Beaker className="h-4 w-4" />
+              <span className="hidden sm:inline">Laboratorio</span>
+            </TabsTrigger>
+          )}
           <TabsTrigger value="sound-exercises" className="flex items-center gap-2 py-2.5">
             <Headphones className="h-4 w-4" />
             <span className="hidden sm:inline">{module.slug === 'avatares-virtuales' ? 'Ejercicios Avatar' : 'Ejercicios Sonido'}</span>
@@ -341,7 +349,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
           ) : (
             <div className="space-y-6">
               <ResourceList resources={allResources} />
-              
+
+              {/* Resumen Ejecutivo del Módulo 3 - Solo para Avatares Virtuales */}
+              {module.slug === 'avatares-virtuales' && (
+                <Module3Summary />
+              )}
+
               {/* Sección de Videos - Solo en Módulo 1 */}
               {module.slug === 'introduccion-ia' && (
                 <Card className="border-red-200 bg-gradient-to-br from-red-50 via-orange-50 to-yellow-50">
@@ -647,7 +660,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
           </Card>
         </TabsContent>
 
-        <TabsContent value="sound-exercises" className="mt-4">
+        <TabsContent value="practice-lab" className="mt-4">
+          <PracticeLab />
+        </TabsContent>
+
+          <TabsContent value="sound-exercises" className="mt-4">
+
           {module.slug === 'avatares-virtuales' ? (
             <AvatarExercises />
           ) : (
