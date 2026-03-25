@@ -22,6 +22,10 @@ import ScriptDurationCalculator from './script-duration-calculator';
 import MapfrePractice1 from './mapfre-practice-1';
 import IberdrolaPractice2 from './iberdrola-practice-2';
 import SeatCupraPractice3 from './seat-cupra-practice-3';
+import InditexAvatar3DPractice from './inditex-avatar-3d-practice';
+import TelefonicaAvatar3DPractice from './telefonica-avatar-3d-practice';
+import TurismoToledoAvatar3DPractice from './turismo-toledo-avatar-3d-practice';
+import AvatarPlatformsMap from './avatar-platforms-map';
 import AvatarTrainingGame from './avatar-training-game';
 import PipelineSimulator from './pipeline-simulator';
 import QAChecklistGame from './qa-checklist-game';
@@ -342,6 +346,42 @@ const module3GamesList: GameItem[] = [
     component: <SeatCupraPractice3 />,
   },
   {
+    id: 'inditex-avatar-3d-practice',
+    title: '👗 Avatares 3D – Práctica 1: Inditex/Zara Probador Virtual',
+    description: 'Diseña un avatar 3D y un vídeo de 15-20s donde el avatar hable y muestre cómo le queda una prenda. Incluye diseño, guion, storyboard 3D y checklist de calidad.',
+    type: 'internal',
+    category: 'juego',
+    icon: <UserRoundCog className="h-5 w-5 text-pink-400" />,
+    component: <InditexAvatar3DPractice />,
+  },
+  {
+    id: 'telefonica-avatar-3d-practice',
+    title: '📞 Avatares 3D – Práctica 2: Telefónica/Movistar Soporte Técnico',
+    description: 'Crea un diálogo entre dos avatares (cliente + agente) para simular una llamada al 1002. Incluye diseño de personajes, guion dialogado y plan de producción con herramientas online.',
+    type: 'internal',
+    category: 'juego',
+    icon: <UserRoundCog className="h-5 w-5 text-sky-400" />,
+    component: <TelefonicaAvatar3DPractice />,
+  },
+  {
+    id: 'turismo-toledo-avatar-3d-practice',
+    title: '🏰 Avatares 3D – Práctica 3: Turismo Toledo Guía Conversacional',
+    description: 'Diseña un guía turístico 3D conversacional para Toledo: avatar, cerebro IA, flujo de conversación y plan de implementación en Convai Avatar Studio. ¡Cierre épico del módulo!',
+    type: 'internal',
+    category: 'juego',
+    icon: <UserRoundCog className="h-5 w-5 text-amber-400" />,
+    component: <TurismoToledoAvatar3DPractice />,
+  },
+  {
+    id: 'avatar-platforms-map',
+    title: '🎨 Mapa de Plataformas de Avatares 3D',
+    description: 'Explora todas las herramientas para crear avatares: las usadas en ejercicios y alternativas. Filtra por tipo y busca por nombre. ¡Tu guía completa de recursos!',
+    type: 'internal',
+    category: 'juego',
+    icon: <UserRoundCog className="h-5 w-5 text-yellow-400" />,
+    component: <AvatarPlatformsMap />,
+  },
+  {
     id: 'avatar-training-game',
     title: '🎯 Entrenamiento de Evaluación - Módulo 3',
     description: 'Juego didáctico con 25 preguntas clave del módulo: avatares, pipeline, localización, TTS, QA y ética. Incluye modo práctica y modo examen.',
@@ -538,11 +578,14 @@ interface GameAccordionItemProps {
 }
 
 function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
-  // Detectar si es la práctica de MAPFRE, Iberdrola o SEAT/CUPRA para aplicar estilo especial
+  // Detectar si es la práctica de MAPFRE, Iberdrola, SEAT/CUPRA, Inditex, Telefónica o Turismo Toledo para aplicar estilo especial
   const isMapfrePractice = game.id === 'mapfre-practice-1';
   const isIberdrolaPractice = game.id === 'iberdrola-practice-2';
   const isSeatPractice = game.id === 'seat-cupra-practice-3';
-  const isSpecialPractice = isMapfrePractice || isIberdrolaPractice || isSeatPractice;
+  const isInditexPractice = game.id === 'inditex-avatar-3d-practice';
+  const isTelefonicaPractice = game.id === 'telefonica-avatar-3d-practice';
+  const isTurismoToledoPractice = game.id === 'turismo-toledo-avatar-3d-practice';
+  const isSpecialPractice = isMapfrePractice || isIberdrolaPractice || isSeatPractice || isInditexPractice || isTelefonicaPractice || isTurismoToledoPractice;
 
   return (
     <Card className={`overflow-hidden ${
@@ -552,6 +595,12 @@ function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
         ? 'border-2 border-green-600/60 bg-gradient-to-br from-green-950/40 via-slate-900 to-slate-900 shadow-lg shadow-green-900/20'
         : isSeatPractice
         ? 'border-2 border-purple-600/60 bg-gradient-to-br from-purple-950/40 via-slate-900 to-slate-900 shadow-lg shadow-purple-900/20'
+        : isInditexPractice
+        ? 'border-2 border-pink-600/60 bg-gradient-to-br from-pink-950/40 via-slate-900 to-slate-900 shadow-lg shadow-pink-900/20'
+        : isTelefonicaPractice
+        ? 'border-2 border-sky-600/60 bg-gradient-to-br from-sky-950/40 via-slate-900 to-slate-900 shadow-lg shadow-sky-900/20'
+        : isTurismoToledoPractice
+        ? 'border-2 border-amber-600/60 bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-900 shadow-lg shadow-amber-900/20'
         : 'border-slate-700 bg-slate-800/50'
     }`}>
       <CardHeader className="p-4 cursor-pointer" onClick={onToggle}>
@@ -564,6 +613,12 @@ function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
                 ? 'bg-green-600/30 border border-green-500/50'
                 : isSeatPractice
                 ? 'bg-purple-600/30 border border-purple-500/50'
+                : isInditexPractice
+                ? 'bg-pink-600/30 border border-pink-500/50'
+                : isTelefonicaPractice
+                ? 'bg-sky-600/30 border border-sky-500/50'
+                : isTurismoToledoPractice
+                ? 'bg-amber-600/30 border border-amber-500/50'
                 : 'bg-slate-700'
             }`}>
               {game.icon}
@@ -571,7 +626,7 @@ function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
             <div>
               <div className="flex items-center gap-2">
                 <h4 className={`font-semibold ${
-                  isMapfrePractice ? 'text-amber-100' : isIberdrolaPractice ? 'text-green-100' : isSeatPractice ? 'text-purple-100' : 'text-slate-100'
+                  isMapfrePractice ? 'text-amber-100' : isIberdrolaPractice ? 'text-green-100' : isSeatPractice ? 'text-purple-100' : isInditexPractice ? 'text-pink-100' : isTelefonicaPractice ? 'text-sky-100' : isTurismoToledoPractice ? 'text-amber-100' : 'text-slate-100'
                 }`}>{game.title}</h4>
                 {game.type === 'external' && (
                   <ExternalLink className="h-4 w-4 text-slate-400" />
@@ -583,17 +638,23 @@ function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
                     ? 'bg-green-500/30 text-green-200 border border-green-400/40'
                     : isSeatPractice
                     ? 'bg-purple-500/30 text-purple-200 border border-purple-400/40'
+                    : isInditexPractice
+                    ? 'bg-pink-500/30 text-pink-200 border border-pink-400/40'
+                    : isTelefonicaPractice
+                    ? 'bg-sky-500/30 text-sky-200 border border-sky-400/40'
+                    : isTurismoToledoPractice
+                    ? 'bg-amber-500/30 text-amber-200 border border-amber-400/40'
                     : game.category === 'juego'
                     ? 'bg-purple-500/20 text-purple-400'
                     : game.category === 'cuento'
                     ? 'bg-amber-500/20 text-amber-400'
                     : 'bg-green-500/20 text-green-400'
                 }`}>
-                  {isMapfrePractice ? '📝 Práctica Evaluable' : isIberdrolaPractice ? '⚡ Práctica Equipo' : isSeatPractice ? '🌍 Localización' : game.category === 'juego' ? 'Juego' : game.category === 'cuento' ? 'Cuento' : 'Actividad'}
+                  {isMapfrePractice ? '📝 Práctica Evaluable' : isIberdrolaPractice ? '⚡ Práctica Equipo' : isSeatPractice ? '🌍 Localización' : isInditexPractice ? '👗 Avatar 3D' : isTelefonicaPractice ? '📞 Dúo Avatares' : isTurismoToledoPractice ? '🏰 Guía 3D' : game.category === 'juego' ? 'Juego' : game.category === 'cuento' ? 'Cuento' : 'Actividad'}
                 </span>
               </div>
               <p className={`text-sm mt-1 ${
-                isMapfrePractice ? 'text-amber-200/80' : isIberdrolaPractice ? 'text-green-200/80' : isSeatPractice ? 'text-purple-200/80' : 'text-slate-400'
+                isMapfrePractice ? 'text-amber-200/80' : isIberdrolaPractice ? 'text-green-200/80' : isSeatPractice ? 'text-purple-200/80' : isInditexPractice ? 'text-pink-200/80' : isTelefonicaPractice ? 'text-sky-200/80' : isTurismoToledoPractice ? 'text-amber-200/80' : 'text-slate-400'
               }`}>{game.description}</p>
             </div>
           </div>
@@ -607,6 +668,12 @@ function GameAccordionItem({ game, isOpen, onToggle }: GameAccordionItemProps) {
                 ? 'text-green-300 hover:text-green-100'
                 : isSeatPractice
                 ? 'text-purple-300 hover:text-purple-100'
+                : isInditexPractice
+                ? 'text-pink-300 hover:text-pink-100'
+                : isTelefonicaPractice
+                ? 'text-sky-300 hover:text-sky-100'
+                : isTurismoToledoPractice
+                ? 'text-amber-300 hover:text-amber-100'
                 : 'text-slate-400 hover:text-slate-100'
             }`}
           >
