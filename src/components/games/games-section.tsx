@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -425,6 +425,25 @@ const module3ExternalActivities: GameItem[] = [
     url: 'https://readyplayer.me',
     category: 'actividad',
     icon: <Brain className="h-5 w-5 text-emerald-400" />,
+  },
+  // Herramientas de Blender
+  {
+    id: 'blender-download',
+    title: '📦 Blender - Descarga Oficial',
+    description: 'Software libre y gratuito para modelado, animación y renderizado 3D. Potente herramienta para crear avatares y escenarios.',
+    type: 'external',
+    url: 'https://www.blender.org/download/lts/',
+    category: 'actividad',
+    icon: <Download className="h-5 w-5 text-orange-400" />,
+  },
+  {
+    id: 'keentools-facebuilder',
+    title: '🎭 KeenTools FaceBuilder para Blender',
+    description: 'Plugin gratuito para crear cabezas 3D fotorrealistas a partir de fotos. Ideal para avatares personalizados con precisión profesional.',
+    type: 'external',
+    url: 'https://keentools.io/download/facebuilder-for-blender',
+    category: 'actividad',
+    icon: <UserRoundCog className="h-5 w-5 text-pink-400" />,
   },
 ];
 
