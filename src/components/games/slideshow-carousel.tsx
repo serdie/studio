@@ -35,13 +35,21 @@ export default function SlideshowCarousel() {
   };
 
   const toggleFullscreen = () => {
+    const carouselElement = document.getElementById('carousel-container');
+    
+    if (!carouselElement) return;
+
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-      setIsFullscreen(true);
+      carouselElement.requestFullscreen().then(() => {
+        setIsFullscreen(true);
+      }).catch(err => {
+        console.error('Error al activar pantalla completa:', err);
+      });
     } else {
       if (document.exitFullscreen) {
-        document.exitFullscreen();
-        setIsFullscreen(false);
+        document.exitFullscreen().then(() => {
+          setIsFullscreen(false);
+        });
       }
     }
   };
@@ -69,7 +77,7 @@ export default function SlideshowCarousel() {
       </div>
 
       {/* Carrusel */}
-      <div className="relative bg-white rounded-3xl border-4 border-indigo-300 shadow-2xl overflow-hidden">
+      <div id="carousel-container" className="relative bg-white rounded-3xl border-4 border-indigo-300 shadow-2xl overflow-hidden">
         {/* Contenedor de diapositivas */}
         <div className="relative aspect-video bg-gradient-to-br from-indigo-50 to-purple-50">
           {SLIDES.map((slide, index) => (
