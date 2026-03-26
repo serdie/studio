@@ -4,9 +4,17 @@ import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Maximize2, Minimize2 } from 'lucide-react';
 
 // Lista de diapositivas (26 imágenes)
-const SLIDES = Array.from({ length: 26 }, (_, i) => ({
+// Los nombres de archivo siguen el patrón: Captura de pantalla 2026-03-26 210XXX.png
+// donde XXX son los segundos: 008, 014, 020, 039, 046, 052, 058, 107, 113, 119, 124, 128, 133, 138, 142, 146, 151, 155, 159, 203, 208, 212, 217, 221, 225, 230
+const SLIDE_FILES = [
+  '008', '014', '020', '039', '046', '052', '058',
+  '107', '113', '119', '124', '128', '133', '138', '142', '146', '151', '155', '159',
+  '203', '208', '212', '217', '221', '225', '230'
+];
+
+const SLIDES = SLIDE_FILES.map((seconds, i) => ({
   id: i + 1,
-  src: `/materiales/tema3/diapositivas-drone/Captura de pantalla 2026-03-26 210${String(i).padStart(3, '0')}.png`,
+  src: encodeURI(`/materiales/tema3/diapositivas-drone/Captura de pantalla 2026-03-26 210${seconds}.png`),
   alt: `Diapositiva ${i + 1} de Drones e IA`,
 }));
 
