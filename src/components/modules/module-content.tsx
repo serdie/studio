@@ -518,87 +518,131 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
 
               {/* Sección de Videos - Módulo 3 (Avatares Virtuales) */}
               {module.slug === 'avatares-virtuales' && (
-                <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-cyan-50 to-pink-50">
+                <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
                   <CardHeader className="pb-3">
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-xl bg-blue-200 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-blue-700"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m10 9 5 3-5 3z"/><path d="M2 8v8"/></svg>
+                      <div className="h-12 w-12 rounded-xl bg-amber-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-amber-700"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
                       </div>
                       <div>
-                        <CardTitle className="text-xl text-blue-900">🎬 Videos Recomendados - Avatares</CardTitle>
-                        <p className="text-sm text-blue-700">Videos sobre Avatares Virtuales, HeyGen y TTS</p>
+                        <CardTitle className="text-xl text-amber-900">🛸 Drones e IA en Vehículos Autónomos</CardTitle>
+                        <p className="text-sm text-amber-700">Clase especial de 6 horas - Fotogrametría, Licencias AESA e IA</p>
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="grid gap-4 md:grid-cols-3">
-                      {/* Video 1: Introducción a Avatares */}
-                      <div className="space-y-2">
-                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
-                          <iframe
-                            src="https://www.youtube.com/embed/8OZBxVqLqKk"
-                            title="Video 1: Introducción a Avatares Virtuales"
-                            className="w-full h-full"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {/* Objetivos */}
+                      <div className="space-y-3">
+                        <h4 className="font-bold text-amber-900 flex items-center gap-2">
+                          <span className="text-xl">🎯</span> Objetivos de la Sesión
+                        </h4>
+                        <div className="grid grid-cols-1 gap-2">
+                          <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-3">
+                            <p className="text-xs text-blue-800"><strong>📋 Normativa Completa:</strong> Categorías Abierta, Específica y Certificada</p>
+                          </div>
+                          <div className="bg-green-50 border-2 border-green-200 rounded-lg p-3">
+                            <p className="text-xs text-green-800"><strong>📜 Licencias A1/A3, A2, STS:</strong> Cómo obtenerlas gratis en AESA</p>
+                          </div>
+                          <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-3">
+                            <p className="text-xs text-purple-800"><strong>💼 Salidas Profesionales:</strong> Trabajos emergentes en el sector</p>
+                          </div>
+                          <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-3">
+                            <p className="text-xs text-orange-800"><strong>🗺️ Fotogrametría Práctica:</strong> Paso a paso con Phantom 3/4</p>
+                          </div>
+                          <div className="bg-pink-50 border-2 border-pink-200 rounded-lg p-3">
+                            <p className="text-xs text-pink-800"><strong>🤖 IA en Drones:</strong> Integración con vehículos autónomos</p>
+                          </div>
+                          <div className="bg-cyan-50 border-2 border-cyan-200 rounded-lg p-3">
+                            <p className="text-xs text-cyan-800"><strong>🚀 Plan de Acción:</strong> Retos prácticos y mini-proyectos</p>
+                          </div>
                         </div>
-                        <p className="text-sm text-blue-800 font-medium">
-                          📺 ¿Qué son los Avatares Virtuales?
-                        </p>
                       </div>
 
-                      {/* Video 2: HeyGen Tutorial */}
-                      <div className="space-y-2">
-                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
-                          <iframe
-                            src="https://www.youtube.com/embed/8OZBxVqLqKk"
-                            title="Video 2: HeyGen Tutorial"
-                            className="w-full h-full"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
+                      {/* Estructura */}
+                      <div className="space-y-3">
+                        <h4 className="font-bold text-amber-900 flex items-center gap-2">
+                          <span className="text-xl">⏱️</span> Estructura de las 6 Horas
+                        </h4>
+                        <div className="space-y-2">
+                          <div className="bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-blue-500 rounded-lg p-3">
+                            <p className="text-xs font-bold text-blue-900">Bloque 1 (1h): Introducción al Mundo de los Drones</p>
+                            <p className="text-xs text-blue-700 mt-1">Tipos, Phantom 3/4, normativa básica</p>
+                          </div>
+                          <div className="bg-gradient-to-r from-green-50 to-green-100 border-l-4 border-green-500 rounded-lg p-3">
+                            <p className="text-xs font-bold text-green-900">Bloque 2 (1.5h): Licencias A1/A3, A2 y STS</p>
+                            <p className="text-xs text-green-700 mt-1">Explicación visual, árbol de decisión, trámites</p>
+                          </div>
+                          <div className="bg-gradient-to-r from-purple-50 to-purple-100 border-l-4 border-purple-500 rounded-lg p-3">
+                            <p className="text-xs font-bold text-purple-900">Bloque 3 (1h): Trabajos Emergentes</p>
+                            <p className="text-xs text-purple-700 mt-1">Topografía, agricultura, inspecciones, seguridad</p>
+                          </div>
+                          <div className="bg-gradient-to-r from-orange-50 to-orange-100 border-l-4 border-orange-500 rounded-lg p-3">
+                            <p className="text-xs font-bold text-orange-900">Bloque 4 (1h): Fotogrametría Paso a Paso</p>
+                            <p className="text-xs text-orange-700 mt-1">Qué es, software, flujo completo, actividad práctica</p>
+                          </div>
+                          <div className="bg-gradient-to-r from-pink-50 to-pink-100 border-l-4 border-pink-500 rounded-lg p-3">
+                            <p className="text-xs font-bold text-pink-900">Bloque 5 (1h): Drones + IA + Autónomos</p>
+                            <p className="text-xs text-pink-700 mt-1">Funciones de IA, casos reales, paralelismos con coches</p>
+                          </div>
+                          <div className="bg-gradient-to-r from-cyan-50 to-cyan-100 border-l-4 border-cyan-500 rounded-lg p-3">
+                            <p className="text-xs font-bold text-cyan-900">Bloque 6 (0.5h): Reto Final y Plan de Acción</p>
+                            <p className="text-xs text-cyan-700 mt-1">Cómo sacar licencias, retos prácticos, mini-proyectos</p>
+                          </div>
                         </div>
-                        <p className="text-sm text-blue-800 font-medium">
-                          📺 HeyGen: Tutorial Completo
-                        </p>
-                      </div>
-
-                      {/* Video 3: ElevenLabs TTS */}
-                      <div className="space-y-2">
-                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
-                          <iframe
-                            src="https://www.youtube.com/embed/8OZBxVqLqKk"
-                            title="Video 3: ElevenLabs TTS"
-                            className="w-full h-full"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                        </div>
-                        <p className="text-sm text-blue-800 font-medium">
-                          📺 ElevenLabs: Texto a Voz
-                        </p>
-                      </div>
-
-                      {/* Video 4: Subtitling Best Practices */}
-                      <div className="space-y-2">
-                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
-                          <iframe
-                            src="https://www.youtube.com/embed/8OZBxVqLqKk"
-                            title="Video 4: Subtitling Best Practices"
-                            className="w-full h-full"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                          />
-                        </div>
-                        <p className="text-sm text-blue-800 font-medium">
-                          📺 Mejores Prácticas de Subtitulado
-                        </p>
                       </div>
                     </div>
-                    <p className="text-xs text-blue-600 text-center">
-                      💡 Consejo: Practica con HeyGen mientras ves los videos. Crea tu primer vídeo el Día 3.
-                    </p>
+
+                    {/* Recursos Clave */}
+                    <div className="bg-white border-2 border-amber-300 rounded-xl p-4 space-y-3">
+                      <h4 className="font-bold text-amber-900 flex items-center gap-2">
+                        <span className="text-xl">🔗</span> Recursos Clave
+                      </h4>
+                      <div className="grid gap-3 md:grid-cols-2">
+                        <a href="https://www.seguridadaerea.gob.es" target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 p-3 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-colors group">
+                          <span className="text-xl group-hover:scale-110 transition-transform">🏛️</span>
+                          <div>
+                            <p className="text-xs font-bold text-blue-900">Portal AESA Drones</p>
+                            <p className="text-xs text-blue-700">Normativa oficial y formación</p>
+                          </div>
+                        </a>
+                        <a href="https://sede.seguridadaerea.gob.es" target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 p-3 bg-green-50 hover:bg-green-100 border border-green-200 rounded-lg transition-colors group">
+                          <span className="text-xl group-hover:scale-110 transition-transform">📜</span>
+                          <div>
+                            <p className="text-xs font-bold text-green-900">Formación A1/A3 Gratis</p>
+                            <p className="text-xs text-green-700">Curso + examen online</p>
+                          </div>
+                        </a>
+                        <a href="https://drones.enaire.es/" target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 p-3 bg-purple-50 hover:bg-purple-100 border border-purple-200 rounded-lg transition-colors group">
+                          <span className="text-xl group-hover:scale-110 transition-transform">🗺️</span>
+                          <div>
+                            <p className="text-xs font-bold text-purple-900">Mapa de Zonas de Vuelo</p>
+                            <p className="text-xs text-purple-700">Consultar zonas permitidas</p>
+                          </div>
+                        </a>
+                        <a href="https://www.oneair.es/normativa-drones-espana-aesa/" target="_blank" rel="noopener noreferrer" className="flex items-start gap-2 p-3 bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-lg transition-colors group">
+                          <span className="text-xl group-hover:scale-110 transition-transform">📚</span>
+                          <div>
+                            <p className="text-xs font-bold text-orange-900">Guía Normativa Completa</p>
+                            <p className="text-xs text-orange-700">Todo sobre regulación de drones</p>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Info Box */}
+                    <div className="bg-gradient-to-r from-amber-100 via-orange-100 to-yellow-100 border-2 border-amber-400 rounded-xl p-4">
+                      <div className="flex items-start gap-3">
+                        <span className="text-3xl">💡</span>
+                        <div>
+                          <p className="text-sm font-bold text-amber-900 mb-1">Información Importante</p>
+                          <p className="text-xs text-amber-800">
+                            Esta clase especial de 6 horas combina teoría normativa con práctica de fotogrametría y las últimas novedades en IA aplicada a drones y vehículos autónomos. 
+                            <strong> Incluye preparación para el examen oficial A1/A3 de AESA (gratuito).</strong>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               )}
