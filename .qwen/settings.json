@@ -4,7 +4,8 @@
       "Bash(npm run *)",
       "Bash(npx *)",
       "Bash(git add *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git commit *)"
     ]
   }
 }

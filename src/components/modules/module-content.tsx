@@ -19,6 +19,8 @@ import AvatarExercises from './avatar-exercises';
 import PracticeLab from './practice-lab';
 import Module3Summary from './module-3-summary';
 import DronesGuide from '../games/drones-guide';
+import ElizaRetroAssistant from '@/components/tools/eliza-retro-assistant';
+import AliceTerminalRetro from '@/components/tools/alice-terminal-retro';
 import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
@@ -650,6 +652,18 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                           <span className="truncate">Crear Avatar</span>
                         </TabsTrigger>
                       )}
+                      {module.slug === 'bots-asistentes' && (
+                        <TabsTrigger value="eliza" className="justify-start w-full px-3 py-2.5 text-xs data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                          <Bot className="mr-2 h-3.5 w-3.5 flex-shrink-0" />
+                          <span className="truncate">ELIZA Retro (1966)</span>
+                        </TabsTrigger>
+                      )}
+                      {module.slug === 'bots-asistentes' && (
+                        <TabsTrigger value="alice" className="justify-start w-full px-3 py-2.5 text-xs data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                          <Bot className="mr-2 h-3.5 w-3.5 flex-shrink-0" />
+                          <span className="truncate">A.L.I.C.E. Terminal (1995)</span>
+                        </TabsTrigger>
+                      )}
                     </TabsList>
                   </div>
                 </div>
@@ -670,6 +684,16 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                   {module.slug === 'creacion-avatares-virtuales' && (
                     <TabsContent value="avatar-creator" className="mt-0">
                       <AvatarCreator />
+                    </TabsContent>
+                  )}
+                  {module.slug === 'bots-asistentes' && (
+                    <TabsContent value="eliza" className="mt-0">
+                      <ElizaRetroAssistant />
+                    </TabsContent>
+                  )}
+                  {module.slug === 'bots-asistentes' && (
+                    <TabsContent value="alice" className="mt-0">
+                      <AliceTerminalRetro />
                     </TabsContent>
                   )}
                 </div>
