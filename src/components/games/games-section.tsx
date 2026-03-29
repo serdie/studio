@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -32,6 +32,18 @@ import QAChecklistGame from './qa-checklist-game';
 import LocalizationChallenge from './localization-challenge';
 import TTSVoiceSelector from './tts-voice-selector';
 import SubtitleEditor from './subtitle-editor';
+// Módulo 4 - Bots y Asistentes Virtuales
+import BotVsAssistantDecision from './bot-vs-assistant-decision';
+import BotsTimelineBuilder from './bots-timeline-builder';
+import IntentClassifier from './intent-classifier';
+import FlowDesignerChallenge from './flow-designer-challenge';
+import PlatformSelectorGame from './platform-selector-game';
+import MultimodalExperienceBuilder from './multimodal-experience-builder';
+import EthicsSecurityQuiz from './ethics-security-quiz';
+import MetricsMatcherGame from './metrics-matcher-game';
+import SanitasPractice1 from './sanitas-practice-1';
+import AenaPractice2 from './aena-practice-2';
+import MovistarPractice3 from './movistar-practice-3';
 
 interface GameItem {
   id: string;
@@ -487,6 +499,176 @@ const module3ExternalActivities: GameItem[] = [
   },
 ];
 
+// Lista de juegos específica para Módulo 4 (Bots y Asistentes Virtuales)
+const module4GamesList: GameItem[] = [
+  {
+    id: 'bot-vs-assistant-decision',
+    title: '🤖 Bot vs. Asistente Decision Game',
+    description: 'Decide cuándo usar un bot basado en reglas vs un asistente con IA. Aprende el criterio clave: el riesgo empresarial.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-orange-400" />,
+    component: <BotVsAssistantDecision />,
+  },
+  {
+    id: 'bots-timeline-builder',
+    title: '📅 Timeline Builder - Línea de Tiempo de Bots',
+    description: 'Ordena cronológicamente los hitos históricos: desde ELIZA (1966) hasta GPT-4 y asistentes de IA.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-blue-400" />,
+    component: <BotsTimelineBuilder />,
+  },
+  {
+    id: 'intent-classifier',
+    title: '🎯 Intent Classifier - Clasificador de Intents',
+    description: 'Clasifica expresiones de usuarios en el intent correcto: consultar vacaciones, reset password, estado de pedido, etc.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-purple-400" />,
+    component: <IntentClassifier />,
+  },
+  {
+    id: 'flow-designer-challenge',
+    title: '🗺️ Flow Designer Challenge - Diseña Flujos',
+    description: 'Ordena los pasos de flujos conversacionales: reset de contraseña, consulta de vacaciones, devoluciones, citas previas.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-green-400" />,
+    component: <FlowDesignerChallenge />,
+  },
+  {
+    id: 'platform-selector-game',
+    title: '🛠️ Platform Selector - Selector de Plataformas',
+    description: 'Empareja cada caso de uso con la plataforma ideal: Dialogflow, Bot Framework, Intercom, Drift, Rasa, Zendesk, etc.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Brain className="h-5 w-5 text-cyan-400" />,
+    component: <PlatformSelectorGame />,
+  },
+  {
+    id: 'multimodal-experience-builder',
+    title: '🎨 Multimodal Experience Builder',
+    description: 'Diseña experiencias multimodales combinando avatar, canal, tono y características para cada caso de uso.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Sparkles className="h-5 w-5 text-pink-400" />,
+    component: <MultimodalExperienceBuilder />,
+  },
+  {
+    id: 'ethics-security-quiz',
+    title: '🔒 Ethics & Security Quiz',
+    description: 'Test sobre ética, privacidad, seguridad y regulación (EU AI Act) en asistentes virtuales y chatbots.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Shield className="h-5 w-5 text-green-400" />,
+    component: <EthicsSecurityQuiz />,
+  },
+  {
+    id: 'metrics-matcher-game',
+    title: '📊 Metrics Matcher - Empareja Métricas',
+    description: '¿Esta métrica es para asistente interno, externo o ambos? CSAT, eNPS, FCR, tickets reducidos, conversión, etc.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Trophy className="h-5 w-5 text-amber-400" />,
+    component: <MetricsMatcherGame />,
+  },
+];
+
+// Enlaces externos específicos para Módulo 4 (Bots y Asistentes Virtuales)
+const module4ExternalActivities: GameItem[] = [
+  {
+    id: 'dialogflow',
+    title: 'Dialogflow - Google Cloud',
+    description: 'Plataforma de Google para crear asistentes conversacionales. NLP avanzado, multicanal, integración con Google.',
+    type: 'external',
+    url: 'https://dialogflow.cloud.google.com',
+    category: 'actividad',
+    icon: <Globe className="h-5 w-5 text-blue-400" />,
+  },
+  {
+    id: 'microsoft-bot-framework',
+    title: 'Microsoft Bot Framework + Azure Bot Service',
+    description: 'Framework completo para bots empresariales. Ideal para empresas Microsoft, integración con Teams y Azure.',
+    type: 'external',
+    url: 'https://dev.botframework.com',
+    category: 'actividad',
+    icon: <Brain className="h-5 w-5 text-indigo-400" />,
+  },
+  {
+    id: 'ibm-watson-assistant',
+    title: 'IBM Watson Assistant',
+    description: 'Asistente con IA empresarial. On-premise, datos sensibles, grandes empresas, compliance.',
+    type: 'external',
+    url: 'https://www.ibm.com/es-es/products/watson-assistant',
+    category: 'actividad',
+    icon: <Brain className="h-5 w-5 text-sky-400" />,
+  },
+  {
+    id: 'rasa',
+    title: 'Rasa - Open Source Conversational AI',
+    description: 'Plataforma open source para asistentes. Control total, personalización, sin costes de licencia.',
+    type: 'external',
+    url: 'https://rasa.com',
+    category: 'actividad',
+    icon: <Code2 className="h-5 w-5 text-emerald-400" />,
+  },
+  {
+    id: 'intercom-fin',
+    title: 'Intercom Fin - AI Chatbot',
+    description: 'Chatbot de IA para atención al cliente. Ecommerce, SaaS, customer support, base de conocimientos.',
+    type: 'external',
+    url: 'https://www.intercom.com/fin',
+    category: 'actividad',
+    icon: <Headphones className="h-5 w-5 text-teal-400" />,
+  },
+  {
+    id: 'drift',
+    title: 'Drift - Conversational Marketing',
+    description: 'Plataforma de conversational marketing. Ventas, lead generation, B2B, cualificación automática.',
+    type: 'external',
+    url: 'https://www.drift.com',
+    category: 'actividad',
+    icon: <TrendingUp className="h-5 w-5 text-violet-400" />,
+  },
+  {
+    id: 'zendesk-answer-bot',
+    title: 'Zendesk Answer Bot',
+    description: 'Bot integrado con sistema de tickets. Base de conocimientos existente, SMB, soporte.',
+    type: 'external',
+    url: 'https://www.zendesk.com/service/answer-bot',
+    category: 'actividad',
+    icon: <LifeBuoy className="h-5 w-5 text-orange-400" />,
+  },
+  {
+    id: 'landbot',
+    title: 'Landbot - No-Code Chatbot Builder',
+    description: 'Constructor visual de chatbots sin código. Marketing, sin desarrolladores, rápido deployment.',
+    type: 'external',
+    url: 'https://landbot.io',
+    category: 'actividad',
+    icon: <MessageSquare className="h-5 w-5 text-yellow-400" />,
+  },
+  {
+    id: 'voiceflow',
+    title: 'Voiceflow - Diseño de Asistentes de Voz',
+    description: 'Diseña, prototipa y colabora en asistentes de voz y chatbots. Ideal para diseño conversacional.',
+    type: 'external',
+    url: 'https://www.voiceflow.com',
+    category: 'actividad',
+    icon: <Mic className="h-5 w-5 text-pink-400" />,
+  },
+  {
+    id: 'botpress',
+    title: 'Botpress - Plataforma de Chatbots Open Source',
+    description: 'Plataforma open source con interfaz visual. Balance entre control y facilidad de uso.',
+    type: 'external',
+    url: 'https://botpress.com',
+    category: 'actividad',
+    icon: <Code2 className="h-5 w-5 text-cyan-400" />,
+  },
+];
+
 const externalActivities: GameItem[] = [
   {
     id: 'code-org-frozen',
@@ -773,9 +955,30 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [voiceAiOpen, setVoiceAiOpen] = useState(false);
   const [threeDAiOpen, setThreeDAiOpen] = useState(false);
   const [avatarToolsOpen, setAvatarToolsOpen] = useState(false);
+  const [module4GamesOpen, setModule4GamesOpen] = useState(false); // Desplegable general Módulo 4
+  const [practice1Open, setPractice1Open] = useState(false); // Desplegable Práctica 1
+  const [practice2Open, setPractice2Open] = useState(false); // Desplegable Práctica 2
+  const [practice3Open, setPractice3Open] = useState(false); // Desplegable Práctica 3
+  const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
     setOpenGameId(openGameId === gameId ? null : gameId);
+  };
+
+  const handlePractice1Toggle = () => {
+    setPractice1Open(!practice1Open);
+  };
+
+  const handlePractice2Toggle = () => {
+    setPractice2Open(!practice2Open);
+  };
+
+  const handlePractice3Toggle = () => {
+    setPractice3Open(!practice3Open);
+  };
+
+  const handlePracticesToggle = () => {
+    setPracticesOpen(!practicesOpen);
   };
 
   const handleExternalLinksToggle = () => {
@@ -822,21 +1025,29 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
     setAvatarToolsOpen(!avatarToolsOpen);
   };
 
+  const handleModule4GamesToggle = () => {
+    setModule4GamesOpen(!module4GamesOpen);
+  };
+
   // Determinar qué lista de juegos y enlaces usar según el módulo
-  const currentGamesList = moduleSlug === 'llms-generativa' 
-    ? module2GamesList 
+  const currentGamesList = moduleSlug === 'llms-generativa'
+    ? module2GamesList
     : moduleSlug === 'avatares-virtuales'
       ? module3GamesList
-      : gamesList;
-  
+      : moduleSlug === 'bots-asistentes'
+        ? module4GamesList
+        : gamesList;
+
   const currentExternalActivities = moduleSlug === 'llms-generativa'
     ? module2ExternalActivities
     : moduleSlug === 'avatares-virtuales'
       ? module3ExternalActivities
-      : externalActivities;
+      : moduleSlug === 'bots-asistentes'
+        ? module4ExternalActivities
+        : externalActivities;
 
-  // Solo mostrar juegos y enlaces en el módulo 1, 2 y 3
-  if (moduleSlug !== 'introduccion-ia' && moduleSlug !== 'llms-generativa' && moduleSlug !== 'avatares-virtuales') {
+  // Solo mostrar juegos y enlaces en el módulo 1, 2, 3 y 4
+  if (moduleSlug !== 'introduccion-ia' && moduleSlug !== 'llms-generativa' && moduleSlug !== 'avatares-virtuales' && moduleSlug !== 'bots-asistentes') {
     return (
       <Card className="border-slate-700 bg-slate-800/50">
         <CardContent className="p-12 text-center space-y-4">
@@ -863,18 +1074,51 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
           <Gamepad2 className="h-5 w-5 text-primary" />
           <h3 className="text-lg font-semibold">Juegos Interactivos</h3>
         </div>
-        
+
         {currentGamesList.length > 0 ? (
-          <div className="space-y-3">
-            {currentGamesList.map(game => (
-              <GameAccordionItem
-                key={game.id}
-                game={game}
-                isOpen={openGameId === game.id}
-                onToggle={() => handleToggle(game.id)}
-              />
-            ))}
-          </div>
+          <>
+            {/* Desplegable general solo para Módulo 4 */}
+            {moduleSlug === 'bots-asistentes' && (
+              <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50 cursor-pointer" onClick={handleModule4GamesToggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-xl bg-cyan-200 flex items-center justify-center">
+                        <Gamepad2 className="h-5 w-5 text-cyan-700" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-cyan-900">🤖 Primeros Juegos: Chatbots y Asistentes</h3>
+                        <p className="text-sm text-cyan-700">
+                          {module4GamesOpen
+                            ? '8 juegos interactivos sobre bots y asistentes virtuales'
+                            : '8 juegos: timeline, intents, flujos, plataformas, ética, métricas y más - Haz clic para ver'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-6 w-6 text-cyan-700 transition-transform duration-300 ${
+                        module4GamesOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Lista de juegos (dentro del desplegable para Módulo 4, directo para otros) */}
+            {(module4GamesOpen || moduleSlug !== 'bots-asistentes') && (
+              <div className={`space-y-3 ${moduleSlug === 'bots-asistentes' ? 'mt-4' : ''}`}>
+                {currentGamesList.map(game => (
+                  <GameAccordionItem
+                    key={game.id}
+                    game={game}
+                    isOpen={openGameId === game.id}
+                    onToggle={() => handleToggle(game.id)}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         ) : (
           <Card className="border-slate-700 bg-slate-800/50">
             <CardContent className="p-8 text-center text-slate-400">
@@ -884,6 +1128,141 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
           </Card>
         )}
       </div>
+
+      {/* Sección Prácticas del Módulo - Solo Módulo 4 */}
+      {moduleSlug === 'bots-asistentes' && (
+        <div className="mt-8 space-y-4">
+          {/* Desplegable general de Prácticas */}
+          <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50 via-green-50 to-white cursor-pointer" onClick={handlePracticesToggle}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-emerald-200 flex items-center justify-center">
+                    <FileText className="h-5 w-5 text-emerald-700" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-emerald-900">📋 Prácticas del Módulo 4</h3>
+                    <p className="text-sm text-emerald-700">
+                      {practicesOpen
+                        ? '3 prácticas disponibles: Brief Sanitas, KPIs Aena y Arquitectura Movistar'
+                        : 'Práctica 1: Brief Sanitas · Práctica 2: KPIs Aena · Práctica 3: Arquitectura Movistar - Haz clic para ver'}
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown
+                  className={`h-6 w-6 text-emerald-700 transition-transform duration-300 ${
+                    practicesOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Contenido de las Prácticas */}
+          {practicesOpen && (
+            <div className="space-y-4 animate-in slide-in-from-top-2 duration-300">
+              {/* Práctica 1 */}
+              <Card className="border-green-200 bg-gradient-to-br from-green-50 via-emerald-50 to-white cursor-pointer" onClick={handlePractice1Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-green-200 flex items-center justify-center">
+                        <Stethoscope className="h-4 w-4 text-green-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-green-900">Práctica 1: Brief y Contrato del Asistente (Sanitas)</h4>
+                        <p className="text-sm text-green-700">
+                          {practice1Open
+                            ? 'Completa el formulario para generar el brief del asistente de Sanitas'
+                            : 'Genera un brief/contrato claro: perfiles, tareas, límites, datos, transparencia, escalado y KPIs'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-green-700 transition-transform duration-300 ${
+                        practice1Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 1 */}
+              {practice1Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <SanitasPractice1 />
+                </div>
+              )}
+
+              {/* Práctica 2 */}
+              <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-cyan-50 to-white cursor-pointer" onClick={handlePractice2Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-blue-200 flex items-center justify-center">
+                        <Plane className="h-4 w-4 text-blue-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-blue-900">Práctica 2: KPIs y Métricas de Éxito (Aena · Oli)</h4>
+                        <p className="text-sm text-blue-700">
+                          {practice2Open
+                            ? 'Define el cuadro de mando mínimo para el chatbot Oli de Aena'
+                            : '6 KPIs clave, 3 alertas operativas y 1 métrica de riesgo'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-blue-700 transition-transform duration-300 ${
+                        practice2Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 2 */}
+              {practice2Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <AenaPractice2 />
+                </div>
+              )}
+
+              {/* Práctica 3 */}
+              <Card className="border-indigo-200 bg-gradient-to-br from-indigo-50 via-blue-50 to-white cursor-pointer" onClick={handlePractice3Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-indigo-200 flex items-center justify-center">
+                        <Wifi className="h-4 w-4 text-indigo-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-indigo-900">Práctica 3: Arquitectura Funcional (Movistar)</h4>
+                        <p className="text-sm text-indigo-700">
+                          {practice3Open
+                            ? 'Diseña el mapa de piezas del asistente de soporte técnico'
+                            : 'Canales, motor, KB/RAG, ticketing, seguridad, logs y handoff'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-indigo-700 transition-transform duration-300 ${
+                        practice3Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 3 */}
+              {practice3Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <MovistarPractice3 />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Sección de Actividades Externas - Desplegable */}
       {currentExternalActivities.length > 0 && (
@@ -1068,8 +1447,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
         </div>
       )}
 
-      {/* Secciones adicionales - Solo para Módulo 1 y 2 (NO Módulo 3) */}
-      {moduleSlug !== 'avatares-virtuales' && (
+      {/* Secciones adicionales - Solo para Módulo 1 y 2 (NO Módulo 3 ni Módulo 4) */}
+      {moduleSlug !== 'avatares-virtuales' && moduleSlug !== 'bots-asistentes' && (
         <>
       {/* Sección LLMs en LOCALHOST - Desplegable */}
       <div className="mt-8">

@@ -1,0 +1,88 @@
+{
+  "module": 4,
+  "title": "Módulo 4: Bots y Asistentes Virtuales",
+  "total_hours": 42,
+  "objectives": [
+    {
+      "section": "4.1. Introducción y Contexto Actual",
+      "items": [
+        "Explicar la evolución histórica de bots y asistentes virtuales desde ELIZA hasta GPT-4.",
+        "Diferenciar entre chatbots, voicebots, asistentes virtuales y agentes conversacionales.",
+        "Clasificar bots por tecnología: basados en reglas, basados en IA e híbridos.",
+        "Identificar sectores líderes en adopción de bots y casos de uso principales.",
+        "Evaluar beneficios clave: disponibilidad, escalabilidad, consistencia, eficiencia.",
+        "Reconocer desafíos actuales: expectativas, complejidad, integración, seguridad."
+      ]
+    },
+    {
+      "section": "4.2. Estrategia y Comparación: Internos vs. Externos",
+      "items": [
+        "Diferenciar asistentes internos (empleados) de externos (clientes) en objetivos y requisitos.",
+        "Identificar casos de uso típicos para asistentes internos: IT, RRHH, onboarding, formación.",
+        "Identificar casos de uso típicos para asistentes externos: atención al cliente, ventas, soporte.",
+        "Seleccionar plataformas adecuadas para cada tipo (Microsoft Copilot, Intercom, Dialogflow, etc.).",
+        "Definir métricas de éxito diferenciadas: eNPS vs CSAT, reducción de tickets vs conversión.",
+        "Diseñar estrategia híbrida que comparta infraestructura y gobernanza."
+      ]
+    },
+    {
+      "section": "4.3. Proceso de Creación de un Asistente Virtual",
+      "items": [
+        "Aplicar fase de descubrimiento: identificar caso de uso, definir alcance, analizar datos.",
+        "Diseñar conversacionalmente: personalidad, flujos, intents, entidades, manejo de errores.",
+        "Seleccionar plataforma técnica: Dialogflow, Bot Framework, Watson, Rasa, Landbot.",
+        "Configurar NLP: entrenar modelo, ajustar umbrales, definir entidades.",
+        "Implementar testing: funcional, conversacional, user acceptance testing.",
+        "Planificar despliegue gradual y operación con mejora continua."
+      ]
+    },
+    {
+      "section": "4.4. Avatares Virtuales y Experiencia Multimodal",
+      "items": [
+        "Definir experiencia multimodal y sus ventajas frente a interacción solo texto.",
+        "Combinar avatares virtuales con chatbots para mayor engagement.",
+        "Identificar tecnologías habilitadoras: Unity, Unreal Engine, D-ID, HeyGen.",
+        "Aplicar principios de diseño multimodal: redundancia, complementariedad, consistencia.",
+        "Evaluar consideraciones técnicas: latencia, ancho de banda, accesibilidad.",
+        "Seleccionar plataformas integradas: Synthesia, HeyGen API, Soul Machines."
+      ]
+    },
+    {
+      "section": "4.5. Ética, Seguridad y Futuro de los Asistentes",
+      "items": [
+        "Aplicar principios éticos: transparencia, privacidad, equidad, no manipulación.",
+        "Implementar medidas de seguridad: encriptación, autenticación, rate limiting.",
+        "Comprender regulación emergente: EU AI Act, GDPR, legislaciones sectoriales.",
+        "Identificar tendencias futuras: agentes autónomos, hiperpersonalización, multimodalidad.",
+        "Diseñar con enfoque humano-centrado: aumentar capacidades, no reemplazar.",
+        "Evaluar impacto social y laboral de la automatización conversacional."
+      ]
+    }
+  ],
+  "practices": [
+    {
+      "name": "Práctica 1: Diseño de Asistente Interno",
+      "description": "Crear especificación completa para asistente virtual de RRHH o IT",
+      "deliverables": ["Documento de descubrimiento", "Flujos conversacionales", "Lista de intents y entidades"],
+      "day": 3
+    },
+    {
+      "name": "Práctica 2: Prototipo en Plataforma",
+      "description": "Implementar prototipo funcional en Dialogflow o plataforma similar",
+      "deliverables": ["Bot funcional", "Demo de conversaciones", "Documentación técnica"],
+      "day": 5
+    },
+    {
+      "name": "Práctica 3: Asistente Multimodal con Avatar",
+      "description": "Integrar avatar virtual con asistente conversacional",
+      "deliverables": ["Avatar configurado", "Integración con chatbot", "Vídeo demo"],
+      "day": 7
+    }
+  ],
+  "evaluation": {
+    "participation": 20,
+    "practices": 40,
+    "final_project": 30,
+    "partial_test": 10
+  }
+}

@@ -810,13 +810,21 @@ Ahora clasifica: 'Calidad aceptable por el precio pagado'</pre>
   {
     id: 4,
     slug: 'bots-asistentes',
-    title: 'Módulo 4: Bots y Asistentes',
+    title: 'Módulo 4: Bots y Asistentes Virtuales',
     duration: '42 h',
     description: 'Creación, implementación y estrategia multimodal.',
     longDescription: 'Estrategia de asistentes internos vs externos, proceso de creación y ética en la automatización.',
     progress: 0,
     icon: Cpu,
-    resources: [],
+    resources: [
+      { title: 'Enlaces y Recursos (PDF)', file: '/materiales/tema4/02_enlaces_4_v01.pdf' },
+      { title: 'Enterprise AI Blueprint (PDF)', file: '/materiales/tema4/Enterprise_AI_Blueprint.pdf' },
+      { title: 'Guía Estratégica: Bots y Asistentes (PDF)', file: '/materiales/tema4/Guia_Estrategica_Bots_y_Asistentes.pdf' },
+      { title: 'Audio: La Ingeniería tras los Asistentes Virtuales (M4A)', file: '/materiales/tema4/La_ingenieria_tras_asistentes_virtuales.m4a' },
+      { title: 'Vídeo: Bots vs Asistentes (MP4)', file: '/materiales/tema4/Bots_vs_Asistentes.mp4' },
+      { title: 'Infografía: Bots vs Asistentes (PNG)', file: '/materiales/tema4/infografia-bots-vs-asistentes.png' },
+      { title: 'Línea de Tiempo: Evolución de Bots (PNG)', file: '/materiales/tema4/linea-tiempo-bots.png' }
+    ],
     content: `
       <h2>4.1. Introducción y Contexto Actual</h2>
       <h3>Evolución de los Bots y Asistentes</h3>

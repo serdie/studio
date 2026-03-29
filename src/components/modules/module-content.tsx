@@ -302,7 +302,11 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
       )}
 
       <Tabs defaultValue="content" className="w-full">
-        <TabsList className={`grid w-full ${module.slug === 'avatares-virtuales' ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-6' : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5'} h-auto p-1`}>
+        <TabsList className={`grid w-full ${
+          module.slug === 'avatares-virtuales' ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-6' : 
+          module.slug === 'bots-asistentes' ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5' :
+          'grid-cols-2 sm:grid-cols-3 md:grid-cols-5'
+        } h-auto p-1`}>
           <TabsTrigger value="content" className="flex items-center gap-2 py-2.5">
             <FileText className="h-4 w-4" />
             <span className="hidden sm:inline">Contenido</span>
@@ -321,10 +325,18 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               <span className="hidden sm:inline">Laboratorio</span>
             </TabsTrigger>
           )}
-          <TabsTrigger value="sound-exercises" className="flex items-center gap-2 py-2.5">
-            <Headphones className="h-4 w-4" />
-            <span className="hidden sm:inline">{module.slug === 'avatares-virtuales' ? 'Ejercicios Avatar' : 'Ejercicios Sonido'}</span>
-          </TabsTrigger>
+          {module.slug === 'avatares-virtuales' && (
+            <TabsTrigger value="sound-exercises" className="flex items-center gap-2 py-2.5">
+              <Headphones className="h-4 w-4" />
+              <span className="hidden sm:inline">Ejercicios Avatar</span>
+            </TabsTrigger>
+          )}
+          {module.slug === 'llms-generativa' && (
+            <TabsTrigger value="sound-exercises" className="flex items-center gap-2 py-2.5">
+              <Headphones className="h-4 w-4" />
+              <span className="hidden sm:inline">Ejercicios Sonido</span>
+            </TabsTrigger>
+          )}
           <TabsTrigger value="games" className="flex items-center gap-2 py-2.5">
             <Gamepad2 className="h-4 w-4" />
             <span className="hidden sm:inline">Juegos y Enlaces</span>
@@ -517,6 +529,93 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                 </Card>
               )}
 
+              {/* Sección de Videos Recomendados - Módulo 4 (Bots y Asistentes) */}
+              {module.slug === 'bots-asistentes' && (
+                <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-blue-50 to-indigo-50">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="h-12 w-12 rounded-xl bg-cyan-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-cyan-700"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m10 9 5 3-5 3z"/><path d="M2 8v8"/></svg>
+                      </div>
+                      <div>
+                        <CardTitle className="text-xl text-cyan-900">🎬 Videos Recomendados - Bots y Asistentes</CardTitle>
+                        <p className="text-sm text-cyan-700">Videos sobre Chatbots, NLP y Diseño Conversacional</p>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid gap-4 md:grid-cols-3">
+                      {/* Video 1: Cómo funcionan los chatbots */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/gXj55zpRoUE"
+                            title="Video 1: Cómo funcionan los chatbots"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-cyan-800 font-medium">
+                          📺 ¿Cómo funcionan los Chatbots?
+                        </p>
+                      </div>
+
+                      {/* Video 2: Dialogflow Tutorial */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/5MWT_doo68k"
+                            title="Video 2: Dialogflow Tutorial"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-cyan-800 font-medium">
+                          📺 Dialogflow para Principiantes
+                        </p>
+                      </div>
+
+                      {/* Video 3: Diseño Conversacional */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/1vI5n9Y0kXg"
+                            title="Video 3: Diseño Conversacional"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-cyan-800 font-medium">
+                          📺 Diseño de Conversaciones para Chatbots
+                        </p>
+                      </div>
+
+                      {/* Video 4: Ética en IA Conversacional */}
+                      <div className="space-y-2">
+                        <div className="aspect-video rounded-lg overflow-hidden bg-black">
+                          <iframe
+                            src="https://www.youtube.com/embed/OCdIvYcH3Gc"
+                            title="Video 4: Ética en IA"
+                            className="w-full h-full"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                        <p className="text-sm text-cyan-800 font-medium">
+                          📺 Ética en Asistentes Virtuales
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-cyan-600 text-center">
+                      💡 Consejo: Toma notas mientras ves los videos. Hay conceptos clave que usarás en las prácticas de diseño de flujos.
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+
               {/* Sección de Drones e IA - Módulo 3 (Avatares Virtuales) - Contenido COMPLETO */}
               {module.slug === 'avatares-virtuales' && (
                 <DronesGuide />
@@ -583,13 +682,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
           <PracticeLab />
         </TabsContent>
 
-          <TabsContent value="sound-exercises" className="mt-4">
-
+        <TabsContent value="sound-exercises" className="mt-4">
           {module.slug === 'avatares-virtuales' ? (
             <AvatarExercises />
-          ) : (
+          ) : module.slug === 'llms-generativa' ? (
             <SoundAIExercises />
-          )}
+          ) : null}
         </TabsContent>
 
         <TabsContent value="games" className="mt-4">
