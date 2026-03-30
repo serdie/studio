@@ -22,7 +22,7 @@ import DronesGuide from '../games/drones-guide';
 import ElizaRetroAssistant from '@/components/tools/eliza-retro-assistant';
 import AliceTerminalRetro from '@/components/tools/alice-terminal-retro';
 import IkeaPractice4 from '@/components/games/ikea-practice-4';
-import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker } from 'lucide-react';
+import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
 import { collection, query, where, orderBy } from 'firebase/firestore';
@@ -344,6 +344,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <Gamepad2 className="h-4 w-4" />
             <span className="hidden sm:inline">Juegos y Enlaces</span>
           </TabsTrigger>
+          {module.slug === 'bots-asistentes' && (
+            <TabsTrigger value="vibe-coding" className="flex items-center gap-2 py-2.5">
+              <Sparkles className="h-4 w-4" />
+              <span className="hidden sm:inline">Vibe Coding</span>
+            </TabsTrigger>
+          )}
         </TabsList>
 
         <TabsContent value="content" className="mt-4">
@@ -718,6 +724,179 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         <TabsContent value="games" className="mt-4">
           <GamesSection moduleSlug={module.slug} />
         </TabsContent>
+
+        {/* Vibe Coding - Solo Módulo 4 */}
+        {module.slug === 'bots-asistentes' && (
+          <TabsContent value="vibe-coding" className="mt-4">
+            <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-pink-50 to-white shadow-md">
+              <CardHeader className="pb-3">
+                <div className="flex items-center gap-3">
+                  <div className="h-12 w-12 rounded-xl bg-purple-200 flex items-center justify-center">
+                    <Sparkles className="h-6 w-6 text-purple-700" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-xl text-purple-900">🚀 Vibe Coding - Herramientas de Desarrollo con IA</CardTitle>
+                    <p className="text-sm text-purple-700">Plataformas para crear aplicaciones y prototipos usando inteligencia artificial</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  {/* Readdy.ai */}
+                  <a
+                    href="https://readdy.ai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-purple-200 bg-white hover:border-purple-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                        <Sparkles className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-purple-900 group-hover:text-purple-700">Readdy.ai</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Genera interfaces de usuario completas a partir de descripciones en lenguaje natural. Prototipado rápido con IA.
+                    </p>
+                  </a>
+
+                  {/* Lovable.dev */}
+                  <a
+                    href="https://lovable.dev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-pink-200 bg-white hover:border-pink-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center">
+                        <Heart className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-pink-900 group-hover:text-pink-700">Lovable.dev</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Crea aplicaciones web completas describiendo lo que necesitas. IA que escribe código por ti.
+                    </p>
+                  </a>
+
+                  {/* Stitch (Google) */}
+                  <a
+                    href="https://stitch.withgoogle.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-blue-200 bg-white hover:border-blue-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                        <Palette className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-blue-900 group-hover:text-blue-700">Stitch (Google)</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Experimento de Google para diseño asistido por IA. Explora el futuro del diseño de interfaces.
+                    </p>
+                  </a>
+
+                  {/* Websim */}
+                  <a
+                    href="https://websim.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-purple-200 bg-white hover:border-purple-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center">
+                        <Globe className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-purple-900 group-hover:text-purple-700">Websim</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Simulador web que genera páginas y aplicaciones funcionales a partir de prompts de texto.
+                    </p>
+                  </a>
+
+                  {/* Google AI Studio */}
+                  <a
+                    href="https://aistudio.google.com/apps"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-cyan-200 bg-white hover:border-cyan-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                        <Brain className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-cyan-900 group-hover:text-cyan-700">Google AI Studio</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Plataforma de Google para prototipar con modelos Gemini. Crea apps con IA generativa.
+                    </p>
+                  </a>
+
+                  {/* Rocket.new */}
+                  <a
+                    href="https://www.rocket.new/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-green-200 bg-white hover:border-green-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                        <Rocket className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-green-900 group-hover:text-green-700">Rocket.new</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Generador de sitios web con IA. Describe tu proyecto y obtén un sitio funcional en segundos.
+                    </p>
+                  </a>
+
+                  {/* Figma */}
+                  <a
+                    href="https://www.figma.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-purple-200 bg-white hover:border-purple-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-purple-700 to-pink-600 flex items-center justify-center">
+                        <PenTool className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-purple-900 group-hover:text-purple-700">Figma</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Herramienta de diseño colaborativo. Ahora con funciones de IA para generar diseños y componentes.
+                    </p>
+                  </a>
+
+                  {/* Notion */}
+                  <a
+                    href="https://www.notion.so/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-slate-200 bg-white hover:border-slate-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
+                        <FileText className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-slate-900 group-hover:text-slate-700">Notion</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Espacio de trabajo todo-en-uno con IA integrada. Documentación, notas y gestión de proyectos.
+                    </p>
+                  </a>
+                </div>
+
+                <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                  <p className="text-sm text-purple-800">
+                    <strong>💡 Consejo:</strong> Estas herramientas te permiten prototipar y crear aplicaciones usando solo descripciones en lenguaje natural. 
+                    ¡Perfectas para materializar rápidamente las ideas de tus asistentes virtuales!
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        )}
       </Tabs>
     </div>
   );
