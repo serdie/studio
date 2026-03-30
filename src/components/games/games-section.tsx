@@ -44,6 +44,7 @@ import MetricsMatcherGame from './metrics-matcher-game';
 import SanitasPractice1 from './sanitas-practice-1';
 import AenaPractice2 from './aena-practice-2';
 import MovistarPractice3 from './movistar-practice-3';
+import IkeaPractice4 from './ikea-practice-4';
 
 interface GameItem {
   id: string;
@@ -959,6 +960,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [practice1Open, setPractice1Open] = useState(false); // Desplegable Práctica 1
   const [practice2Open, setPractice2Open] = useState(false); // Desplegable Práctica 2
   const [practice3Open, setPractice3Open] = useState(false); // Desplegable Práctica 3
+  const [practice4Open, setPractice4Open] = useState(false); // Desplegable Práctica 4
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -975,6 +977,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handlePractice3Toggle = () => {
     setPractice3Open(!practice3Open);
+  };
+
+  const handlePractice4Toggle = () => {
+    setPractice4Open(!practice4Open);
   };
 
   const handlePracticesToggle = () => {
@@ -1144,8 +1150,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                     <h3 className="text-lg font-bold text-emerald-900">📋 Prácticas del Módulo 4</h3>
                     <p className="text-sm text-emerald-700">
                       {practicesOpen
-                        ? '3 prácticas disponibles: Brief Sanitas, KPIs Aena y Arquitectura Movistar'
-                        : 'Práctica 1: Brief Sanitas · Práctica 2: KPIs Aena · Práctica 3: Arquitectura Movistar - Haz clic para ver'}
+                        ? '4 prácticas disponibles: Brief Sanitas, KPIs Aena, Arquitectura Movistar y Backlog IKEA'
+                        : 'Práctica 1: Brief Sanitas · Práctica 2: KPIs Aena · Práctica 3: Arquitectura Movistar · Práctica 4: Backlog IKEA - Haz clic para ver'}
                     </p>
                   </div>
                 </div>
@@ -1257,6 +1263,39 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
               {practice3Open && (
                 <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
                   <MovistarPractice3 />
+                </div>
+              )}
+
+              {/* Práctica 4 */}
+              <Card className="border-yellow-200 bg-gradient-to-br from-yellow-50 via-amber-50 to-white cursor-pointer" onClick={handlePractice4Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-yellow-200 flex items-center justify-center">
+                        <ClipboardList className="h-4 w-4 text-yellow-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-yellow-900">Práctica 4: Backlog y Checklist MVP (IKEA)</h4>
+                        <p className="text-sm text-yellow-700">
+                          {practice4Open
+                            ? 'Crea el backlog de 12 casos de uso y checklist MVP con 15 pruebas'
+                            : '12 ítems priorizados + 15 pruebas (5/5/5) + controles de transparencia'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-yellow-700 transition-transform duration-300 ${
+                        practice4Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 4 */}
+              {practice4Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <IkeaPractice4 />
                 </div>
               )}
             </div>

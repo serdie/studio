@@ -21,6 +21,7 @@ import Module3Summary from './module-3-summary';
 import DronesGuide from '../games/drones-guide';
 import ElizaRetroAssistant from '@/components/tools/eliza-retro-assistant';
 import AliceTerminalRetro from '@/components/tools/alice-terminal-retro';
+import IkeaPractice4 from '@/components/games/ikea-practice-4';
 import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
