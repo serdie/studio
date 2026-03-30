@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Separator } from '@/components/ui/separator';
 import type { Module, Resource } from '@/lib/data';
 import ResourceList from './resource-list';
 import AISummarizer from './ai-summarizer';
@@ -22,7 +23,8 @@ import DronesGuide from '../games/drones-guide';
 import ElizaRetroAssistant from '@/components/tools/eliza-retro-assistant';
 import AliceTerminalRetro from '@/components/tools/alice-terminal-retro';
 import IkeaPractice4 from '@/components/games/ikea-practice-4';
-import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool, Brain } from 'lucide-react';
+import VibePromptStudio from '@/components/tools/vibe-prompt-studio';
+import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool, Brain, Moon, ExternalLink, Code2 } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
 import { collection, query, where, orderBy } from 'firebase/firestore';
@@ -885,14 +887,99 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                       Espacio de trabajo todo-en-uno con IA integrada. Documentación, notas y gestión de proyectos.
                     </p>
                   </a>
+
+                  {/* v0.app */}
+                  <a
+                    href="https://v0.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-slate-200 bg-white hover:border-slate-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center">
+                        <Code2 className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-slate-900 group-hover:text-slate-700">v0.app</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Generador de UI con IA de Vercel. Crea componentes React con Tailwind CSS usando prompts de texto.
+                    </p>
+                  </a>
+
+                  {/* NxCode */}
+                  <a
+                    href="https://www.nxcode.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-indigo-200 bg-white hover:border-indigo-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                        <ExternalLink className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-indigo-900 group-hover:text-indigo-700">NxCode</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Asistente de código con IA para desarrollo web. Autocompletado inteligente y generación de código.
+                    </p>
+                  </a>
+
+                  {/* UXPilot */}
+                  <a
+                    href="https://uxpilot.ai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-pink-200 bg-white hover:border-pink-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+                        <Palette className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-pink-900 group-hover:text-pink-700">UXPilot.ai</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Herramienta de diseño UX asistida por IA. Genera wireframes, user flows y documentación de diseño.
+                    </p>
+                  </a>
                 </div>
 
                 <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
                   <p className="text-sm text-purple-800">
-                    <strong>💡 Consejo:</strong> Estas herramientas te permiten prototipar y crear aplicaciones usando solo descripciones en lenguaje natural. 
+                    <strong>💡 Consejo:</strong> Estas herramientas te permiten prototipar y crear aplicaciones usando solo descripciones en lenguaje natural.
                     ¡Perfectas para materializar rápidamente las ideas de tus asistentes virtuales!
                   </p>
                 </div>
+
+                <Separator className="my-6 bg-purple-200" />
+
+                {/* Vibe Prompt Studio - Desplegable */}
+                <Collapsible className="border border-purple-200 rounded-xl bg-gradient-to-br from-purple-50/50 via-white to-pink-50/50">
+                  <CollapsibleTrigger asChild>
+                    <Card className="cursor-pointer hover:shadow-lg transition-shadow border-0 bg-transparent">
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-green-400 via-cyan-400 to-purple-500 flex items-center justify-center shadow-lg shadow-cyan-500/30">
+                              <Sparkles className="h-6 w-6 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-lg font-bold text-purple-900">🎨 Vibe Prompt Studio · Generador Profesional de Prompts</h3>
+                              <p className="text-sm text-purple-700">Crea prompts de nivel senior para Vibe Coding, Lovable, Readdy y otros asistentes de código</p>
+                            </div>
+                          </div>
+                          <Button variant="ghost" size="sm" className="text-purple-600">
+                            <ChevronDown className="h-5 w-5" />
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <div className="p-4">
+                      <VibePromptStudio />
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
               </CardContent>
             </Card>
           </TabsContent>

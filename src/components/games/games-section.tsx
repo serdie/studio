@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -46,6 +46,7 @@ import AenaPractice2 from './aena-practice-2';
 import MovistarPractice3 from './movistar-practice-3';
 import IkeaPractice4 from './ikea-practice-4';
 import TelefonicaPractice5 from './telefonica-practice-5';
+import SeurPractice6 from './seur-practice-6';
 
 interface GameItem {
   id: string;
@@ -963,6 +964,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [practice3Open, setPractice3Open] = useState(false); // Desplegable Práctica 3
   const [practice4Open, setPractice4Open] = useState(false); // Desplegable Práctica 4
   const [practice5Open, setPractice5Open] = useState(false); // Desplegable Práctica 5
+  const [practice6Open, setPractice6Open] = useState(false); // Desplegable Práctica 6
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -987,6 +989,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handlePractice5Toggle = () => {
     setPractice5Open(!practice5Open);
+  };
+
+  const handlePractice6Toggle = () => {
+    setPractice6Open(!practice6Open);
   };
 
   const handlePracticesToggle = () => {
@@ -1156,8 +1162,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                     <h3 className="text-lg font-bold text-emerald-900">📋 Prácticas del Módulo 4</h3>
                     <p className="text-sm text-emerald-700">
                       {practicesOpen
-                        ? '5 prácticas disponibles: Brief Sanitas, KPIs Aena, Arquitectura Movistar, Backlog IKEA y Comparativa Telefónica'
-                        : 'Práctica 1: Brief Sanitas · Práctica 2: KPIs Aena · Práctica 3: Arquitectura Movistar · Práctica 4: Backlog IKEA · Práctica 5: Comparativa Telefónica - Haz clic para ver'}
+                        ? '6 prácticas disponibles: Brief Sanitas, KPIs Aena, Arquitectura Movistar, Backlog IKEA, Comparativa Telefónica e Intents SEUR'
+                        : 'Práctica 1: Brief Sanitas · Práctica 2: KPIs Aena · Práctica 3: Arquitectura Movistar · Práctica 4: Backlog IKEA · Práctica 5: Comparativa Telefónica · Práctica 6: Intents SEUR - Haz clic para ver'}
                     </p>
                   </div>
                 </div>
@@ -1335,6 +1341,39 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
               {practice5Open && (
                 <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
                   <TelefonicaPractice5 />
+                </div>
+              )}
+
+              {/* Práctica 6 */}
+              <Card className="border-green-200 bg-gradient-to-br from-green-50 via-emerald-50 to-white cursor-pointer" onClick={handlePractice6Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-green-200 flex items-center justify-center">
+                        <Package className="h-4 w-4 text-green-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-green-900">Práctica 6: Intents, Entidades y Dataset (SEUR)</h4>
+                        <p className="text-sm text-green-700">
+                          {practice6Open
+                            ? 'Define 3 intents, 6 entidades y dataset de 40+10 frases'
+                            : '3 intents de acción + 6 entidades mínimas + 40 frases etiquetadas + 10 trampa'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-green-700 transition-transform duration-300 ${
+                        practice6Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 6 */}
+              {practice6Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <SeurPractice6 />
                 </div>
               )}
             </div>
