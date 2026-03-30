@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2 } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -45,6 +45,7 @@ import SanitasPractice1 from './sanitas-practice-1';
 import AenaPractice2 from './aena-practice-2';
 import MovistarPractice3 from './movistar-practice-3';
 import IkeaPractice4 from './ikea-practice-4';
+import TelefonicaPractice5 from './telefonica-practice-5';
 
 interface GameItem {
   id: string;
@@ -961,6 +962,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [practice2Open, setPractice2Open] = useState(false); // Desplegable Práctica 2
   const [practice3Open, setPractice3Open] = useState(false); // Desplegable Práctica 3
   const [practice4Open, setPractice4Open] = useState(false); // Desplegable Práctica 4
+  const [practice5Open, setPractice5Open] = useState(false); // Desplegable Práctica 5
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -981,6 +983,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handlePractice4Toggle = () => {
     setPractice4Open(!practice4Open);
+  };
+
+  const handlePractice5Toggle = () => {
+    setPractice5Open(!practice5Open);
   };
 
   const handlePracticesToggle = () => {
@@ -1150,8 +1156,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                     <h3 className="text-lg font-bold text-emerald-900">📋 Prácticas del Módulo 4</h3>
                     <p className="text-sm text-emerald-700">
                       {practicesOpen
-                        ? '4 prácticas disponibles: Brief Sanitas, KPIs Aena, Arquitectura Movistar y Backlog IKEA'
-                        : 'Práctica 1: Brief Sanitas · Práctica 2: KPIs Aena · Práctica 3: Arquitectura Movistar · Práctica 4: Backlog IKEA - Haz clic para ver'}
+                        ? '5 prácticas disponibles: Brief Sanitas, KPIs Aena, Arquitectura Movistar, Backlog IKEA y Comparativa Telefónica'
+                        : 'Práctica 1: Brief Sanitas · Práctica 2: KPIs Aena · Práctica 3: Arquitectura Movistar · Práctica 4: Backlog IKEA · Práctica 5: Comparativa Telefónica - Haz clic para ver'}
                     </p>
                   </div>
                 </div>
@@ -1296,6 +1302,39 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
               {practice4Open && (
                 <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
                   <IkeaPractice4 />
+                </div>
+              )}
+
+              {/* Práctica 5 */}
+              <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-blue-50 to-white cursor-pointer" onClick={handlePractice5Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-cyan-200 flex items-center justify-center">
+                        <Building2 className="h-4 w-4 text-cyan-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-cyan-900">Práctica 5: Comparativa Interno vs Externo (Telefónica)</h4>
+                        <p className="text-sm text-cyan-700">
+                          {practice5Open
+                            ? 'Redacta especificaciones para asistentes interno y externo'
+                            : '10 diferencias + 12 microcopys (6+6) + 3 frases prohibidas'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-cyan-700 transition-transform duration-300 ${
+                        practice5Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 5 */}
+              {practice5Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <TelefonicaPractice5 />
                 </div>
               )}
             </div>
