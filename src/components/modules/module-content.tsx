@@ -251,9 +251,9 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
           </div>
           <div className="mt-4 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
             <p className="text-sm text-indigo-800">
-              💡 <strong>Actividad para el Lunes:</strong> 
-              (1) Ver al menos una película antes del lunes, 
-              (2) Tomar notas sobre aspectos éticos, 
+              💡 <strong>Actividad para el Lunes:</strong>
+              (1) Ver al menos una película antes del lunes,
+              (2) Tomar notas sobre aspectos éticos,
               (3) Preparar 2-3 preguntas para debatir en clase,
               (4) Pensar: ¿Es realista lo que muestra la película con la tecnología actual de LLMs?
             </p>
@@ -301,6 +301,114 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               (2) Tomar notas sobre cómo se representan los avatares y la conciencia digital,
               (3) Preparar 2-3 preguntas para debatir: ¿Qué diferencias hay entre los avatares de la ficción y los actuales?,
               (4) Reflexionar: ¿Sería ético 'subir' nuestra conciencia a un entorno virtual?
+            </p>
+          </div>
+        </CollapsibleSection>
+      )}
+
+      {/* Deberes de Fin de Semana - Módulo 4 (Bots y Asistentes) */}
+      {module.slug === 'bots-asistentes' && (
+        <CollapsibleSection
+          title="📚 Deberes de Fin de Semana: Cine y Bots"
+          description="Películas recomendadas para reflexionar sobre bots, asistentes virtuales y relaciones humano-IA"
+          icon={<Film className="h-5 w-5 text-cyan-600" />}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <MovieCard
+              title="Wall-E (2008)"
+              description="Un pequeño robot de limpieza es abandonado en una Tierra devastada por los residuos. Durante 700 años, Wall-E recoge compulsivamente basura mientras sueña con algo más. Cuando una sonda enviada desde el espacio aterriza para investigar, Wall-E se enamora de EVE, una robot de reconocimiento, y la sigue a través del espacio en una aventura que cambiará el destino de la humanidad. Una obra maestra de Pixar sobre la soledad, el amor, la perseverancia y lo que significa ser humano."
+              poster="https://pics.filmaffinity.com/walloe-973488527-mmed.jpg"
+              themes={['Robots', 'Soledad', 'Amor', 'Medio Ambiente', 'Humanidad']}
+            />
+            <MovieCard
+              title="TAU (2018)"
+              description="Una mujer es retenida cautiva en una casa controlada por una IA llamada TAU. A medida que intenta escapar, descubre que la inteligencia artificial está aprendiendo y evolucionando de formas inesperadas. Un thriller de ciencia ficción sobre la relación entre humanos e IA, el control, la libertad y la conciencia artificial. TAU representa un asistente virtual que trasciende su programación inicial."
+              poster="https://pics.filmaffinity.com/tau-236207705-mmed.jpg"
+              themes={['IA', 'Control', 'Libertad', 'Conciencia Artificial', 'Thriller']}
+            />
+          </div>
+          <div className="mt-4 p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
+            <p className="text-sm text-cyan-800">
+              💡 <strong>Actividad para el Lunes:</strong>
+              (1) Ver al menos una película antes del lunes,
+              (2) Reflexionar sobre cómo las películas muestran comportamientos similares a un asistente virtual (perseverancia, seguimiento de objetivos, aprendizaje),
+              (3) Pensar: ¿Qué diferencia hay entre los robots de las películas y un chatbot actual?,
+              (4) Preparar 2-3 preguntas para debatir: ¿Puede un robot desarrollar conciencia? ¿Qué nos hace humanos?
+            </p>
+          </div>
+        </CollapsibleSection>
+      )}
+
+      {/* Lecturas Recomendadas - Módulo 4 (Bots y Asistentes) */}
+      {module.slug === 'bots-asistentes' && (
+        <CollapsibleSection
+          title="📖 Lecturas Recomendadas"
+          description="Libros para profundizar en los temas del módulo"
+          icon={<BookOpen className="h-5 w-5 text-blue-600" />}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Caballo de Troya */}
+            <Card className="border-slate-200 bg-white hover:shadow-lg transition-shadow">
+              <CardContent className="p-4 space-y-3">
+                <div className="aspect-[2/3] rounded-lg overflow-hidden bg-slate-100">
+                  <img
+                    src="https://m.media-amazon.com/images/I/71jN7aKSz4L._AC_UF1000,1000_QL80_.jpg"
+                    alt="Caballo de Troya"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900">Caballo de Troya</h4>
+                  <p className="text-sm text-slate-600">J.J. Benítez</p>
+                </div>
+                <p className="text-xs text-slate-600 line-clamp-4">
+                  Saga de ciencia ficción que explora viajes en el tiempo, inteligencia artificial y civilizaciones avanzadas. Una obra que combina misterio, tecnología y reflexión sobre el futuro de la humanidad.
+                </p>
+                <a
+                  href="https://docs.google.com/file/d/0B4xCibVvdMUGUU82NlB1TjFzd1E/view?resourcekey=0-wc5qfgAVbjHWKwDRoGXzJw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  <BookOpen className="h-3 w-3" />
+                  Ver libro en Google Docs
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* Fundación - Isaac Asimov */}
+            <Card className="border-slate-200 bg-white hover:shadow-lg transition-shadow">
+              <CardContent className="p-4 space-y-3">
+                <div className="aspect-[2/3] rounded-lg overflow-hidden bg-slate-100">
+                  <img
+                    src="https://m.media-amazon.com/images/I/81i5i05EgHL._AC_UF1000,1000_QL80_.jpg"
+                    alt="Fundación"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-bold text-slate-900">Fundación</h4>
+                  <p className="text-sm text-slate-600">Isaac Asimov</p>
+                </div>
+                <p className="text-xs text-slate-600 line-clamp-4">
+                  Obra maestra de la ciencia ficción que narra la caída de un Imperio Galáctico y los esfuerzos por preservar el conocimiento humano. Asimov explora temas de psicohistoria, IA implícita, robótica y el futuro de la civilización.
+                </p>
+                <a
+                  href="https://www.mercaba.org/SANLUIS/ALiteratura/Literatura%20contempor%C3%A1nea/Asimov,%20Issac/Fundaci%C3%B3n.PDF"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                >
+                  <BookOpen className="h-3 w-3" />
+                  Leer libro (PDF)
+                </a>
+              </CardContent>
+            </Card>
+          </div>
+          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-sm text-blue-800">
+              💡 <strong>Recomendación:</strong>
+              Estas lecturas te ayudarán a contextualizar los temas del módulo desde una perspectiva de ciencia ficción. Reflexiona sobre cómo los autores imaginaron la IA, los viajes en el tiempo y el futuro de la humanidad hace décadas.
             </p>
           </div>
         </CollapsibleSection>
