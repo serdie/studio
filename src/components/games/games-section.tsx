@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package, AlertTriangle, ShoppingCart, Database, Link, Calendar, UserCheck, BookOpen, Rocket, Lock, Eye, BarChart3, RefreshCw, Play, Users, Key, Bug } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package, AlertTriangle, ShoppingCart, Database, Link, Calendar, UserCheck, BookOpen, Rocket, Lock, Eye, BarChart3, RefreshCw, Play, Users, Key, Bug, LayoutGrid } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
