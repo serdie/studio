@@ -1,535 +1,486 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {
   Plus,
   X,
-  Image as ImageIcon,
-  Palette,
-  LayoutGrid,
-  Download,
+  Shuffle,
   Trash2,
+  Moon,
+  Sun,
+  LayoutGrid,
   Sparkles,
-  Upload,
-  Eye,
-  Edit3
+  GripVertical,
+  Palette
 } from 'lucide-react';
 
-interface PostIt {
+const COLORS = [
+  { name: 'Amarillo', value: '#f8ee8e' },
+  { name: 'Rosa', value: '#ffb3cd' },
+  { name: 'Azul', value: '#9edbf5' },
+  { name: 'Verde', value: '#bce7a3' },
+  { name: 'Naranja', value: '#ffc58b' },
+  { name: 'Lila', value: '#d6b8ff' },
+];
+
+const ZONES = [
+  { id: 'socios', title: 'Socios clave', icon: '👥', hint: 'Arrastra aquí ideas sobre partners y alianzas' },
+  { id: 'actividades', title: 'Actividades clave', icon: '🧩', hint: '' },
+  { id: 'recursos', title: 'Recursos clave', icon: '🛠️', hint: '' },
+  { id: 'valor', title: 'Propuesta de valor', icon: '💎', hint: '' },
+  { id: 'relaciones', title: 'Relaciones con clientes', icon: '💬', hint: '' },
+  { id: 'canales', title: 'Canales', icon: '🔗', hint: '' },
+  { id: 'segmentos', title: 'Segmentos de clientes', icon: '🧑\u200d🤝\u200d🧑', hint: '' },
+  { id: 'costes', title: 'Estructura de costes', icon: '📉', hint: '' },
+  { id: 'ingresos', title: 'Fuentes de ingresos', icon: '💰', hint: '' },
+];
+
+const EXAMPLES = [
+  { text: 'Acuerdos con proveedores logísticos', color: '#9edbf5', zone: 'socios' },
+  { text: 'Montaje y entrega eficiente', color: '#bce7a3', zone: 'actividades' },
+  { text: 'Equipo de atención al cliente', color: '#ffc58b', zone: 'recursos' },
+  { text: 'Diseño funcional a precio accesible', color: '#f8ee8e', zone: 'valor' },
+  { text: 'Chat, teléfono y tienda física', color: '#ffb3cd', zone: 'relaciones' },
+  { text: 'Web, app y tiendas', color: '#d6b8ff', zone: 'canales' },
+  { text: 'Familias jóvenes y hogares urbanos', color: '#f8ee8e', zone: 'segmentos' },
+  { text: 'Coste de almacén y transporte', color: '#ffc58b', zone: 'costes' },
+  { text: 'Venta de muebles y servicios extra', color: '#bce7a3', zone: 'ingresos' },
+];
+
+interface StickyNote {
   id: string;
   text: string;
   color: string;
-  image?: string;
+  zone: string;
+  x: number;
+  y: number;
+  rotation: number;
 }
-
-interface CanvasSection {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  postIts: PostIt[];
-  gridArea: string;
-  borderColor: string;
-  bgColor: string;
-}
-
-const POST_IT_COLORS = [
-  { name: 'Amarillo', value: '#fef08a' },
-  { name: 'Rosa', value: '#fecdd3' },
-  { name: 'Azul', value: '#bfdbfe' },
-  { name: 'Verde', value: '#bbf7d0' },
-  { name: 'Naranja', value: '#fed7aa' },
-  { name: 'Morado', value: '#e9d5ff' },
-  { name: 'Cyan', value: '#cffafe' },
-  { name: 'Rojo', value: '#fecaca' },
-];
-
-const initialSections: CanvasSection[] = [
-  {
-    id: 'partners',
-    title: 'Socios Clave',
-    subtitle: 'Key Partners',
-    description: '¿Quiénes son nuestros socios y proveedores clave? ¿Qué recursos obtenemos de ellos?',
-    postIts: [],
-    gridArea: '1 / 1 / 3 / 2',
-    borderColor: 'border-purple-300',
-    bgColor: 'from-purple-50 to-purple-100/50',
-  },
-  {
-    id: 'activities',
-    title: 'Actividades Clave',
-    subtitle: 'Key Activities',
-    description: '¿Qué actividades debe realizar nuestro negocio para funcionar?',
-    postIts: [],
-    gridArea: '1 / 2 / 2 / 3',
-    borderColor: 'border-blue-300',
-    bgColor: 'from-blue-50 to-blue-100/50',
-  },
-  {
-    id: 'resources',
-    title: 'Recursos Clave',
-    subtitle: 'Key Resources',
-    description: '¿Qué recursos indispensables necesitamos para crear valor?',
-    postIts: [],
-    gridArea: '2 / 2 / 3 / 3',
-    borderColor: 'border-cyan-300',
-    bgColor: 'from-cyan-50 to-cyan-100/50',
-  },
-  {
-    id: 'value',
-    title: 'Propuestas de Valor',
-    subtitle: 'Value Propositions',
-    description: '¿Qué valor ofrecemos al cliente? ¿Qué problema resolvemos?',
-    postIts: [],
-    gridArea: '1 / 3 / 3 / 4',
-    borderColor: 'border-green-300',
-    bgColor: 'from-green-50 to-green-100/50',
-  },
-  {
-    id: 'relationships',
-    title: 'Relaciones con Clientes',
-    subtitle: 'Customer Relationships',
-    description: '¿Qué tipo de relación espera cada segmento de clientes?',
-    postIts: [],
-    gridArea: '1 / 4 / 3 / 5',
-    borderColor: 'border-amber-300',
-    bgColor: 'from-amber-50 to-amber-100/50',
-  },
-  {
-    id: 'channels',
-    title: 'Canales',
-    subtitle: 'Channels',
-    description: '¿Cómo llegan nuestras propuestas de valor a los clientes?',
-    postIts: [],
-    gridArea: '1 / 5 / 3 / 6',
-    borderColor: 'border-orange-300',
-    bgColor: 'from-orange-50 to-orange-100/50',
-  },
-  {
-    id: 'segments',
-    title: 'Segmentos de Clientes',
-    subtitle: 'Customer Segments',
-    description: '¿Para quién creamos valor? ¿Quiénes son nuestros clientes más importantes?',
-    postIts: [],
-    gridArea: '1 / 6 / 3 / 7',
-    borderColor: 'border-red-300',
-    bgColor: 'from-red-50 to-red-100/50',
-  },
-  {
-    id: 'costs',
-    title: 'Estructura de Costes',
-    subtitle: 'Cost Structure',
-    description: '¿Cuáles son los costes más importantes de nuestro modelo de negocio?',
-    postIts: [],
-    gridArea: '3 / 1 / 4 / 4',
-    borderColor: 'border-slate-300',
-    bgColor: 'from-slate-50 to-slate-100/50',
-  },
-  {
-    id: 'revenue',
-    title: 'Fuentes de Ingresos',
-    subtitle: 'Revenue Streams',
-    description: '¿Por qué valor están dispuestos a pagar nuestros clientes? ¿Cómo pagan?',
-    postIts: [],
-    gridArea: '3 / 4 / 4 / 7',
-    borderColor: 'border-emerald-300',
-    bgColor: 'from-emerald-50 to-emerald-100/50',
-  },
-];
 
 export default function BusinessModelCanvas() {
-  const [sections, setSections] = useState<CanvasSection[]>(initialSections);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [newText, setNewText] = useState('');
-  const [selectedColor, setSelectedColor] = useState(POST_IT_COLORS[0].value);
-  const [showColorPicker, setShowColorPicker] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [editText, setEditText] = useState('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [uploadingSection, setUploadingSection] = useState<string | null>(null);
+  const [stickies, setStickies] = useState<StickyNote[]>([
+    { id: 'note-1', text: 'Escribe tu primera idea aquí', color: '#f8ee8e', zone: 'valor', x: 40, y: 50, rotation: -1.5 },
+  ]);
+  const [noteText, setNoteText] = useState('');
+  const [selectedColor, setSelectedColor] = useState(COLORS[0].value);
+  const [selectedZone, setSelectedZone] = useState('valor');
+  const [isDark, setIsDark] = useState(false);
+  const [draggingId, setDraggingId] = useState<string | null>(null);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [hoverZone, setHoverZone] = useState<string | null>(null);
+  const boardRef = useRef<HTMLDivElement>(null);
+  const nextId = useRef(2);
 
-  const addPostIt = (sectionId: string) => {
-    if (!newText.trim()) return;
-
-    const postIt: PostIt = {
-      id: `${sectionId}-${Date.now()}`,
-      text: newText.trim(),
-      color: selectedColor,
-    };
-
-    setSections(prev =>
-      prev.map(s =>
-        s.id === sectionId ? { ...s, postIts: [...s.postIts, postIt] } : s
-      )
-    );
-    setNewText('');
-  };
-
-  const removePostIt = (sectionId: string, postItId: string) => {
-    setSections(prev =>
-      prev.map(s =>
-        s.id === sectionId
-          ? { ...s, postIts: s.postIts.filter(p => p.id !== postItId) }
-          : s
-      )
-    );
-  };
-
-  const startEditing = (postItId: string, currentText: string) => {
-    setEditingId(postItId);
-    setEditText(currentText);
-  };
-
-  const saveEdit = (sectionId: string, postItId: string) => {
-    if (!editText.trim()) return;
-    setSections(prev =>
-      prev.map(s =>
-        s.id === sectionId
-          ? {
-              ...s,
-              postIts: s.postIts.map(p =>
-                p.id === postItId ? { ...p, text: editText.trim() } : p
-              ),
-            }
-          : s
-      )
-    );
-    setEditingId(null);
-    setEditText('');
-  };
-
-  const handleImageUpload = useCallback((sectionId: string, e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploadingSection(sectionId);
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const imageData = event.target?.result as string;
-      const postIt: PostIt = {
-        id: `${sectionId}-img-${Date.now()}`,
-        text: `📷 ${file.name}`,
-        color: POST_IT_COLORS[0].value,
-        image: imageData,
-      };
-      setSections(prev =>
-        prev.map(s =>
-          s.id === sectionId ? { ...s, postIts: [...s.postIts, postIt] } : s
-        )
-      );
-      setUploadingSection(null);
-    };
-    reader.readAsDataURL(file);
+  const randomPos = useCallback((zoneId: string) => {
+    const zoneEl = document.querySelector(`[data-zone="${zoneId}"] .notes-layer`);
+    if (!zoneEl) return { x: 10, y: 10 };
+    const w = Math.max(zoneEl.clientWidth - 160, 10);
+    const h = Math.max(zoneEl.clientHeight - 120, 10);
+    return { x: Math.round(Math.random() * w), y: Math.round(Math.random() * h) };
   }, []);
 
-  const clearAll = () => {
-    setSections(initialSections.map(s => ({ ...s, postIts: [] })));
-    setActiveSection(null);
-    setNewText('');
+  const addSticky = () => {
+    const pos = randomPos(selectedZone);
+    const newSticky: StickyNote = {
+      id: `note-${nextId.current++}`,
+      text: noteText.trim() || 'Nueva idea',
+      color: selectedColor,
+      zone: selectedZone,
+      x: pos.x,
+      y: pos.y,
+      rotation: Math.round((Math.random() * 5 - 2.5) * 100) / 100,
+    };
+    setStickies(prev => [...prev, newSticky]);
+    setNoteText('');
   };
 
-  const getTotalPostIts = () => {
-    return sections.reduce((total, s) => total + s.postIts.length, 0);
+  const removeSticky = (id: string) => {
+    setStickies(prev => prev.filter(s => s.id !== id));
   };
 
-  const getSectionPostIts = (sectionId: string) => {
-    return sections.find(s => s.id === sectionId)?.postIts || [];
+  const cycleColor = (id: string) => {
+    setStickies(prev => prev.map(s => {
+      if (s.id !== id) return s;
+      const idx = COLORS.findIndex(c => c.value === s.color);
+      const next = COLORS[(idx + 1) % COLORS.length];
+      return { ...s, color: next.value };
+    }));
   };
+
+  const clearBoard = () => setStickies([]);
+
+  const shufflePositions = () => {
+    setStickies(prev => prev.map(s => {
+      const pos = randomPos(s.zone);
+      return { ...s, x: pos.x, y: pos.y, rotation: Math.round((Math.random() * 5 - 2.5) * 100) / 100 };
+    }));
+  };
+
+  const loadExamples = () => {
+    const newStickies: StickyNote[] = EXAMPLES.map((ex, i) => ({
+      id: `note-${nextId.current++}`,
+      text: ex.text,
+      color: ex.color,
+      zone: ex.zone,
+      ...randomPos(ex.zone),
+      rotation: Math.round((Math.random() * 5 - 2.5) * 100) / 100,
+    }));
+    setStickies(prev => [...prev, ...newStickies]);
+  };
+
+  // Drag handlers
+  const handlePointerDown = (e: React.PointerEvent, sticky: StickyNote) => {
+    if ((e.target as HTMLElement).closest('button') || (e.target as HTMLElement).tagName === 'TEXTAREA') return;
+    setDraggingId(sticky.id);
+    const el = document.getElementById(sticky.id);
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    setDragOffset({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    el.setPointerCapture?.(e.pointerId);
+  };
+
+  useEffect(() => {
+    if (!draggingId) return;
+
+    const onMove = (e: PointerEvent) => {
+      const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
+      const hit = el?.closest('.zone') as HTMLElement | null;
+      setHoverZone(hit?.dataset?.zone || null);
+
+      setStickies(prev => prev.map(s => {
+        if (s.id !== draggingId) return s;
+        const layer = document.querySelector(`[data-zone="${s.zone}"] .notes-layer`);
+        if (!layer) return s;
+        const parent = layer.getBoundingClientRect();
+        return {
+          ...s,
+          x: Math.max(0, e.clientX - parent.left - dragOffset.x),
+          y: Math.max(0, e.clientY - parent.top - dragOffset.y),
+        };
+      }));
+    };
+
+    const onUp = (e: PointerEvent) => {
+      const el = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
+      const hit = el?.closest('.zone') as HTMLElement | null;
+      setHoverZone(null);
+
+      if (hit) {
+        const newZone = hit.dataset?.zone || '';
+        const layer = hit.querySelector('.notes-layer');
+        if (layer) {
+          const zoneRect = layer.getBoundingClientRect();
+          const x = Math.max(0, Math.min(layer.clientWidth - 150, e.clientX - zoneRect.left - dragOffset.x));
+          const y = Math.max(0, Math.min(layer.clientHeight - 110, e.clientY - zoneRect.top - dragOffset.y));
+          setStickies(prev => prev.map(s =>
+            s.id === draggingId ? { ...s, zone: newZone, x, y } : s
+          ));
+        }
+      }
+
+      setDraggingId(null);
+    };
+
+    document.addEventListener('pointermove', onMove);
+    document.addEventListener('pointerup', onUp);
+    return () => {
+      document.removeEventListener('pointermove', onMove);
+      document.removeEventListener('pointerup', onUp);
+    };
+  }, [draggingId, dragOffset]);
+
+  const bgClass = isDark ? 'bg-[#111216]' : 'bg-[#f3f3f2]';
+  const sidebarBg = isDark ? 'bg-[#171920]' : 'bg-white';
+  const boardBg = isDark ? 'bg-[#171920]' : 'bg-white';
+  const textColor = isDark ? 'text-[#f3f5f9]' : 'text-[#1d1b34]';
+  const mutedText = isDark ? 'text-[#a5afbc]' : 'text-[#6f6f7d]';
+  const borderColor = isDark ? 'border-[#d7dcef]' : 'border-[#1d1b34]';
+  const surfaceColor = isDark ? 'bg-[#20232b]' : 'bg-[#f8f8f7]';
+  const inputBg = isDark ? 'bg-[#171920] border-[#d7dcef]' : 'bg-white border-[#1d1b34]/14';
+  const primaryBtn = isDark ? 'bg-[#cfd8ff] text-[#111216]' : 'bg-[#1e1a5f] text-white';
+  const secondaryBtn = isDark ? 'bg-[#33556b] text-[#f3f5f9]' : 'bg-[#d9eef5] text-[#143642]';
+  const ghostBtn = isDark ? 'border-[#d7dcef] text-[#f3f5f9]' : 'border-[#1d1b34]/16 text-[#1d1b34]';
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-4 space-y-6">
-      {/* Header */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-400 via-purple-500 to-fuchsia-500 flex items-center justify-center shadow-lg">
-            <LayoutGrid className="h-5 w-5 text-white" />
-          </div>
+    <div className={`w-full min-h-screen ${bgClass} font-sans`}>
+      <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] min-h-screen">
+        {/* Sidebar */}
+        <aside className={`${sidebarBg} border-r-2 ${isDark ? 'border-[#d7dcef]/12' : 'border-[#1d1b34]/12'} p-5 flex flex-col gap-5 shadow-lg z-10`}>
           <div>
-            <h1 className="text-2xl font-bold text-slate-800">Modelo Canvas Interactivo</h1>
-            <p className="text-sm text-slate-600">Diseña tu modelo de negocio con post-its interactivos, colores e imágenes</p>
-          </div>
-        </div>
-
-        {/* Pills */}
-        <div className="flex flex-wrap gap-2">
-          <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
-            <strong className="font-semibold">9 secciones</strong> <span className="ml-1">del Business Model Canvas</span>
-          </Badge>
-          <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-            <strong className="font-semibold">Post-its</strong> <span className="ml-1">con colores personalizables</span>
-          </Badge>
-          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-            <strong className="font-semibold">{getTotalPostIts()} post-its</strong> <span className="ml-1">creados</span>
-          </Badge>
-        </div>
-      </div>
-
-      {/* Scenario Card */}
-      <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-white shadow-md">
-        <CardContent className="p-5 space-y-3">
-          <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="h-5 w-5 text-purple-600" />
-            <h3 className="font-semibold text-purple-900">¿Qué es el Modelo Canvas?</h3>
-            <Badge variant="outline" className="ml-auto text-xs bg-purple-100 text-purple-700 border-purple-300">herramienta estratégica</Badge>
-          </div>
-          <p className="text-sm text-slate-700 leading-relaxed">
-            El <strong>Business Model Canvas</strong> es una herramienta visual que te permite describir, diseñar y analizar tu modelo de negocio en una sola página. Se divide en <strong>9 bloques</strong> que cubren desde tus clientes hasta tus costes e ingresos.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-            <div className="p-3 rounded-lg bg-white border border-purple-200">
-              <strong className="text-purple-800">🎯 Front-stage (derecha)</strong>
-              <p className="text-slate-600 mt-1">Clientes, canales, relaciones y propuestas de valor</p>
+            <div className={`inline-flex items-center gap-1.5 text-xs uppercase tracking-widest ${mutedText}`}>
+              <span className="w-2 h-2 rounded-full bg-[#7fd3e8]" />
+              Juego didáctico
             </div>
-            <div className="p-3 rounded-lg bg-white border border-blue-200">
-              <strong className="text-blue-800">⚙️ Back-stage (izquierda)</strong>
-              <p className="text-slate-600 mt-1">Socios, actividades y recursos clave</p>
-            </div>
-            <div className="p-3 rounded-lg bg-white border border-emerald-200">
-              <strong className="text-emerald-800">💰 Finanzas (abajo)</strong>
-              <p className="text-slate-600 mt-1">Estructura de costes y fuentes de ingresos</p>
-            </div>
+            <h1 className={`font-bold text-3xl tracking-tight mt-1 mb-2 ${textColor}`} style={{ fontFamily: "'General Sans', 'Satoshi', sans-serif" }}>
+              Modelo Canvas con post-it
+            </h1>
+            <p className={`text-sm ${mutedText}`}>
+              El alumno puede crear notas, escribir en ellas, cambiar su color y arrastrarlas por cada bloque del canvas, igual que en una dinámica presencial con post-its.
+            </p>
           </div>
-          <p className="text-xs text-slate-500 italic bg-slate-100 p-2 rounded">
-            💡 <strong>Cómo usar:</strong> Haz clic en cualquier sección para añadir post-its. Puedes elegir colores, subir imágenes y editar el texto. ¡Sé creativo!
-          </p>
-        </CardContent>
-      </Card>
 
-      {/* Toolbar */}
-      <Card className="border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-100 shadow-sm">
-        <CardContent className="p-4">
-          <div className="flex items-center justify-between flex-wrap gap-3">
-            <div className="flex items-center gap-3">
-              <Palette className="h-4 w-4 text-slate-500" />
-              <span className="text-sm font-medium text-slate-700">Color del post-it:</span>
-              <div className="flex gap-1.5">
-                {POST_IT_COLORS.map((color) => (
-                  <button
-                    key={color.value}
-                    onClick={() => setSelectedColor(color.value)}
-                    className={`h-6 w-6 rounded-full border-2 transition-all hover:scale-110 ${
-                      selectedColor === color.value ? 'border-slate-800 scale-110 shadow-sm' : 'border-slate-200'
-                    }`}
-                    style={{ backgroundColor: color.value }}
-                    title={color.name}
-                  />
-                ))}
+          {/* Create sticky */}
+          <Card className={`${surfaceColor} border ${isDark ? 'border-[#d7dcef]/10' : 'border-[#1d1b34]/8'} rounded-2xl`}>
+            <CardContent className="p-4 space-y-3">
+              <div>
+                <h2 className={`font-bold text-lg tracking-tight ${textColor}`} style={{ fontFamily: "'General Sans', 'Satoshi', sans-serif" }}>Crear post-it</h2>
+                <p className={`text-xs ${mutedText}`}>Escribe una idea inicial, elige color y añádela al tablero.</p>
               </div>
+
+              <div className="space-y-1">
+                <label className={`text-xs ${mutedText}`}>Texto del post-it</label>
+                <Textarea
+                  placeholder="Ej.: Tiendas físicas en grandes ciudades"
+                  className={`text-xs ${inputBg} rounded-xl min-h-[88px]`}
+                  value={noteText}
+                  onChange={(e) => setNoteText(e.target.value)}
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className={`text-xs ${mutedText}`}>Color</label>
+                <div className="flex flex-wrap gap-2">
+                  {COLORS.map((color) => (
+                    <button
+                      key={color.value}
+                      onClick={() => setSelectedColor(color.value)}
+                      className="w-8 h-8 rounded-full border-2 cursor-pointer relative transition-all"
+                      style={{
+                        backgroundColor: color.value,
+                        borderColor: isDark ? 'rgba(215,220,239,0.18)' : 'rgba(29,27,52,0.18)',
+                      }}
+                      title={color.name}
+                    >
+                      {selectedColor === color.value && (
+                        <span className="absolute inset-[7px] rounded-full border-2" style={{ borderColor: isDark ? 'rgba(215,220,239,0.72)' : 'rgba(29,27,52,0.72)' }} />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className={`text-xs ${mutedText}`}>Bloque inicial</label>
+                <select
+                  className={`w-full rounded-xl ${inputBg} px-3 py-2 text-xs`}
+                  value={selectedZone}
+                  onChange={(e) => setSelectedZone(e.target.value)}
+                >
+                  {ZONES.map(z => (
+                    <option key={z.id} value={z.id}>{z.title}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  onClick={addSticky}
+                  className={`rounded-full font-bold text-sm min-h-[46px] ${primaryBtn}`}
+                >
+                  <Plus className="h-4 w-4 mr-1.5" />
+                  Añadir post-it
+                </Button>
+                <Button
+                  onClick={loadExamples}
+                  className={`rounded-full font-bold text-sm min-h-[46px] ${secondaryBtn}`}
+                >
+                  <Sparkles className="h-4 w-4 mr-1.5" />
+                  Cargar ejemplos
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Tools */}
+          <Card className={`${surfaceColor} border ${isDark ? 'border-[#d7dcef]/10' : 'border-[#1d1b34]/8'} rounded-2xl`}>
+            <CardContent className="p-4 space-y-3">
+              <h2 className={`font-bold text-lg tracking-tight ${textColor}`} style={{ fontFamily: "'General Sans', 'Satoshi', sans-serif" }}>Herramientas</h2>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={clearBoard}
+                  className={`rounded-full text-sm ${ghostBtn}`}
+                >
+                  <Trash2 className="h-3.5 w-3.5 mr-1" />
+                  Vaciar tablero
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={shufflePositions}
+                  className={`rounded-full text-sm ${ghostBtn}`}
+                >
+                  <Shuffle className="h-3.5 w-3.5 mr-1" />
+                  Reordenar
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsDark(!isDark)}
+                  className={`rounded-full text-sm ${ghostBtn}`}
+                >
+                  {isDark ? <Sun className="h-3.5 w-3.5 mr-1" /> : <Moon className="h-3.5 w-3.5 mr-1" />}
+                  {isDark ? 'Tema claro' : 'Tema oscuro'}
+                </Button>
+              </div>
+              <p className={`text-[11px] ${mutedText}`}>
+                Consejo: cada bloque admite varios post-it. Haz doble clic sobre un post-it para editar con comodidad en el propio tablero.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* How to play */}
+          <Card className={`${surfaceColor} border ${isDark ? 'border-[#d7dcef]/10' : 'border-[#1d1b34]/8'} rounded-2xl`}>
+            <CardContent className="p-4 space-y-2">
+              <h2 className={`font-bold text-lg tracking-tight ${textColor}`} style={{ fontFamily: "'General Sans', 'Satoshi', sans-serif" }}>Cómo se juega</h2>
+              <p className={`text-sm ${mutedText}`}>
+                1. Crear ideas, 2. arrastrarlas al bloque correcto, 3. recolorear por categorías, 4. debatir si la ubicación es correcta, 5. refinar el modelo de negocio.
+              </p>
+            </CardContent>
+          </Card>
+        </aside>
+
+        {/* Board */}
+        <main className="p-5 overflow-auto">
+          {/* Toolbar */}
+          <div className="flex justify-between items-center gap-3 mb-4 flex-wrap">
+            <div>
+              <div className={`inline-flex items-center gap-1.5 text-xs uppercase tracking-widest ${mutedText}`}>
+                <span className="w-2 h-2 rounded-full bg-[#7fd3e8]" />
+                Tablero
+              </div>
+              <h2 className={`font-bold text-xl tracking-tight ${textColor}`} style={{ fontFamily: "'General Sans', 'Satoshi', sans-serif" }}>
+                Modelo Canvas interactivo
+              </h2>
             </div>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={clearAll}
-                className="border-red-200 text-red-600 hover:bg-red-50"
-              >
-                <Trash2 className="h-3.5 w-3.5 mr-1.5" />
-                Limpiar todo
-              </Button>
+            <div className="flex gap-2 flex-wrap">
+              <Badge variant="outline" className={`rounded-full text-xs ${isDark ? 'bg-[#171920] border-[#d7dcef]/12 text-[#a5afbc]' : 'bg-white border-[#1d1b34]/12 text-[#6f6f7d]'}`}>
+                Arrastrar y soltar
+              </Badge>
+              <Badge variant="outline" className={`rounded-full text-xs ${isDark ? 'bg-[#171920] border-[#d7dcef]/12 text-[#a5afbc]' : 'bg-white border-[#1d1b34]/12 text-[#6f6f7d]'}`}>
+                Editar texto
+              </Badge>
+              <Badge variant="outline" className={`rounded-full text-xs ${isDark ? 'bg-[#171920] border-[#d7dcef]/12 text-[#a5afbc]' : 'bg-white border-[#1d1b34]/12 text-[#6f6f7d]'}`}>
+                Cambiar color
+              </Badge>
+              <Badge variant="outline" className={`rounded-full text-xs ${isDark ? 'bg-[#171920] border-[#d7dcef]/12 text-[#a5afbc]' : 'bg-white border-[#1d1b34]/12 text-[#6f6f7d]'}`}>
+                Dinámica en clase
+              </Badge>
             </div>
           </div>
-        </CardContent>
-      </Card>
 
-      {/* Canvas Grid */}
-      <div className="relative">
-        <div
-          className="grid gap-2"
-          style={{
-            gridTemplateColumns: 'repeat(6, 1fr)',
-            gridTemplateRows: 'repeat(3, minmax(200px, auto))',
-          }}
-        >
-          {sections.map((section) => {
-            const isActive = activeSection === section.id;
-            const sectionPostIts = getSectionPostIts(section.id);
+          {/* Canvas Board */}
+          <div ref={boardRef} className={`${boardBg} rounded-[28px] p-6 border ${isDark ? 'border-[#d7dcef]/12' : 'border-[#1d1b34]/12'} shadow-lg overflow-x-auto`}>
+            <div className={`text-center font-bold mb-5 ${textColor}`} style={{ fontFamily: "'General Sans', 'Satoshi', sans-serif", fontSize: 'clamp(2rem, 1.5rem + 2vw, 3.5rem)' }}>
+              Modelo Canvas
+            </div>
 
-            return (
-              <Card
-                key={section.id}
-                className={`relative border-2 ${section.borderColor} bg-gradient-to-br ${section.bgColor} shadow-sm hover:shadow-md transition-all cursor-pointer overflow-hidden`}
-                style={{
-                  gridColumn: section.gridArea.split(' / ')[0],
-                  gridRow: section.gridArea.split(' / ')[2],
-                }}
-                onClick={() => setActiveSection(isActive ? null : section.id)}
-              >
-                <CardContent className="p-3 h-full flex flex-col">
-                  {/* Section Header */}
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-sm font-bold text-slate-800 leading-tight">{section.title}</h3>
-                      <p className="text-[10px] text-slate-500 italic">{section.subtitle}</p>
+            {/* Grid */}
+            <div
+              className={`grid ${borderColor}`}
+              style={{
+                gridTemplateColumns: '1.2fr 1.3fr 1.25fr 1.25fr 1.25fr',
+                gridTemplateRows: '250px 250px 170px',
+                border: `2px solid ${isDark ? '#d7dcef' : '#1d1b34'}`,
+                minWidth: '1100px',
+              }}
+            >
+              {ZONES.map((zone) => {
+                const zoneStickies = stickies.filter(s => s.zone === zone.id);
+                const isHovered = hoverZone === zone.id;
+
+                return (
+                  <div
+                    key={zone.id}
+                    data-zone={zone.id}
+                    className={`zone relative border-r-2 border-b-2 p-3 overflow-hidden ${isHovered ? 'bg-[rgba(127,211,232,0.18)]' : isDark ? 'bg-[rgba(255,255,255,0.05)]' : 'bg-[rgba(255,255,255,0.32)]'}`}
+                    style={{
+                      gridColumn: zone.id === 'socios' ? '1' : zone.id === 'actividades' || zone.id === 'recursos' ? '2' : zone.id === 'valor' ? '3' : zone.id === 'relaciones' || zone.id === 'canales' ? '4' : zone.id === 'segmentos' ? '5' : zone.id === 'costes' ? '1 / span 3' : '4 / span 3',
+                      gridRow: zone.id === 'socios' || zone.id === 'valor' || zone.id === 'segmentos' ? '1 / span 2' : zone.id === 'actividades' || zone.id === 'relaciones' ? '1' : zone.id === 'recursos' || zone.id === 'canales' ? '2' : '3',
+                      borderRight: (zone.id === 'segmentos' || zone.id === 'ingresos') ? 'none' : undefined,
+                      borderBottom: '2px solid ' + (isDark ? '#d7dcef' : '#1d1b34'),
+                    }}
+                  >
+                    <div className={`font-extrabold leading-tight max-w-[80%] ${textColor}`} style={{ fontSize: 'clamp(1.05rem, .95rem + .4vw, 1.45rem)' }}>
+                      {zone.title}
                     </div>
-                    <Badge variant="outline" className="text-[10px] bg-white/80">
-                      {sectionPostIts.length}
-                    </Badge>
-                  </div>
+                    <div className="absolute top-2.5 right-2.5 text-2xl opacity-35">{zone.icon}</div>
 
-                  {/* Description */}
-                  <p className="text-[11px] text-slate-600 mb-2 leading-tight">{section.description}</p>
-
-                  {/* Post-its Area */}
-                  <div className="flex-1 overflow-y-auto space-y-1.5 min-h-[80px]">
-                    {sectionPostIts.map((postIt) => (
-                      <div
-                        key={postIt.id}
-                        className="relative rounded-lg p-2 shadow-sm border border-slate-200/50 group"
-                        style={{ backgroundColor: postIt.color }}
-                      >
-                        {editingId === postIt.id ? (
-                          <div className="space-y-1">
-                            <Textarea
-                              value={editText}
-                              onChange={(e) => setEditText(e.target.value)}
-                              className="text-xs bg-white min-h-[50px] resize-none"
-                              autoFocus
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' && !e.shiftKey) {
-                                  e.preventDefault();
-                                  saveEdit(section.id, postIt.id);
-                                }
-                              }}
-                            />
-                            <div className="flex gap-1">
-                              <Button
-                                size="sm"
-                                variant="ghost"
-                                className="h-5 px-1.5 text-[10px]"
-                                onClick={() => saveEdit(section.id, postIt.id)}
+                    {/* Notes Layer */}
+                    <div className="notes-layer absolute inset-[42px_8px_8px_8px]">
+                      {zoneStickies.map((sticky) => (
+                        <article
+                          key={sticky.id}
+                          id={sticky.id}
+                          className={`sticky-note absolute w-[150px] min-h-[110px] p-3 pb-8 rounded-[10px] shadow-lg cursor-grab select-none touch-none border border-black/8 flex flex-col gap-2`}
+                          style={{
+                            left: sticky.x,
+                            top: sticky.y,
+                            background: sticky.color,
+                            transform: `rotate(${sticky.rotation}deg)`,
+                            zIndex: draggingId === sticky.id ? 999 : 10,
+                            boxShadow: draggingId === sticky.id ? '0 18px 34px rgba(0,0,0,0.22)' : '0 8px 18px rgba(0,0,0,0.14)',
+                            transition: draggingId === sticky.id ? 'box-shadow 0.18s ease, transform 0.18s ease' : 'box-shadow 0.18s ease',
+                          }}
+                          onPointerDown={(e) => handlePointerDown(e, sticky)}
+                          onDoubleClick={() => {
+                            const ta = document.querySelector(`#${sticky.id} textarea`) as HTMLTextAreaElement;
+                            ta?.focus();
+                          }}
+                        >
+                          <textarea
+                            className="bg-transparent border-none resize-none outline-none min-h-[54px] text-[14px] leading-tight text-[#232323] w-full"
+                            value={sticky.text}
+                            onChange={(e) => {
+                              setStickies(prev => prev.map(s => s.id === sticky.id ? { ...s, text: e.target.value } : s));
+                            }}
+                            onPointerDown={(e) => e.stopPropagation()}
+                          />
+                          <div className="absolute left-2 right-2 bottom-2 flex justify-between items-center gap-1.5">
+                            <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-72">post-it</span>
+                            <div className="flex gap-1.5">
+                              <button
+                                onClick={(e) => { e.stopPropagation(); cycleColor(sticky.id); }}
+                                className="w-[26px] h-[26px] border-none rounded-full bg-white/45 backdrop-blur-sm cursor-pointer text-[13px] flex items-center justify-center"
+                                title="Cambiar color"
                               >
-                                ✓ Guardar
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="ghost"
-                                className="h-5 px-1.5 text-[10px]"
-                                onClick={() => setEditingId(null)}
+                                <Palette className="h-3 w-3" />
+                              </button>
+                              <button
+                                onClick={(e) => { e.stopPropagation(); removeSticky(sticky.id); }}
+                                className="w-[26px] h-[26px] border-none rounded-full bg-white/45 backdrop-blur-sm cursor-pointer text-[13px] flex items-center justify-center hover:bg-red-100"
+                                title="Eliminar"
                               >
-                                ✕ Cancelar
-                              </Button>
+                                <X className="h-3 w-3 text-red-600" />
+                              </button>
                             </div>
                           </div>
-                        ) : (
-                          <div className="pr-5">
-                            {postIt.image && (
-                              <img
-                                src={postIt.image}
-                                alt={postIt.text}
-                                className="w-full h-16 object-cover rounded mb-1"
-                              />
-                            )}
-                            <p className="text-xs text-slate-800 leading-tight whitespace-pre-wrap">{postIt.text}</p>
-                          </div>
-                        )}
-
-                        {/* Action buttons */}
-                        <div className="absolute top-1 right-1 flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              startEditing(postIt.id, postIt.text);
-                            }}
-                            className="h-4 w-4 rounded bg-white/80 hover:bg-white flex items-center justify-center"
-                          >
-                            <Edit3 className="h-2.5 w-2.5 text-slate-600" />
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              removePostIt(section.id, postIt.id);
-                            }}
-                            className="h-4 w-4 rounded bg-white/80 hover:bg-red-100 flex items-center justify-center"
-                          >
-                            <X className="h-2.5 w-2.5 text-red-600" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Add Post-it (when section is active) */}
-                  {isActive && (
-                    <div className="mt-2 pt-2 border-t border-slate-200/50 space-y-2" onClick={(e) => e.stopPropagation()}>
-                      <div className="flex gap-1.5">
-                        <Input
-                          placeholder="Escribe tu idea..."
-                          className="text-xs bg-white h-8"
-                          value={newText}
-                          onChange={(e) => setNewText(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                              addPostIt(section.id);
-                            }
-                          }}
-                        />
-                        <Button
-                          size="sm"
-                          className="h-8 w-8 p-0 bg-gradient-to-r from-purple-500 to-fuchsia-500 hover:from-purple-600 hover:to-fuchsia-600"
-                          onClick={() => addPostIt(section.id)}
-                        >
-                          <Plus className="h-3.5 w-3.5" />
-                        </Button>
-                      </div>
-                      <div className="flex gap-1.5">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="h-6 text-[10px] px-2"
-                          onClick={() => fileInputRef.current?.click()}
-                        >
-                          <Upload className="h-3 w-3 mr-1" />
-                          Imagen
-                        </Button>
-                        <input
-                          ref={fileInputRef}
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) => handleImageUpload(section.id, e)}
-                        />
-                      </div>
+                        </article>
+                      ))}
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-      </div>
 
-      {/* Tips Section */}
-      <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50 to-white shadow-sm">
-        <CardContent className="p-5 space-y-3">
-          <div className="flex items-center gap-2">
-            <Eye className="h-4 w-4 text-amber-500" />
-            <h3 className="font-semibold text-amber-900">Consejos para tu Modelo Canvas</h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <div className="p-3 rounded-lg bg-white border border-amber-200">
-              <strong className="text-amber-800">1. Empieza por el cliente</strong>
-              <p className="text-slate-600 mt-1">Define primero tus segmentos de clientes y sus necesidades antes de pensar en el producto.</p>
-            </div>
-            <div className="p-3 rounded-lg bg-white border border-amber-200">
-              <strong className="text-amber-800">2. Sé específico</strong>
-              <p className="text-slate-600 mt-1">Evita generalidades. En lugar de "mejorar la vida", escribe "ahorrar 2 horas diarias a padres trabajadores".</p>
-            </div>
-            <div className="p-3 rounded-lg bg-white border border-amber-200">
-              <strong className="text-amber-800">3. Usa post-its reales</strong>
-              <p className="text-slate-600 mt-1">Cada idea debe caber en un post-it. Si no cabe, es demasiado compleja para este nivel.</p>
-            </div>
-            <div className="p-3 rounded-lg bg-white border border-amber-200">
-              <strong className="text-amber-800">4. Itera y valida</strong>
-              <p className="text-slate-600 mt-1">El Canvas nunca está terminado. Revísalo cada semana con nuevos datos del mercado.</p>
+                    {/* Empty tip */}
+                    {zone.hint && zoneStickies.length === 0 && (
+                      <div className={`absolute left-3 bottom-2.5 text-[11px] ${mutedText} opacity-80`}>
+                        {zone.hint}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </CardContent>
-      </Card>
+
+          <p className={`mt-4 text-xs ${mutedText}`}>
+            Consejo: cada bloque admite varios post-it. Haz doble clic sobre un post-it para editar con comodidad en el propio tablero.
+          </p>
+        </main>
+      </div>
     </div>
   );
 }

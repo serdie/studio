@@ -581,15 +581,6 @@ const module4GamesList: GameItem[] = [
     icon: <Trophy className="h-5 w-5 text-amber-400" />,
     component: <MetricsMatcherGame />,
   },
-  {
-    id: 'business-model-canvas',
-    title: '🎨 Modelo Canvas Interactivo',
-    description: 'Diseña tu modelo de negocio con post-its interactivos, colores personalizables e imágenes. 9 secciones del Business Model Canvas.',
-    type: 'internal',
-    category: 'juego',
-    icon: <LayoutGrid className="h-5 w-5 text-purple-400" />,
-    component: <BusinessModelCanvas />,
-  },
 ];
 
 // Enlaces externos específicos para Módulo 4 (Bots y Asistentes Virtuales)
@@ -983,6 +974,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [practice8Open, setPractice8Open] = useState(false); // Desplegable Práctica 8
   const [practice9Open, setPractice9Open] = useState(false); // Desplegable Práctica 9
   const [practice10Open, setPractice10Open] = useState(false); // Desplegable Práctica 10
+  const [canvasOpen, setCanvasOpen] = useState(false); // Desplegable Modelo Canvas
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -1027,6 +1019,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handlePractice10Toggle = () => {
     setPractice10Open(!practice10Open);
+  };
+
+  const handleCanvasToggle = () => {
+    setCanvasOpen(!canvasOpen);
   };
 
   const handlePracticesToggle = () => {
@@ -1542,6 +1538,43 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                   <BBVAPractice10 />
                 </div>
               )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Sección Modelo Canvas - Apartado independiente */}
+      {moduleSlug === 'bots-asistentes' && (
+        <div className="mt-8">
+          <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-white cursor-pointer" onClick={handleCanvasToggle}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-400 via-purple-500 to-fuchsia-500 flex items-center justify-center shadow-lg">
+                    <LayoutGrid className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-purple-900">🎨 Modelo Canvas Interactivo</h3>
+                    <p className="text-sm text-purple-700">
+                      {canvasOpen
+                        ? 'Herramienta interactiva con post-its arrastrables, colores y ejemplos'
+                        : 'Diseña tu modelo de negocio con post-its arrastrables, colores personalizables y ejemplos precargados - Haz clic para abrir'}
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown
+                  className={`h-6 w-6 text-purple-700 transition-transform duration-300 ${
+                    canvasOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Contenido del Canvas */}
+          {canvasOpen && (
+            <div className="mt-4 animate-in slide-in-from-top-2 duration-300">
+              <BusinessModelCanvas />
             </div>
           )}
         </div>
