@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package, AlertTriangle, ShoppingCart, Database, Link, Calendar, UserCheck, BookOpen, Rocket, Lock, Eye, BarChart3, RefreshCw, Play, Users, Key, Bug } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -47,6 +47,10 @@ import MovistarPractice3 from './movistar-practice-3';
 import IkeaPractice4 from './ikea-practice-4';
 import TelefonicaPractice5 from './telefonica-practice-5';
 import SeurPractice6 from './seur-practice-6';
+import CorreosExpressPractice7 from './correos-express-practice-7';
+import IkeaPractice8 from './ikea-practice-8';
+import TelefonicaPractice9 from './telefonica-practice-9';
+import BBVAPractice10 from './bbva-practice-10';
 
 interface GameItem {
   id: string;
@@ -965,6 +969,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [practice4Open, setPractice4Open] = useState(false); // Desplegable Práctica 4
   const [practice5Open, setPractice5Open] = useState(false); // Desplegable Práctica 5
   const [practice6Open, setPractice6Open] = useState(false); // Desplegable Práctica 6
+  const [practice7Open, setPractice7Open] = useState(false); // Desplegable Práctica 7
+  const [practice8Open, setPractice8Open] = useState(false); // Desplegable Práctica 8
+  const [practice9Open, setPractice9Open] = useState(false); // Desplegable Práctica 9
+  const [practice10Open, setPractice10Open] = useState(false); // Desplegable Práctica 10
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -993,6 +1001,22 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handlePractice6Toggle = () => {
     setPractice6Open(!practice6Open);
+  };
+
+  const handlePractice7Toggle = () => {
+    setPractice7Open(!practice7Open);
+  };
+
+  const handlePractice8Toggle = () => {
+    setPractice8Open(!practice8Open);
+  };
+
+  const handlePractice9Toggle = () => {
+    setPractice9Open(!practice9Open);
+  };
+
+  const handlePractice10Toggle = () => {
+    setPractice10Open(!practice10Open);
   };
 
   const handlePracticesToggle = () => {
@@ -1162,8 +1186,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                     <h3 className="text-lg font-bold text-emerald-900">📋 Prácticas del Módulo 4</h3>
                     <p className="text-sm text-emerald-700">
                       {practicesOpen
-                        ? '6 prácticas disponibles: Brief Sanitas, KPIs Aena, Arquitectura Movistar, Backlog IKEA, Comparativa Telefónica e Intents SEUR'
-                        : 'Práctica 1: Brief Sanitas · Práctica 2: KPIs Aena · Práctica 3: Arquitectura Movistar · Práctica 4: Backlog IKEA · Práctica 5: Comparativa Telefónica · Práctica 6: Intents SEUR - Haz clic para ver'}
+                        ? '10 prácticas disponibles: Brief Sanitas, KPIs Aena, Arquitectura Movistar, Backlog IKEA, Comparativa Telefónica, Intents SEUR, Flujo Correos Express, Excepciones IKEA, KB+RAG Telefónica y Dossier BBVA'
+                        : 'Práctica 1: Brief Sanitas · Práctica 2: KPIs Aena · Práctica 3: Arquitectura Movistar · Práctica 4: Backlog IKEA · Práctica 5: Comparativa Telefónica · Práctica 6: Intents SEUR · Práctica 7: Flujo Correos Express · Práctica 8: Excepciones IKEA · Práctica 9: KB+RAG Telefónica · Práctica 10: Dossier BBVA - Haz clic para ver'}
                     </p>
                   </div>
                 </div>
@@ -1374,6 +1398,138 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
               {practice6Open && (
                 <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
                   <SeurPractice6 />
+                </div>
+              )}
+
+              {/* Práctica 7 */}
+              <Card className="border-teal-200 bg-gradient-to-br from-teal-50 via-cyan-50 to-white cursor-pointer" onClick={handlePractice7Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-teal-200 flex items-center justify-center">
+                        <MessageSquare className="h-4 w-4 text-teal-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-teal-900">Práctica 7: Flujo "¿Dónde está mi envío?" (Correos Express)</h4>
+                        <p className="text-sm text-teal-700">
+                          {practice7Open
+                            ? 'Diseña un flujo conversacional con slot filling, validación, confirmación y escalado'
+                            : 'Intent + slots mínimos + validación + confirmación + fallbacks + microcopys'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-teal-700 transition-transform duration-300 ${
+                        practice7Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 7 */}
+              {practice7Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <CorreosExpressPractice7 />
+                </div>
+              )}
+
+              {/* Práctica 8 */}
+              <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-orange-50 to-white cursor-pointer" onClick={handlePractice8Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-amber-200 flex items-center justify-center">
+                        <AlertTriangle className="h-4 w-4 text-amber-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-amber-900">Práctica 8: Excepciones + Handoff (IKEA)</h4>
+                        <p className="text-sm text-amber-700">
+                          {practice8Open
+                            ? 'Diseña flujo de devolución/incidencia con 6 excepciones, 15 casos y handoff'
+                            : '6 excepciones + 15 casos de prueba + plantilla de handoff con resumen de contexto'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-amber-700 transition-transform duration-300 ${
+                        practice8Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 8 */}
+              {practice8Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <IkeaPractice8 />
+                </div>
+              )}
+
+              {/* Práctica 9 */}
+              <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-white cursor-pointer" onClick={handlePractice9Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-blue-200 flex items-center justify-center">
+                        <Database className="h-4 w-4 text-blue-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-blue-900">Práctica 9: Base de Conocimiento + RAG (Telefónica Empresas)</h4>
+                        <p className="text-sm text-blue-700">
+                          {practice9Open
+                            ? 'Diseña KB con 4 categorías, 12 documentos, 10 FAQ y política de mantenimiento'
+                            : 'Árbol KB + 12 docs con owner/vigencia + 10 preguntas FAQ + política mantenimiento'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-blue-700 transition-transform duration-300 ${
+                        practice9Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 9 */}
+              {practice9Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <TelefonicaPractice9 />
+                </div>
+              )}
+
+              {/* Práctica 10 */}
+              <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-blue-50 to-white cursor-pointer" onClick={handlePractice10Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-cyan-200 flex items-center justify-center">
+                        <Rocket className="h-4 w-4 text-cyan-700" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-cyan-900">Práctica 10: "Listo para operar" (BBVA Blue)</h4>
+                        <p className="text-sm text-cyan-700">
+                          {practice10Open
+                            ? 'Dossier completo: seguridad + tests + operación + demo final con handoff'
+                            : '10 tests seguridad + 15 funcionales + política datos + plan operación + demo 3 min'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      className={`h-5 w-5 text-cyan-700 transition-transform duration-300 ${
+                        practice10Open ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contenido Práctica 10 */}
+              {practice10Open && (
+                <div className="pl-4 animate-in slide-in-from-top-2 duration-300">
+                  <BBVAPractice10 />
                 </div>
               )}
             </div>
