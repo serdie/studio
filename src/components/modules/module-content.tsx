@@ -1049,6 +1049,60 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                       Herramienta de diseño UX asistida por IA. Genera wireframes, user flows y documentación de diseño.
                     </p>
                   </a>
+
+                  {/* Obsidian */}
+                  <a
+                    href="https://obsidian.md/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-violet-200 bg-white hover:border-violet-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center">
+                        <FileText className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-violet-900 group-hover:text-violet-700">Obsidian</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Base de conocimiento personal con enlaces bidireccionales. Ideal para organizar documentación de proyectos y notas de desarrollo.
+                    </p>
+                  </a>
+
+                  {/* Bolt.new */}
+                  <a
+                    href="https://bolt.new/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-sky-200 bg-white hover:border-sky-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center">
+                        <Rocket className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-sky-900 group-hover:text-sky-700">Bolt.new</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Desarrollo web completo con IA. Crea, edita y despliega aplicaciones full-stack directamente desde el navegador.
+                    </p>
+                  </a>
+
+                  {/* Bolt.diy */}
+                  <a
+                    href="https://bolt.diy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-emerald-200 bg-white hover:border-emerald-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
+                        <Code2 className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-emerald-900 group-hover:text-emerald-700">Bolt.diy</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Versión open-source y self-hosted de Bolt.new. Control total sobre tu entorno de desarrollo con IA, sin dependencias externas.
+                    </p>
+                  </a>
                 </div>
 
                 <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
