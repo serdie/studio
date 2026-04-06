@@ -51,6 +51,7 @@ import CorreosExpressPractice7 from './correos-express-practice-7';
 import IkeaPractice8 from './ikea-practice-8';
 import TelefonicaPractice9 from './telefonica-practice-9';
 import BBVAPractice10 from './bbva-practice-10';
+import BusinessModelCanvas from './business-model-canvas';
 
 interface GameItem {
   id: string;
@@ -579,6 +580,15 @@ const module4GamesList: GameItem[] = [
     category: 'juego',
     icon: <Trophy className="h-5 w-5 text-amber-400" />,
     component: <MetricsMatcherGame />,
+  },
+  {
+    id: 'business-model-canvas',
+    title: '🎨 Modelo Canvas Interactivo',
+    description: 'Diseña tu modelo de negocio con post-its interactivos, colores personalizables e imágenes. 9 secciones del Business Model Canvas.',
+    type: 'internal',
+    category: 'juego',
+    icon: <LayoutGrid className="h-5 w-5 text-purple-400" />,
+    component: <BusinessModelCanvas />,
   },
 ];
 
