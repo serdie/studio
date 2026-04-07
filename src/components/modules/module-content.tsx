@@ -326,6 +326,18 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               poster="https://pics.filmaffinity.com/tau-236207705-mmed.jpg"
               themes={['IA', 'Control', 'Libertad', 'Conciencia Artificial', 'Thriller']}
             />
+            <MovieCard
+              title="Fringe (Serie, 2008-2013)"
+              description="Una unidad del FBI investiga fenómenos fronterizos entre la ciencia y lo imposible. A lo largo de 5 temporadas, la serie explora temas de inteligencia artificial, conciencia, realidades paralelas y las consecuencias éticas de la experimentación científica. Una reflexión profunda sobre los límites de la tecnología y la naturaleza de la realidad."
+              poster="https://pics.filmaffinity.com/fringe-292728955-mmed.jpg"
+              themes={['Ciencia Ficción', 'IA', 'Realidades Paralelas', 'Ética Científica', 'Conciencia']}
+            />
+            <MovieCard
+              title="iBoy (2017)"
+              description="Tras un accidente, un adolescente descubre que un fragmento de su iPhone se ha incrustado en su cerebro, otorgándole habilidades tecnológicas sobrenaturales. Puede acceder a internet, hackear sistemas y controlar dispositivos con la mente. Un thriller que explora la fusión entre humano y tecnología, la privacidad digital y las consecuencias de tener un smartphone literalmente dentro de tu cabeza."
+              poster="https://pics.filmaffinity.com/iboy-727055223-mmed.jpg"
+              themes={['Tecnología', 'Cyberpunk', 'Privacidad', 'Humano-Máquina', 'Thriller']}
+            />
           </div>
           <div className="mt-4 p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
             <p className="text-sm text-cyan-800">
