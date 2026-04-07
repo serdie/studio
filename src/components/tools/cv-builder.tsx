@@ -584,12 +584,12 @@ export default function CVBuilderTool() {
                   <CardContent className="p-5 space-y-4">
                     <h3 className="text-lg font-bold text-violet-900 flex items-center gap-2"><User className="h-5 w-5" /> Datos Personales</h3>
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Nombre completo *</label><Input placeholder="María García López" className="text-xs bg-white" value={cv.fullName} onChange={(e) => updateCV('fullName', e.target.value)} /></div>
-                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Título profesional *</label><Input placeholder="Desarrolladora Full Stack Senior" className="text-xs bg-white" value={cv.title} onChange={(e) => updateCV('title', e.target.value)} /></div>
-                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Email *</label><Input placeholder="maria@email.com" className="text-xs bg-white" value={cv.email} onChange={(e) => updateCV('email', e.target.value)} /></div>
-                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Teléfono</label><Input placeholder="+34 612 345 678" className="text-xs bg-white" value={cv.phone} onChange={(e) => updateCV('phone', e.target.value)} /></div>
-                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Ubicación</label><Input placeholder="Madrid, España" className="text-xs bg-white" value={cv.location} onChange={(e) => updateCV('location', e.target.value)} /></div>
-                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">LinkedIn</label><Input placeholder="linkedin.com/in/maria" className="text-xs bg-white" value={cv.linkedin} onChange={(e) => updateCV('linkedin', e.target.value)} /></div>
+                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Nombre completo *</label><Input placeholder="María García López" className="text-xs bg-white" value={cv.fullName || ''} onChange={(e) => updateCV('fullName', e.target.value)} /></div>
+                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Título profesional *</label><Input placeholder="Desarrolladora Full Stack Senior" className="text-xs bg-white" value={cv.title || ''} onChange={(e) => updateCV('title', e.target.value)} /></div>
+                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Email *</label><Input placeholder="maria@email.com" className="text-xs bg-white" value={cv.email || ''} onChange={(e) => updateCV('email', e.target.value)} /></div>
+                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Teléfono</label><Input placeholder="+34 612 345 678" className="text-xs bg-white" value={cv.phone || ''} onChange={(e) => updateCV('phone', e.target.value)} /></div>
+                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">Ubicación</label><Input placeholder="Madrid, España" className="text-xs bg-white" value={cv.location || ''} onChange={(e) => updateCV('location', e.target.value)} /></div>
+                      <div className="space-y-1"><label className="text-xs font-medium text-slate-600">LinkedIn</label><Input placeholder="linkedin.com/in/maria" className="text-xs bg-white" value={cv.linkedin || ''} onChange={(e) => updateCV('linkedin', e.target.value)} /></div>
                     </div>
                   </CardContent>
                 </Card>
@@ -607,13 +607,13 @@ export default function CVBuilderTool() {
                         <CardContent className="p-4 space-y-3">
                           <div className="flex items-center justify-between"><span className="text-sm font-semibold text-slate-700">Experiencia {i + 1}</span>{cv.experience.length > 1 && <Button size="sm" variant="ghost" onClick={() => removeExperience(i)} className="text-red-500 h-7 w-7 p-0"><X className="h-3.5 w-3.5" /></Button>}</div>
                           <div className="grid grid-cols-2 gap-2">
-                            <Input placeholder="Empresa" className="text-xs bg-white" value={exp.company} onChange={(e) => updateExperience(i, 'company', e.target.value)} />
-                            <Input placeholder="Rol / Puesto" className="text-xs bg-white" value={exp.role} onChange={(e) => updateExperience(i, 'role', e.target.value)} />
-                            <Input placeholder="Fecha inicio" className="text-xs bg-white" value={exp.startDate} onChange={(e) => updateExperience(i, 'startDate', e.target.value)} />
-                            <Input placeholder="Fecha fin" className="text-xs bg-white" value={exp.endDate} onChange={(e) => updateExperience(i, 'endDate', e.target.value)} />
+                            <Input placeholder="Empresa" className="text-xs bg-white" value={exp.company || ''} onChange={(e) => updateExperience(i, 'company', e.target.value)} />
+                            <Input placeholder="Rol / Puesto" className="text-xs bg-white" value={exp.role || ''} onChange={(e) => updateExperience(i, 'role', e.target.value)} />
+                            <Input placeholder="Fecha inicio" className="text-xs bg-white" value={exp.startDate || ''} onChange={(e) => updateExperience(i, 'startDate', e.target.value)} />
+                            <Input placeholder="Fecha fin" className="text-xs bg-white" value={exp.endDate || ''} onChange={(e) => updateExperience(i, 'endDate', e.target.value)} />
                           </div>
-                          <Textarea placeholder="Descripción de responsabilidades..." className="text-xs bg-white min-h-[60px]" value={exp.description} onChange={(e) => updateExperience(i, 'description', e.target.value)} />
-                          <Textarea placeholder="Logros cuantificables (Ej.: Aumenté ventas un 25%...)" className="text-xs bg-white min-h-[60px]" value={exp.achievements} onChange={(e) => updateExperience(i, 'achievements', e.target.value)} />
+                          <Textarea placeholder="Descripción de responsabilidades..." className="text-xs bg-white min-h-[60px]" value={exp.description || ''} onChange={(e) => updateExperience(i, 'description', e.target.value)} />
+                          <Textarea placeholder="Logros cuantificables (Ej.: Aumenté ventas un 25%...)" className="text-xs bg-white min-h-[60px]" value={exp.achievements || ''} onChange={(e) => updateExperience(i, 'achievements', e.target.value)} />
                         </CardContent>
                       </Card>
                     ))}
@@ -633,10 +633,10 @@ export default function CVBuilderTool() {
                         <CardContent className="p-4 space-y-3">
                           <div className="flex items-center justify-between"><span className="text-sm font-semibold text-slate-700">Educación {i + 1}</span>{cv.education.length > 1 && <Button size="sm" variant="ghost" onClick={() => removeEducation(i)} className="text-red-500 h-7 w-7 p-0"><X className="h-3.5 w-3.5" /></Button>}</div>
                           <div className="grid grid-cols-2 gap-2">
-                            <Input placeholder="Institución" className="text-xs bg-white" value={edu.institution} onChange={(e) => updateEducation(i, 'institution', e.target.value)} />
-                            <Input placeholder="Título" className="text-xs bg-white" value={edu.degree} onChange={(e) => updateEducation(i, 'degree', e.target.value)} />
-                            <Input placeholder="Campo de estudio" className="text-xs bg-white" value={edu.field} onChange={(e) => updateEducation(i, 'field', e.target.value)} />
-                            <Input placeholder="Nota media (opcional)" className="text-xs bg-white" value={edu.grade} onChange={(e) => updateEducation(i, 'grade', e.target.value)} />
+                            <Input placeholder="Institución" className="text-xs bg-white" value={edu.institution || ''} onChange={(e) => updateEducation(i, 'institution', e.target.value)} />
+                            <Input placeholder="Título" className="text-xs bg-white" value={edu.degree || ''} onChange={(e) => updateEducation(i, 'degree', e.target.value)} />
+                            <Input placeholder="Campo de estudio" className="text-xs bg-white" value={edu.field || ''} onChange={(e) => updateEducation(i, 'field', e.target.value)} />
+                            <Input placeholder="Nota media (opcional)" className="text-xs bg-white" value={edu.grade || ''} onChange={(e) => updateEducation(i, 'grade', e.target.value)} />
                           </div>
                         </CardContent>
                       </Card>
@@ -655,7 +655,7 @@ export default function CVBuilderTool() {
                     {cv.skills.map((skill, i) => (
                       <Card key={i} className="border-slate-200 bg-white">
                         <CardContent className="p-3 flex items-center gap-3">
-                          <Input placeholder="Habilidad" className="text-xs bg-white flex-1" value={skill.name} onChange={(e) => updateSkill(i, 'name', e.target.value)} />
+                          <Input placeholder="Habilidad" className="text-xs bg-white flex-1" value={skill.name || ''} onChange={(e) => updateSkill(i, 'name', e.target.value)} />
                           <div className="flex items-center gap-1">{[1, 2, 3, 4, 5].map(level => (<button key={level} onClick={() => updateSkill(i, 'level', level)} className={`w-6 h-6 rounded-full text-[9px] font-bold transition-all ${level <= skill.level ? 'bg-amber-500 text-white' : 'bg-slate-100 text-slate-400'}`} title={SKILL_LEVELS[level - 1]}>{level}</button>))}</div>
                           <span className="text-[10px] text-slate-500 w-16 text-right">{SKILL_LEVELS[skill.level - 1]}</span>
                           {cv.skills.length > 1 && <Button size="sm" variant="ghost" onClick={() => removeSkill(i)} className="text-red-500 h-7 w-7 p-0"><X className="h-3.5 w-3.5" /></Button>}
@@ -676,8 +676,8 @@ export default function CVBuilderTool() {
                     {cv.languages.map((lang, i) => (
                       <Card key={i} className="border-slate-200 bg-white">
                         <CardContent className="p-3 flex items-center gap-3">
-                          <Input placeholder="Idioma" className="text-xs bg-white flex-1" value={lang.name} onChange={(e) => updateLanguage(i, 'name', e.target.value)} />
-                          <select className="text-xs bg-white border border-slate-200 rounded-lg px-3 py-2" value={lang.level} onChange={(e) => updateLanguage(i, 'level', e.target.value)}>
+                          <Input placeholder="Idioma" className="text-xs bg-white flex-1" value={lang.name || ''} onChange={(e) => updateLanguage(i, 'name', e.target.value)} />
+                          <select className="text-xs bg-white border border-slate-200 rounded-lg px-3 py-2" value={lang.level || 'Nativo'} onChange={(e) => updateLanguage(i, 'level', e.target.value)}>
                             {['Nativo', 'C2 - Maestría', 'C1 - Avanzado', 'B2 - Intermedio Alto', 'B1 - Intermedio', 'A2 - Básico'].map(l => (<option key={l} value={l}>{l}</option>))}
                           </select>
                           {cv.languages.length > 1 && <Button size="sm" variant="ghost" onClick={() => removeLanguage(i)} className="text-red-500 h-7 w-7 p-0"><X className="h-3.5 w-3.5" /></Button>}
@@ -695,7 +695,7 @@ export default function CVBuilderTool() {
                       <h3 className="text-lg font-bold text-purple-900 flex items-center gap-2"><FileText className="h-5 w-5" /> Resumen Profesional</h3>
                       <Button size="sm" onClick={generateSummary} disabled={isGeneratingSummary} className="bg-purple-500 hover:bg-purple-600 text-white rounded-full">{isGeneratingSummary ? <RefreshCw className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Sparkles className="h-3.5 w-3.5 mr-1" />}{isGeneratingSummary ? 'Generando...' : 'Generar con IA'}</Button>
                     </div>
-                    <Textarea placeholder="Profesional con X años de experiencia en... Especializado en... He logrado..." className="text-xs bg-white min-h-[150px]" value={cv.summary} onChange={(e) => updateCV('summary', e.target.value)} />
+                    <Textarea placeholder="Profesional con X años de experiencia en... Especializado en... He logrado..." className="text-xs bg-white min-h-[150px]" value={cv.summary || ''} onChange={(e) => updateCV('summary', e.target.value)} />
                   </CardContent>
                 </Card>
               )}
@@ -873,10 +873,13 @@ export default function CVBuilderTool() {
                   <div className="space-y-3">
                     <Textarea placeholder="Pega aquí el texto completo de tu currículum vitae..." className="text-xs bg-white min-h-[200px]" value={cvText} onChange={(e) => setCvText(e.target.value)} />
                     <div className="flex items-center gap-3">
-                      <input ref={fileInputRef} type="file" accept=".txt,.text" className="hidden" onChange={handleFileUpload} />
+                      <input ref={fileInputRef} type="file" accept=".txt,.text,.pdf,.doc,.docx" className="hidden" onChange={handleFileUpload} />
                       <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} className="border-slate-300"><Upload className="h-3.5 w-3.5 mr-1.5" /> Subir archivo</Button>
                       <Button size="sm" onClick={analyzeCV} disabled={!cvText.trim() || isAnalyzing} className="bg-amber-500 hover:bg-amber-600 text-white rounded-full">{isAnalyzing ? <RefreshCw className="h-3.5 w-3.5 mr-1.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5 mr-1.5" />}{isAnalyzing ? 'Analizando...' : 'Analizar CV'}</Button>
                     </div>
+                    <p className="text-[10px] text-slate-500">
+                      💡 <strong>Consejo:</strong> Para PDFs, el texto se extrae automáticamente. Si el resultado no es correcto, copia y pega el texto directamente para mejor precisión.
+                    </p>
                   </div>
                 </CardContent>
               </Card>
