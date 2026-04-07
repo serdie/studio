@@ -1322,6 +1322,436 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                   </div>
                 </div>
 
+                {/* Separador */}
+                <Separator className="my-6 bg-cyan-200" />
+
+                {/* Sección CLI Tools */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center">
+                      <Code2 className="h-4 w-4 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-800">⌨️ Vibe Coding CLI — Herramientas de Terminal</h3>
+                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Línea de comandos</Badge>
+                  </div>
+                  <p className="text-sm text-slate-600">
+                    Estas herramientas se instalan y ejecutan desde la terminal. Son las favoritas de los desarrolladores avanzados porque permiten automatizar tareas, generar código y trabajar directamente sobre tus archivos.
+                  </p>
+
+                  {/* Grid de herramientas CLI */}
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {/* Gemini CLI */}
+                    <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-blue-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                            <Sparkles className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-cyan-900">Gemini CLI</h4>
+                            <p className="text-[10px] text-cyan-600">Google</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          CLI oficial de Google. Ejecuta Gemini desde terminal para generar código, analizar archivos y automatizar tareas.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">npm install -g @anthropic-ai/gemini-cli</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">npm install -g @anthropic-ai/gemini-cli</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">npm install -g @anthropic-ai/gemini-cli</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://ai.google.dev/gemini-api/docs/cli" target="_blank" rel="noopener noreferrer" className="text-[10px] text-cyan-600 hover:text-cyan-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> Documentación oficial
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* Qwen CLI */}
+                    <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-pink-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                            <Brain className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-purple-900">Qwen CLI</h4>
+                            <p className="text-[10px] text-purple-600">Alibaba / Open Source</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          Modelos open-source de Alibaba. Potente, gratuito y con soporte para múltiples lenguajes de programación.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">pip install qwen-agent</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">pip install qwen-agent</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">pip install qwen-agent</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://github.com/QwenLM/Qwen" target="_blank" rel="noopener noreferrer" className="text-[10px] text-purple-600 hover:text-purple-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> GitHub oficial
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* Aider */}
+                    <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50 via-green-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center">
+                            <Code2 className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-emerald-900">Aider</h4>
+                            <p className="text-[10px] text-emerald-600">Pair programming en terminal</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          El estándar para pair programming en terminal. Edita archivos de tu repo directamente con IA. Compatible con GPT-4, Claude, Gemini.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">pip install aider-chat</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">pip install aider-chat</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">pip install aider-chat</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://aider.chat/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-emerald-600 hover:text-emerald-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> Documentación oficial
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* Open Interpreter */}
+                    <Card className="border-orange-200 bg-gradient-to-br from-orange-50 via-amber-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                            <Rocket className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-orange-900">Open Interpreter</h4>
+                            <p className="text-[10px] text-orange-600">Ejecuta código en natural</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          Escribe en lenguaje natural y ejecuta código real en tu máquina. "Crea un gráfico de ventas" → lo genera al instante.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">pip install open-interpreter</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">pip install open-interpreter</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">pip install open-interpreter</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://openinterpreter.com/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-orange-600 hover:text-orange-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> Web oficial
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* Amazon Q CLI */}
+                    <Card className="border-yellow-200 bg-gradient-to-br from-yellow-50 via-amber-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
+                            <Brain className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-yellow-900">Amazon Q CLI</h4>
+                            <p className="text-[10px] text-yellow-600">AWS</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          CLI de AWS para desarrolladores. Genera código, analiza logs y gestiona infraestructura cloud desde la terminal.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">winget install Amazon.Q</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">brew install --cask amazon-q</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">curl -fsSL https://aws.amazon.com/q/install | sh</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://aws.amazon.com/q/developer/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-yellow-600 hover:text-yellow-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> Documentación AWS
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* GitHub Copilot CLI */}
+                    <Card className="border-slate-200 bg-gradient-to-br from-slate-50 via-gray-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
+                            <ExternalLink className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-slate-900">GitHub Copilot CLI</h4>
+                            <p className="text-[10px] text-slate-600">GitHub / Microsoft</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          Copilot en tu terminal. Traduce lenguaje natural a comandos bash/zsh/powershell. "Busca archivos mayores de 1MB" → genera el comando.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">winget install GitHub.cli</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">brew install gh</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">sudo apt install gh</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://github.com/cli/cli" target="_blank" rel="noopener noreferrer" className="text-[10px] text-slate-600 hover:text-slate-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> GitHub oficial
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* Continue.dev */}
+                    <Card className="border-indigo-200 bg-gradient-to-br from-indigo-50 via-blue-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center">
+                            <Code2 className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-indigo-900">Continue.dev</h4>
+                            <p className="text-[10px] text-indigo-600">Open Source</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          Extensión open-source para VS Code y JetBrains. Conecta cualquier modelo (GPT, Claude, Gemini) directamente en tu editor.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">Buscar "Continue" en VS Code Extensions</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">Buscar "Continue" en VS Code Extensions</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">Buscar "Continue" en VS Code Extensions</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://www.continue.dev/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-indigo-600 hover:text-indigo-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> Web oficial
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* Gemini Code Assist */}
+                    <Card className="border-teal-200 bg-gradient-to-br from-teal-50 via-cyan-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-teal-500 to-cyan-600 flex items-center justify-center">
+                            <Sparkles className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-teal-900">Gemini Code Assist</h4>
+                            <p className="text-[10px] text-teal-600">Google Cloud</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          La apuesta de Google para desarrollo con IA. Integrado en VS Code y JetBrains, con contexto de todo tu repositorio.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">Instalar extensión "Gemini Code Assist" en VS Code</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">Instalar extensión "Gemini Code Assist" en VS Code</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">Instalar extensión "Gemini Code Assist" en VS Code</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://cloud.google.com/products/gemini/code-assist" target="_blank" rel="noopener noreferrer" className="text-[10px] text-teal-600 hover:text-teal-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> Google Cloud
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* Warp Terminal */}
+                    <Card className="border-rose-200 bg-gradient-to-br from-rose-50 via-pink-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center">
+                            <Rocket className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-rose-900">Warp Terminal</h4>
+                            <p className="text-[10px] text-rose-600">Terminal con IA</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          Terminal moderno con IA integrada. Escribes lo que quieres hacer en lenguaje natural y genera el comando automáticamente.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">winget install Warp.Warp</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">brew install --cask warp</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">curl https://releases.warp.dev/linux/deb/warp.list | sudo tee /etc/apt/sources.list.d/warp.list</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://www.warp.dev/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-rose-600 hover:text-rose-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> Web oficial
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* Devin */}
+                    <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-yellow-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                            <Brain className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-amber-900">Devin (Cognition AI)</h4>
+                            <p className="text-[10px] text-amber-600">Ingeniero de software IA autónomo</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          El primer "ingeniero de software IA autónomo". Le das una tarea y la resuelve solo, paso a paso, planificando y ejecutando.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Acceso:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Web</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">Solicitar acceso en cognition.ai</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://www.cognition.ai/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-amber-600 hover:text-amber-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> Cognition AI
+                        </a>
+                      </CardContent>
+                    </Card>
+
+                    {/* Zed */}
+                    <Card className="border-violet-200 bg-gradient-to-br from-violet-50 via-purple-50 to-white">
+                      <CardContent className="p-4 space-y-3">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-violet-600 to-indigo-700 flex items-center justify-center">
+                            <Code2 className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-violet-900">Zed</h4>
+                            <p className="text-[10px] text-violet-600">Editor ultrarrápido</p>
+                          </div>
+                        </div>
+                        <p className="text-xs text-slate-600">
+                          Editor ultrarrápido creado por los autores de Atom. IA integrada y colaboración en tiempo real. Escrito en Rust para máximo rendimiento.
+                        </p>
+                        <div className="space-y-1.5">
+                          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">Instalación:</p>
+                          <div className="space-y-1">
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-blue-50 text-blue-700 border-blue-200 shrink-0 mt-0.5">Win</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">winget install ZedIndustries.Zed</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-slate-100 text-slate-700 border-slate-200 shrink-0 mt-0.5">Mac</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">brew install --cask zed</code>
+                            </div>
+                            <div className="flex items-start gap-1.5">
+                              <Badge variant="outline" className="text-[9px] bg-green-50 text-green-700 border-green-200 shrink-0 mt-0.5">Linux</Badge>
+                              <code className="text-[10px] bg-slate-100 rounded px-1.5 py-0.5 font-mono break-all">curl -f https://zed.dev/install.sh | sh</code>
+                            </div>
+                          </div>
+                        </div>
+                        <a href="https://zed.dev/" target="_blank" rel="noopener noreferrer" className="text-[10px] text-violet-600 hover:text-violet-800 hover:underline flex items-center gap-1">
+                          <ExternalLink className="h-2.5 w-2.5" /> Web oficial
+                        </a>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+
                 <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
                   <p className="text-sm text-purple-800">
                     <strong>💡 Consejo:</strong> Estas herramientas te permiten prototipar y crear aplicaciones usando solo descripciones en lenguaje natural.
