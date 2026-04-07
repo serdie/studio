@@ -21,6 +21,7 @@ import PracticeLab from './practice-lab';
 import Module3Summary from './module-3-summary';
 import DronesGuide from '../games/drones-guide';
 import ElizaRetroAssistant from '@/components/tools/eliza-retro-assistant';
+import CVBuilderTool from '@/components/tools/cv-builder';
 import AliceTerminalRetro from '@/components/tools/alice-terminal-retro';
 import IkeaPractice4 from '@/components/games/ikea-practice-4';
 import VibePromptStudio from '@/components/tools/vibe-prompt-studio';
@@ -1867,6 +1868,13 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
           </TabsContent>
         )}
       </Tabs>
+
+      {/* CV Builder Pro - Sección independiente debajo de todo */}
+      {module.slug === 'bots-asistentes' && (
+        <div className="mt-8">
+          <CVBuilderTool />
+        </div>
+      )}
     </div>
   );
 }
