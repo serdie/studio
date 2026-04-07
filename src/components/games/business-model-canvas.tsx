@@ -15,7 +15,8 @@ import {
   LayoutGrid,
   Sparkles,
   GripVertical,
-  Palette
+  Palette,
+  Download
 } from 'lucide-react';
 
 const COLORS = [
@@ -130,6 +131,113 @@ export default function BusinessModelCanvas() {
       rotation: Math.round((Math.random() * 5 - 2.5) * 100) / 100,
     }));
     setStickies(prev => [...prev, ...newStickies]);
+  };
+
+  // Download canvas as image
+  const downloadCanvas = () => {
+    const board = boardRef.current;
+    if (!board) return;
+
+    const canvas = document.createElement('canvas');
+    const scale = 2;
+    const width = board.scrollWidth;
+    const height = board.scrollHeight;
+    canvas.width = width * scale;
+    canvas.height = height * scale;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.scale(scale, scale);
+    ctx.fillStyle = isDark ? '#111216' : '#f3f3f2';
+    ctx.fillRect(0, 0, width, height);
+
+    // Draw title
+    ctx.fillStyle = isDark ? '#cfd8ff' : '#1e1a5f';
+    ctx.font = 'bold 28px "General Sans", "Satoshi", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Modelo Canvas', width / 2, 40);
+
+    // Draw zones and stickies
+    const zones = board.querySelectorAll('.zone');
+    zones.forEach((zoneEl) => {
+      const zoneId = zoneEl.getAttribute('data-zone');
+      if (!zoneId) return;
+
+      const zoneRect = zoneEl.getBoundingClientRect();
+      const boardRect = board.getBoundingClientRect();
+      const zx = zoneRect.left - boardRect.left;
+      const zy = zoneRect.top - boardRect.top;
+      const zw = zoneRect.width;
+      const zh = zoneRect.height;
+
+      // Zone background
+      ctx.fillStyle = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.32)';
+      ctx.fillRect(zx, zy, zw, zh);
+
+      // Zone border
+      ctx.strokeStyle = isDark ? '#d7dcef' : '#1d1b34';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(zx, zy, zw, zh);
+
+      // Zone title
+      const zoneTitle = zoneEl.querySelector('.zone-title')?.textContent || '';
+      ctx.fillStyle = isDark ? '#cfd8ff' : '#1e1a5f';
+      ctx.font = 'bold 14px "General Sans", "Satoshi", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(zoneTitle, zx + 12, zy + 22);
+
+      // Draw stickies in this zone
+      const zoneStickies = stickies.filter(s => s.zone === zoneId);
+      zoneStickies.forEach((sticky) => {
+        const sx = zx + sticky.x;
+        const sy = zy + sticky.y;
+        const sw = 150;
+        const sh = 110;
+
+        // Sticky background
+        ctx.fillStyle = sticky.color;
+        ctx.beginPath();
+        ctx.roundRect(sx, sy, sw, sh, 10);
+        ctx.fill();
+
+        // Sticky shadow
+        ctx.shadowColor = 'rgba(0,0,0,0.14)';
+        ctx.shadowBlur = 18;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 8;
+        ctx.beginPath();
+        ctx.roundRect(sx, sy, sw, sh, 10);
+        ctx.fill();
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
+
+        // Sticky text
+        ctx.fillStyle = '#232323';
+        ctx.font = '14px sans-serif';
+        ctx.textAlign = 'left';
+        const words = sticky.text.split(' ');
+        let line = '';
+        let ly = sy + 20;
+        words.forEach((word) => {
+          const testLine = line + word + ' ';
+          const metrics = ctx.measureText(testLine);
+          if (metrics.width > sw - 24) {
+            ctx.fillText(line.trim(), sx + 12, ly);
+            line = word + ' ';
+            ly += 18;
+          } else {
+            line = testLine;
+          }
+        });
+        ctx.fillText(line.trim(), sx + 12, ly);
+      });
+    });
+
+    // Download
+    const link = document.createElement('a');
+    link.download = `modelo-canvas-${new Date().toISOString().split('T')[0]}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
   };
 
   // Drag handlers
@@ -326,6 +434,15 @@ export default function BusinessModelCanvas() {
                 >
                   {isDark ? <Sun className="h-3.5 w-3.5 mr-1" /> : <Moon className="h-3.5 w-3.5 mr-1" />}
                   {isDark ? 'Tema claro' : 'Tema oscuro'}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={downloadCanvas}
+                  className={`rounded-full text-sm font-semibold ${isDark ? 'border-[#cfd8ff] text-[#cfd8ff]' : 'border-[#1e1a5f] text-[#1e1a5f]'}`}
+                >
+                  <Download className="h-3.5 w-3.5 mr-1" />
+                  Descargar
                 </Button>
               </div>
               <p className={`text-[11px] ${mutedText}`}>
