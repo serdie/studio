@@ -122,8 +122,10 @@ export default function CVBuilderTool() {
   const [design, setDesign] = useState<DesignSettings>(defaultDesign);
   const [showDesignPanel, setShowDesignPanel] = useState(false);
   const [showPreview, setShowPreview] = useState(true);
+  const [importStatus, setImportStatus] = useState<{ type: 'ok' | 'error' | ''; message: string }>({ type: '', message: '' });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
+  const importInputRef = useRef<HTMLInputElement>(null);
   const cvPrintRef = useRef<HTMLDivElement>(null);
 
   const steps = [
@@ -178,6 +180,185 @@ export default function CVBuilderTool() {
       if (response.ok) { const data = await response.json(); if (data.text) updateCV('summary', data.text); }
     } catch (e) { console.error(e); }
     setIsGeneratingSummary(false);
+  };
+
+  // Parse imported CV text and auto-fill all fields
+  const parseAndImportCV = (text: string) => {
+    const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    const fullText = text;
+
+    // Extract email
+    const emailMatch = fullText.match(/[\w.-]+@[\w.-]+\.\w{2,}/);
+    const email = emailMatch ? emailMatch[0] : '';
+
+    // Extract phone
+    const phoneMatch = fullText.match(/(?:\+?\d{1,3}[\s.-]?)?\d{3}[\s.-]?\d{3}[\s.-]?\d{3,4}/);
+    const phone = phoneMatch ? phoneMatch[0] : '';
+
+    // Extract LinkedIn
+    const linkedinMatch = fullText.match(/linkedin\.com\/in\/[\w-]+/i);
+    const linkedin = linkedinMatch ? linkedinMatch[0] : '';
+
+    // Extract location
+    const locationMatch = fullText.match(/(?:Madrid|Barcelona|Valencia|Sevilla|Bilbao|Málaga|Zaragoza|Toledo|Alicante|Murcia|Palma|España|Spain|México|Colombia|Argentina|Chile|Perú|Ecuador|Uruguay|Paraguay|Bolivia|Venezuela|Costa Rica|Panamá|Guatemala|Honduras|El Salvador|Nicaragua|República Dominicana|Puerto Rico|Cuba)/i);
+    const location = locationMatch ? locationMatch[0] : '';
+
+    // Extract name (first non-empty line that's not an email/phone)
+    let fullName = '';
+    let title = '';
+    for (const line of lines.slice(0, 5)) {
+      if (line.length > 3 && !line.includes('@') && !line.match(/^\d/) && !line.toLowerCase().includes('email') && !line.toLowerCase().includes('tel') && !line.toLowerCase().includes('linkedin')) {
+        if (!fullName) {
+          fullName = line.replace(/^#+\s*/, '').trim();
+        } else if (!title && line.length < 60) {
+          title = line.replace(/^#+\s*/, '').trim();
+          break;
+        }
+      }
+    }
+
+    // Parse sections
+    const sections: { name: string; content: string; startIndex: number; endIndex: number }[] = [];
+    const sectionPatterns = [
+      { name: 'experience', pattern: /(?:experiencia|experience|trabajo|work history|laboral|profesional)/i },
+      { name: 'education', pattern: /(?:educación|education|formación|academic|estudios|académica)/i },
+      { name: 'skills', pattern: /(?:habilidades|skills|competencias|herramientas|technologies|tecnologías|conocimientos)/i },
+      { name: 'languages', pattern: /(?:idiomas|languages|lenguas|lingüístico)/i },
+      { name: 'summary', pattern: /(?:perfil|resumen|summary|objetivo|about me|sobre mí|acerca de|presentación)/i },
+      { name: 'certifications', pattern: /(?:certificación|certificaciones|certificates|cursos|courses|formación complementaria)/i },
+      { name: 'projects', pattern: /(?:proyecto|proyectos|projects|portfolio)/i },
+    ];
+
+    for (const sec of sectionPatterns) {
+      const match = fullText.match(sec.pattern);
+      if (match) {
+        const startIndex = match.index!;
+        let endIndex = fullText.length;
+        for (const otherSec of sectionPatterns) {
+          if (otherSec.name === sec.name) continue;
+          const otherMatch = fullText.slice(startIndex + 1).match(otherSec.pattern);
+          if (otherMatch) {
+            const absIndex = startIndex + 1 + otherMatch.index!;
+            if (absIndex < endIndex) endIndex = absIndex;
+          }
+        }
+        sections.push({ name: sec.name, content: fullText.slice(startIndex, endIndex), startIndex, endIndex });
+      }
+    }
+    sections.sort((a, b) => a.startIndex - b.startIndex);
+
+    // Parse experience
+    const experience: WorkExperience[] = [];
+    const expSection = sections.find(s => s.name === 'experience');
+    if (expSection) {
+      const expLines = expSection.content.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      let currentExp: Partial<WorkExperience> = {};
+      let descLines: string[] = [];
+      for (const line of expLines.slice(1)) {
+        const isNewEntry = line.match(/(?:ene|feb|mar|abr|may|jun|jul|ago|sep|oct|nov|dic|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\s*\d{4}|(?:20\d{2}|19\d{2})\s*[-–—]\s*(?:actual|present|20\d{2})/i) ||
+          (line.length > 2 && line.length < 80 && !line.startsWith('•') && !line.startsWith('-') && descLines.length > 0);
+        if (isNewEntry && currentExp.company) {
+          currentExp.description = descLines.join(' ').trim();
+          experience.push(currentExp as WorkExperience);
+          currentExp = {};
+          descLines = [];
+        }
+        if (!currentExp.company && line.length > 2 && line.length < 80) {
+          currentExp.company = line;
+        } else if (!currentExp.role && line.length > 2 && line.length < 100) {
+          currentExp.role = line;
+        } else {
+          descLines.push(line);
+        }
+      }
+      if (currentExp.company) {
+        currentExp.description = descLines.join(' ').trim();
+        experience.push(currentExp as WorkExperience);
+      }
+    }
+
+    // Parse education
+    const education: Education[] = [];
+    const eduSection = sections.find(s => s.name === 'education');
+    if (eduSection) {
+      const eduLines = eduSection.content.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      let currentEdu: Partial<Education> = {};
+      for (const line of eduLines.slice(1)) {
+        if (line.match(/(?:20\d{2}|19\d{2})\s*[-–—]/) || (line.length > 2 && line.length < 80 && currentEdu.institution)) {
+          if (currentEdu.institution) { education.push(currentEdu as Education); currentEdu = {}; }
+        }
+        if (!currentEdu.degree && line.length > 2 && line.length < 100) {
+          currentEdu.degree = line;
+        } else if (!currentEdu.institution && line.length > 2 && line.length < 100) {
+          currentEdu.institution = line;
+        }
+      }
+      if (currentEdu.institution) education.push(currentEdu as Education);
+    }
+
+    // Parse skills
+    const skills: Skill[] = [];
+    const skillsSection = sections.find(s => s.name === 'skills');
+    if (skillsSection) {
+      const skillText = skillsSection.content.split('\n').slice(1).join(' ');
+      const skillItems = skillText.split(/[,;•·\-\n]/).map(s => s.trim()).filter(s => s.length > 1 && s.length < 40);
+      skillItems.forEach(s => skills.push({ name: s, level: 3 }));
+    }
+
+    // Parse languages
+    const languages: Language[] = [];
+    const langSection = sections.find(s => s.name === 'languages');
+    if (langSection) {
+      const langLines = langSection.content.split('\n').slice(1).map(l => l.trim()).filter(l => l.length > 0);
+      for (const line of langLines) {
+        const langMatch = line.match(/([\wáéíóúñ]+)\s*[-:–—]?\s*(?:nivel\s*)?(nativo|básico|intermedio|avanzado|fluido|c1|c2|b1|b2|a1|a2|maestría|alto)/i);
+        if (langMatch) {
+          const levelMap: Record<string, string> = { 'nativo': 'Nativo', 'básico': 'A2 - Básico', 'intermedio': 'B1 - Intermedio', 'avanzado': 'C1 - Avanzado', 'fluido': 'C1 - Avanzado', 'c1': 'C1 - Avanzado', 'c2': 'C2 - Maestría', 'b1': 'B1 - Intermedio', 'b2': 'B2 - Intermedio Alto', 'a1': 'A1 - Principiante', 'a2': 'A2 - Básico', 'maestría': 'C2 - Maestría', 'alto': 'B2 - Intermedio Alto' };
+          languages.push({ name: langMatch[1], level: levelMap[langMatch[2].toLowerCase()] || 'Intermedio' });
+        } else if (line.length > 1 && line.length < 40) {
+          languages.push({ name: line, level: 'Intermedio' });
+        }
+      }
+    }
+
+    // Parse summary
+    let summary = '';
+    const summarySection = sections.find(s => s.name === 'summary');
+    if (summarySection) {
+      summary = summarySection.content.split('\n').slice(1).map(l => l.trim()).filter(l => l.length > 0).join(' ');
+    }
+
+    const importedCV: CVData = {
+      fullName: fullName || '',
+      title: title || '',
+      email, phone, location, linkedin, summary,
+      experience: experience.length > 0 ? experience : [{ company: '', role: '', startDate: '', endDate: '', description: '', achievements: '' }],
+      education: education.length > 0 ? education : [{ institution: '', degree: '', field: '', startDate: '', endDate: '', grade: '' }],
+      skills: skills.length > 0 ? skills : [{ name: '', level: 3 }],
+      languages: languages.length > 0 ? languages : [{ name: '', level: 'Nativo' }],
+    };
+
+    setCv(importedCV);
+    const fieldsFilled = [fullName, title, email, phone, summary].filter(Boolean).length;
+    setImportStatus({ type: 'ok', message: `✅ CV importado: ${fieldsFilled}/5 datos personales, ${experience.length} experiencias, ${education.length} estudios, ${skills.length} habilidades, ${languages.length} idiomas detectados. Revisa y completa los campos vacíos.` });
+  };
+
+  // Handle CV file import
+  const handleCVImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = event.target?.result as string;
+      if (text && text.trim().length > 10) {
+        parseAndImportCV(text);
+      } else {
+        setImportStatus({ type: 'error', message: '❌ No se pudo extraer texto del archivo. Intenta copiar y pegar el texto directamente.' });
+      }
+    };
+    reader.onerror = () => setImportStatus({ type: 'error', message: '❌ Error al leer el archivo.' });
+    reader.readAsText(file);
+    e.target.value = '';
   };
 
   // Download CV as PDF using browser print
@@ -577,6 +758,32 @@ export default function CVBuilderTool() {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Import CV Button */}
+              <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50 via-green-50 to-white cursor-pointer hover:shadow-md transition-shadow" onClick={() => importInputRef.current?.click()}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center"><Upload className="h-4 w-4 text-white" /></div>
+                      <div>
+                        <h4 className="text-sm font-bold text-emerald-900">Importar CV existente</h4>
+                        <p className="text-xs text-emerald-600">Sube tu CV (.txt, .md) y se auto-rellenarán todos los campos</p>
+                      </div>
+                    </div>
+                    <ChevronRight className="h-5 w-5 text-emerald-400" />
+                  </div>
+                </CardContent>
+              </Card>
+              <input ref={importInputRef} type="file" accept=".txt,.text,.md" className="hidden" onChange={handleCVImport} />
+
+              {/* Import Status */}
+              {importStatus.message && (
+                <div className={`p-3 rounded-lg text-xs flex items-start gap-2 ${importStatus.type === 'ok' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+                  {importStatus.type === 'ok' ? <CheckCircle2 className="h-4 w-4 flex-shrink-0 mt-0.5" /> : <AlertCircle className="h-4 w-4 flex-shrink-0 mt-0.5" />}
+                  {importStatus.message}
+                  {importStatus.type === 'ok' && <Button size="sm" variant="ghost" onClick={() => setImportStatus({ type: '', message: '' })} className="ml-auto text-green-600 h-5 w-5 p-0"><X className="h-3 w-3" /></Button>}
+                </div>
+              )}
 
               {/* Step forms */}
               {currentStep === 0 && (
