@@ -851,7 +851,29 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                {/* Sección Amateur - Desplegable */}
+                <Collapsible className="space-y-3">
+                  <CollapsibleTrigger asChild>
+                    <Card className="cursor-pointer hover:shadow-md transition-shadow border-2 border-purple-200 bg-gradient-to-br from-purple-50 via-pink-50 to-white">
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                              <Sparkles className="h-4 w-4 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-lg font-bold text-purple-900">🚀 Vibe Coding - Herramientas de Desarrollo con IA</h3>
+                              <p className="text-sm text-purple-700">Plataformas para crear aplicaciones y prototipos usando IA</p>
+                            </div>
+                          </div>
+                          <ChevronDown className="h-5 w-5 text-purple-600 transition-transform duration-300 collapsible-chevron" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <div className="space-y-4 pt-4">
+                      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                   {/* Readdy.ai */}
                   <a
                     href="https://readdy.ai/"
@@ -1158,24 +1180,43 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                     </p>
                   </a>
                 </div>
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
 
                 {/* Separador */}
                 <Separator className="my-6 bg-purple-200" />
 
-                {/* Sección Herramientas PRO */}
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
-                      <Rocket className="h-4 w-4 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold text-slate-800">🛠️ Vibe Coding PRO — Herramientas Profesionales</h3>
-                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">Nivel profesional</Badge>
-                  </div>
-                  <p className="text-sm text-slate-600">
-                    Estas son las herramientas que usan los desarrolladores profesionales para construir aplicaciones reales con IA. Entorno de desarrollo, backend y asistentes de código.
-                  </p>
+                {/* Sección PRO - Desplegable */}
+                <Collapsible className="space-y-3">
+                  <CollapsibleTrigger asChild>
+                    <Card className="cursor-pointer hover:shadow-md transition-shadow border-2 border-amber-200 bg-gradient-to-br from-amber-50 via-orange-50 to-white">
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                              <Rocket className="h-4 w-4 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-lg font-bold text-slate-800">🛠️ Vibe Coding PRO — Herramientas Profesionales</h3>
+                              <p className="text-sm text-slate-600">IDEs y asistentes de código para desarrolladores</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">Nivel profesional</Badge>
+                            <ChevronDown className="h-5 w-5 text-amber-600 transition-transform duration-300 collapsible-chevron" />
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <div className="space-y-4 pt-4">
+                      <p className="text-sm text-slate-600">
+                        Estas son las herramientas que usan los desarrolladores profesionales para construir aplicaciones reales con IA. Entorno de desarrollo, backend y asistentes de código.
+                      </p>
 
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {/* Firebase Studio */}
                     <a
                       href="https://studio.firebase.google.com/"
@@ -1320,26 +1361,44 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                       </p>
                     </a>
                   </div>
-                </div>
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
 
                 {/* Separador */}
                 <Separator className="my-6 bg-cyan-200" />
 
-                {/* Sección CLI Tools */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center">
-                      <Code2 className="h-4 w-4 text-white" />
-                    </div>
-                    <h3 className="text-lg font-bold text-slate-800">⌨️ Vibe Coding CLI — Herramientas de Terminal</h3>
-                    <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Línea de comandos</Badge>
-                  </div>
-                  <p className="text-sm text-slate-600">
-                    Estas herramientas se instalan y ejecutan desde la terminal. Son las favoritas de los desarrolladores avanzados porque permiten automatizar tareas, generar código y trabajar directamente sobre tus archivos.
-                  </p>
+                {/* Sección CLI - Desplegable */}
+                <Collapsible className="space-y-3">
+                  <CollapsibleTrigger asChild>
+                    <Card className="cursor-pointer hover:shadow-md transition-shadow border-2 border-cyan-200 bg-gradient-to-br from-cyan-50 via-teal-50 to-white">
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center">
+                              <Code2 className="h-4 w-4 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-lg font-bold text-slate-800">⌨️ Vibe Coding CLI — Herramientas de Terminal</h3>
+                              <p className="text-sm text-slate-600">Automatiza tareas y genera código desde la línea de comandos</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Badge variant="outline" className="text-xs bg-cyan-50 text-cyan-700 border-cyan-200">Línea de comandos</Badge>
+                            <ChevronDown className="h-5 w-5 text-cyan-600 transition-transform duration-300 collapsible-chevron" />
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <div className="space-y-4 pt-4">
+                      <p className="text-sm text-slate-600">
+                        Estas herramientas se instalan y ejecutan desde la terminal. Son las favoritas de los desarrolladores avanzados porque permiten automatizar tareas, generar código y trabajar directamente sobre tus archivos.
+                      </p>
 
-                  {/* Grid de herramientas CLI */}
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                      {/* Grid de herramientas CLI */}
+                      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {/* Gemini CLI */}
                     <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-blue-50 to-white">
                       <CardContent className="p-4 space-y-3">
@@ -1750,7 +1809,9 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                       </CardContent>
                     </Card>
                   </div>
-                </div>
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
 
                 <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
                   <p className="text-sm text-purple-800">
