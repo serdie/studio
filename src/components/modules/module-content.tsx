@@ -1103,6 +1103,24 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                       Versión open-source y self-hosted de Bolt.new. Control total sobre tu entorno de desarrollo con IA, sin dependencias externas.
                     </p>
                   </a>
+
+                  {/* Pencil.dev */}
+                  <a
+                    href="https://www.pencil.dev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-amber-200 bg-white hover:border-amber-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                        <PenTool className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-amber-900 group-hover:text-amber-700">Pencil.dev</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Generador de sitios web con IA. Crea landing pages y sitios completos a partir de descripciones en lenguaje natural.
+                    </p>
+                  </a>
                 </div>
 
                 <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
