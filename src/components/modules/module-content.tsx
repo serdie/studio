@@ -1121,6 +1121,205 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                       Generador de sitios web con IA. Crea landing pages y sitios completos a partir de descripciones en lenguaje natural.
                     </p>
                   </a>
+
+                  {/* ChatGPT Codex */}
+                  <a
+                    href="https://chatgpt.com/codex"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-green-200 bg-white hover:border-green-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+                        <Code2 className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-green-900 group-hover:text-green-700">ChatGPT Codex</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Modo de codificación de ChatGPT. Genera, edita y depura código en múltiples lenguajes con explicaciones paso a paso.
+                    </p>
+                  </a>
+
+                  {/* Replit */}
+                  <a
+                    href="https://replit.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block p-4 rounded-lg border-2 border-orange-200 bg-white hover:border-orange-400 hover:shadow-lg transition-all"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                        <Sparkles className="h-5 w-5 text-white" />
+                      </div>
+                      <h4 className="font-bold text-orange-900 group-hover:text-orange-700">Replit Agent</h4>
+                    </div>
+                    <p className="text-xs text-slate-600">
+                      Agente autónomo de IA que construye apps completas desde un prompt. Funciona 100% en el navegador, sin instalar nada. Ideal para empezar.
+                    </p>
+                  </a>
+                </div>
+
+                {/* Separador */}
+                <Separator className="my-6 bg-purple-200" />
+
+                {/* Sección Herramientas PRO */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                      <Rocket className="h-4 w-4 text-white" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-800">🛠️ Vibe Coding PRO — Herramientas Profesionales</h3>
+                    <Badge variant="outline" className="text-xs bg-amber-50 text-amber-700 border-amber-200">Nivel profesional</Badge>
+                  </div>
+                  <p className="text-sm text-slate-600">
+                    Estas son las herramientas que usan los desarrolladores profesionales para construir aplicaciones reales con IA. Entorno de desarrollo, backend y asistentes de código.
+                  </p>
+
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {/* Firebase Studio */}
+                    <a
+                      href="https://studio.firebase.google.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-4 rounded-lg border-2 border-amber-200 bg-white hover:border-amber-400 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
+                          <Sparkles className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-amber-900 group-hover:text-amber-700">Firebase Studio</h4>
+                      </div>
+                      <p className="text-xs text-slate-600">
+                        Entorno visual de Firebase para construir apps con IA. Prototipa, conecta y despliega sin escribir código.
+                      </p>
+                    </a>
+
+                    {/* Firebase Console */}
+                    <a
+                      href="https://console.firebase.google.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-4 rounded-lg border-2 border-yellow-200 bg-white hover:border-yellow-400 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center">
+                          <Brain className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-yellow-900 group-hover:text-yellow-700">Firebase Console</h4>
+                      </div>
+                      <p className="text-xs text-slate-600">
+                        Panel de administración de Firebase. Gestiona bases de datos, autenticación, hosting, funciones cloud y más.
+                      </p>
+                    </a>
+
+                    {/* VS Code */}
+                    <a
+                      href="https://code.visualstudio.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-4 rounded-lg border-2 border-blue-200 bg-white hover:border-blue-400 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center">
+                          <Code2 className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-blue-900 group-hover:text-blue-700">VS Code</h4>
+                      </div>
+                      <p className="text-xs text-slate-600">
+                        El editor de código más popular del mundo. Gratuito, con miles de extensiones e integración con Copilot y otras IAs.
+                      </p>
+                    </a>
+
+                    {/* Cursor */}
+                    <a
+                      href="https://cursor.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-4 rounded-lg border-2 border-slate-200 bg-white hover:border-slate-400 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center">
+                          <ExternalLink className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-slate-900 group-hover:text-slate-700">Cursor</h4>
+                      </div>
+                      <p className="text-xs text-slate-600">
+                        Editor de código con IA integrada. Escribe, refactoriza y depura código con asistentes de IA contextuales. El favorito de los profesionales.
+                      </p>
+                    </a>
+
+                    {/* Antigravity */}
+                    <a
+                      href="http://antigravity.google/download"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-4 rounded-lg border-2 border-cyan-200 bg-white hover:border-cyan-400 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center">
+                          <Rocket className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-cyan-900 group-hover:text-cyan-700">Antigravity (Google)</h4>
+                      </div>
+                      <p className="text-xs text-slate-600">
+                        Herramienta experimental de Google para desarrollo asistido por IA. Descarga y explora el futuro del desarrollo de software.
+                      </p>
+                    </a>
+
+                    {/* GitHub Copilot */}
+                    <a
+                      href="https://github.com/features/copilot"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-4 rounded-lg border-2 border-slate-200 bg-white hover:border-slate-400 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-slate-800 to-slate-950 flex items-center justify-center">
+                          <Code2 className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-slate-900 group-hover:text-slate-700">GitHub Copilot</h4>
+                      </div>
+                      <p className="text-xs text-slate-600">
+                        El asistente de código más usado del mundo. Integrado en VS Code, genera código, tests y explica funciones en tiempo real.
+                      </p>
+                    </a>
+
+                    {/* Windsurf */}
+                    <a
+                      href="https://windsurf.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-4 rounded-lg border-2 border-sky-200 bg-white hover:border-sky-400 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center">
+                          <ExternalLink className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-sky-900 group-hover:text-sky-700">Windsurf (Codeium)</h4>
+                      </div>
+                      <p className="text-xs text-slate-600">
+                        IDE con IA integrado, competidor directo de Cursor. Tiene "Flows" que entienden todo tu proyecto y contexto completo.
+                      </p>
+                    </a>
+
+                    {/* Claude Code */}
+                    <a
+                      href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block p-4 rounded-lg border-2 border-violet-200 bg-white hover:border-violet-400 hover:shadow-lg transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-violet-500 to-purple-700 flex items-center justify-center">
+                          <Brain className="h-5 w-5 text-white" />
+                        </div>
+                        <h4 className="font-bold text-violet-900 group-hover:text-violet-700">Claude Code</h4>
+                      </div>
+                      <p className="text-xs text-slate-600">
+                        Agente de codificación de Anthropic. Trabaja en terminal, entiende repos completos y realiza cambios complejos de forma autónoma.
+                      </p>
+                    </a>
+                  </div>
                 </div>
 
                 <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
