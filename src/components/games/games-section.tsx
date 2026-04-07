@@ -52,6 +52,7 @@ import IkeaPractice8 from './ikea-practice-8';
 import TelefonicaPractice9 from './telefonica-practice-9';
 import BBVAPractice10 from './bbva-practice-10';
 import BusinessModelCanvas from './business-model-canvas';
+import BusinessModelDAFO from './business-model-dafo';
 
 interface GameItem {
   id: string;
@@ -975,6 +976,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [practice9Open, setPractice9Open] = useState(false); // Desplegable Práctica 9
   const [practice10Open, setPractice10Open] = useState(false); // Desplegable Práctica 10
   const [canvasOpen, setCanvasOpen] = useState(false); // Desplegable Modelo Canvas
+  const [dafoOpen, setDafoOpen] = useState(false); // Desplegable Análisis DAFO
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -1023,6 +1025,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handleCanvasToggle = () => {
     setCanvasOpen(!canvasOpen);
+  };
+
+  const handleDafoToggle = () => {
+    setDafoOpen(!dafoOpen);
   };
 
   const handlePracticesToggle = () => {
@@ -1575,6 +1581,43 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
           {canvasOpen && (
             <div className="mt-4 animate-in slide-in-from-top-2 duration-300">
               <BusinessModelCanvas />
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Sección Análisis DAFO - Apartado independiente */}
+      {moduleSlug === 'bots-asistentes' && (
+        <div className="mt-8">
+          <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50 via-green-50 to-white cursor-pointer" onClick={handleDafoToggle}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-400 via-green-500 to-teal-500 flex items-center justify-center shadow-lg">
+                    <Shield className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-emerald-900">📊 Análisis DAFO Interactivo</h3>
+                    <p className="text-sm text-emerald-700">
+                      {dafoOpen
+                        ? 'Herramienta interactiva con post-its arrastrables para Fortalezas, Debilidades, Oportunidades y Amenazas'
+                        : 'Identifica factores internos y externos con post-its arrastrables en 4 cuadrantes - Haz clic para abrir'}
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown
+                  className={`h-6 w-6 text-emerald-700 transition-transform duration-300 ${
+                    dafoOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Contenido del DAFO */}
+          {dafoOpen && (
+            <div className="mt-4 animate-in slide-in-from-top-2 duration-300">
+              <BusinessModelDAFO />
             </div>
           )}
         </div>
