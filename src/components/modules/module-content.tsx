@@ -25,6 +25,7 @@ import CVBuilderTool from '@/components/tools/cv-builder';
 import AliceTerminalRetro from '@/components/tools/alice-terminal-retro';
 import IkeaPractice4 from '@/components/games/ikea-practice-4';
 import VibePromptStudio from '@/components/tools/vibe-prompt-studio';
+import AISkillBuilder from '@/components/tools/ai-skill-builder';
 import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool, Brain, Moon, ExternalLink, Code2 } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
@@ -794,6 +795,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                           <span className="truncate">A.L.I.C.E. Terminal (1995)</span>
                         </TabsTrigger>
                       )}
+                      {module.slug === 'bots-asistentes' && (
+                        <TabsTrigger value="cv-builder" className="justify-start w-full px-3 py-2.5 text-xs data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                          <FileText className="mr-2 h-3.5 w-3.5 flex-shrink-0" />
+                          <span className="truncate">CV Builder Pro</span>
+                        </TabsTrigger>
+                      )}
                     </TabsList>
                   </div>
                 </div>
@@ -824,6 +831,11 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                   {module.slug === 'bots-asistentes' && (
                     <TabsContent value="alice" className="mt-0">
                       <AliceTerminalRetro />
+                    </TabsContent>
+                  )}
+                  {module.slug === 'bots-asistentes' && (
+                    <TabsContent value="cv-builder" className="mt-0">
+                      <CVBuilderTool />
                     </TabsContent>
                   )}
                 </div>
@@ -1863,18 +1875,40 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
                     </div>
                   </CollapsibleContent>
                 </Collapsible>
+
+                {/* AI Skill Builder - Nueva sección */}
+                <Collapsible className="border border-violet-200 rounded-xl bg-gradient-to-br from-violet-50/50 via-white to-purple-50/50 mt-4">
+                  <CollapsibleTrigger asChild>
+                    <Card className="cursor-pointer hover:shadow-lg transition-shadow border-0 bg-transparent">
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-violet-500 via-purple-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-violet-500/30">
+                              <Brain className="h-6 w-6 text-white" />
+                            </div>
+                            <div>
+                              <h3 className="text-lg font-bold text-violet-900">🧠 AI Skill Builder · Crea Habilidades para IA</h3>
+                              <p className="text-sm text-violet-700">Diseña skills personalizados para asistentes de IA: diseño, buenas prácticas, seguridad, testing y más</p>
+                            </div>
+                          </div>
+                          <Button variant="ghost" size="sm" className="text-violet-600">
+                            <ChevronDown className="h-5 w-5" />
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <div className="p-4">
+                      <AISkillBuilder />
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
               </CardContent>
             </Card>
           </TabsContent>
         )}
       </Tabs>
-
-      {/* CV Builder Pro - Sección independiente debajo de todo */}
-      {module.slug === 'bots-asistentes' && (
-        <div className="mt-8">
-          <CVBuilderTool />
-        </div>
-      )}
     </div>
   );
 }
