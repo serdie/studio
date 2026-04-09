@@ -53,6 +53,7 @@ import TelefonicaPractice9 from './telefonica-practice-9';
 import BBVAPractice10 from './bbva-practice-10';
 import BusinessModelCanvas from './business-model-canvas';
 import BusinessModelDAFO from './business-model-dafo';
+import Module4ExamQuiz from './module4-exam-quiz';
 
 interface GameItem {
   id: string;
@@ -977,6 +978,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [practice10Open, setPractice10Open] = useState(false); // Desplegable Práctica 10
   const [canvasOpen, setCanvasOpen] = useState(false); // Desplegable Modelo Canvas
   const [dafoOpen, setDafoOpen] = useState(false); // Desplegable Análisis DAFO
+  const [examQuizOpen, setExamQuizOpen] = useState(false); // Desplegable Simulacro Examen
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -1029,6 +1031,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handleDafoToggle = () => {
     setDafoOpen(!dafoOpen);
+  };
+
+  const handleExamQuizToggle = () => {
+    setExamQuizOpen(!examQuizOpen);
   };
 
   const handlePracticesToggle = () => {
@@ -1618,6 +1624,43 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
           {dafoOpen && (
             <div className="mt-4 animate-in slide-in-from-top-2 duration-300">
               <BusinessModelDAFO />
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Sección Simulacro Examen */}
+      {moduleSlug === 'bots-asistentes' && (
+        <div className="mt-8">
+          <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-orange-50 to-white cursor-pointer" onClick={handleExamQuizToggle}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 flex items-center justify-center shadow-lg">
+                    <Trophy className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-amber-900">🏆 Simulacro de Examen — Módulo 4</h3>
+                    <p className="text-sm text-amber-700">
+                      {examQuizOpen
+                        ? '10 preguntas tipo test con explicaciones detalladas. Prepárate para el examen real del lunes.'
+                        : 'Test de evaluación con las mismas preguntas y conceptos del examen real. ¡Practica antes del lunes!'}
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown
+                  className={`h-6 w-6 text-amber-700 transition-transform duration-300 ${
+                    examQuizOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Contenido del Simulacro */}
+          {examQuizOpen && (
+            <div className="mt-4 animate-in slide-in-from-top-2 duration-300">
+              <Module4ExamQuiz />
             </div>
           )}
         </div>

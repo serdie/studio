@@ -340,6 +340,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               poster="https://pics.filmaffinity.com/iboy-727055223-mmed.jpg"
               themes={['Tecnología', 'Cyberpunk', 'Privacidad', 'Humano-Máquina', 'Thriller']}
             />
+            <MovieCard
+              title="Sin Piedad / Mercy (2026)"
+              description="Un thriller de ciencia ficción que explora los límites de la inteligencia artificial y la misericordia tecnológica. Cuando un sistema de IA avanzado debe tomar decisiones que afectan vidas humanas, surge la pregunta: ¿puede una máquina mostrar piedad? Una reflexión sobre la ética de la IA, la autonomía de los sistemas y qué significa realmente tomar decisiones con consecuencias humanas."
+              poster="https://pics.filmaffinity.com/mercy-236747908-mmed.jpg"
+              themes={['IA', 'Ética', 'Decisiones Autónomas', 'Ciencia Ficción', 'Tecnología']}
+            />
           </div>
           <div className="mt-4 p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
             <p className="text-sm text-cyan-800">
