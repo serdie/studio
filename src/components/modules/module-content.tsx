@@ -346,6 +346,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               poster="https://pics.filmaffinity.com/mercy-236747908-mmed.jpg"
               themes={['IA', 'Ética', 'Decisiones Autónomas', 'Ciencia Ficción', 'Tecnología']}
             />
+            <MovieCard
+              title="Gladiator II (2024)"
+              description="La secuela de la épica historia de Roma. En un futuro donde la tecnología y la inteligencia artificial controlan los espectáculos y las decisiones del imperio, un luchador debe enfrentarse a un sistema que usa IA para manipular multitudes y tomar decisiones de vida o muerte. Una reflexión sobre el poder, la tecnología y la humanidad frente a sistemas automatizados de control."
+              poster="https://pics.filmaffinity.com/gladiator-851958258-mmed.jpg"
+              themes={['Épica', 'IA', 'Control Tecnológico', 'Humanidad', 'Poder']}
+            />
           </div>
           <div className="mt-4 p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
             <p className="text-sm text-cyan-800">
