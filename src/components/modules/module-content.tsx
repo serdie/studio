@@ -365,6 +365,39 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         </CollapsibleSection>
       )}
 
+      {/* Deberes de Fin de Semana - Módulo 5 (Low-Code e IA) */}
+      {module.slug === 'low-code-no-code' && (
+        <CollapsibleSection
+          title="📚 Deberes de Fin de Semana: Cine y Automatización"
+          description="Películas recomendadas para reflexionar sobre IA, automatización y el futuro del trabajo"
+          icon={<Film className="h-5 w-5 text-cyan-600" />}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <MovieCard
+              title="M3GAN (2022)"
+              description="Una empresa de juguetes crea una muñeca con IA avanzada que aprende y evoluciona de forma autónoma. Cuando la muñeca empieza a tomar decisiones peligrosas para proteger a su dueña, surge la pregunta: ¿hasta dónde debe llegar la autonomía de una IA? Un thriller sobre automatización, ética de la IA y los límites de la delegación de decisiones en sistemas inteligentes."
+              poster="https://pics.filmaffinity.com/m3gan-570441440-mmed.jpg"
+              themes={['IA Autónoma', 'Automatización', 'Ética', 'Robótica', 'Thriller']}
+            />
+            <MovieCard
+              title="Minority Report (2002)"
+              description="En un futuro donde una unidad de élite de la policía utiliza tecnología predictiva para detener crímenes antes de que ocurran, un agente descubre que el sistema puede estar equivocado. Una reflexión visionaria sobre predicción algorítmica, automatización de decisiones, sesgos en sistemas de IA y los peligros de delegar la justicia en algoritmos sin supervisión humana."
+              poster="https://pics.filmaffinity.com/minority_report-284130722-mmed.jpg"
+              themes={['Predicción Algorítmica', 'Automatización', 'Sesgo de IA', 'Ética', 'Futuro']}
+            />
+          </div>
+          <div className="mt-4 p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
+            <p className="text-sm text-cyan-800">
+              💡 <strong>Actividad para el Lunes:</strong>
+              (1) Ver la película antes del lunes,
+              (2) Reflexionar sobre cómo la IA de M3GAN toma decisiones autónomas sin supervisión humana,
+              (3) Pensar: ¿Qué paralelismos hay entre M3GAN y los asistentes virtuales empresariales sin controles adecuados?,
+              (4) Preparar 2-3 preguntas para debatir: ¿Dónde deben estar los límites de la autonomía de la IA?
+            </p>
+          </div>
+        </CollapsibleSection>
+      )}
+
       {/* Lecturas Recomendadas - Módulo 4 (Bots y Asistentes) */}
       {module.slug === 'bots-asistentes' && (
         <CollapsibleSection

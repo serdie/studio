@@ -1408,7 +1408,16 @@ Ahora clasifica: 'Calidad aceptable por el precio pagado'</pre>
     longDescription: 'Introducción al movimiento No-Code y automatización avanzada de flujos de trabajo utilizando MAKE.',
     progress: 0,
     icon: Settings2,
-    resources: [],
+    resources: [
+      { title: 'Guía del Módulo 5 (PDF)', file: '/materiales/tema5/01_guia_modulo_5.pdf' },
+      { title: 'Enlaces y Recursos (PDF)', file: '/materiales/tema5/02_enlaces_5_v01.pdf' },
+      { title: 'Ejercicios Módulo 5 (PDF)', file: '/materiales/tema5/03_ejercicios_5.pdf' },
+      { title: 'Enterprise Virtual Assistant Blueprint (PDF)', file: '/materiales/tema5/Enterprise_Virtual_Assistant_Blueprint.pdf' },
+      { title: 'Presentación Enterprise Blueprint (PPTX)', file: '/materiales/tema5/Enterprise_Virtual_Assistant_Blueprint.pptx' },
+      { title: 'Audio: Cómo las empresas controlan su IA conversacional (M4A)', file: '/materiales/tema5/Como_las_empresas_controlan_su_IA_conversacional.m4a' },
+      { title: 'Vídeo: El manual para asistentes de IA (MP4)', file: '/materiales/tema5/El_manual_para_asistentes_de_IA.mp4' },
+      { title: 'Infografía del Módulo 5 (PNG)', file: '/materiales/tema5/unnamed (1).png' }
+    ],
     content: `
       <h2>5.1. Introducción a Low-Code, No-Code e IA</h2>
       <h3>Definiciones</h3>

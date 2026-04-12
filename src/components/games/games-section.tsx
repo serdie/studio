@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package, AlertTriangle, ShoppingCart, Database, Link, Calendar, UserCheck, BookOpen, Rocket, Lock, Eye, BarChart3, RefreshCw, Play, Users, Key, Bug, LayoutGrid } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package, AlertTriangle, ShoppingCart, Database, Link, Calendar, UserCheck, BookOpen, Rocket, Lock, Eye, BarChart3, RefreshCw, Play, Users, Key, Bug, LayoutGrid, Zap, Layout } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -54,6 +54,9 @@ import BBVAPractice10 from './bbva-practice-10';
 import BusinessModelCanvas from './business-model-canvas';
 import BusinessModelDAFO from './business-model-dafo';
 import Module4ExamQuiz from './module4-exam-quiz';
+import MakeScenarioBuilder from './make-scenario-builder';
+import PlatformMatcherGame from './platform-matcher-game';
+import Module5ExamQuiz from './module5-exam-quiz';
 
 interface GameItem {
   id: string;
@@ -585,7 +588,6 @@ const module4GamesList: GameItem[] = [
   },
 ];
 
-// Enlaces externos específicos para Módulo 4 (Bots y Asistentes Virtuales)
 const module4ExternalActivities: GameItem[] = [
   {
     id: 'dialogflow',
@@ -676,6 +678,104 @@ const module4ExternalActivities: GameItem[] = [
     url: 'https://botpress.com',
     category: 'actividad',
     icon: <Code2 className="h-5 w-5 text-cyan-400" />,
+  },
+];
+
+// Enlaces externos específicos para Módulo 5 (Low-Code e IA)
+const module5ExternalActivities: GameItem[] = [
+  {
+    id: 'make',
+    title: 'MAKE (antes Integromat)',
+    description: 'Plataforma de automatización visual. Conecta apps y servicios para crear flujos de trabajo automatizados sin código.',
+    type: 'external',
+    url: 'https://www.make.com/',
+    category: 'actividad',
+    icon: <Zap className="h-5 w-5 text-orange-400" />,
+  },
+  {
+    id: 'zapier',
+    title: 'Zapier',
+    description: 'Automatiza flujos entre 5000+ apps. El estándar para integraciones sin código.',
+    type: 'external',
+    url: 'https://zapier.com/',
+    category: 'actividad',
+    icon: <Zap className="h-5 w-5 text-green-400" />,
+  },
+  {
+    id: 'n8n',
+    title: 'n8n - Automatización Open Source',
+    description: 'Alternativa open-source a MAKE. Auto-hosteable, personalizable y gratuita.',
+    type: 'external',
+    url: 'https://n8n.io/',
+    category: 'actividad',
+    icon: <Code2 className="h-5 w-5 text-red-400" />,
+  },
+  {
+    id: 'bubble',
+    title: 'Bubble - Apps Web sin Código',
+    description: 'Crea aplicaciones web completas con base de datos, autenticación y lógica sin programar.',
+    type: 'external',
+    url: 'https://bubble.io/',
+    category: 'actividad',
+    icon: <Layout className="h-5 w-5 text-blue-400" />,
+  },
+  {
+    id: 'airtable',
+    title: 'Airtable - Base de Datos Visual',
+    description: 'Combina hojas de cálculo con bases de datos relacionales. Ideal para gestión de proyectos.',
+    type: 'external',
+    url: 'https://airtable.com/',
+    category: 'actividad',
+    icon: <Database className="h-5 w-5 text-green-400" />,
+  },
+  {
+    id: 'webflow',
+    title: 'Webflow - Diseño Web Visual',
+    description: 'Diseña websites profesionales con control total de CSS y animaciones, sin código.',
+    type: 'external',
+    url: 'https://webflow.com/',
+    category: 'actividad',
+    icon: <Globe className="h-5 w-5 text-purple-400" />,
+  },
+  {
+    id: 'openai-api',
+    title: 'OpenAI API',
+    description: 'API de GPT-4, DALL-E y Whisper para integrar IA en automatizaciones.',
+    type: 'external',
+    url: 'https://platform.openai.com/',
+    category: 'actividad',
+    icon: <Brain className="h-5 w-5 text-slate-400" />,
+  },
+  {
+    id: 'google-ai-studio',
+    title: 'Google AI Studio',
+    description: 'Prototipa con Gemini Pro y Gemini Pro Vision. Integración con Google Cloud.',
+    type: 'external',
+    url: 'https://aistudio.google.com/',
+    category: 'actividad',
+    icon: <Sparkles className="h-5 w-5 text-blue-400" />,
+  },
+];
+
+// Juegos específicos para Módulo 5 (Low-Code e IA)
+const module5GamesList: GameItem[] = [
+  {
+    id: 'make-scenario-builder',
+    title: '⚡ Make Scenario Builder',
+    description: 'Construye flujos de automatización arrastrando los módulos correctos en orden. 4 escenarios reales: leads, tickets, pedidos y reuniones.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Zap className="h-5 w-5 text-orange-400" />,
+    component: <MakeScenarioBuilder />,
+  },
+  {
+    id: 'platform-matcher-game',
+    title: '🧩 Platform Matcher',
+    description: 'Elige la plataforma No-Code/Low-Code correcta para cada caso de uso: MAKE, Zapier, Bubble, Airtable, Webflow, Softr, Glide, n8n.',
+    type: 'internal',
+    category: 'juego',
+    icon: <Layout className="h-5 w-5 text-blue-400" />,
+    component: <PlatformMatcherGame />,
   },
 ];
 
@@ -979,6 +1079,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [canvasOpen, setCanvasOpen] = useState(false); // Desplegable Modelo Canvas
   const [dafoOpen, setDafoOpen] = useState(false); // Desplegable Análisis DAFO
   const [examQuizOpen, setExamQuizOpen] = useState(false); // Desplegable Simulacro Examen
+  const [module5GamesOpen, setModule5GamesOpen] = useState(false); // Desplegable Juegos Módulo 5
+  const [module5ExamOpen, setModule5ExamOpen] = useState(false); // Desplegable Simulacro Examen M5
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -1035,6 +1137,14 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
 
   const handleExamQuizToggle = () => {
     setExamQuizOpen(!examQuizOpen);
+  };
+
+  const handleModule5GamesToggle = () => {
+    setModule5GamesOpen(!module5GamesOpen);
+  };
+
+  const handleModule5ExamToggle = () => {
+    setModule5ExamOpen(!module5ExamOpen);
   };
 
   const handlePracticesToggle = () => {
@@ -1096,7 +1206,9 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
       ? module3GamesList
       : moduleSlug === 'bots-asistentes'
         ? module4GamesList
-        : gamesList;
+        : moduleSlug === 'low-code-no-code'
+          ? module5GamesList
+          : gamesList;
 
   const currentExternalActivities = moduleSlug === 'llms-generativa'
     ? module2ExternalActivities
@@ -1104,10 +1216,12 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
       ? module3ExternalActivities
       : moduleSlug === 'bots-asistentes'
         ? module4ExternalActivities
-        : externalActivities;
+        : moduleSlug === 'low-code-no-code'
+          ? module5ExternalActivities
+          : externalActivities;
 
-  // Solo mostrar juegos y enlaces en el módulo 1, 2, 3 y 4
-  if (moduleSlug !== 'introduccion-ia' && moduleSlug !== 'llms-generativa' && moduleSlug !== 'avatares-virtuales' && moduleSlug !== 'bots-asistentes') {
+  // Solo mostrar juegos y enlaces en el módulo 1, 2, 3, 4 y 5
+  if (moduleSlug !== 'introduccion-ia' && moduleSlug !== 'llms-generativa' && moduleSlug !== 'avatares-virtuales' && moduleSlug !== 'bots-asistentes' && moduleSlug !== 'low-code-no-code') {
     return (
       <Card className="border-slate-700 bg-slate-800/50">
         <CardContent className="p-12 text-center space-y-4">
@@ -1666,6 +1780,68 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
         </div>
       )}
 
+      {/* Sección Módulo 5 - Juegos */}
+      {moduleSlug === 'low-code-no-code' && (
+        <div className="mt-8 space-y-6">
+          {/* Juegos Módulo 5 */}
+          <Card className="border-orange-200 bg-gradient-to-br from-orange-50 via-amber-50 to-white cursor-pointer" onClick={handleModule5GamesToggle}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-orange-400 via-red-500 to-pink-500 flex items-center justify-center shadow-lg">
+                    <Zap className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-orange-900">⚡ Juegos del Módulo 5</h3>
+                    <p className="text-sm text-orange-700">
+                      {module5GamesOpen
+                        ? 'Make Scenario Builder + Platform Matcher: practica automatizaciones y plataformas No-Code'
+                        : 'Construye escenarios en MAKE y elige la plataforma correcta para cada caso - Haz clic para abrir'}
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown className={`h-6 w-6 text-orange-700 transition-transform duration-300 ${module5GamesOpen ? 'rotate-180' : ''}`} />
+              </div>
+            </CardContent>
+          </Card>
+
+          {module5GamesOpen && (
+            <div className="space-y-6 animate-in slide-in-from-top-2 duration-300">
+              <MakeScenarioBuilder />
+              <PlatformMatcherGame />
+            </div>
+          )}
+
+          {/* Simulacro Examen Módulo 5 */}
+          <Card className="border-red-200 bg-gradient-to-br from-red-50 via-orange-50 to-white cursor-pointer" onClick={handleModule5ExamToggle}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-red-400 via-orange-500 to-amber-500 flex items-center justify-center shadow-lg">
+                    <Trophy className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-red-900">🏆 Simulacro de Examen — Módulo 5</h3>
+                    <p className="text-sm text-red-700">
+                      {module5ExamOpen
+                        ? '10 preguntas tipo test sobre No-Code, MAKE e IA aplicada a automatizaciones'
+                        : 'Test de evaluación con conceptos clave del módulo 5. ¡Practica antes del examen!'}
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown className={`h-6 w-6 text-red-700 transition-transform duration-300 ${module5ExamOpen ? 'rotate-180' : ''}`} />
+              </div>
+            </CardContent>
+          </Card>
+
+          {module5ExamOpen && (
+            <div className="mt-4 animate-in slide-in-from-top-2 duration-300">
+              <Module5ExamQuiz />
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Sección de Actividades Externas - Desplegable */}
       {currentExternalActivities.length > 0 && (
         <div className="mt-8">
@@ -1682,7 +1858,9 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                         ? '🔗 Enlaces Externos - Avatares y TTS'
                         : moduleSlug === 'llms-generativa'
                           ? '🔗 Enlaces Externos a LLMs'
-                          : '🔗 Enlaces Externos Recomendados'}
+                          : moduleSlug === 'low-code-no-code'
+                            ? '🔗 Enlaces Externos - Automatizaciones y No-Code'
+                            : '🔗 Enlaces Externos Recomendados'}
                     </h3>
                     <p className="text-sm text-yellow-700">
                       {externalLinksOpen
@@ -1849,8 +2027,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
         </div>
       )}
 
-      {/* Secciones adicionales - Solo para Módulo 1 y 2 (NO Módulo 3 ni Módulo 4) */}
-      {moduleSlug !== 'avatares-virtuales' && moduleSlug !== 'bots-asistentes' && (
+      {/* Secciones adicionales - Solo para Módulo 1 y 2 (NO Módulo 3, 4 ni 5) */}
+      {moduleSlug !== 'avatares-virtuales' && moduleSlug !== 'bots-asistentes' && moduleSlug !== 'low-code-no-code' && (
         <>
       {/* Sección LLMs en LOCALHOST - Desplegable */}
       <div className="mt-8">
