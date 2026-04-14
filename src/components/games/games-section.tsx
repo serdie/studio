@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package, AlertTriangle, ShoppingCart, Database, Link, Calendar, UserCheck, BookOpen, Rocket, Lock, Eye, BarChart3, RefreshCw, Play, Users, Key, Bug, LayoutGrid, Zap, Layout } from 'lucide-react';
+import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package, AlertTriangle, ShoppingCart, Database, Link, Calendar, UserCheck, BookOpen, Rocket, Lock, Eye, BarChart3, RefreshCw, Play, Users, Key, Bug, LayoutGrid, Zap, Layout, Clock, Map, Scale, Webhook, GitBranch } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
 import IAClassificationGame from './ia-classification-game';
@@ -57,6 +57,12 @@ import Module4ExamQuiz from './module4-exam-quiz';
 import MakeScenarioBuilder from './make-scenario-builder';
 import PlatformMatcherGame from './platform-matcher-game';
 import Module5ExamQuiz from './module5-exam-quiz';
+import ZalandoPractice1 from './zalando-practice-1';
+import GestoriaPractice2 from './gestoria-practice-2';
+import GlovoPractice3 from './glovo-practice-3';
+import DomestikaPractice4 from './domestika-practice-4';
+import SeurPractice5 from './seur-practice-5';
+import TypeformPractice6 from './typeform-practice-6';
 
 interface GameItem {
   id: string;
@@ -1081,6 +1087,13 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [examQuizOpen, setExamQuizOpen] = useState(false); // Desplegable Simulacro Examen
   const [module5GamesOpen, setModule5GamesOpen] = useState(false); // Desplegable Juegos Módulo 5
   const [module5ExamOpen, setModule5ExamOpen] = useState(false); // Desplegable Simulacro Examen M5
+  const [module5PracticesOpen, setModule5PracticesOpen] = useState(false); // Desplegable Prácticas Módulo 5
+  const [practice5_1Open, setPractice5_1Open] = useState(false);
+  const [practice5_2Open, setPractice5_2Open] = useState(false);
+  const [practice5_3Open, setPractice5_3Open] = useState(false);
+  const [practice5_4Open, setPractice5_4Open] = useState(false);
+  const [practice5_5Open, setPractice5_5Open] = useState(false);
+  const [practice5_6Open, setPractice5_6Open] = useState(false);
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -1146,6 +1159,17 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const handleModule5ExamToggle = () => {
     setModule5ExamOpen(!module5ExamOpen);
   };
+
+  const handleModule5PracticesToggle = () => {
+    setModule5PracticesOpen(!module5PracticesOpen);
+  };
+
+  const handlePractice5_1Toggle = () => { setPractice5_1Open(!practice5_1Open); };
+  const handlePractice5_2Toggle = () => { setPractice5_2Open(!practice5_2Open); };
+  const handlePractice5_3Toggle = () => { setPractice5_3Open(!practice5_3Open); };
+  const handlePractice5_4Toggle = () => { setPractice5_4Open(!practice5_4Open); };
+  const handlePractice5_5Toggle = () => { setPractice5_5Open(!practice5_5Open); };
+  const handlePractice5_6Toggle = () => { setPractice5_6Open(!practice5_6Open); };
 
   const handlePracticesToggle = () => {
     setPracticesOpen(!practicesOpen);
@@ -1837,6 +1861,134 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
           {module5ExamOpen && (
             <div className="mt-4 animate-in slide-in-from-top-2 duration-300">
               <Module5ExamQuiz />
+            </div>
+          )}
+
+          {/* Prácticas Módulo 5 */}
+          <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50 via-green-50 to-white cursor-pointer" onClick={handleModule5PracticesToggle}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-400 via-green-500 to-teal-500 flex items-center justify-center shadow-lg">
+                    <FileText className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-emerald-900">📋 Prácticas del Módulo 5</h3>
+                    <p className="text-sm text-emerald-700">
+                      {module5PracticesOpen
+                        ? '6 prácticas: Zalando AS-IS/TO-BE, Gestoría JSON, Glovo Trigger, Domestika Make vs n8n, SEUR Make L1, Typeform Make L2'
+                        : 'Práctica 1: Zalando · Práctica 2: Gestoría · Práctica 3: Glovo · Práctica 4: Domestika · Práctica 5: SEUR · Práctica 6: Typeform - Haz clic para ver'}
+                    </p>
+                  </div>
+                </div>
+                <ChevronDown className={`h-6 w-6 text-emerald-700 transition-transform duration-300 ${module5PracticesOpen ? 'rotate-180' : ''}`} />
+              </div>
+            </CardContent>
+          </Card>
+
+          {module5PracticesOpen && (
+            <div className="space-y-4 animate-in slide-in-from-top-2 duration-300">
+              {/* Práctica 1 */}
+              <Card className="border-orange-200 bg-gradient-to-br from-orange-50 via-amber-50 to-white cursor-pointer" onClick={handlePractice5_1Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-orange-200 flex items-center justify-center"><Map className="h-4 w-4 text-orange-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-orange-900">Práctica 1: Caso Troncal y Mapa AS-IS → TO-BE (Zalando)</h4>
+                        <p className="text-sm text-orange-700">{practice5_1Open ? 'Elige un proceso, mapea AS-IS y diseña TO-BE con rutas OK/revisión/error' : 'Matriz valor/riesgo + 8-12 pasos AS-IS + TO-BE + 6 excepciones'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-orange-700 transition-transform duration-300 ${practice5_1Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_1Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><ZalandoPractice1 /></div>)}
+
+              {/* Práctica 2 */}
+              <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-white cursor-pointer" onClick={handlePractice5_2Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-blue-200 flex items-center justify-center"><Code2 className="h-4 w-4 text-blue-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-blue-900">Práctica 2: Contrato de Datos JSON + Validación (Gestoría)</h4>
+                        <p className="text-sm text-blue-700">{practice5_2Open ? 'Diseña JSON schema, 10 reglas de validación y 3 ejemplos de entrada' : 'Campos mínimos/opcionales + metadatos + ruta datos faltantes'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-blue-700 transition-transform duration-300 ${practice5_2Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_2Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><GestoriaPractice2 /></div>)}
+
+              {/* Práctica 3 */}
+              <Card className="border-green-200 bg-gradient-to-br from-green-50 via-emerald-50 to-white cursor-pointer" onClick={handlePractice5_3Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-green-200 flex items-center justify-center"><Clock className="h-4 w-4 text-green-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-green-900">Práctica 3: Trigger: Evento vs Cron vs Polling (Glovo)</h4>
+                        <p className="text-sm text-green-700">{practice5_3Open ? 'Propón 2 flujos (tiempo real + batch) con trigger, KPI, riesgo e idempotencia' : 'Tabla comparativa A/B + decisión de idempotencia'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-green-700 transition-transform duration-300 ${practice5_3Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_3Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><GlovoPractice3 /></div>)}
+
+              {/* Práctica 4 */}
+              <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-pink-50 to-white cursor-pointer" onClick={handlePractice5_4Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-purple-200 flex items-center justify-center"><Scale className="h-4 w-4 text-purple-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-purple-900">Práctica 4: Make vs n8n Matriz de Decisión (Domestika)</h4>
+                        <p className="text-sm text-purple-700">{practice5_4Open ? 'Matriz 8 criterios + argumentario + 3 trade-offs + hoja de riesgos' : 'Make vs n8n: criterios ponderados, defensa oral y mitigaciones'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-purple-700 transition-transform duration-300 ${practice5_4Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_4Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><DomestikaPractice4 /></div>)}
+
+              {/* Práctica 5 */}
+              <Card className="border-green-200 bg-gradient-to-br from-green-50 via-emerald-50 to-white cursor-pointer" onClick={handlePractice5_5Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-green-200 flex items-center justify-center"><Webhook className="h-4 w-4 text-green-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-green-900">Práctica 5: Make Nivel 1 - Escenario MVP (SEUR)</h4>
+                        <p className="text-sm text-green-700">{practice5_5Open ? 'Trigger + validación + rutas OK/faltan datos + 3 casos de prueba + trace_id' : 'Primer escenario reproducible con salida visible y trazabilidad'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-green-700 transition-transform duration-300 ${practice5_5Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_5Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><SeurPractice5 /></div>)}
+
+              {/* Práctica 6 */}
+              <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-blue-50 to-white cursor-pointer" onClick={handlePractice5_6Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-cyan-200 flex items-center justify-center"><GitBranch className="h-4 w-4 text-cyan-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-cyan-900">Práctica 6: Make Nivel 2 - Router/Filters + Revisión (Typeform)</h4>
+                        <p className="text-sm text-cyan-700">{practice5_6Open ? '4 rutas (alta/media/baja/revisión) + 15 casos de prueba + reglas de prioridad' : 'Router con filtros, ruta de revisión humana y set de pruebas completo'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-cyan-700 transition-transform duration-300 ${practice5_6Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_6Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><TypeformPractice6 /></div>)}
             </div>
           )}
         </div>
