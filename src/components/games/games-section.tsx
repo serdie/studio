@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { ChevronDown, ChevronUp, Gamepad2, ExternalLink, Brain, Trophy, Sparkles, Search, Code2, Image as ImageIcon, Film, Headphones, UserRoundCog, Globe, CheckCircle2, FileText, Download, Box, Shield, LifeBuoy, Mic, TrendingUp, MessageSquare, Stethoscope, Plane, Wifi, ClipboardList, Building2, Package, AlertTriangle, ShoppingCart, Database, Link, Calendar, UserCheck, BookOpen, Rocket, Lock, Eye, BarChart3, RefreshCw, Play, Users, Key, Bug, LayoutGrid, Zap, Layout, Clock, Map, Scale, Webhook, GitBranch } from 'lucide-react';
 import ProjectNeural from './project-neural';
 import IAMLDeepLearningQuiz from './ia-ml-dl-quiz';
@@ -1094,6 +1095,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [practice5_4Open, setPractice5_4Open] = useState(false);
   const [practice5_5Open, setPractice5_5Open] = useState(false);
   const [practice5_6Open, setPractice5_6Open] = useState(false);
+  const [module5GlossaryOpen, setModule5GlossaryOpen] = useState(false);
+  const [glossarySearch, setGlossarySearch] = useState('');
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
 
   const handleToggle = (gameId: string) => {
@@ -1170,6 +1173,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const handlePractice5_4Toggle = () => { setPractice5_4Open(!practice5_4Open); };
   const handlePractice5_5Toggle = () => { setPractice5_5Open(!practice5_5Open); };
   const handlePractice5_6Toggle = () => { setPractice5_6Open(!practice5_6Open); };
+  const handleModule5GlossaryToggle = () => { setModule5GlossaryOpen(!module5GlossaryOpen); };
 
   const handlePracticesToggle = () => {
     setPracticesOpen(!practicesOpen);
@@ -1989,6 +1993,146 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                 </CardContent>
               </Card>
               {practice5_6Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><TypeformPractice6 /></div>)}
+
+              {/* Glosario Módulo 5 */}
+              <Card className="border-indigo-200 bg-gradient-to-br from-indigo-50 via-violet-50 to-white cursor-pointer" onClick={handleModule5GlossaryToggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-400 via-violet-500 to-purple-500 flex items-center justify-center shadow-lg">
+                        <BookOpen className="h-5 w-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-indigo-900">📖 Glosario de Automatización</h3>
+                        <p className="text-sm text-indigo-700">
+                          {module5GlossaryOpen
+                            ? 'Diccionario de conceptos fundamentales de automatización, IA y plataformas'
+                            : 'Conceptos clave para entender Make, n8n, IA y automatización - Haz clic para abrir'}
+                        </p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-6 w-6 text-indigo-700 transition-transform duration-300 ${module5GlossaryOpen ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {module5GlossaryOpen && (
+                <div className="space-y-4 animate-in slide-in-from-top-2 duration-300">
+                  {/* Search */}
+                  <Card className="border-slate-200 bg-white">
+                    <CardContent className="p-3">
+                      <Input
+                        placeholder="🔍 Buscar concepto..."
+                        className="text-xs bg-white"
+                        value={glossarySearch}
+                        onChange={(e) => setGlossarySearch(e.target.value)}
+                      />
+                    </CardContent>
+                  </Card>
+
+                  {/* Category 1: Conceptos Fundamentales */}
+                  <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-white to-cyan-50">
+                    <CardContent className="p-4 space-y-3">
+                      <h4 className="text-sm font-bold text-blue-900 flex items-center gap-2"><Zap className="h-4 w-4" /> Conceptos Fundamentales de Automatización</h4>
+                      {[
+                        { term: 'Workflow/Escenario', def: 'La secuencia de pasos que automatiza una tarea (n8n usa "Workflow", Make usa "Scenarios").' },
+                        { term: 'Trigger (Disparador)', def: 'El evento que inicia la automatización (ej. recibir un email, nuevo registro).' },
+                        { term: 'Action (Acción)', def: 'La tarea que se realiza después del trigger (ej. enviar mensaje, actualizar CRM).' },
+                        { term: 'Nodo/Módulo', def: 'Los componentes individuales dentro del flujo que representan aplicaciones o funciones.' },
+                        { term: 'Webhook', def: 'La forma más rápida de recibir datos de una aplicación en tiempo real (n8n/Make).' },
+                        { term: 'API', def: 'Application Programming Interface: conexión técnica entre aplicaciones.' },
+                      ].filter(item => !glossarySearch || item.term.toLowerCase().includes(glossarySearch.toLowerCase()) || item.def.toLowerCase().includes(glossarySearch.toLowerCase())).map((item, i) => (
+                        <Card key={i} className="border-slate-200 bg-white">
+                          <CardContent className="p-3">
+                            <span className="text-xs font-bold text-blue-800">{item.term}</span>
+                            <p className="text-xs text-slate-600 mt-1">{item.def}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </CardContent>
+                  </Card>
+
+                  {/* Category 2: Términos Técnicos */}
+                  <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-white to-pink-50">
+                    <CardContent className="p-4 space-y-3">
+                      <h4 className="text-sm font-bold text-purple-900 flex items-center gap-2"><Code2 className="h-4 w-4" /> Términos Técnicos Específicos</h4>
+                      {[
+                        { term: 'JSON', def: 'JavaScript Object Notation: formato estándar de intercambio de datos.' },
+                        { term: 'Parsing/Mapeo de datos', def: 'Proceso de seleccionar datos de módulos anteriores para usar en módulos posteriores.' },
+                        { term: 'Integración', def: 'Conectar aplicaciones como Slack, Notion, Gmail, CRM, etc.' },
+                        { term: 'HTTP Request', def: 'Nodo avanzado para conectarse a cualquier API que no esté predefinida.' },
+                        { term: 'Error Handling', def: 'Manejo de errores: técnicas para gestionar fallos en los flujos.' },
+                      ].filter(item => !glossarySearch || item.term.toLowerCase().includes(glossarySearch.toLowerCase()) || item.def.toLowerCase().includes(glossarySearch.toLowerCase())).map((item, i) => (
+                        <Card key={i} className="border-slate-200 bg-white">
+                          <CardContent className="p-3">
+                            <span className="text-xs font-bold text-purple-800">{item.term}</span>
+                            <p className="text-xs text-slate-600 mt-1">{item.def}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </CardContent>
+                  </Card>
+
+                  {/* Category 3: IA */}
+                  <Card className="border-green-200 bg-gradient-to-br from-green-50 via-white to-emerald-50">
+                    <CardContent className="p-4 space-y-3">
+                      <h4 className="text-sm font-bold text-green-900 flex items-center gap-2"><Brain className="h-4 w-4" /> Automatización con IA</h4>
+                      {[
+                        { term: 'AI Agents', def: 'Agentes de IA autónomos que toman decisiones en un flujo.' },
+                        { term: 'System Prompt', def: 'Instrucciones básicas que definen el comportamiento de la IA.' },
+                        { term: 'Vector Database/Vector Store', def: 'Bases de datos para almacenar conocimientos de IA.' },
+                        { term: 'LLM', def: 'Large Language Model: modelos como OpenAI/GPT, Claude, integrados en n8n.' },
+                      ].filter(item => !glossarySearch || item.term.toLowerCase().includes(glossarySearch.toLowerCase()) || item.def.toLowerCase().includes(glossarySearch.toLowerCase())).map((item, i) => (
+                        <Card key={i} className="border-slate-200 bg-white">
+                          <CardContent className="p-3">
+                            <span className="text-xs font-bold text-green-800">{item.term}</span>
+                            <p className="text-xs text-slate-600 mt-1">{item.def}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </CardContent>
+                  </Card>
+
+                  {/* Category 4: Diferencias entre plataformas */}
+                  <Card className="border-amber-200 bg-gradient-to-br from-amber-50 via-white to-yellow-50">
+                    <CardContent className="p-4 space-y-3">
+                      <h4 className="text-sm font-bold text-amber-900 flex items-center gap-2"><Scale className="h-4 w-4" /> Diferencias Clave entre Plataformas</h4>
+                      {[
+                        { term: 'No-Code (Make)', def: 'Plataforma orientada a usuarios no técnicos, visual.' },
+                        { term: 'Low-Code (n8n)', def: 'Plataforma más amigable para desarrolladores que permite JavaScript/TypeScript.' },
+                        { term: 'Open Source/Self-Hosted (n8n)', def: 'Capacidad de instalar en servidores propios, sin límites de tareas.' },
+                        { term: 'Polling (Make)', def: 'Revisión periódica de nuevas acciones (ej. cada 15 min).' },
+                      ].filter(item => !glossarySearch || item.term.toLowerCase().includes(glossarySearch.toLowerCase()) || item.def.toLowerCase().includes(glossarySearch.toLowerCase())).map((item, i) => (
+                        <Card key={i} className="border-slate-200 bg-white">
+                          <CardContent className="p-3">
+                            <span className="text-xs font-bold text-amber-800">{item.term}</span>
+                            <p className="text-xs text-slate-600 mt-1">{item.def}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </CardContent>
+                  </Card>
+
+                  {/* Category 5: Gestión de Datos */}
+                  <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-blue-50">
+                    <CardContent className="p-4 space-y-3">
+                      <h4 className="text-sm font-bold text-cyan-900 flex items-center gap-2"><Database className="h-4 w-4" /> Conceptos de Gestión de Datos</h4>
+                      {[
+                        { term: 'Data Transformation', def: 'Limpiar o cambiar el formato de los datos dentro del flujo.' },
+                        { term: 'Database (CRM, Notion, Sheets)', def: 'Almacenamiento de los resultados de la automatización.' },
+                        { term: 'Sincronización', def: 'Mantener datos iguales en dos aplicaciones diferentes.' },
+                      ].filter(item => !glossarySearch || item.term.toLowerCase().includes(glossarySearch.toLowerCase()) || item.def.toLowerCase().includes(glossarySearch.toLowerCase())).map((item, i) => (
+                        <Card key={i} className="border-slate-200 bg-white">
+                          <CardContent className="p-3">
+                            <span className="text-xs font-bold text-cyan-800">{item.term}</span>
+                            <p className="text-xs text-slate-600 mt-1">{item.def}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
             </div>
           )}
         </div>
