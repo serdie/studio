@@ -64,6 +64,10 @@ import GlovoPractice3 from './glovo-practice-3';
 import DomestikaPractice4 from './domestika-practice-4';
 import SeurPractice5 from './seur-practice-5';
 import TypeformPractice6 from './typeform-practice-6';
+import IkeaPractice7 from './ikea-practice-7';
+import HttpPractice8 from './http-practice-8';
+import N8nPractice9 from './n8n-practice-9';
+import AenaPractice10 from './aena-practice-10';
 
 interface GameItem {
   id: string;
@@ -1095,6 +1099,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const [practice5_4Open, setPractice5_4Open] = useState(false);
   const [practice5_5Open, setPractice5_5Open] = useState(false);
   const [practice5_6Open, setPractice5_6Open] = useState(false);
+  const [practice5_7Open, setPractice5_7Open] = useState(false);
+  const [practice5_8Open, setPractice5_8Open] = useState(false);
+  const [practice5_9Open, setPractice5_9Open] = useState(false);
+  const [practice5_10Open, setPractice5_10Open] = useState(false);
   const [module5GlossaryOpen, setModule5GlossaryOpen] = useState(false);
   const [glossarySearch, setGlossarySearch] = useState('');
   const [practicesOpen, setPracticesOpen] = useState(false); // Desplegable general de Prácticas
@@ -1173,6 +1181,10 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
   const handlePractice5_4Toggle = () => { setPractice5_4Open(!practice5_4Open); };
   const handlePractice5_5Toggle = () => { setPractice5_5Open(!practice5_5Open); };
   const handlePractice5_6Toggle = () => { setPractice5_6Open(!practice5_6Open); };
+  const handlePractice5_7Toggle = () => { setPractice5_7Open(!practice5_7Open); };
+  const handlePractice5_8Toggle = () => { setPractice5_8Open(!practice5_8Open); };
+  const handlePractice5_9Toggle = () => { setPractice5_9Open(!practice5_9Open); };
+  const handlePractice5_10Toggle = () => { setPractice5_10Open(!practice5_10Open); };
   const handleModule5GlossaryToggle = () => { setModule5GlossaryOpen(!module5GlossaryOpen); };
 
   const handlePracticesToggle = () => {
@@ -1880,8 +1892,8 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                     <h3 className="text-lg font-bold text-emerald-900">📋 Prácticas del Módulo 5</h3>
                     <p className="text-sm text-emerald-700">
                       {module5PracticesOpen
-                        ? '6 prácticas: Zalando AS-IS/TO-BE, Gestoría JSON, Glovo Trigger, Domestika Make vs n8n, SEUR Make L1, Typeform Make L2'
-                        : 'Práctica 1: Zalando · Práctica 2: Gestoría · Práctica 3: Glovo · Práctica 4: Domestika · Práctica 5: SEUR · Práctica 6: Typeform - Haz clic para ver'}
+                        ? '10 prácticas: Zalando AS-IS/TO-BE, Gestoría JSON, Glovo Trigger, Domestika Make vs n8n, SEUR Make L1, Typeform Make L2, IKEA Listas, HTTP Integración, n8n Equivalente, Aena IA Operable'
+                        : 'Práctica 1: Zalando · Práctica 2: Gestoría · Práctica 3: Glovo · Práctica 4: Domestika · Práctica 5: SEUR · Práctica 6: Typeform · Práctica 7: IKEA · Práctica 8: HTTP · Práctica 9: n8n · Práctica 10: Aena - Haz clic para ver'}
                     </p>
                   </div>
                 </div>
@@ -1993,6 +2005,74 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
                 </CardContent>
               </Card>
               {practice5_6Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><TypeformPractice6 /></div>)}
+
+              {/* Práctica 7 */}
+              <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-white cursor-pointer" onClick={handlePractice5_7Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-blue-200 flex items-center justify-center"><Layers className="h-4 w-4 text-blue-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-blue-900">Práctica 7: Vibe Coding - Listas, Iterator/Aggregator y Control de Coste (IKEA)</h4>
+                        <p className="text-sm text-blue-700">{practice5_7Open ? 'Detecta arrays, procesa ≤5 adjuntos con Iterator, >5 con Aggregator + revisión' : 'Tratamiento de listas, control de operaciones y optimización de costes'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-blue-700 transition-transform duration-300 ${practice5_7Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_7Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><IkeaPractice7 /></div>)}
+
+              {/* Práctica 8 */}
+              <Card className="border-red-200 bg-gradient-to-br from-red-50 via-orange-50 to-white cursor-pointer" onClick={handlePractice5_8Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-red-200 flex items-center justify-center"><Globe className="h-4 w-4 text-red-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-red-900">Práctica 8: VS Code - Integración Universal por HTTP: Autenticación y Manejo de Errores</h4>
+                        <p className="text-sm text-red-700">{practice5_8Open ? 'Llamadas HTTP GET/POST, manejo 401/403/429/5xx, reintentos + backoff + alertas' : 'API sin conector, errores típicos, reintentos limitados y trazabilidad'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-red-700 transition-transform duration-300 ${practice5_8Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_8Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><HttpPractice8 /></div>)}
+
+              {/* Práctica 9 */}
+              <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-pink-50 to-white cursor-pointer" onClick={handlePractice5_9Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-purple-200 flex items-center justify-center"><GitBranch className="h-4 w-4 text-purple-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-purple-900">Práctica 9: Cursor - Replicar el Caso en "Modo Equivalente" (Items, IF/Switch, Split in Batches)</h4>
+                        <p className="text-sm text-purple-700">{practice5_9Open ? 'Traducir flujo Make a Cursor, equivalencias funcionales y riesgos de migración' : 'Evitar dependencia de herramienta, comparar conceptos y traducciones'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-purple-700 transition-transform duration-300 ${practice5_9Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_9Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><N8nPractice9 /></div>)}
+
+              {/* Práctica 10 */}
+              <Card className="border-green-200 bg-gradient-to-br from-green-50 via-emerald-50 to-white cursor-pointer" onClick={handlePractice5_10Toggle}>
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-lg bg-green-200 flex items-center justify-center"><Brain className="h-4 w-4 text-green-700" /></div>
+                      <div>
+                        <h4 className="font-bold text-green-900">Práctica 10: Vibe Coding + IA - IA "Operable" en el Flujo: Contrato de Salida + Validación + Fallback + Demo Final</h4>
+                        <p className="text-sm text-green-700">{practice5_10Open ? 'Clasificación IA + extracción + borrador respuesta + validación + 20 casos de prueba' : 'IA como paso operativo, contrato JSON estricto, validación y demo obligatoria'}</p>
+                      </div>
+                    </div>
+                    <ChevronDown className={`h-5 w-5 text-green-700 transition-transform duration-300 ${practice5_10Open ? 'rotate-180' : ''}`} />
+                  </div>
+                </CardContent>
+              </Card>
+              {practice5_10Open && (<div className="pl-4 animate-in slide-in-from-top-2 duration-300"><AenaPractice10 /></div>)}
 
               {/* Glosario Módulo 5 */}
               <Card className="border-indigo-200 bg-gradient-to-br from-indigo-50 via-violet-50 to-white cursor-pointer" onClick={handleModule5GlossaryToggle}>
