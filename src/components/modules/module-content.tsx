@@ -386,6 +386,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
               poster="https://pics.filmaffinity.com/minority_report-284130722-mmed.jpg"
               themes={['Predicción Algorítmica', 'Automatización', 'Sesgo de IA', 'Ética', 'Futuro']}
             />
+            <MovieCard
+              title="Free Guy (2021)"
+              description="Un cajero de banco en un videojuego se vuelve consciente y comienza a cuestionar su existencia programada. Una comedia que explora la conciencia artificial, la autonomía de los NPCs en entornos virtuales, y cómo los sistemas automatizados pueden desarrollar personalidad y libre albedrío. Reflexión sobre la diferencia entre código y vida, y los límites de la programación en entornos interactivos."
+              poster="https://pics.filmaffinity.com/free_guy-297648487-mmed.jpg"
+              themes={['Conciencia Artificial', 'Automatización', 'Videojuegos', 'Libre Albedrío', 'IA']}
+            />
           </div>
           <div className="mt-4 p-3 bg-cyan-50 border border-cyan-200 rounded-lg">
             <p className="text-sm text-cyan-800">
