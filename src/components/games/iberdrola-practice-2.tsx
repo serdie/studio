@@ -24,7 +24,7 @@ export default function IberdrolaPractice2() {
     }
 
     return () => {
-      if (guionEl) {
+      if (guionEl && metricsGuionEl) {
         guionEl.removeEventListener('input', () => actualizarMetricasGuion(guionEl, metricsGuionEl));
       }
       if (btnLimpiar) {

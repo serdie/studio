@@ -75,7 +75,7 @@ interface GameItem {
   description: string;
   type: 'internal' | 'external';
   url?: string;
-  category: 'juego' | 'actividad';
+  category: 'juego' | 'actividad' | 'enlace' | 'cuento';
   icon: React.ReactNode;
   component?: React.ReactNode;
 }

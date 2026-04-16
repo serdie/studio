@@ -1,373 +1,446 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Brain, CheckCircle2, AlertTriangle, BarChart3, Code2, Zap, Shield, FileText } from 'lucide-react';
+import { Copy, RotateCcw, FileText, AlertCircle, CheckCircle2, Bot, Brain, Target, HelpCircle, Zap } from 'lucide-react';
 
 interface TestCase {
-  id: string;
-  entrada: string;
-  salidaEsperada: string;
-  resultado: 'ok' | 'incompleto' | 'limite' | 'error';
-  revision: boolean;
+  nombre: string;
+  input: string;
+  expectedOutput: string;
+  resultado: 'pass' | 'fail' | 'pending';
 }
 
 interface KPI {
   nombre: string;
-  valor: number;
+  valor: string;
+  unidad: string;
   descripcion: string;
 }
 
 export default function AenaPractice10() {
-  const [inputContract, setInputContract] = useState(`{
-  "mensaje": "string",
-  "canal": "email|formulario|redes",
-  "urgencia": "alta|media|baja"
-}`);
-  const [outputContract, setOutputContract] = useState(`{
-  "motivo": "equipaje|accesibilidad|informacion|queja",
-  "datos_extraidos": {
-    "aeropuerto": "string or null",
-    "fecha": "string or null",
-    "vuelo": "string or null"
-  },
-  "urgencia_clasificada": "alta|media|baja",
-  "borrador_respuesta": "string",
-  "flags": {
-    "sensibilidad": boolean,
-    "datos_faltantes": boolean
-  }
-}`);
-  const [prompt, setPrompt] = useState('');
-  const [testCases, setTestCases] = useState<TestCase[]>(Array(20).fill({ id: '', entrada: '', salidaEsperada: '', resultado: 'ok' as const, revision: false }));
-  const [kpis, setKpis] = useState<KPI[]>([
-    { nombre: 'Tiempo ciclo', valor: 0, descripcion: 'Tiempo promedio de procesamiento' },
-    { nombre: '% Revisión', valor: 0, descripcion: 'Porcentaje de casos que requieren revisión' },
-    { nombre: '% Error técnico', valor: 0, descripcion: 'Porcentaje de fallos técnicos' },
-    { nombre: 'Retrabajo', valor: 0, descripcion: 'Casos que requieren corrección' },
-    { nombre: 'Volumen', valor: 0, descripcion: 'Número total de casos procesados' },
-    { nombre: 'Precisión IA', valor: 0, descripcion: 'Porcentaje de clasificaciones correctas' },
-  ]);
-
-  const [checklist, setChecklist] = useState({
-    credenciales: false,
-    logs: false,
-    alertas: false,
-    cambios: false,
+  const [formData, setFormData] = useState({
+    inputContract: '',
+    outputContract: '',
+    prompt: '',
+    testCases: [] as TestCase[],
+    kpis: [] as KPI[],
+    implementacion: '',
+    resultados: ''
   });
 
-  const updateTestCase = (index: number, field: keyof TestCase, value: string | boolean) => {
-    const updated = [...testCases];
+  const [summary, setSummary] = useState('');
+  const [status, setStatus] = useState({ type: '', message: '' });
+  const [missing, setMissing] = useState<string[]>([]);
+
+  const updateTestCase = (index: number, field: keyof TestCase, value: string) => {
+    const updated = [...formData.testCases];
     updated[index] = { ...updated[index], [field]: value };
-    setTestCases(updated);
+    setFormData({ ...formData, testCases: updated });
   };
 
-  const updateKPI = (index: number, field: keyof KPI, value: string | number) => {
-    const updated = [...kpis];
+  const updateKPI = (index: number, field: keyof KPI, value: string) => {
+    const updated = [...formData.kpis];
     updated[index] = { ...updated[index], [field]: value };
-    setKpis(updated);
+    setFormData({ ...formData, kpis: updated });
   };
 
-  const updateChecklist = (field: keyof typeof checklist, value: boolean) => {
-    setChecklist({ ...checklist, [field]: value });
+  const addTestCase = () => {
+    setFormData({
+      ...formData,
+      testCases: [...formData.testCases, {
+        nombre: '',
+        input: '',
+        expectedOutput: '',
+        resultado: 'pending'
+      }]
+    });
+  };
+
+  const addKPI = () => {
+    setFormData({
+      ...formData,
+      kpis: [...formData.kpis, {
+        nombre: '',
+        valor: '',
+        unidad: '',
+        descripcion: ''
+      }]
+    });
+  };
+
+  const generate = () => {
+    const required = ['inputContract', 'outputContract', 'prompt', 'implementacion', 'resultados'];
+    const missingFields = required.filter(field => !formData[field as keyof typeof formData]);
+
+    if (missingFields.length > 0) {
+      setMissing(missingFields);
+      setStatus({ type: 'error', message: 'Faltan campos obligatorios' });
+      return;
+    }
+
+    if (formData.testCases.length < 2) {
+      setStatus({ type: 'error', message: 'Se requieren al menos 2 casos de prueba' });
+      return;
+    }
+
+    if (formData.kpis.length < 2) {
+      setStatus({ type: 'error', message: 'Se requieren al menos 2 KPIs' });
+      return;
+    }
+
+    setMissing([]);
+    setStatus({ type: 'success', message: 'Práctica generada correctamente' });
+
+    const testCasesSummary = formData.testCases.map((test, i) =>
+      `| ${i + 1} | ${test.nombre} | ${test.input} | ${test.expectedOutput} | ${test.resultado} |`
+    ).join('\n');
+
+    const kpisSummary = formData.kpis.map((kpi, i) =>
+      `| ${i + 1} | ${kpi.nombre} | ${kpi.valor} | ${kpi.unidad} | ${kpi.descripcion} |`
+    ).join('\n');
+
+    const summaryText = `# Práctica 10: IA Operable con Contratos JSON
+
+## 1. Contrato de Input (JSON Schema)
+${formData.inputContract}
+
+## 2. Contrato de Output (JSON Schema)
+${formData.outputContract}
+
+## 3. Prompt del Sistema
+${formData.prompt}
+
+## 4. Casos de Prueba (${formData.testCases.length} casos)
+| # | Nombre | Input | Output Esperado | Resultado |
+|---|--------|-------|----------------|-----------|
+${testCasesSummary}
+
+## 5. KPIs de Rendimiento (${formData.kpis.length} métricas)
+| # | KPI | Valor | Unidad | Descripción |
+|---|-----|-------|--------|-------------|
+${kpisSummary}
+
+## 6. Implementación Técnica
+${formData.implementacion}
+
+## 7. Resultados de Pruebas
+${formData.resultados}
+
+## Herramientas Vibe Coding recomendadas:
+- **Vibe Coding**: Diseña el sistema de IA operable con contratos JSON estrictos
+- **Cursor + AI**: "Implementa un agente IA que valide inputs/outputs contra schemas JSON y ejecute acciones basadas en contratos"
+- **Antigravity**: "Genera casos de prueba para contratos JSON: validación de schemas, transformación de datos, manejo de errores de formato"
+- **Qwen CLI**: "Crea un validador de contratos JSON que garantice que la IA solo ejecute acciones permitidas por el schema definido"
+- **Alternativas gratuitas**: Claude (claude.ai), ChatGPT (chatgpt.com), Gemini (gemini.google.com)
+- **Si no tienes código**: Describe la implementación con schemas JSON detallados y validación estricta de contratos`;
+
+    setSummary(summaryText);
+  };
+
+  const clearAll = () => {
+    setFormData({
+      inputContract: '',
+      outputContract: '',
+      prompt: '',
+      testCases: [],
+      kpis: [],
+      implementacion: '',
+      resultados: ''
+    });
+    setSummary('');
+    setStatus({ type: '', message: '' });
+    setMissing([]);
+  };
+
+  const copySummary = async () => {
+    if (summary) {
+      await navigator.clipboard.writeText(summary);
+      setStatus({ type: 'success', message: 'Resumen copiado al portapapeles' });
+    }
   };
 
   return (
-    <div className="space-y-6">
-      {/* Encargo */}
-      <Card className="border-green-200 bg-gradient-to-br from-green-50 via-white to-emerald-50">
-        <CardHeader>
-          <CardTitle className="text-green-900 flex items-center gap-2">
-            <Brain className="h-5 w-5" />
-            Práctica 10 — IA "Operable" en el Flujo: Contrato de Salida + Validación + Fallback + Demo Final
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="bg-green-100 p-4 rounded-lg">
-            <h4 className="font-bold text-green-900 mb-2">🏢 Encargo (necesidad de empresa):</h4>
-            <p className="text-sm text-green-800">
-              Aena recibe mensajes de pasajeros (email/formulario/redes) con incidencias y preguntas. Quieren un flujo que:
-              Clasifique motivo, extraiga datos, genere borrador de respuesta, derive a revisión si falta dato o hay señal sensible.
-              La prioridad es que la IA sea un paso dentro del proceso, con contrato de salida estricto y validación.
-            </p>
+    <div className="w-full max-w-7xl mx-auto p-4 space-y-6">
+      {/* Header */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-500 flex items-center justify-center shadow-lg">
+            <span className="text-lg font-bold text-white">10</span>
           </div>
-
-          <div className="bg-emerald-100 p-4 rounded-lg">
-            <h4 className="font-bold text-emerald-900 mb-2">🔗 Enlaces para analizar:</h4>
-            <a href="https://www.aena.es/es/contacto.html" target="_blank" rel="noopener noreferrer"
-               className="text-emerald-700 hover:text-emerald-900 underline text-sm">
-              Contacto Aena
-            </a>
+          <div>
+            <h1 className="text-2xl font-bold text-slate-800">Práctica 10 · IA Operable con Contratos JSON</h1>
+            <p className="text-sm text-slate-600">Implementa IA que ejecuta acciones basadas en contratos JSON estrictos</p>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Badge variant="outline" className="bg-cyan-50 text-cyan-700 border-cyan-200"><Bot className="h-3 w-3 mr-1" /> AI Agent</Badge>
+          <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200"><Brain className="h-3 w-3 mr-1" /> JSON Contracts</Badge>
+          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200"><Target className="h-3 w-3 mr-1" /> Operable AI</Badge>
+        </div>
+      </div>
 
-      {/* Lo que se pide */}
-      <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-white to-cyan-50">
-        <CardHeader>
-          <CardTitle className="text-blue-900 flex items-center gap-2">
-            <Code2 className="h-5 w-5" />
-            Lo que se pide:
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5" />
-              <p className="text-sm">Definir entrada JSON y salida JSON del paso de IA (campos obligatorios, valores permitidos)</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5" />
-              <p className="text-sm">Redactar prompt operativo para clasificación/extracción/sugerencia de borrador</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5" />
-              <p className="text-sm">Validación post-IA (reintento 1 vez; si vuelve a fallar: revisión)</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5" />
-              <p className="text-sm">Checklist de producción: credenciales, logs, alertas, control de cambios/export</p>
-            </div>
-            <div className="flex items-start gap-3">
-              <CheckCircle2 className="h-5 w-5 text-blue-600 mt-0.5" />
-              <p className="text-sm">Demo obligatoria: 1 ejecución OK + 1 fallo tratado</p>
-            </div>
+      {/* Encargo de negocio */}
+      <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-blue-50 to-white shadow-md">
+        <CardContent className="p-5 space-y-3">
+          <div className="flex items-center gap-2 mb-2">
+            <Target className="h-5 w-5 text-cyan-600" />
+            <h3 className="font-semibold text-cyan-900">Encargo de negocio</h3>
+            <Badge variant="outline" className="ml-auto text-xs bg-cyan-100 text-cyan-700 border-cyan-300">Empresa · IA operable</Badge>
           </div>
+          <p className="text-sm text-slate-700 leading-relaxed">
+            Una empresa necesita una IA que pueda <strong>ejecutar acciones reales</strong> en su sistema pero con <strong>controles estrictos</strong> para evitar comportamientos no deseados. Debes diseñar contratos JSON que definan exactamente qué puede hacer la IA y cómo validar todas las interacciones.
+          </p>
 
-          <div className="bg-blue-100 p-4 rounded-lg">
-            <h4 className="font-bold text-blue-900 mb-2">🛠️ Herramientas recomendadas:</h4>
-            <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary" className="bg-blue-200 text-blue-800">Vibe Coding + IA</Badge>
-              <Badge variant="secondary" className="bg-blue-200 text-blue-800">Cursor + AI</Badge>
-              <Badge variant="secondary" className="bg-blue-200 text-blue-800">Antigravity</Badge>
-              <Badge variant="secondary" className="bg-blue-200 text-blue-800">Windsurf</Badge>
+          {/* Paso a paso */}
+          <div className="p-4 rounded-xl bg-cyan-50 border border-cyan-200 space-y-3">
+            <h4 className="text-sm font-bold text-cyan-900 flex items-center gap-2"><HelpCircle className="h-4 w-4" /> Paso a paso para implementar IA operable</h4>
+            <div className="space-y-2 text-xs text-cyan-800">
+              <p><strong>Paso 1 — Contratos JSON:</strong> Define schemas estrictos para inputs y outputs. Ejemplo: input contract especifica campos requeridos, tipos de datos, rangos válidos</p>
+              <p><strong>Paso 2 — Validación de contratos:</strong> Implementa validación antes/después de cada acción. Ejemplo: rechaza inputs que no cumplan el schema, valida outputs antes de ejecutar</p>
+              <p><strong>Paso 3 — Prompt engineering:</strong> Crea prompts que incluyan los contratos como instrucciones. Ejemplo: "Solo ejecuta acciones que cumplan este schema JSON..."</p>
+              <p><strong>Paso 4 — Manejo de errores:</strong> Define comportamiento para contratos inválidos. Ejemplo: rechaza con mensaje específico, no intenta "arreglar" datos automáticamente</p>
             </div>
           </div>
         </CardContent>
       </Card>
 
-      {/* Contrato JSON */}
-      <Card className="border-purple-200 bg-gradient-to-br from-purple-50 via-white to-pink-50">
-        <CardHeader>
-          <CardTitle className="text-purple-900 flex items-center gap-2">
-            <FileText className="h-5 w-5" />
-            Contrato JSON de Entrada y Salida
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
+      {/* Campos de práctica */}
+      <Card className="border-blue-200 bg-gradient-to-br from-blue-50 via-indigo-50 to-white shadow-md">
+        <CardContent className="p-5 space-y-4">
+          <div className="flex items-center gap-2 mb-4">
+            <FileText className="h-5 w-5 text-blue-600" />
+            <h3 className="font-semibold text-blue-900">Campos de práctica</h3>
+          </div>
+
+          {/* Contratos JSON */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm font-medium text-purple-900">Entrada JSON:</label>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Contrato de Input (JSON Schema) *</label>
               <Textarea
-                value={inputContract}
-                onChange={(e) => setInputContract(e.target.value)}
-                className="mt-1 min-h-32 font-mono text-xs"
+                value={formData.inputContract}
+                onChange={(e) => setFormData({ ...formData, inputContract: e.target.value })}
+                placeholder="Define el schema JSON para inputs válidos..."
+                className="min-h-32 font-mono text-xs"
               />
             </div>
-            <div>
-              <label className="text-sm font-medium text-purple-900">Salida JSON:</label>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Contrato de Output (JSON Schema) *</label>
               <Textarea
-                value={outputContract}
-                onChange={(e) => setOutputContract(e.target.value)}
-                className="mt-1 min-h-32 font-mono text-xs"
+                value={formData.outputContract}
+                onChange={(e) => setFormData({ ...formData, outputContract: e.target.value })}
+                placeholder="Define el schema JSON para outputs válidos..."
+                className="min-h-32 font-mono text-xs"
               />
             </div>
           </div>
-        </CardContent>
-      </Card>
 
-      {/* Prompt Operativo */}
-      <Card className="border-orange-200 bg-gradient-to-br from-orange-50 via-white to-amber-50">
-        <CardHeader>
-          <CardTitle className="text-orange-900 flex items-center gap-2">
-            <Zap className="h-5 w-5" />
-            Prompt Operativo
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Textarea
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Redacta aquí el prompt que usarás para la IA, incluyendo instrucciones claras de formato JSON..."
-            className="min-h-40"
-          />
-        </CardContent>
-      </Card>
+          {/* Prompt del sistema */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Prompt del sistema *</label>
+            <Textarea
+              value={formData.prompt}
+              onChange={(e) => setFormData({ ...formData, prompt: e.target.value })}
+              placeholder="Describe el prompt que guiará a la IA..."
+              className="min-h-24"
+            />
+          </div>
 
-      {/* Casos de Prueba */}
-      <Card className="border-red-200 bg-gradient-to-br from-red-50 via-white to-orange-50">
-        <CardHeader>
-          <CardTitle className="text-red-900 flex items-center gap-2">
-            <BarChart3 className="h-5 w-5" />
-            Casos de Prueba (20 casos)
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3 max-h-96 overflow-y-auto">
-            {testCases.slice(0, 10).map((testCase, index) => (
-              <div key={index} className="border border-red-200 rounded-lg p-3 bg-white">
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-                  <div>
-                    <label className="text-xs font-medium text-red-900">Entrada:</label>
-                    <Input
-                      value={testCase.entrada}
-                      onChange={(e) => updateTestCase(index, 'entrada', e.target.value)}
-                      className="mt-1 text-xs"
-                      placeholder="Mensaje de pasajero..."
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-medium text-red-900">Salida Esperada:</label>
-                    <Input
-                      value={testCase.salidaEsperada}
-                      onChange={(e) => updateTestCase(index, 'salidaEsperada', e.target.value)}
-                      className="mt-1 text-xs"
-                      placeholder="JSON esperado..."
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs font-medium text-red-900">Resultado:</label>
-                    <Select
-                      value={testCase.resultado}
-                      onValueChange={(value: 'ok' | 'incompleto' | 'limite' | 'error') => updateTestCase(index, 'resultado', value)}
-                    >
-                      <SelectTrigger className="mt-1">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="ok">OK</SelectItem>
-                        <SelectItem value="incompleto">Incompleto</SelectItem>
-                        <SelectItem value="limite">Límite</SelectItem>
-                        <SelectItem value="error">Error</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <label className="text-xs font-medium text-red-900">Revisión:</label>
-                    <Select
-                      value={testCase.revision ? 'true' : 'false'}
-                      onValueChange={(value) => updateTestCase(index, 'revision', value === 'true')}
-                    >
-                      <SelectTrigger className="mt-1">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="true">Sí</SelectItem>
-                        <SelectItem value="false">No</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="flex items-center">
-                    <Badge className={`${
-                      testCase.resultado === 'ok' ? 'bg-green-100 text-green-800' :
-                      testCase.resultado === 'incompleto' ? 'bg-yellow-100 text-yellow-800' :
-                      testCase.resultado === 'limite' ? 'bg-orange-100 text-orange-800' :
-                      'bg-red-100 text-red-800'
-                    }`}>
-                      {testCase.resultado === 'ok' ? 'OK' :
-                       testCase.resultado === 'incompleto' ? 'Incompleto' :
-                       testCase.resultado === 'limite' ? 'Límite' : 'Error'}
-                    </Badge>
+          {/* Casos de prueba */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium">Casos de prueba (mínimo 2)</label>
+              <Button onClick={addTestCase} size="sm" variant="outline">
+                + Agregar Caso
+              </Button>
+            </div>
+
+            <div className="space-y-3 max-h-64 overflow-y-auto">
+              {formData.testCases.map((test, index) => (
+                <div key={index} className="border rounded-lg p-3 bg-gray-50">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                    <div>
+                      <label className="text-xs font-medium">Nombre:</label>
+                      <Input
+                        value={test.nombre}
+                        onChange={(e) => updateTestCase(index, 'nombre', e.target.value)}
+                        className="mt-1 text-xs"
+                        placeholder="Test válido"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium">Input:</label>
+                      <Input
+                        value={test.input}
+                        onChange={(e) => updateTestCase(index, 'input', e.target.value)}
+                        className="mt-1 text-xs"
+                        placeholder="JSON input"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium">Output esperado:</label>
+                      <Input
+                        value={test.expectedOutput}
+                        onChange={(e) => updateTestCase(index, 'expectedOutput', e.target.value)}
+                        className="mt-1 text-xs"
+                        placeholder="JSON output"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium">Resultado:</label>
+                      <Select
+                        value={test.resultado}
+                        onValueChange={(value: 'pass' | 'fail' | 'pending') => updateTestCase(index, 'resultado', value)}
+                      >
+                        <SelectTrigger className="mt-1">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="pending">Pendiente</SelectItem>
+                          <SelectItem value="pass">Pasa</SelectItem>
+                          <SelectItem value="fail">Falla</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </CardContent>
-      </Card>
 
-      {/* KPIs */}
-      <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-blue-50">
-        <CardHeader>
-          <CardTitle className="text-cyan-900 flex items-center gap-2">
-            <BarChart3 className="h-5 w-5" />
-            KPIs de Producción
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {kpis.map((kpi, index) => (
-              <div key={kpi.nombre} className="border border-cyan-200 rounded-lg p-4 bg-white">
-                <div>
-                  <label className="text-sm font-medium text-cyan-900">{kpi.nombre}:</label>
-                  <Input
-                    type="number"
-                    value={kpi.valor}
-                    onChange={(e) => updateKPI(index, 'valor', Number(e.target.value))}
-                    className="mt-1"
-                  />
+          {/* KPIs */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium">KPIs de rendimiento (mínimo 2)</label>
+              <Button onClick={addKPI} size="sm" variant="outline">
+                + Agregar KPI
+              </Button>
+            </div>
+
+            <div className="space-y-3 max-h-64 overflow-y-auto">
+              {formData.kpis.map((kpi, index) => (
+                <div key={index} className="border rounded-lg p-3 bg-gray-50">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                    <div>
+                      <label className="text-xs font-medium">Nombre KPI:</label>
+                      <Input
+                        value={kpi.nombre}
+                        onChange={(e) => updateKPI(index, 'nombre', e.target.value)}
+                        className="mt-1 text-xs"
+                        placeholder="Tasa de éxito"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium">Valor:</label>
+                      <Input
+                        value={kpi.valor}
+                        onChange={(e) => updateKPI(index, 'valor', e.target.value)}
+                        className="mt-1 text-xs"
+                        placeholder="95.2"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium">Unidad:</label>
+                      <Input
+                        value={kpi.unidad}
+                        onChange={(e) => updateKPI(index, 'unidad', e.target.value)}
+                        className="mt-1 text-xs"
+                        placeholder="%"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium">Descripción:</label>
+                      <Input
+                        value={kpi.descripcion}
+                        onChange={(e) => updateKPI(index, 'descripcion', e.target.value)}
+                        className="mt-1 text-xs"
+                        placeholder="Porcentaje de contratos válidos"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <Textarea
-                  value={kpi.descripcion}
-                  onChange={(e) => updateKPI(index, 'descripcion', e.target.value)}
-                  className="mt-2 text-xs"
-                  rows={2}
-                />
-              </div>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          {/* Implementación técnica */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Implementación técnica *</label>
+            <Textarea
+              value={formData.implementacion}
+              onChange={(e) => setFormData({ ...formData, implementacion: e.target.value })}
+              placeholder="Describe cómo implementarías la IA operable..."
+              className="min-h-32"
+            />
+          </div>
+
+          {/* Resultados de pruebas */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Resultados de pruebas *</label>
+            <Textarea
+              value={formData.resultados}
+              onChange={(e) => setFormData({ ...formData, resultados: e.target.value })}
+              placeholder="Describe los resultados esperados..."
+              className="min-h-24"
+            />
           </div>
         </CardContent>
       </Card>
 
-      {/* Checklist de Producción */}
-      <Card className="border-green-200 bg-gradient-to-br from-green-50 via-white to-emerald-50">
-        <CardHeader>
-          <CardTitle className="text-green-900 flex items-center gap-2">
-            <Shield className="h-5 w-5" />
-            Checklist de Producción
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-3">
-            {Object.entries(checklist).map(([key, value]) => (
-              <div key={key} className="flex items-center space-x-3">
-                <input
-                  type="checkbox"
-                  checked={value}
-                  onChange={(e) => updateChecklist(key as keyof typeof checklist, e.target.checked)}
-                  className="rounded"
-                />
-                <label className="text-sm text-green-900 capitalize">
-                  {key === 'credenciales' ? 'Credenciales configuradas' :
-                   key === 'logs' ? 'Sistema de logs operativo' :
-                   key === 'alertas' ? 'Alertas configuradas' :
-                   'Control de cambios y export'}
-                </label>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      {/* Estado y mensajes */}
+      {status.message && (
+        <div className={`p-4 rounded-lg flex items-center gap-2 ${
+          status.type === 'error' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+        }`}>
+          {status.type === 'error' ? <AlertCircle className="h-5 w-5" /> : <CheckCircle2 className="h-5 w-5" />}
+          {status.message}
+        </div>
+      )}
 
-      {/* Resultado esperado */}
-      <Card className="border-indigo-200 bg-gradient-to-br from-indigo-50 via-white to-violet-50">
-        <CardHeader>
-          <CardTitle className="text-indigo-900 flex items-center gap-2">
-            <FileText className="h-5 w-5" />
-            Resultado esperado:
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="bg-indigo-100 p-4 rounded-lg">
-            <p className="text-sm text-indigo-800 mb-2">
-              <strong>"Paquete de entrega" del mini-proyecto: diagrama del flujo + contrato JSON + prompt + validación/fallback.</strong>
-            </p>
-            <p className="text-sm text-indigo-800">
-              Requerimientos mínimos: 20 casos de prueba (8 OK, 6 incompletos, 6 límite/sensibles), 4–6 KPIs, evidencias de demo (OK y fallo tratado)
-            </p>
-          </div>
+      {/* Campos obligatorios faltantes */}
+      {missing.length > 0 && (
+        <div className="bg-yellow-100 p-4 rounded-lg">
+          <p className="text-yellow-800 font-medium mb-2">Campos obligatorios faltantes:</p>
+          <ul className="text-yellow-700 text-sm">
+            {missing.map(field => <li key={field}>• ${field}</li>)}
+          </ul>
+        </div>
+      )}
 
+      {/* Botones de acción */}
+      <div className="flex gap-2">
+        <Button onClick={generate} className="flex-1">
+          <FileText className="h-4 w-4 mr-2" />
+          Generar Práctica
+        </Button>
+        <Button onClick={clearAll} variant="outline">
+          <RotateCcw className="h-4 w-4 mr-2" />
+          Limpiar
+        </Button>
+        {summary && (
+          <Button onClick={copySummary} variant="outline">
+            <Copy className="h-4 w-4 mr-2" />
+            Copiar
+          </Button>
+        )}
+      </div>
+
+      {/* Resumen generado */}
+      {summary && (
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Resumen Generado:</label>
           <Textarea
-            placeholder="Describe aquí tu paquete de entrega, evidencias de demo y métricas finales..."
-            className="min-h-32"
+            value={summary}
+            readOnly
+            className="min-h-96 font-mono text-xs"
           />
-        </CardContent>
-      </Card>
+        </div>
+      )}
     </div>
   );
 }
