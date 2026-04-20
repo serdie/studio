@@ -68,6 +68,8 @@ import IkeaPractice7 from './ikea-practice-7';
 import HttpPractice8 from './http-practice-8';
 import N8nPractice9 from './n8n-practice-9';
 import AenaPractice10 from './aena-practice-10';
+import Module6ToolsAndGames from './module6-tools-and-games';
+import MarketingAIToolsLinks from './marketing-ai-tools-links';
 
 interface GameItem {
   id: string;
@@ -1259,6 +1261,16 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
         : moduleSlug === 'low-code-no-code'
           ? module5ExternalActivities
           : externalActivities;
+
+  // Renderizar componente dedicado para Módulo 6
+  if (moduleSlug === 'marketing-ia') {
+    return (
+      <div className="space-y-6">
+        <Module6ToolsAndGames />
+        <MarketingAIToolsLinks />
+      </div>
+    );
+  }
 
   // Solo mostrar juegos y enlaces en el módulo 1, 2, 3, 4 y 5
   if (moduleSlug !== 'introduccion-ia' && moduleSlug !== 'llms-generativa' && moduleSlug !== 'avatares-virtuales' && moduleSlug !== 'bots-asistentes' && moduleSlug !== 'low-code-no-code') {

@@ -1938,372 +1938,368 @@ Email: {{email_text}}
   {
     id: 6,
     slug: 'marketing-ia',
-    title: 'Módulo 6: Marketing con IA',
-    duration: '24 h',
-    description: 'SEO, SEM, Funnels y Redes Sociales con IA.',
-    longDescription: 'Aplicación de la inteligencia artificial para optimizar el posicionamiento, la conversión y la gestión de comunidades.',
+    title: 'Módulo 6: IA y Marketing Profesional',
+    duration: '60 h',
+    description: 'Transformación del marketing con IA y estrategias predictivas.',
+    longDescription: 'Aplicación de IA en marketing digital, automatización, análisis predictivo y gobernanza ética.',
     progress: 0,
     icon: Megaphone,
-    resources: [],
+    resources: [
+      { title: 'Guía del Módulo 6 (PDF)', file: '/materiales/tema6/01_Guía del Módulo 6.pdf' },
+      { title: 'Enlaces Módulo 6 (PDF)', file: '/materiales/tema6/02_enlaces_6_v01.pdf' },
+      { title: 'Ejercicios Módulo 6 (PDF)', file: '/materiales/tema6/03_ejercicios_6.pdf' },
+      { title: 'Evaluación Parcial 6 (PDF)', file: '/materiales/tema6/0x_Evaluación_parcial_6.pdf' },
+      { title: 'AI Marketing Systems Blueprint (PDF)', file: '/materiales/tema6/AI_Marketing_Systems_Blueprint.pdf' },
+      { title: 'AI Marketing Systems Blueprint (PPTX)', file: '/materiales/tema6/AI_Marketing_Systems_Blueprint.pptx' },
+      { title: 'Fichas Módulo 6 (PDF)', file: '/materiales/tema6/fichas_6.pdf' },
+      { title: 'IA y Marketing Profesional (Vídeo MP4)', file: '/materiales/tema6/IA_y_Marketing_Profesional.mp4' },
+      { title: 'Briefing Marketing Digital e IA (DOCX)', file: '/materiales/tema6/Programa Superior en Inteligencia Artificial Aplicada a la Empresa_ Briefing de Marketing Digital e Inteligencia Artificial.docx' },
+      { title: 'Briefing Marketing Digital e IA (XLSX)', file: '/materiales/tema6/Programa Superior en Inteligencia Artificial Aplicada a la Empresa_ Briefing de Marketing Digital e Inteligencia Artificial.xlsx' },
+      { title: 'Rigor y Precisión con IA en Marketing (Audio M4A)', file: '/materiales/tema6/Rigor_y_precisión_con_IA_en_marketing.m4a' },
+      { title: 'Imagen Módulo 6 (PNG)', file: '/materiales/tema6/unnamed (1).png' }
+    ],
     content: `
-      <h2>6.1. Fundamentos de la Inteligencia Artificial en Marketing</h2>
-      <h3>¿Por qué IA en Marketing?</h3>
-      <p>El marketing genera cantidades masivas de datos que la IA puede analizar y optimizar mejor que humanos:</p>
+      <h2>6.1. Fundamentos y Estrategia: Transformación del marketing con IA</h2>
+      
+      <div class="video-section mb-6">
+        <h3 class="text-xl font-semibold mb-3">📹 Vídeo Introductorio: IA y Marketing Profesional</h3>
+        <p class="mb-3">Antes de comenzar, visualiza este vídeo que explica los fundamentos de la transformación del marketing con IA:</p>
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <video controls class="w-full max-w-2xl mx-auto">
+            <source src="/materiales/tema6/IA_y_Marketing_Profesional.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de vídeo.
+          </video>
+        </div>
+      </div>
+
+      <h3>La Revolución del Marketing Digital</h3>
+      <p>La Inteligencia Artificial está transformando fundamentalmente el marketing digital, permitiendo estrategias más precisas, personalizadas y predictivas. Esta transformación afecta todos los aspectos del marketing: desde la segmentación de audiencias hasta la optimización de campañas en tiempo real.</p>
+      
+      <h3>Áreas de Aplicación de la IA en Marketing</h3>
       <ul>
-        <li>Comportamiento de usuarios en tiempo real</li>
-        <li>Múltiples canales y touchpoints</li>
-        <li>Personalización a escala</li>
-        <li>Predicción de tendencias y conversión</li>
+        <li><strong>Marketing Predictivo:</strong> Anticipar comportamientos de clientes y tendencias del mercado.</li>
+        <li><strong>Personalización:</strong> Contenido y ofertas adaptadas individualmente a cada usuario.</li>
+        <li><strong>Automatización:</strong> Flujos de trabajo inteligentes que optimizan procesos manuales.</li>
+        <li><strong>Análisis de Datos:</strong> Procesamiento de grandes volúmenes de datos para insights accionables.</li>
+        <li><strong>Generación de Contenido:</strong> Creación automática de textos, imágenes y vídeos con IA.</li>
+        <li><strong>Atención al Cliente:</strong> Chatbots y asistentes virtuales 24/7.</li>
       </ul>
       
-      <h3>Áreas de Aplicación</h3>
-      <p><strong>1. Concienciación (Awareness):</strong></p>
+      <h3>Impacto en ROI y Métricas Clave</h3>
+      <p>La implementación de IA en marketing puede aumentar significativamente el ROI:</p>
       <ul>
-        <li>Generación de contenido</li>
-        <li>SEO y posicionamiento</li>
-        <li>Publicidad programática</li>
-        <li>Influencer matching</li>
+        <li>Mejora de la tasa de conversión hasta un 50%</li>
+        <li>Reducción de costes de adquisición de clientes</li>
+        <li>Aumento de la retención de clientes</li>
+        <li>Optimización del presupuesto publicitario</li>
       </ul>
       
-      <p><strong>2. Consideración:</strong></p>
+      <h3>Estrategias de Marketing Predictivo</h3>
+      <p>El marketing predictivo utiliza algoritmos de machine learning para:</p>
       <ul>
-        <li>Personalización de mensajes</li>
-        <li>Recomendaciones de producto</li>
-        <li>Chatbots de ventas</li>
-        <li>Lead scoring</li>
+        <li>Predecir la probabilidad de compra</li>
+        <li>Identificar clientes en riesgo de churn</li>
+        <li>Optimizar el momento óptimo para campañas</li>
+        <li>Personalizar recomendaciones de productos</li>
       </ul>
-      
-      <p><strong>3. Conversión:</strong></p>
-      <ul>
-        <li>Optimización de precios</li>
-        <li>Predicción de abandono de carrito</li>
-        <li>Ofertas personalizadas</li>
-        <li>Optimización de checkout</li>
-      </ul>
-      
-      <p><strong>4. Retención:</strong></p>
-      <ul>
-        <li>Predicción de churn</li>
-        <li>Campañas de re-engagement</li>
-        <li>Programas de fidelización</li>
-        <li>Soporte automatizado</li>
-      </ul>
-      
-      <h3>Herramientas Principales</h3>
-      <p><strong>Generación de contenido:</strong> Jasper, Copy.ai, Writesonic, Claude, GPT-4.</p>
-      <p><strong>SEO:</strong> Surfer SEO, Frase, MarketMuse, Clearscope.</p>
-      <p><strong>Publicidad:</strong> Google Ads Smart Bidding, Meta Advantage+, Albert.ai.</p>
-      <p><strong>Email marketing:</strong> Seventh Sense, Phrasee, Persado.</p>
-      <p><strong>Analítica:</strong> Google Analytics 4, Adobe Sensei, Mixpanel.</p>
-      <p><strong>Personalización:</strong> Dynamic Yield, Optimizely, Evergage.</p>
-      
-      <h3>Beneficios Cuantificables</h3>
-      <ul>
-        <li>40% más de engagement en contenidos generados con IA</li>
-        <li>30% reducción en coste de adquisición (CAC)</li>
-        <li>50% más de eficiencia en creación de contenido</li>
-        <li>20% aumento en tasas de conversión</li>
-        <li>60% reducción en tiempo de campaña</li>
-      </ul>
-      
-      <h3>Desafíos y Consideraciones</h3>
-      <ul>
-        <li>Calidad y autenticidad del contenido</li>
-        <li>Privacidad y uso de datos</li>
-        <li>Sesgo en segmentación</li>
-        <li>Transparencia con la audiencia</li>
-        <li>Equilibrio entre automatización y toque humano</li>
-      </ul>
+
+      <div class="game-section my-8 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+        <h4 class="text-lg font-semibold mb-3">🎮 Juego Interactivo: Optimizador de Campañas de Marketing</h4>
+        <p class="mb-4">Pon a prueba tus conocimientos aplicando IA en la optimización de campañas. Este juego te ayudará a entender cómo la IA puede mejorar el rendimiento de tus estrategias de marketing.</p>
+        <div class="bg-white p-4 rounded shadow-sm">
+          <p class="text-sm text-gray-600 mb-2">Componente del juego se cargará aquí dinámicamente</p>
+          <p class="text-xs text-blue-600">Archivo: marketing-campaign-optimizer.tsx</p>
+        </div>
+      </div>
 
       <hr/>
 
-      <h2>6.2. IA para SEO y SEM</h2>
-      <h3>IA en SEO (Search Engine Optimization)</h3>
-      <p><strong>1. Investigación de Keywords:</strong></p>
+      <h2>6.2. Herramientas y Ejecución: Plataformas de Marketing Automation</h2>
+      
+      <div class="audio-section mb-6">
+        <h3 class="text-xl font-semibold mb-3">🎧 Audio: Rigor y Precisión con IA en Marketing</h3>
+        <p class="mb-3">Escucha esta sesión de audio sobre cómo mantener el rigor y la precisión al aplicar IA en estrategias de marketing:</p>
+        <div class="bg-gray-100 p-4 rounded-lg">
+          <audio controls class="w-full">
+            <source src="/materiales/tema6/Rigor_y_precisión_con_IA_en_marketing.m4a" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+          </audio>
+        </div>
+      </div>
+
+      <h3>Herramientas de Marketing Automation</h3>
+      <p>Las plataformas de marketing automation permiten automatizar campañas complejas:</p>
       <ul>
-        <li>Herramientas: Ahrefs, SEMrush, Moz con IA</li>
-        <li>Descubrimiento de long-tail keywords</li>
-        <li>Análisis de intención de búsqueda</li>
-        <li>Predicción de dificultad y oportunidad</li>
+        <li><strong>HubSpot:</strong> CRM y automatización integral - <a href="https://www.hubspot.com" target="_blank" class="text-blue-600 hover:underline">Visitar sitio</a> | <a href="https://academy.hubspot.com" target="_blank" class="text-green-600 hover:underline">Certificación</a></li>
+        <li><strong>Marketo:</strong> Enfocado en B2B y ciclos de venta largos - <a href="https://www.marketo.com" target="_blank" class="text-blue-600 hover:underline">Visitar sitio</a> | <a href="https://nation.marketo.com" target="_blank" class="text-green-600 hover:underline">Comunidad</a></li>
+        <li><strong>Klaviyo:</strong> Especializado en e-commerce - <a href="https://www.klaviyo.com" target="_blank" class="text-blue-600 hover:underline">Visitar sitio</a> | <a href="https://academy.klaviyo.com" target="_blank" class="text-green-600 hover:underline">Academy</a></li>
+        <li><strong>ActiveCampaign:</strong> Automatización y email marketing - <a href="https://www.activecampaign.com" target="_blank" class="text-blue-600 hover:underline">Visitar sitio</a> | <a href="https://www.activecampaign.com/blog" target="_blank" class="text-green-600 hover:underline">Blog</a></li>
+        <li><strong>Mailchimp:</strong> Email marketing con IA - <a href="https://mailchimp.com" target="_blank" class="text-blue-600 hover:underline">Visitar sitio</a> | <a href="https://mailchimp.com/resources/" target="_blank" class="text-green-600 hover:underline">Recursos</a></li>
       </ul>
       
-      <p><strong>2. Optimización de Contenido:</strong></p>
+      <h3>Herramientas de Creación de Contenido con IA</h3>
       <ul>
-        <li><strong>Surfer SEO:</strong> Analiza top 10 resultados y sugiere optimizaciones</li>
-        <li><strong>Frase:</strong> Genera briefs y optimiza contenido existente</li>
-        <li><strong>MarketMuse:</strong> Identifica gaps de contenido</li>
-        <li><strong>Clearscope:</strong> Sugiere términos relacionados</li>
+        <li><strong>Copy.ai:</strong> Generación de textos publicitarios - <a href="https://www.copy.ai" target="_blank" class="text-blue-600 hover:underline">Probar ahora</a> | <a href="https://www.copy.ai/blog" target="_blank" class="text-green-600 hover:underline">Blog</a></li>
+        <li><strong>Jasper:</strong> Contenido de marketing y blog - <a href="https://www.jasper.ai" target="_blank" class="text-blue-600 hover:underline">Probar ahora</a> | <a href="https://www.jasper.ai/blog" target="_blank" class="text-green-600 hover:underline">Blog</a></li>
+        <li><strong>Canva Magic Design:</strong> Creación visual con IA - <a href="https://www.canva.com" target="_blank" class="text-blue-600 hover:underline">Probar ahora</a> | <a href="https://www.canva.com/learn/" target="_blank" class="text-green-600 hover:underline">Tutoriales</a></li>
+        <li><strong>Runway ML:</strong> Edición de vídeo con IA - <a href="https://runwayml.com" target="_blank" class="text-blue-600 hover:underline">Probar ahora</a> | <a href="https://runwayml.com/blog" target="_blank" class="text-green-600 hover:underline">Blog</a></li>
+        <li><strong>Synthesia:</strong> Avatares de vídeo con IA - <a href="https://www.synthesia.io" target="_blank" class="text-blue-600 hover:underline">Probar ahora</a> | <a href="https://www.synthesia.io/blog" target="_blank" class="text-green-600 hover:underline">Blog</a></li>
+        <li><strong>Midjourney:</strong> Generación de imágenes - <a href="https://www.midjourney.com" target="_blank" class="text-blue-600 hover:underline">Probar ahora</a> | <a href="https://docs.midjourney.com" target="_blank" class="text-green-600 hover:underline">Documentación</a></li>
+        <li><strong>DALL-E:</strong> Imágenes con IA de OpenAI - <a href="https://openai.com/dall-e-3/" target="_blank" class="text-blue-600 hover:underline">Probar ahora</a> | <a href="https://platform.openai.com/docs" target="_blank" class="text-green-600 hover:underline">API Docs</a></li>
+      </ul>
+
+      <h3>Herramientas de Análisis y Optimización</h3>
+      <ul>
+        <li><strong>Google Analytics 4:</strong> Análisis web avanzado - <a href="https://analytics.google.com" target="_blank" class="text-blue-600 hover:underline">Acceder</a> | <a href="https://support.google.com/analytics" target="_blank" class="text-green-600 hover:underline">Ayuda</a></li>
+        <li><strong>SEMrush:</strong> SEO y análisis competitivo - <a href="https://www.semrush.com" target="_blank" class="text-blue-600 hover:underline">Probar</a> | <a href="https://www.semrush.com/academy" target="_blank" class="text-green-600 hover:underline">Academy</a></li>
+        <li><strong>Hotjar:</strong> Análisis de comportamiento - <a href="https://www.hotjar.com" target="_blank" class="text-blue-600 hover:underline">Probar</a> | <a href="https://help.hotjar.com" target="_blank" class="text-green-600 hover:underline">Centro de ayuda</a></li>
+        <li><strong>Optimizely:</strong> Testing y personalización - <a href="https://www.optimizely.com" target="_blank" class="text-blue-600 hover:underline">Probar</a> | <a href="https://docs.optimizely.com" target="_blank" class="text-green-600 hover:underline">Docs</a></li>
+        <li><strong>Tableau:</strong> Visualización de datos - <a href="https://www.tableau.com" target="_blank" class="text-blue-600 hover:underline">Probar</a> | <a href="https://help.tableau.com" target="_blank" class="text-green-600 hover:underline">Aprender</a></li>
       </ul>
       
-      <p><strong>3. Generación de Contenido:</strong></p>
+      <h3>Análisis Predictivo y Segmentación</h3>
+      <p>Técnicas avanzadas para segmentación inteligente:</p>
       <ul>
-        <li>IA escribe borradores optimizados</li>
-        <li>Generación de meta titles y descriptions</li>
-        <li>Creación de FAQs estructuradas</li>
-        <li>Escalado de contenido para landing pages</li>
+        <li>Clustering basado en comportamiento</li>
+        <li>Análisis de cohortes predictivo</li>
+        <li>Segmentación por valor de vida del cliente (CLV)</li>
+        <li>Predicción de afinidad por productos</li>
       </ul>
       
-      <p><strong>4. SEO Técnico:</strong></p>
+      <h3>Optimización de Campañas en Tiempo Real</h3>
+      <p>La optimización en tiempo real utiliza algoritmos para:</p>
       <ul>
-        <li>Detección automática de errores</li>
-        <li>Optimización de velocidad</li>
-        <li>Generación de schema markup</li>
-        <li>Monitorización de rankings</li>
+        <li>Ajustar presupuestos automáticamente</li>
+        <li>Modificar mensajes según rendimiento</li>
+        <li>Redirigir tráfico a páginas de alto rendimiento</li>
+        <li>Personalizar ofertas en el momento óptimo</li>
       </ul>
-      
-      <p><strong>5. Link Building:</strong></p>
-      <ul>
-        <li>Identificación de oportunidades</li>
-        <li>Outreach personalizado con IA</li>
-        <li>Análisis de calidad de backlinks</li>
-      </ul>
-      
-      <h3>Workflow de SEO con IA</h3>
-      <ol>
-        <li>Investigación de keywords con IA</li>
-        <li>Análisis de competencia automatizado</li>
-        <li>Generación de brief de contenido</li>
-        <li>Redacción asistida por IA</li>
-        <li>Optimización on-page con herramientas IA</li>
-        <li>Publicación y indexación</li>
-        <li>Monitorización de rankings</li>
-        <li>Optimización iterativa basada en datos</li>
-      </ol>
-      
-      <h3>IA en SEM (Search Engine Marketing)</h3>
-      <p><strong>1. Smart Bidding de Google Ads:</strong></p>
-      <ul>
-        <li>Target CPA (coste por adquisición)</li>
-        <li>Target ROAS (retorno de inversión)</li>
-        <li>Maximize conversions</li>
-        <li>Enhanced CPC (coste por clic)</li>
-      </ul>
-      
-      <p><strong>2. Optimización de Anuncios:</strong></p>
-      <ul>
-        <li>Generación automática de headlines</li>
-        <li>Responsive search ads</li>
-        <li>Adaptación de mensajes por audiencia</li>
-        <li>Testing multivariante automatizado</li>
-      </ul>
-      
-      <p><strong>3. Segmentación:</strong></p>
-      <ul>
-        <li>Audiencias similares (lookalikes)</li>
-        <li>In-market audiences</li>
-        <li>Custom intent audiences</li>
-        <li>Predictive audiences</li>
-      </ul>
-      
-      <p><strong>4. Meta Advantage+:</strong></p>
-      <ul>
-        <li>Optimización automática de placement</li>
-        <li>Targeting automatizado</li>
-        <li>Creative optimization</li>
-        <li>Budget optimization entre audiencias</li>
-      </ul>
-      
-      <h3>Mejores Prácticas SEM con IA</h3>
-      <ul>
-        <li>Dar suficiente data al algoritmo (50+ conversiones/mes)</li>
-        <li>No sobre-optimizar manualmente</li>
-        <li>Usar broad match con smart bidding</li>
-        <li>Implementar conversion tracking preciso</li>
-        <li>Testear diferentes estrategias de bidding</li>
-        <li>Monitorizar search terms regularmente</li>
-      </ul>
+
+      <div class="exercise-section my-8 p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
+        <h4 class="text-lg font-semibold mb-3">📝 Ejercicio Práctico: Diseño de Estrategia IA</h4>
+        <p class="mb-4">Utiliza los ejercicios del módulo para practicar el diseño de estrategias de marketing con IA:</p>
+        <div class="bg-white p-4 rounded shadow-sm">
+          <p class="text-sm text-gray-600 mb-2">Descarga y completa los ejercicios prácticos:</p>
+          <a href="/materiales/tema6/03_ejercicios_6.pdf" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            📄 Descargar Ejercicios
+          </a>
+        </div>
+      </div>
 
       <hr/>
 
-      <h2>6.3. Embudos de Conversión (Funnels) y CRO con IA</h2>
-      <h3>Optimización de Embudos con IA</h3>
-      <p><strong>1. Análisis del Funnel:</strong></p>
+      <h2>6.3. Análisis y Medición: Casos de éxito y mejores prácticas</h2>
+      
+      <div class="case-study-section mb-6">
+        <h3 class="text-xl font-semibold mb-3">📊 Caso de Estudio: Netflix y Recomendaciones IA</h3>
+        <p class="mb-3">Analiza cómo Netflix utiliza IA para recomendaciones personalizadas:</p>
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <ul class="space-y-2">
+            <li><strong>Problema:</strong> Millones de títulos, usuarios con preferencias únicas</li>
+            <li><strong>Solución IA:</strong> Algoritmos de recomendación basados en ML</li>
+            <li><strong>Resultado:</strong> 80% del contenido visto viene de recomendaciones</li>
+            <li><strong>Impacto:</strong> Mayor engagement y retención de usuarios</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Casos de Éxito en Marketing con IA</h3>
       <ul>
-        <li>Identificación de puntos de fuga</li>
-        <li>Segmentación de usuarios por comportamiento</li>
-        <li>Predicción de probabilidad de conversión</li>
-        <li>Atribución multicanal</li>
+        <li><strong>Netflix:</strong> Recomendaciones personalizadas aumentan engagement - <a href="https://netflixtechblog.com/" target="_blank" class="text-blue-600 hover:underline">Leer caso</a></li>
+        <li><strong>Amazon:</strong> Optimización de precios dinámica - <a href="https://aws.amazon.com/machine-learning/" target="_blank" class="text-blue-600 hover:underline">Leer caso</a></li>
+        <li><strong>Spotify:</strong> Playlists generadas por IA - <a href="https://engineering.atspotify.com/" target="_blank" class="text-blue-600 hover:underline">Leer caso</a></li>
+        <li><strong>Coca-Cola:</strong> Campañas personalizadas por región - <a href="https://www.coca-colacompany.com/" target="_blank" class="text-blue-600 hover:underline">Leer caso</a></li>
       </ul>
       
-      <p><strong>2. Personalización del Journey:</strong></p>
+      <h3>Medición de Efectividad</h3>
+      <p>Métricas clave para evaluar campañas con IA:</p>
       <ul>
-        <li>Contenido dinámico según etapa del funnel</li>
-        <li>Mensajes adaptados a perfil del usuario</li>
-        <li>Ofertas personalizadas en tiempo real</li>
-        <li>Timing óptimo de comunicaciones</li>
-      </ul>
-      
-      <p><strong>3. Lead Scoring:</strong></p>
-      <ul>
-        <li>IA predice probabilidad de conversión</li>
-        <li>Priorización de leads para ventas</li>
-        <li>Identificación de señales de compra</li>
-        <li>Trigger de acciones automatizadas</li>
-      </ul>
-      
-      <h3>CRO (Conversion Rate Optimization) con IA</h3>
-      <p><strong>1. Testing Automatizado:</strong></p>
-      <ul>
-        <li><strong>Optimizely:</strong> Testing multivariante con IA</li>
-        <li><strong>Google Optimize:</strong> Experimentos automatizados</li>
-        <li><strong>VWO:</strong> SmartStats con probabilidad bayesiana</li>
-      </ul>
-      
-      <p><strong>2. Heatmaps y Session Recording:</strong></p>
-      <ul>
-        <li><strong>Hotjar:</strong> Análisis de comportamiento</li>
-        <li><strong>Crazy Egg:</strong> Mapas de calor con IA</li>
-        <li><strong>Microsoft Clarity:</strong> Detección automática de problemas</li>
-      </ul>
-      
-      <p><strong>3. Optimización de Landing Pages:</strong></p>
-      <ul>
-        <li>IA genera variaciones de copy</li>
-        <li>Testing automático de layouts</li>
-        <li>Personalización dinámica de elementos</li>
-        <li>Optimización de formularios</li>
-      </ul>
-      
-      <p><strong>4. Recuperación de Carrito:</strong></p>
-      <ul>
-        <li>Predicción de abandono</li>
-        <li>Trigger de emails/SMS en momento óptimo</li>
-        <li>Ofertas personalizadas de recuperación</li>
-        <li>Chatbots de asistencia en checkout</li>
-      </ul>
-      
-      <h3>Herramientas de CRO con IA</h3>
-      <table>
-        <tr><th>Herramienta</th><th>Función</th><th>IA aplicada</th></tr>
-        <tr><td>Optimizely</td><td>Testing</td><td>Auto-segmentación</td></tr>
-        <tr><td>Dynamic Yield</td><td>Personalización</td><td>Recomendaciones</td></tr>
-        <tr><td>Hotjar</td><td>Analytics</td><td>Detección de patrones</td></tr>
-        <tr><td>Unbounce</td><td>Landing pages</td><td>Smart Traffic</td></tr>
-        <tr><td>Convertflow</td><td>Popups</td><td>Targeting inteligente</td></tr>
-      </table>
-      
-      <h3>Métricas Clave a Monitorizar</h3>
-      <ul>
-        <li>Tasa de conversión por etapa</li>
-        <li>Tiempo en cada etapa</li>
-        <li>Drop-off rate</li>
+        <li>ROI por canal y campaña</li>
+        <li>Tasa de conversión por segmento</li>
         <li>Customer Lifetime Value (CLV)</li>
-        <li>Coste de Adquisición (CAC)</li>
-        <li>ROI por canal</li>
+        <li>Atribución multicanal</li>
+        <li>Engagement y retención</li>
       </ul>
+      
+      <h3>Optimización Basada en Datos</h3>
+      <p>Estrategias de optimización:</p>
+      <ul>
+        <li>A/B testing automatizado</li>
+        <li>Optimización de landing pages</li>
+        <li>Predicción de abandono de carrito</li>
+        <li>Recomendaciones en tiempo real</li>
+      </ul>
+      
+      <h3>Planes de Implementación Práctica</h3>
+      <p>Pasos para implementar IA en marketing:</p>
+      <ol>
+        <li>Auditoría de datos y procesos actuales</li>
+        <li>Selección de casos de uso prioritarios</li>
+        <li>Piloto con herramientas específicas</li>
+        <li>Escalado gradual y medición de resultados</li>
+        <li>Optimización continua basada en datos</li>
+      </ol>
+
+      <div class="quiz-section my-8 p-6 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+        <h4 class="text-lg font-semibold mb-3">🧠 Quiz de Evaluación: Marketing con IA</h4>
+        <p class="mb-4">Evalúa tus conocimientos sobre marketing con IA respondiendo este quiz interactivo:</p>
+        <div class="bg-white p-4 rounded shadow-sm">
+          <p class="text-sm text-gray-600 mb-2">Componente del quiz se cargará aquí dinámicamente</p>
+          <p class="text-xs text-purple-600">Archivo: module6-exam-quiz.tsx</p>
+        </div>
+      </div>
+
+      <div class="ethics-game-section my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+        <h4 class="text-lg font-semibold mb-3">⚖️ Juego de Ética: Dilemas en Marketing con IA</h4>
+        <p class="mb-4">Evalúa escenarios éticos reales en marketing con IA. Aprende a tomar decisiones responsables que cumplan con regulaciones como GDPR y AI Act.</p>
+        <div class="bg-white p-4 rounded shadow-sm">
+          <p class="text-sm text-gray-600 mb-2">Componente del juego se cargará aquí dinámicamente</p>
+          <p class="text-xs text-red-600">Archivo: ethics-marketing-game.tsx</p>
+        </div>
+      </div>
+
+      <div class="strategy-game-section my-8 p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
+        <h4 class="text-lg font-semibold mb-3">🎯 Juego Estratégico: Estrategias IA en Marketing</h4>
+        <p class="mb-4">Desarrolla estrategias completas de marketing con IA. Toma decisiones sobre presupuestos, canales y optimizaciones para maximizar el ROI.</p>
+        <div class="bg-white p-4 rounded shadow-sm">
+          <p class="text-sm text-gray-600 mb-2">Componente del juego se cargará aquí dinámicamente</p>
+          <p class="text-xs text-green-600">Archivo: ai-marketing-strategy-game.tsx</p>
+        </div>
+      </div>
 
       <hr/>
 
-      <h2>6.4. Redes Sociales e IA</h2>
-      <h3>Generación de Contenido para Redes</h3>
-      <p><strong>1. Copywriting:</strong></p>
+      <h2>6.4. Ética y Gobernanza: Aplicación de GDPR y privacidad</h2>
+      
+      <div class="resources-section mb-6">
+        <h3 class="text-xl font-semibold mb-3">📚 Recursos Adicionales</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-blue-50 p-4 rounded-lg">
+            <h4 class="font-semibold mb-2">Guía del Módulo 6</h4>
+            <p class="text-sm mb-3">Descarga la guía completa del módulo</p>
+            <a href="/materiales/tema6/01_Guía del Módulo 6.pdf" target="_blank" class="inline-flex items-center px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
+              📄 Descargar PDF
+            </a>
+          </div>
+          <div class="bg-green-50 p-4 rounded-lg">
+            <h4 class="font-semibold mb-2">Enlaces Útiles</h4>
+            <p class="text-sm mb-3">Recopilación de enlaces y recursos</p>
+            <a href="/materiales/tema6/02_enlaces_6_v01.pdf" target="_blank" class="inline-flex items-center px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
+              🔗 Ver Enlaces
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <h3>Consideraciones Éticas en Marketing con IA</h3>
+      <p>La IA en marketing plantea desafíos éticos importantes:</p>
       <ul>
-        <li>IA genera posts completos</li>
-        <li>Adaptación de tono por plataforma</li>
-        <li>Generación de variaciones para testing</li>
-        <li>Optimización de hashtags</li>
+        <li>Privacidad y protección de datos personales</li>
+        <li>Transparencia en algoritmos de decisión</li>
+        <li>Evitación de discriminación y sesgos</li>
+        <li>Consentimiento informado del usuario</li>
       </ul>
       
-      <p><strong>2. Imágenes y Video:</strong></p>
+      <h3>Cumplimiento Normativo</h3>
+      <p>Regulaciones clave:</p>
       <ul>
-        <li>DALL-E 3, Midjourney para gráficos</li>
-        <li>Canva AI para diseños</li>
-        <li>Runway, Pika para videos</li>
-        <li>CapCut AI para edición</li>
+        <li><strong>GDPR (Europa):</strong> Protección de datos personales - <a href="https://gdpr-info.eu/" target="_blank" class="text-blue-600 hover:underline">Más info</a></li>
+        <li><strong>CCPA (California):</strong> Privacidad del consumidor - <a href="https://oag.ca.gov/privacy/ccpa" target="_blank" class="text-blue-600 hover:underline">Más info</a></li>
+        <li><strong>COPPA:</strong> Protección de menores online - <a href="https://www.ftc.gov/legal-library/browse/rules/childrens-online-privacy-protection-rule-coppa" target="_blank" class="text-blue-600 hover:underline">Más info</a></li>
+        <li><strong>AI Act (UE):</strong> Regulación específica de IA - <a href="https://artificialintelligenceact.eu/" target="_blank" class="text-blue-600 hover:underline">Más info</a></li>
       </ul>
       
-      <h3>Gestión y Programación</h3>
-      <p><strong>1. Herramientas con IA:</strong></p>
+      <h3>Mitigación de Sesgos Algorítmicos</h3>
+      <p>Estrategias para reducir sesgos:</p>
       <ul>
-        <li><strong>Buffer:</strong> Optimización de timing</li>
-        <li><strong>Hootsuite:</strong> Sugerencias de contenido</li>
-        <li><strong>Later:</strong> Best time to post</li>
-        <li><strong>Sprout Social:</strong> Análisis de sentimiento</li>
+        <li>Auditorías regulares de algoritmos</li>
+        <li>Diversidad en datos de entrenamiento</li>
+        <li>Monitoreo continuo de resultados</li>
+        <li>Intervención humana en decisiones críticas</li>
       </ul>
-      
-      <p><strong>2. Optimización de Posting:</strong></p>
+
+      <div class="blueprint-section my-8 p-6 bg-indigo-50 rounded-lg border-l-4 border-indigo-500">
+        <h4 class="text-lg font-semibold mb-3">🏗️ AI Marketing Systems Blueprint</h4>
+        <p class="mb-4">Descarga el blueprint completo de sistemas de marketing con IA:</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/materiales/tema6/AI_Marketing_Systems_Blueprint.pdf" target="_blank" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            📄 PDF Blueprint
+          </a>
+          <a href="/materiales/tema6/AI_Marketing_Systems_Blueprint.pptx" target="_blank" class="inline-flex items-center px-4 py-2 bg-indigo-700 text-white rounded hover:bg-indigo-800">
+            📊 PPTX Blueprint
+          </a>
+        </div>
+      </div>
+
+      <h3>Marco de Gobernanza Ética</h3>
+      <p>Principios para una implementación ética de IA en marketing:</p>
       <ul>
-        <li>IA analiza cuándo tu audiencia está activa</li>
-        <li>Programación automática en momentos óptimos</li>
-        <li>Frecuencia ideal por plataforma</li>
-        <li>A/B testing de horarios</li>
+        <li><strong>Transparencia:</strong> Informar sobre uso de IA</li>
+        <li><strong>Consentimiento:</strong> Obtener aprobación explícita</li>
+        <li><strong>Equidad:</strong> Evitar discriminación algorítmica</li>
+        <li><strong>Responsabilidad:</strong> Supervisión humana continua</li>
+        <li><strong>Privacidad:</strong> Protección de datos personales</li>
       </ul>
-      
-      <h3>Community Management con IA</h3>
-      <p><strong>1. Moderación:</strong></p>
-      <ul>
-        <li>Detección automática de spam</li>
-        <li>Filtrado de comentarios ofensivos</li>
-        <li>Identificación de trolls</li>
-        <li>Alertas de crisis de reputación</li>
-      </ul>
-      
-      <p><strong>2. Respuestas:</strong></p>
-      <ul>
-        <li>Chatbots para preguntas frecuentes</li>
-        <li>Sugerencias de respuesta para CM</li>
-        <li>Clasificación de mensajes por urgencia</li>
-        <li>Escalado automático a humano</li>
-      </ul>
-      
-      <p><strong>3. Engagement:</strong></p>
-      <ul>
-        <li>Identificación de super-fans</li>
-        <li>Detección de oportunidades de interacción</li>
-        <li>Segmentación de audiencia</li>
-        <li>Personalización de respuestas</li>
-      </ul>
-      
-      <h3>Análisis y Reporting</h3>
-      <p><strong>1. Métricas automatizadas:</strong></p>
-      <ul>
-        <li>Reach e impresiones</li>
-        <li>Engagement rate</li>
-        <li>Crecimiento de seguidores</li>
-        <li>Click-through rate</li>
-        <li>Conversiones atribuidas</li>
-      </ul>
-      
-      <p><strong>2. Insights con IA:</strong></p>
-      <ul>
-        <li>Tendencias emergentes</li>
-        <li>Contenido de mayor rendimiento</li>
-        <li>Mejores prácticas por industria</li>
-        <li>Benchmarking competitivo</li>
-      </ul>
-      
-      <h3>Publicidad en Redes Sociales</h3>
-      <p><strong>1. Meta Ads (Facebook/Instagram):</strong></p>
-      <ul>
-        <li>Advantage+ shopping campaigns</li>
-        <li>Automated app events</li>
-        <li>Dynamic ads</li>
-        <li>Creative hub con IA</li>
-      </ul>
-      
-      <p><strong>2. TikTok Ads:</strong></p>
-      <ul>
-        <li>Smart Performance Campaign</li>
-        <li>Automated creative optimization</li>
-        <li>Auto-targeting</li>
-      </ul>
-      
-      <p><strong>3. LinkedIn Ads:</strong></p>
-      <ul>
-        <li>Audience expansion</li>
-        <li>Automated bidding</li>
-        <li>Content suggestions</li>
-      </ul>
-      
-      <h3>Tendencias 2025</h3>
-      <ul>
-        <li>Contenido generado por IA más auténtico</li>
-        <li>Influencers virtuales</li>
-        <li>Personalización hiper-granular</li>
-        <li>Social commerce con IA</li>
-        <li>Video short-form dominante</li>
-        <li>Integración de AR/VR</li>
-      </ul>
+
+      <div class="final-assessment my-8 p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+        <h4 class="text-lg font-semibold mb-3">📝 Evaluación Final del Módulo 6</h4>
+        <p class="mb-4">Completa la evaluación parcial para validar tus conocimientos:</p>
+        <a href="/materiales/tema6/0x_Evaluación_parcial_6.pdf" target="_blank" class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+          📋 Descargar Evaluación
+        </a>
+      </div>
+
+      <h3>Recursos de Aprendizaje Continuo</h3>
+      <div class="resources-grid grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+        <div class="bg-yellow-50 p-4 rounded-lg">
+          <h4 class="font-semibold mb-2">Fichas del Módulo</h4>
+          <a href="/materiales/tema6/fichas_6.pdf" target="_blank" class="text-blue-600 hover:underline text-sm">📄 Descargar</a>
+        </div>
+        <div class="bg-purple-50 p-4 rounded-lg">
+          <h4 class="font-semibold mb-2">Briefing Marketing Digital</h4>
+          <div class="flex gap-2">
+            <a href="/materiales/tema6/Programa Superior en Inteligencia Artificial Aplicada a la Empresa_ Briefing de Marketing Digital e Inteligencia Artificial.docx" target="_blank" class="text-blue-600 hover:underline text-sm">📝 DOCX</a>
+            <a href="/materiales/tema6/Programa Superior en Inteligencia Artificial Aplicada a la Empresa_ Briefing de Marketing Digital e Inteligencia Artificial.xlsx" target="_blank" class="text-green-600 hover:underline text-sm">📊 XLSX</a>
+          </div>
+        </div>
+        <div class="bg-pink-50 p-4 rounded-lg">
+          <h4 class="font-semibold mb-2">Imagen del Módulo</h4>
+          <img src="/materiales/tema6/unnamed (1).png" alt="Módulo 6" class="w-full h-20 object-cover rounded"/>
+        </div>
+      </div>
+
+      <h3>Enlaces de Aprendizaje Avanzado</h3>
+      <div class="advanced-links grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <div class="bg-indigo-50 p-4 rounded-lg">
+          <h4 class="font-semibold mb-2">📚 Cursos Especializados</h4>
+          <ul class="space-y-1 text-sm">
+            <li><a href="https://www.coursera.org/specializations/digital-marketing" target="_blank" class="text-blue-600 hover:underline">Google Digital Marketing (Coursera)</a></li>
+            <li><a href="https://www.udemy.com/course/ai-for-marketing/" target="_blank" class="text-blue-600 hover:underline">AI for Marketing (Udemy)</a></li>
+            <li><a href="https://www.edx.org/learn/marketing" target="_blank" class="text-blue-600 hover:underline">Marketing Analytics (edX)</a></li>
+            <li><a href="https://www.datacamp.com/tracks/marketing-analytics" target="_blank" class="text-blue-600 hover:underline">Marketing Analytics with Python (DataCamp)</a></li>
+          </ul>
+        </div>
+        <div class="bg-teal-50 p-4 rounded-lg">
+          <h4 class="font-semibold mb-2">📰 Blogs y Revistas Especializadas</h4>
+          <ul class="space-y-1 text-sm">
+            <li><a href="https://www.thinkwithgoogle.com" target="_blank" class="text-blue-600 hover:underline">Think with Google</a></li>
+            <li><a href="https://www.marketingdive.com" target="_blank" class="text-blue-600 hover:underline">Marketing Dive</a></li>
+            <li><a href="https://www.searchenginejournal.com" target="_blank" class="text-blue-600 hover:underline">Search Engine Journal</a></li>
+            <li><a href="https://www.litmus.com/blog" target="_blank" class="text-blue-600 hover:underline">Litmus Blog</a></li>
+            <li><a href="https://www.hubspot.com/marketing" target="_blank" class="text-blue-600 hover:underline">HubSpot Marketing Blog</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Comunidades y Eventos</h3>
+      <div class="communities-section bg-gray-50 p-4 rounded-lg mt-6">
+        <ul class="space-y-2">
+          <li><strong>Reddit:</strong> <a href="https://www.reddit.com/r/Marketing/" target="_blank" class="text-blue-600 hover:underline">r/Marketing</a> | <a href="https://www.reddit.com/r/SEO/" target="_blank" class="text-blue-600 hover:underline">r/SEO</a> | <a href="https://www.reddit.com/r/MachineLearning/" target="_blank" class="text-blue-600 hover:underline">r/MachineLearning</a></li>
+          <li><strong>LinkedIn Groups:</strong> <a href="https://www.linkedin.com/groups" target="_blank" class="text-blue-600 hover:underline">AI Marketing Professionals</a> | <a href="https://www.linkedin.com/groups" target="_blank" class="text-blue-600 hover:underline">Digital Marketing Experts</a></li>
+          <li><strong>Eventos:</strong> <a href="https://www.marketingweek.com" target="_blank" class="text-blue-600 hover:underline">Marketing Week Live</a> | <a href="https://www.brightondigitalfestival.com" target="_blank" class="text-blue-600 hover:underline">Brighton Digital Festival</a></li>
+          <li><strong>Podcasts:</strong> <a href="https://www.marketingovercoffee.com" target="_blank" class="text-blue-600 hover:underline">Marketing Over Coffee</a> | <a href="https://www.themarketingagency.com/podcast" target="_blank" class="text-blue-600 hover:underline">The Marketing Agency Leadership Podcast</a></li>
+        </ul>
+      </div>
     `
   },
   {

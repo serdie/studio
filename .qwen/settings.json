@@ -9,5 +9,6 @@
       "Bash(rm *)",
       "Bash(rmdir *)"
     ]
-  }
+  },
+  "$version": 3
 }

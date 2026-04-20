@@ -1,0 +1,43 @@
+{
+  "module": 6,
+  "title": "Módulo 6: IA y Marketing Profesional",
+  "total_hours": 60,
+  "objectives": [
+    {
+      "section": "Fundamentos y Estrategia",
+      "items": [
+        "Comprender la transformación del marketing con IA",
+        "Identificar áreas de aplicación y oportunidades",
+        "Evaluar impacto en ROI y métricas clave",
+        "Diseñar estrategias de marketing predictivo"
+      ]
+    },
+    {
+      "section": "Herramientas y Ejecución",
+      "items": [
+        "Dominar plataformas de Marketing Automation",
+        "Utilizar herramientas de creación de contenido con IA",
+        "Implementar análisis predictivo y segmentación",
+        "Optimizar campañas en tiempo real"
+      ]
+    },
+    {
+      "section": "Análisis y Medición",
+      "items": [
+        "Analizar casos de éxito y mejores prácticas",
+        "Medir effectiveness de campañas con IA",
+        "Optimizar basado en datos y predicciones",
+        "Desarrollar planes de implementación práctica"
+      ]
+    },
+    {
+      "section": "Ética y Gobernanza",
+      "items": [
+        "Aplicar GDPR y privacidad de datos",
+        "Identificar y mitigar sesgos algorítmicos",
+        "Implementar sistemas transparentes",
+        "Establecer marcos de gobernanza ética"
+      ]
+    }
+  ]
+}
