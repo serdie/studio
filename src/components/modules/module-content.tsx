@@ -27,6 +27,7 @@ import IkeaPractice4 from '@/components/games/ikea-practice-4';
 import VibePromptStudio from '@/components/tools/vibe-prompt-studio';
 import AISkillBuilder from '@/components/tools/ai-skill-builder';
 import AIAgentsSection from '@/components/tools/ai-agents';
+import StudentPortfolios from './student-portfolios';
 import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool, Brain, Moon, ExternalLink, Code2 } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
@@ -530,6 +531,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <TabsTrigger value="ai-agents" className="flex items-center gap-2 py-2.5">
               <Bot className="h-4 w-4" />
               <span className="hidden sm:inline">Agentes IA</span>
+            </TabsTrigger>
+          )}
+          {module.slug === 'recursos-adicionales' && (
+            <TabsTrigger value="student-portfolios" className="flex items-center gap-2 py-2.5">
+              <Palette className="h-4 w-4" />
+              <span className="hidden sm:inline">Portfolios Alumnos</span>
             </TabsTrigger>
           )}
         </TabsList>
@@ -1971,6 +1978,13 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         {module.slug === 'low-code-no-code' && (
           <TabsContent value="ai-agents" className="mt-4">
             <AIAgentsSection />
+          </TabsContent>
+        )}
+
+        {/* Portfolios Alumnos - Solo en Recursos Adicionales */}
+        {module.slug === 'recursos-adicionales' && (
+          <TabsContent value="student-portfolios" className="mt-4">
+            <StudentPortfolios />
           </TabsContent>
         )}
       </Tabs>
