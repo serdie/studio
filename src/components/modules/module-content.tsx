@@ -28,6 +28,7 @@ import VibePromptStudio from '@/components/tools/vibe-prompt-studio';
 import AISkillBuilder from '@/components/tools/ai-skill-builder';
 import AIAgentsSection from '@/components/tools/ai-agents';
 import StudentPortfolios from './student-portfolios';
+import EmailMarketingSection from './email-marketing-section';
 import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool, Brain, Moon, ExternalLink, Code2 } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
@@ -537,6 +538,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <TabsTrigger value="student-portfolios" className="flex items-center gap-2 py-2.5">
               <Palette className="h-4 w-4" />
               <span className="hidden sm:inline">Portfolios Alumnos</span>
+            </TabsTrigger>
+          )}
+          {module.slug === 'marketing-ia' && (
+            <TabsTrigger value="email-marketing" className="flex items-center gap-2 py-2.5">
+              <Mail className="h-4 w-4" />
+              <span className="hidden sm:inline">Email Marketing</span>
             </TabsTrigger>
           )}
         </TabsList>
