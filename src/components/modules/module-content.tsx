@@ -1987,6 +1987,14 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <StudentPortfolios />
           </TabsContent>
         )}
+
+        {/* Email Marketing Section - Only for Marketing IA Module */}
+        {module.slug === 'marketing-ia' && (
+          <TabsContent value="email-marketing" className="mt-4">
+            <EmailMarketingSection />
+          </TabsContent>
+        )}
+
       </Tabs>
     </div>
   );
