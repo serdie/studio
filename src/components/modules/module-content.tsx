@@ -29,7 +29,7 @@ import AISkillBuilder from '@/components/tools/ai-skill-builder';
 import AIAgentsSection from '@/components/tools/ai-agents';
 import StudentPortfolios from './student-portfolios';
 import EmailMarketingSection from './email-marketing-section';
-import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool, Brain, Moon, ExternalLink, Code2 } from 'lucide-react';
+import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool, Brain, Moon, ExternalLink, Code2, Mail } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
 import { collection, query, where, orderBy } from 'firebase/firestore';
