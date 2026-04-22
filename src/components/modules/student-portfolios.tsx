@@ -78,6 +78,36 @@ const studentPortfolios: StudentPortfolio[] = [
     gradient: 'from-fuchsia-500 via-pink-500 to-rose-500',
     icon: 'palette',
   },
+  {
+    name: 'Iker Garcia',
+    url: 'https://portfolioikerg.vercel.app/',
+    gradient: 'from-blue-600 via-cyan-600 to-teal-600',
+    icon: 'code',
+  },
+  {
+    name: 'Álvaro Alonso',
+    url: 'https://alvaroaf.vercel.app/',
+    gradient: 'from-violet-600 via-purple-600 to-fuchsia-600',
+    icon: 'palette',
+  },
+  {
+    name: 'Hector Martín',
+    url: 'https://hectormartinportfoliopage.vercel.app/',
+    gradient: 'from-orange-600 via-amber-600 to-yellow-600',
+    icon: 'rocket',
+  },
+  {
+    name: 'Dani',
+    url: 'https://portfolio-profesional-blue.vercel.app/',
+    gradient: 'from-sky-500 via-blue-500 to-indigo-500',
+    icon: 'code',
+  },
+  {
+    name: 'Adrian',
+    url: 'https://portfoliopersonal-nu.vercel.app/',
+    gradient: 'from-red-600 via-rose-600 to-pink-600',
+    icon: 'rocket',
+  },
 ];
 
 function getIconComponent(icon: string) {
