@@ -70,6 +70,7 @@ import N8nPractice9 from './n8n-practice-9';
 import AenaPractice10 from './aena-practice-10';
 import Module6ToolsAndGames from './module6-tools-and-games';
 import MarketingAIToolsLinks from './marketing-ai-tools-links';
+import Module6Practices from './module6-practices';
 
 interface GameItem {
   id: string;
@@ -1267,6 +1268,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
     return (
       <div className="space-y-6">
         <Module6ToolsAndGames />
+        <Module6Practices />
         <MarketingAIToolsLinks />
       </div>
     );
