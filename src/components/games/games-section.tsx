@@ -71,6 +71,7 @@ import AenaPractice10 from './aena-practice-10';
 import Module6ToolsAndGames from './module6-tools-and-games';
 import MarketingAIToolsLinks from './marketing-ai-tools-links';
 import Module6Practices from './module6-practices';
+import Module6QuizAndSeo from './module6-quiz-and-seo';
 
 interface GameItem {
   id: string;
@@ -1269,6 +1270,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
       <div className="space-y-6">
         <Module6ToolsAndGames />
         <Module6Practices />
+        <Module6QuizAndSeo />
         <MarketingAIToolsLinks />
       </div>
     );
