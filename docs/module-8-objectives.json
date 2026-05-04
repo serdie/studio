@@ -1,0 +1,43 @@
+{
+  "module": 8,
+  "title": "Módulo 8: IA Aplicada a las Áreas Funcionales de la Empresa",
+  "total_hours": 12,
+  "objectives": [
+    {
+      "section": "Marketing y Ventas con IA",
+      "items": [
+        "Implementar personalización de experiencia del cliente con IA",
+        "Diseñar chatbots de ventas y sistemas de recomendación",
+        "Aplicar análisis predictivo para forecast de demanda",
+        "Optimizar campañas con segmentación inteligente"
+      ]
+    },
+    {
+      "section": "Recursos Humanos con IA",
+      "items": [
+        "Automatizar procesos de reclutamiento y selección",
+        "Implementar análisis predictivo de rotación y retención",
+        "Utilizar IA para formación personalizada y desarrollo",
+        "Aplicar People Analytics para decisiones estratégicas"
+      ]
+    },
+    {
+      "section": "Finanzas y Operaciones con IA",
+      "items": [
+        "Automatizar procesos financieros y detección de fraude",
+        "Implementar IA en gestión de riesgos y compliance",
+        "Optimizar cadena de suministro con predicción de demanda",
+        "Aplicar mantenimiento predictivo en operaciones"
+      ]
+    },
+    {
+      "section": "Casos Prácticos y Estrategia",
+      "items": [
+        "Analizar casos reales de IA en diferentes sectores",
+        "Evaluar ROI de implementaciones de IA empresarial",
+        "Diseñar roadmaps de adopción de IA por área funcional",
+        "Identificar oportunidades de IA en la propia empresa"
+      ]
+    }
+  ]
+}

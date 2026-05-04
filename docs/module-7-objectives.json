@@ -1,0 +1,43 @@
+{
+  "module": 7,
+  "title": "Módulo 7: Ética, Privacidad y Legislación en IA",
+  "total_hours": 24,
+  "objectives": [
+    {
+      "section": "Ética y Sesgos",
+      "items": [
+        "Identificar y analizar sesgos algorítmicos en sistemas de IA",
+        "Comprender la discriminación directa e indirecta en algoritmos",
+        "Aplicar principios de transparencia y explicabilidad (XAI)",
+        "Evaluar dilemas éticos reales en IA empresarial"
+      ]
+    },
+    {
+      "section": "Protección de Datos y GDPR",
+      "items": [
+        "Dominar los principios fundamentales del RGPD/GDPR",
+        "Comprender derechos digitales: acceso, rectificación, supresión, portabilidad",
+        "Implementar Privacy by Design y Privacy by Default",
+        "Realizar Evaluaciones de Impacto (DPIA) en sistemas de IA"
+      ]
+    },
+    {
+      "section": "Legislación Europea de IA",
+      "items": [
+        "Conocer el AI Act de la Unión Europea y sus categorías de riesgo",
+        "Clasificar sistemas de IA según nivel de riesgo (inaceptable, alto, limitado, mínimo)",
+        "Aplicar requisitos legales para sistemas de IA de alto riesgo",
+        "Comprender la LOPDGDD y normativa española sobre datos"
+      ]
+    },
+    {
+      "section": "Gobernanza y IA Responsable",
+      "items": [
+        "Diseñar frameworks de gobernanza ética para IA",
+        "Implementar auditorías algorítmicas y mecanismos de supervisión",
+        "Aplicar principios de IA Responsable en proyectos reales",
+        "Desarrollar políticas corporativas de IA ética"
+      ]
+    }
+  ]
+}

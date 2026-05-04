@@ -2311,7 +2311,17 @@ Email: {{email_text}}
     longDescription: 'Análisis de sesgos, protección de datos y el marco legal de la IA en la Unión Europea.',
     progress: 0,
     icon: ShieldCheck,
-    resources: [],
+    resources: [
+      { title: 'Guía del Módulo 7 (PDF)', file: '/materiales/tema7/01_Guia del Modulo 7.pdf' },
+      { title: 'Enlaces Externos Módulo 7 (PDF)', file: '/materiales/tema7/02_enlaces_7_v01.pdf' },
+      { title: 'Ejercicios Módulo 7 (PDF)', file: '/materiales/tema7/03_ejercicios_7.pdf' },
+      { title: 'Fichas Módulo 7 (PDF)', file: '/materiales/tema7/04_fichas_7.pdf' },
+      { title: 'Evaluación Parcial Módulo 7 (PDF)', file: '/materiales/tema7/0x_Evaluacion_parcial_7.pdf' },
+      { title: 'Gobernanza IA 360 (PDF)', file: '/materiales/tema7/Gobernanza_IA_360.pdf' },
+      { title: 'Pilares de IA Responsable (Video MP4)', file: '/materiales/tema7/Pilares_de_IA_Responsable.mp4' },
+      { title: 'Por qué tu IA no es neutral (Audio M4A)', file: '/materiales/tema7/Por_qué_tu_IA_no_es_neutral.m4a' },
+      { title: 'Infografía del Módulo 7 (Imagen PNG)', file: '/materiales/tema7/unnamed (1).png' }
+    ],
     content: `
       <h2>7.1. Ética en la IA: Sesgos algorítmicos, discriminación, transparencia, explicabilidad (XAI)</h2>
       <h3>Sesgos Algorítmicos</h3>
@@ -2903,7 +2913,17 @@ Email: {{email_text}}
     longDescription: 'Casos prácticos de IA aplicada a la cadena de suministro, contratación y gestión financiera.',
     progress: 0,
     icon: Layers,
-    resources: [],
+    resources: [
+      { title: 'Guía del Módulo 8 (PDF)', file: '/materiales/tema8/01_Guia del Modulo 8.pdf' },
+      { title: 'Enlaces Externos Módulo 8 (PDF)', file: '/materiales/tema8/02_enlaces_8_v01.pdf' },
+      { title: 'Ejercicios Módulo 8 (PDF)', file: '/materiales/tema8/03_ejercicios_8.pdf' },
+      { title: 'Fichas Módulo 8 (PDF)', file: '/materiales/tema8/04_Fichas_8.pdf' },
+      { title: 'Evaluación Parcial Módulo 8 (PDF)', file: '/materiales/tema8/0x_Evaluacion_parcial_8.pdf' },
+      { title: 'AI Operational Blueprint (PDF)', file: '/materiales/tema8/AI_Operational_Blueprint.pdf' },
+      { title: 'IA Empresarial Práctica (Video MP4)', file: '/materiales/tema8/IA_Empresarial_Práctica.mp4' },
+      { title: 'La IA en las trincheras del negocio (Audio M4A)', file: '/materiales/tema8/La_IA_en_las_trincheras_del_negocio.m4a' },
+      { title: 'Infografía del Módulo 8 (Imagen PNG)', file: '/materiales/tema8/unnamed (1).png' }
+    ],
     content: `
       <h2>8.1. IA en Marketing y Ventas: Personalización de la experiencia del cliente, chatbots, sistemas de recomendación, análisis predictivo de ventas</h2>
       <h3>Personalización de la Experiencia del Cliente</h3>
@@ -3454,7 +3474,17 @@ Email: {{email_text}}
     longDescription: 'Fase final del curso dedicada a la creación de un proyecto práctico completo con monitorización real.',
     progress: 0,
     icon: Rocket,
-    resources: [],
+    resources: [
+      { title: 'Fichas Módulo 9 (PDF)', file: '/materiales/tema9/02_Fichas_9_v01.pdf' },
+      { title: 'Rúbrica de Evaluación Proyecto (PDF)', file: '/materiales/tema9/04_Rubrica_evaluacion_proyecto_9.pdf' },
+      { title: 'Convocatoria Empresas para Proyectos (PDF)', file: '/materiales/tema9/10_convocatoria_empresas_proyectos.pdf' },
+      { title: 'Blueprint de IA Empresarial (PDF)', file: '/materiales/tema9/Blueprint_de_IA_Empresarial.pdf' },
+      { title: 'De Cero a Piloto: IA Aplicada (Video MP4)', file: '/materiales/tema9/De_Cero_a_Piloto__IA_Aplicada.mp4' },
+      { title: 'Implementar IA real sin vender humo (Audio M4A)', file: '/materiales/tema9/Implementar_IA_real_sin_vender_humo.m4a' },
+      { title: 'Infografía del Módulo 9 (Imagen PNG)', file: '/materiales/tema9/unnamed (1).png' },
+      { title: 'Plantilla General PPT (PPTX)', file: '/materiales/tema9/Plantillas_proyecto/Plantilla_general_PPT.pptx' },
+      { title: 'Plantilla General Word (DOCX)', file: '/materiales/tema9/Plantillas_proyecto/Plantilla_general_word.docx' }
+    ],
     content: `
       <h2>9.1. Metodología de proyectos de IA: Desde la definición del problema hasta la implementación y monitorización</h2>
       <h3>Fases del Proyecto de IA</h3>

@@ -1,0 +1,43 @@
+{
+  "module": 9,
+  "title": "Módulo 9: Proyectos Integradores de IA",
+  "total_hours": 90,
+  "objectives": [
+    {
+      "section": "Metodología y Planificación",
+      "items": [
+        "Aplicar metodologías CRISP-DM y Agile en proyectos de IA",
+        "Definir problemas empresariales solucionables con IA",
+        "Elaborar propuestas de proyecto con análisis de viabilidad",
+        "Planificar sprints y hitos del proyecto integrador"
+      ]
+    },
+    {
+      "section": "Desarrollo del Proyecto",
+      "items": [
+        "Recopilar, limpiar y preparar datos para el modelo",
+        "Seleccionar e implementar herramientas de IA apropiadas",
+        "Integrar múltiples módulos del curso en un proyecto real",
+        "Documentar decisiones técnicas y arquitectura del sistema"
+      ]
+    },
+    {
+      "section": "Evaluación y Presentación",
+      "items": [
+        "Evaluar modelos y resultados con métricas apropiadas",
+        "Preparar presentación ejecutiva del proyecto",
+        "Defender el proyecto ante tribunal evaluador",
+        "Aplicar rúbrica de evaluación para autoevaluación"
+      ]
+    },
+    {
+      "section": "Despliegue y Monitorización",
+      "items": [
+        "Diseñar plan de despliegue y escalabilidad",
+        "Implementar monitorización y alertas del modelo",
+        "Planificar reentrenamiento y mantenimiento continuo",
+        "Documentar lecciones aprendidas y próximos pasos"
+      ]
+    }
+  ]
+}
