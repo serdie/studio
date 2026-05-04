@@ -407,6 +407,123 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         </CollapsibleSection>
       )}
 
+      {/* Deberes de Fin de Semana - Módulo 7 (Ética, Privacidad y Legislación) */}
+      {module.slug === 'etica-privacidad' && (
+        <CollapsibleSection
+          title="📚 Deberes de Fin de Semana: Cine y Ética en IA"
+          description="Películas y documentales sobre ética, privacidad y los peligros de la IA sin regulación"
+          icon={<Film className="h-5 w-5 text-red-600" />}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <MovieCard
+              title="Coded Bias (2020)"
+              description="Documental que sigue a la investigadora Joy Buolamwini del MIT, quien descubre que los algoritmos de reconocimiento facial no detectan rostros de piel oscura. Una investigación reveladora sobre sesgo racial en IA, vigilancia algorítmica y la lucha por regular la tecnología de reconocimiento facial."
+              poster="https://pics.filmaffinity.com/coded_bias-553451702-mmed.jpg"
+              themes={['Sesgo Algorítmico', 'Reconocimiento Facial', 'Racismo', 'Regulación', 'Documental']}
+            />
+            <MovieCard
+              title="The Social Dilemma (2020)"
+              description="Ex-empleados de Silicon Valley revelan cómo las redes sociales usan IA para manipular el comportamiento de los usuarios, recopilar datos masivos y crear adicción. Un documental imprescindible sobre privacidad digital, manipulación algorítmica y la necesidad de regulación tecnológica."
+              poster="https://pics.filmaffinity.com/the_social_dilemma-862498773-mmed.jpg"
+              themes={['Privacidad', 'Manipulación', 'Big Tech', 'Algoritmos', 'Documental']}
+            />
+            <MovieCard
+              title="Gattaca (1997)"
+              description="En un futuro donde la modificación genética determina tu lugar en la sociedad, un hombre genéticamente 'imperfecto' lucha por alcanzar sus sueños. Reflexión sobre discriminación algorítmica, determinismo genético, privacidad de datos biométricos y los peligros de clasificar personas por sus datos."
+              poster="https://pics.filmaffinity.com/gattaca-327799604-mmed.jpg"
+              themes={['Discriminación', 'Datos Biométricos', 'Privacidad', 'Ética', 'Ciencia Ficción']}
+            />
+          </div>
+          <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-sm text-red-800">
+              💡 <strong>Actividad para el Lunes:</strong>
+              (1) Ver Coded Bias antes del lunes,
+              (2) Reflexionar sobre cómo los sesgos se transfieren a los algoritmos,
+              (3) Investigar un caso real de sesgo algorítmico en España o Europa,
+              (4) Preparar 2-3 propuestas de cómo el GDPR y el AI Act podrían haber prevenido el problema
+            </p>
+          </div>
+        </CollapsibleSection>
+      )}
+
+      {/* Deberes de Fin de Semana - Módulo 8 (Áreas Funcionales) */}
+      {module.slug === 'areas-funcionales' && (
+        <CollapsibleSection
+          title="📚 Deberes de Fin de Semana: Cine y IA Empresarial"
+          description="Películas sobre IA aplicada a negocios, predicción y transformación digital"
+          icon={<Film className="h-5 w-5 text-indigo-600" />}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <MovieCard
+              title="Moneyball (2011)"
+              description="Un equipo de béisbol con poco presupuesto usa análisis estadístico y datos para competir contra equipos ricos. Basada en hechos reales, muestra cómo el análisis predictivo y la toma de decisiones basada en datos puede revolucionar cualquier industria, desde el deporte hasta los negocios."
+              poster="https://pics.filmaffinity.com/moneyball-175480079-mmed.jpg"
+              themes={['Análisis de Datos', 'Predicción', 'Innovación', 'Gestión', 'Basada en hechos']}
+            />
+            <MovieCard
+              title="The Founder (2016)"
+              description="La historia de Ray Kroc y cómo transformó un pequeño restaurante en el imperio McDonald's. Lecciones sobre eficiencia operativa, estandarización de procesos, escalabilidad y cómo la optimización de operaciones (hoy potenciada por IA) puede transformar un negocio."
+              poster="https://pics.filmaffinity.com/the_founder-269965399-mmed.jpg"
+              themes={['Operaciones', 'Eficiencia', 'Escalabilidad', 'Negocios', 'Basada en hechos']}
+            />
+            <MovieCard
+              title="The Big Short (2015)"
+              description="Un grupo de inversores descubre la burbuja inmobiliaria de 2008 analizando datos que nadie más estaba mirando. Una obra maestra sobre análisis financiero, predicción de riesgos y cómo los datos pueden revelar verdades que los expertos ignoran."
+              poster="https://pics.filmaffinity.com/the_big_short-670890741-mmed.jpg"
+              themes={['Finanzas', 'Análisis de Riesgo', 'Predicción', 'Datos', 'Basada en hechos']}
+            />
+          </div>
+          <div className="mt-4 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+            <p className="text-sm text-indigo-800">
+              💡 <strong>Actividad para el Lunes:</strong>
+              (1) Ver Moneyball antes del lunes,
+              (2) Identificar 3 decisiones del film que hoy se podrían tomar con IA,
+              (3) Reflexionar: ¿Qué área funcional de tu empresa se beneficiaría más de la IA?,
+              (4) Preparar una mini-propuesta de caso de uso de IA para tu departamento
+            </p>
+          </div>
+        </CollapsibleSection>
+      )}
+
+      {/* Deberes de Fin de Semana - Módulo 9 (Proyectos Integradores) */}
+      {module.slug === 'proyectos-integradores' && (
+        <CollapsibleSection
+          title="📚 Inspiración: Cine sobre Proyectos y Equipos"
+          description="Películas sobre trabajo en equipo, innovación y la ejecución de proyectos ambiciosos"
+          icon={<Film className="h-5 w-5 text-orange-600" />}
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <MovieCard
+              title="The Imitation Game (2014)"
+              description="La historia de Alan Turing y su equipo para descifrar Enigma en la Segunda Guerra Mundial. Un proyecto imposible con plazos imposibles, equipos multidisciplinares, gestión de stakeholders escépticos y la importancia de la perseverancia. El proyecto de IA más importante de la historia."
+              poster="https://pics.filmaffinity.com/the_imitation_game-475498891-mmed.jpg"
+              themes={['Gestión de Proyectos', 'Equipos', 'IA', 'Innovación', 'Basada en hechos']}
+            />
+            <MovieCard
+              title="Hidden Figures (2016)"
+              description="Tres mujeres matemáticas afroamericanas que fueron cruciales en el programa espacial de la NASA. Demuestra cómo la diversidad en equipos de proyecto, el cálculo y la perseverancia ante barreras institucionales pueden lograr lo imposible."
+              poster="https://pics.filmaffinity.com/hidden_figures-170493753-mmed.jpg"
+              themes={['Diversidad', 'Matemáticas', 'Equipos', 'Perseverancia', 'Basada en hechos']}
+            />
+            <MovieCard
+              title="Apollo 13 (1995)"
+              description="Cuando una explosión pone en peligro la misión Apollo 13, los equipos de la NASA deben improvisar soluciones con recursos limitados bajo presión extrema. Lecciones magistrales sobre gestión de crisis, resolución de problemas, trabajo en equipo y entrega de resultados cuando todo falla."
+              poster="https://pics.filmaffinity.com/apollo_13-891187733-mmed.jpg"
+              themes={['Gestión de Crisis', 'Trabajo en Equipo', 'Resolución', 'Liderazgo', 'Basada en hechos']}
+            />
+          </div>
+          <div className="mt-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+            <p className="text-sm text-orange-800">
+              💡 <strong>Actividad para el Lunes:</strong>
+              (1) Ver The Imitation Game antes del lunes,
+              (2) Identificar las fases del proyecto de Turing y mapearlas a CRISP-DM,
+              (3) Reflexionar sobre los retos de gestión de proyecto que enfrentó Turing,
+              (4) Preparar un timeline inicial de tu proyecto integrador con las 6 fases CRISP-DM
+            </p>
+          </div>
+        </CollapsibleSection>
+      )}
+
       {/* Lecturas Recomendadas - Módulo 4 (Bots y Asistentes) */}
       {module.slug === 'bots-asistentes' && (
         <CollapsibleSection

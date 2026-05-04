@@ -72,6 +72,15 @@ import Module6ToolsAndGames from './module6-tools-and-games';
 import MarketingAIToolsLinks from './marketing-ai-tools-links';
 import Module6Practices from './module6-practices';
 import Module6QuizAndSeo from './module6-quiz-and-seo';
+// Módulo 7 - Ética, Privacidad y Legislación
+import Module7ToolsAndGames from './module7-tools-and-games';
+import Module7ExternalLinks from './module7-external-links';
+// Módulo 8 - Áreas Funcionales
+import Module8ToolsAndGames from './module8-tools-and-games';
+import Module8ExternalLinks from './module8-external-links';
+// Módulo 9 - Proyectos Integradores
+import Module9ToolsAndGames from './module9-tools-and-games';
+import Module9ExternalLinks from './module9-external-links';
 
 interface GameItem {
   id: string;
@@ -1272,6 +1281,36 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
         <Module6Practices />
         <Module6QuizAndSeo />
         <MarketingAIToolsLinks />
+      </div>
+    );
+  }
+
+  // Renderizar componente dedicado para Módulo 7
+  if (moduleSlug === 'etica-privacidad') {
+    return (
+      <div className="space-y-6">
+        <Module7ToolsAndGames />
+        <Module7ExternalLinks />
+      </div>
+    );
+  }
+
+  // Renderizar componente dedicado para Módulo 8
+  if (moduleSlug === 'areas-funcionales') {
+    return (
+      <div className="space-y-6">
+        <Module8ToolsAndGames />
+        <Module8ExternalLinks />
+      </div>
+    );
+  }
+
+  // Renderizar componente dedicado para Módulo 9
+  if (moduleSlug === 'proyectos-integradores') {
+    return (
+      <div className="space-y-6">
+        <Module9ToolsAndGames />
+        <Module9ExternalLinks />
       </div>
     );
   }
