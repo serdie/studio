@@ -7,12 +7,14 @@ import { Layers, Building2, Trophy } from 'lucide-react';
 
 import Module8DepartmentMatcher from './module8-department-matcher';
 import Module8ExamQuiz from './module8-exam-quiz';
+import Module8UseCasePrioritizer from './module8-use-case-prioritizer';
 
 export default function Module8ToolsAndGames() {
   const [activeTab, setActiveTab] = useState('matcher');
 
   const tools = [
     { id: 'matcher', name: '¿Qué Departamento?', description: 'Asigna casos de uso al área correcta', icon: Building2, badge: 'Juego' },
+    { id: 'prioritizer', name: 'Priorizador de IA', description: 'Matriz de Impacto vs Esfuerzo', icon: Layers, badge: 'Juego' },
     { id: 'exam', name: 'Test del Módulo 8', description: '20 preguntas sobre IA en áreas funcionales', icon: Trophy, badge: 'Test' },
   ];
 
@@ -32,7 +34,7 @@ export default function Module8ToolsAndGames() {
         </CardHeader>
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid grid-cols-2 gap-2 h-auto bg-transparent">
+            <TabsList className="grid grid-cols-2 md:grid-cols-3 gap-2 h-auto bg-transparent">
               {tools.map(tool => (
                 <TabsTrigger key={tool.id} value={tool.id}
                   className="flex flex-col items-center gap-1 p-3 data-[state=active]:bg-indigo-100 data-[state=active]:text-indigo-900 rounded-lg border border-indigo-200">
@@ -42,6 +44,7 @@ export default function Module8ToolsAndGames() {
               ))}
             </TabsList>
             <TabsContent value="matcher" className="mt-4"><Module8DepartmentMatcher /></TabsContent>
+            <TabsContent value="prioritizer" className="mt-4"><Module8UseCasePrioritizer /></TabsContent>
             <TabsContent value="exam" className="mt-4"><Module8ExamQuiz /></TabsContent>
           </Tabs>
         </CardContent>

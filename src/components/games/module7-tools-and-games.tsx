@@ -10,6 +10,7 @@ import Module7BiasDetective from './module7-bias-detective';
 import Module7GDPRRightsGame from './module7-gdpr-rights-game';
 import Module7AIActClassifier from './module7-ai-act-classifier';
 import Module7ExamQuiz from './module7-exam-quiz';
+import Module7EthicalDilemmas from './module7-ethical-dilemmas';
 
 export default function Module7ToolsAndGames() {
   const [activeTab, setActiveTab] = useState('bias');
@@ -18,6 +19,7 @@ export default function Module7ToolsAndGames() {
     { id: 'bias', name: 'Detective de Sesgos', description: 'Analiza escenarios reales de sesgo algorítmico', icon: Search, badge: 'Juego' },
     { id: 'gdpr', name: 'Derechos GDPR', description: 'Identifica qué derecho aplica en cada caso', icon: Lock, badge: 'Juego' },
     { id: 'ai-act', name: 'Clasificador AI Act', description: 'Clasifica sistemas IA por nivel de riesgo', icon: Scale, badge: 'Juego' },
+    { id: 'dilemmas', name: 'Dilemas Éticos', description: 'Toma decisiones éticas en casos de negocio', icon: ShieldCheck, badge: 'Juego' },
     { id: 'exam', name: 'Test del Módulo 7', description: '20 preguntas sobre ética, GDPR y AI Act', icon: Trophy, badge: 'Test' },
   ];
 
@@ -37,7 +39,7 @@ export default function Module7ToolsAndGames() {
         </CardHeader>
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-2 h-auto bg-transparent">
+            <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2 h-auto bg-transparent">
               {tools.map(tool => (
                 <TabsTrigger
                   key={tool.id}
@@ -58,6 +60,9 @@ export default function Module7ToolsAndGames() {
             </TabsContent>
             <TabsContent value="ai-act" className="mt-4">
               <Module7AIActClassifier />
+            </TabsContent>
+            <TabsContent value="dilemmas" className="mt-4">
+              <Module7EthicalDilemmas />
             </TabsContent>
             <TabsContent value="exam" className="mt-4">
               <Module7ExamQuiz />
