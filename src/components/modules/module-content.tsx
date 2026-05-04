@@ -418,19 +418,19 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <MovieCard
               title="Coded Bias (2020)"
               description="Documental que sigue a la investigadora Joy Buolamwini del MIT, quien descubre que los algoritmos de reconocimiento facial no detectan rostros de piel oscura. Una investigación reveladora sobre sesgo racial en IA, vigilancia algorítmica y la lucha por regular la tecnología de reconocimiento facial."
-              poster="https://pics.filmaffinity.com/coded_bias-553451702-mmed.jpg"
+              poster="https://pics.filmaffinity.com/coded_bias-670175084-mmed.jpg"
               themes={['Sesgo Algorítmico', 'Reconocimiento Facial', 'Racismo', 'Regulación', 'Documental']}
             />
             <MovieCard
               title="The Social Dilemma (2020)"
               description="Ex-empleados de Silicon Valley revelan cómo las redes sociales usan IA para manipular el comportamiento de los usuarios, recopilar datos masivos y crear adicción. Un documental imprescindible sobre privacidad digital, manipulación algorítmica y la necesidad de regulación tecnológica."
-              poster="https://pics.filmaffinity.com/the_social_dilemma-862498773-mmed.jpg"
+              poster="https://pics.filmaffinity.com/the_social_dilemma-384147385-mmed.jpg"
               themes={['Privacidad', 'Manipulación', 'Big Tech', 'Algoritmos', 'Documental']}
             />
             <MovieCard
               title="Gattaca (1997)"
               description="En un futuro donde la modificación genética determina tu lugar en la sociedad, un hombre genéticamente 'imperfecto' lucha por alcanzar sus sueños. Reflexión sobre discriminación algorítmica, determinismo genético, privacidad de datos biométricos y los peligros de clasificar personas por sus datos."
-              poster="https://pics.filmaffinity.com/gattaca-327799604-mmed.jpg"
+              poster="https://pics.filmaffinity.com/gattaca-690490097-mmed.jpg"
               themes={['Discriminación', 'Datos Biométricos', 'Privacidad', 'Ética', 'Ciencia Ficción']}
             />
           </div>
@@ -457,19 +457,19 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <MovieCard
               title="Moneyball (2011)"
               description="Un equipo de béisbol con poco presupuesto usa análisis estadístico y datos para competir contra equipos ricos. Basada en hechos reales, muestra cómo el análisis predictivo y la toma de decisiones basada en datos puede revolucionar cualquier industria, desde el deporte hasta los negocios."
-              poster="https://pics.filmaffinity.com/moneyball-175480079-mmed.jpg"
+              poster="https://pics.filmaffinity.com/moneyball-572287299-mmed.jpg"
               themes={['Análisis de Datos', 'Predicción', 'Innovación', 'Gestión', 'Basada en hechos']}
             />
             <MovieCard
               title="The Founder (2016)"
               description="La historia de Ray Kroc y cómo transformó un pequeño restaurante en el imperio McDonald's. Lecciones sobre eficiencia operativa, estandarización de procesos, escalabilidad y cómo la optimización de operaciones (hoy potenciada por IA) puede transformar un negocio."
-              poster="https://pics.filmaffinity.com/the_founder-269965399-mmed.jpg"
+              poster="https://pics.filmaffinity.com/the_founder-172341798-mmed.jpg"
               themes={['Operaciones', 'Eficiencia', 'Escalabilidad', 'Negocios', 'Basada en hechos']}
             />
             <MovieCard
               title="The Big Short (2015)"
               description="Un grupo de inversores descubre la burbuja inmobiliaria de 2008 analizando datos que nadie más estaba mirando. Una obra maestra sobre análisis financiero, predicción de riesgos y cómo los datos pueden revelar verdades que los expertos ignoran."
-              poster="https://pics.filmaffinity.com/the_big_short-670890741-mmed.jpg"
+              poster="https://pics.filmaffinity.com/the_big_short-129125490-mmed.jpg"
               themes={['Finanzas', 'Análisis de Riesgo', 'Predicción', 'Datos', 'Basada en hechos']}
             />
           </div>
@@ -502,13 +502,13 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <MovieCard
               title="Hidden Figures (2016)"
               description="Tres mujeres matemáticas afroamericanas que fueron cruciales en el programa espacial de la NASA. Demuestra cómo la diversidad en equipos de proyecto, el cálculo y la perseverancia ante barreras institucionales pueden lograr lo imposible."
-              poster="https://pics.filmaffinity.com/hidden_figures-170493753-mmed.jpg"
+              poster="https://pics.filmaffinity.com/hidden_figures-810983135-mmed.jpg"
               themes={['Diversidad', 'Matemáticas', 'Equipos', 'Perseverancia', 'Basada en hechos']}
             />
             <MovieCard
               title="Apollo 13 (1995)"
               description="Cuando una explosión pone en peligro la misión Apollo 13, los equipos de la NASA deben improvisar soluciones con recursos limitados bajo presión extrema. Lecciones magistrales sobre gestión de crisis, resolución de problemas, trabajo en equipo y entrega de resultados cuando todo falla."
-              poster="https://pics.filmaffinity.com/apollo_13-891187733-mmed.jpg"
+              poster="https://pics.filmaffinity.com/apollo_13-254915224-mmed.jpg"
               themes={['Gestión de Crisis', 'Trabajo en Equipo', 'Resolución', 'Liderazgo', 'Basada en hechos']}
             />
           </div>
