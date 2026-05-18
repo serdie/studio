@@ -81,6 +81,7 @@ import Module8ExternalLinks from './module8-external-links';
 // Módulo 9 - Proyectos Integradores
 import Module9ToolsAndGames from './module9-tools-and-games';
 import Module9ExternalLinks from './module9-external-links';
+import Module9WhatsAppAutomation from './module9-whatsapp-automation';
 
 interface GameItem {
   id: string;
@@ -1310,6 +1311,7 @@ export default function GamesSection({ moduleSlug }: GamesSectionProps) {
     return (
       <div className="space-y-6">
         <Module9ToolsAndGames />
+        <Module9WhatsAppAutomation />
         <Module9ExternalLinks />
       </div>
     );
