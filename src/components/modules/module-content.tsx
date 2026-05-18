@@ -29,7 +29,8 @@ import AISkillBuilder from '@/components/tools/ai-skill-builder';
 import AIAgentsSection from '@/components/tools/ai-agents';
 import StudentPortfolios from './student-portfolios';
 import EmailMarketingSection from './email-marketing-section';
-import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool, Brain, Moon, ExternalLink, Code2, Mail } from 'lucide-react';
+import JobSearchTool from './job-search-tool';
+import { FileText, Bot, Sparkles, ImageIcon, UserRoundCog, CheckCircle, CheckCircle2, Loader2, Gamepad2, BookOpen, FileText as FileTextIcon, ChevronDown, ChevronUp, Film, Headphones, Music, Beaker, Heart, Palette, Globe, Rocket, PenTool, Brain, Moon, ExternalLink, Code2, Mail, Briefcase } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { useFirestore, useMemoFirebase } from '@/firebase/provider';
 import { collection, query, where, orderBy } from 'firebase/firestore';
@@ -603,6 +604,7 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         <TabsList className={`grid w-full ${
           module.slug === 'avatares-virtuales' ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-6' : 
           module.slug === 'bots-asistentes' ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5' :
+          module.slug === 'proyectos-integradores' ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-6' :
           'grid-cols-2 sm:grid-cols-3 md:grid-cols-5'
         } h-auto p-1`}>
           <TabsTrigger value="content" className="flex items-center gap-2 py-2.5">
@@ -639,6 +641,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
             <Gamepad2 className="h-4 w-4" />
             <span className="hidden sm:inline">Juegos y Enlaces</span>
           </TabsTrigger>
+          {module.slug === 'proyectos-integradores' && (
+            <TabsTrigger value="job-search" className="flex items-center gap-2 py-2.5">
+              <Briefcase className="h-4 w-4" />
+              <span className="hidden sm:inline">Búsqueda de empleo</span>
+            </TabsTrigger>
+          )}
           {module.slug === 'bots-asistentes' && (
             <TabsTrigger value="vibe-coding" className="flex items-center gap-2 py-2.5">
               <Sparkles className="h-4 w-4" />
@@ -1048,6 +1056,12 @@ export default function ModuleContent({ module, objectives }: ModuleContentProps
         <TabsContent value="games" className="mt-4">
           <GamesSection moduleSlug={module.slug} />
         </TabsContent>
+
+        {module.slug === 'proyectos-integradores' && (
+          <TabsContent value="job-search" className="mt-4">
+            <JobSearchTool />
+          </TabsContent>
+        )}
 
         {/* Vibe Coding - Solo Módulo 4 */}
         {module.slug === 'bots-asistentes' && (
